@@ -16,9 +16,9 @@ public class NavigationVbox extends VBox {
         Button button2 = new Button("dummy button");
         Button button3 = new Button("dummy button");
         Button button4 = new Button("dummy button");
-        Button1.setOnAction(e-> System.out.println("print this"));
+        Button1.setOnAction(e-> stage.setScene(PackageFormScene.CreatePackageFormScene(stage)));
 
-        button2.setOnAction(e-> System.out.println("print this"));
+        button2.setOnAction(e-> stage.setScene(dummyScene.CreatedummyScene(stage)));
 
         this.setPadding(new Insets(20));
         this.setSpacing(15);
