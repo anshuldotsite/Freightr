@@ -12,13 +12,13 @@ public class NavigationVbox extends VBox {
     public NavigationVbox(Stage stage) {
         this.stage = stage;
 
-        Button Button1 = new Button("Parcel Scene Button");
-        Button button2 = new Button("dummy button");
+        Button Button1 = new Button("Package Scene Button");
+        Button button2 = new Button("package tracking Button");
         Button button3 = new Button("dummy button");
         Button button4 = new Button("dummy button");
         Button1.setOnAction(e-> stage.setScene(PackageFormScene.CreatePackageFormScene(stage)));
 
-        button2.setOnAction(e-> stage.setScene(dummyScene.CreatedummyScene(stage)));
+        button2.setOnAction(e-> stage.setScene(trackPackageScene.createTrackPackageScene(stage)));
 
         this.setPadding(new Insets(20));
         this.setSpacing(15);
