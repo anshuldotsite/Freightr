@@ -61,9 +61,7 @@ public class AccountCreation {
         HBox confirmPasswordBox = new HBox(7, confirmPassword, confirmPasswordText);
 
         Button createAccount = new Button("Create Account");
-        createAccount.setOnAction(e -> {
-
-        });
+        createAccount.setOnAction(e -> {});
 
 
         vbox.getChildren().addAll(nameBox, emailBox, designationBox, usernameBox, passwordBox, confirmPasswordBox, createAccount);
