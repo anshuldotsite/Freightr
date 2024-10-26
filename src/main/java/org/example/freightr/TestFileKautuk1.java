@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 public class TestFileKautuk1 extends Application {
     @Override
     public void start(Stage stage){
-        Scene scene = trackPackageScene.createTrackPackageScene(stage);
+        Scene scene = LoginPageScene.createLoginPage(stage);
         stage.setTitle("Track Package");
         stage.setScene(scene);
         stage.show();
