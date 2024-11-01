@@ -5,4 +5,6 @@ module org.example.freightr {
 
     opens org.example.freightr to javafx.fxml;
     exports org.example.freightr;
+
+
 }
