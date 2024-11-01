@@ -1,0 +1,91 @@
+package org.example.freightr;
+
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.*;
+
+;
+
+public class DbForm {
+    public static Scene CreateDBFormScene (Stage stage){
+
+        //page heading
+        Label pageHeading = new Label("Database Configuration Form");
+        pageHeading.setAlignment(Pos.CENTER);
+
+        //Hbox for username
+        HBox userBox = new HBox();
+        Label userLabel = new Label("DB User Name");
+        TextField usernameInput = new TextField();
+        userLabel.setMinWidth(75);
+        usernameInput.setMinWidth(100);
+        userBox.getChildren().addAll(userLabel,usernameInput);
+        userBox.setAlignment(Pos.CENTER);
+        userBox.setSpacing(10);
+
+        //Hbox for db name
+        HBox dbNameBox = new HBox();
+        Label dbName = new Label("DB  Name");
+        TextField dbNameInput = new TextField();
+        dbName.setMinWidth(75);
+        dbNameInput.setMinWidth(100);
+        dbNameBox.getChildren().addAll(dbName,dbNameInput);
+        dbNameBox.setAlignment(Pos.CENTER);
+        dbNameBox.setSpacing(10);
+
+
+        //Hbox for password
+        HBox passwordBox = new HBox();
+        Label passwordLabel = new Label("DB Password");
+        TextField passwordInput = new TextField();
+        passwordLabel.setMinWidth(75);
+        passwordInput.setMinWidth(100);
+        passwordBox.getChildren().addAll(passwordLabel,passwordInput);
+        passwordBox.setAlignment(Pos.CENTER);
+        passwordBox.setSpacing(10);
+
+
+        //test connection button
+        Button testButton = new Button("Test Connection");
+        testButton.setMinWidth(35);
+
+        //next page button
+        Button nextButton = new Button("Next");
+        nextButton.setMinWidth(35);
+
+        //button box
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().addAll(testButton,nextButton);
+        buttonBox.setSpacing(5);
+        buttonBox.setAlignment(Pos.CENTER);
+
+        //Vbox
+        VBox vBox = new VBox();
+        vBox.getChildren().addAll(pageHeading,userBox,dbNameBox,passwordBox,buttonBox);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(10);
+
+
+        //changing the scene if the connection is successful
+        nextButton.setOnAction(actionEvent -> {
+            Scene r = LoginPageScene.createLoginPage(stage);
+            stage.setScene(r);
+        });
+
+        BorderPane root = new BorderPane();
+        root.setCenter(vBox);
+        return new Scene(root,900,640);
+
+
+    }
+
+}
+
