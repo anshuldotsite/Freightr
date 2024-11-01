@@ -73,6 +73,37 @@ public class DbForm {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(10);
 
+        //writing to the file through the form and establishing connection
+        testButton.setOnAction(actionEvent -> {
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("credentials.txt"));
+
+                String empty = " ";
+                String userIn = usernameInput.getText()+empty;
+                String dbNameIn = dbNameInput.getText()+empty;
+                String passwordIn = passwordInput.getText()+empty;
+
+                writer.write(userIn);
+                writer.write(dbNameIn);
+                writer.write(passwordIn);
+                writer.flush();
+
+                Database db = Database.getInstance();
+                if (db.getStatus()==true){
+                    Label successLabel = new Label("Connection Successful");
+                    vBox.getChildren().add(successLabel);
+                    successLabel.setAlignment(Pos.BASELINE_CENTER);
+                }else {
+                    Label failLabel = new Label("Connection Failed");
+                    vBox.getChildren().add(failLabel);
+                    failLabel.setAlignment(Pos.BASELINE_CENTER);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        });
+
 
         //changing the scene if the connection is successful
         nextButton.setOnAction(actionEvent -> {
