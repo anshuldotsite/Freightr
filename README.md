@@ -1,8 +1,8 @@
 # Project Title
-## Freightr
+Freightr
 
 # Project Description
-## Package Tracking Software
+Package Tracking Software
 
 # Teammates
 - Anshul Karande
