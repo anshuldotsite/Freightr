@@ -39,6 +39,16 @@ public class DbForm {
         dbNameBox.setAlignment(Pos.CENTER);
         dbNameBox.setSpacing(10);
 
+        //Hbox for host
+        HBox hostBox = new HBox();
+        Label hostLabel = new Label("Host");
+        TextField hostInput = new TextField();
+        hostLabel.setMinWidth(75);
+        hostInput.setMinWidth(100);
+        hostBox.getChildren().addAll(hostLabel,hostInput);
+        hostBox.setAlignment(Pos.CENTER);
+        hostBox.setSpacing(10);
+
 
         //Hbox for password
         HBox passwordBox = new HBox();
@@ -67,7 +77,7 @@ public class DbForm {
 
         //Vbox
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(pageHeading,userBox,dbNameBox,passwordBox,buttonBox);
+        vBox.getChildren().addAll(pageHeading,userBox,dbNameBox,hostBox,passwordBox,buttonBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(10);
 
@@ -113,4 +123,3 @@ public class DbForm {
         return new Scene(root,900,640);
     }
 }
-

@@ -10,7 +10,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Scene scene = AccountCreation.AccountCreationScene(stage);
+        Scene scene = DbForm.CreateDBFormScene(stage);
         stage.setTitle("Create an account");
         stage.setScene(scene);
         stage.show();
