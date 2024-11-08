@@ -1,9 +1,11 @@
-package org.example.freightr;
+package org.example.freightr.scenes;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.scenes.PackageFormScene;
+import org.example.freightr.scenes.TrackPackageScene;
 
 public class NavigationVBox extends VBox {
 

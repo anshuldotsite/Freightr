@@ -1,4 +1,4 @@
-package org.example.freightr;
+package org.example.freightr.scenes;
 
 import javafx.scene.control.TextField;
 

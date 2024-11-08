@@ -1,9 +1,9 @@
 package org.example.freightr;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.freightr.scenes.LoginPageScene;
 
 import java.io.File;
 import java.io.IOException;
