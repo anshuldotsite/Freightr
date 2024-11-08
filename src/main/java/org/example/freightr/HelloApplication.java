@@ -13,6 +13,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         //logic for db form
         // comment 2
+        //test
         Scene dbScene = DbForm.CreateDBFormScene(stage);
         Scene loginScene = LoginPageScene.createLoginPage(stage);
 
