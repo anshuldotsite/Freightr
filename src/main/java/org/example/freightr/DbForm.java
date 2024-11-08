@@ -68,6 +68,7 @@ public class DbForm {
         //next page button
         Button nextButton = new Button("Next");
         nextButton.setMinWidth(35);
+        nextButton.setDisable(true);
 
         //button box
         HBox buttonBox = new HBox();
@@ -89,10 +90,12 @@ public class DbForm {
                 String empty = " ";
                 String userIn = usernameInput.getText()+empty;
                 String dbNameIn = dbNameInput.getText()+empty;
+                String hostIN = hostInput.getText()+empty;
                 String passwordIn = passwordInput.getText()+empty;
 
                 writer.write(userIn);
                 writer.write(dbNameIn);
+                writer.write(hostIN);
                 writer.write(passwordIn);
                 writer.flush();
 
@@ -101,6 +104,7 @@ public class DbForm {
                     Label successLabel = new Label("Connection Successful");
                     vBox.getChildren().add(successLabel);
                     successLabel.setAlignment(Pos.BASELINE_CENTER);
+                    nextButton.setDisable(false);
                 }else {
                     Label failLabel = new Label("Connection Failed");
                     vBox.getChildren().add(failLabel);

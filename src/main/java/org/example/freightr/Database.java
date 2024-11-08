@@ -12,6 +12,7 @@ public class Database {
     private static String DB_NAME;
     private static String DB_PASSWORD;
     private static String DB_USER;
+    private static String HOST;
     private static boolean isConnected;
 
     private Database() {
@@ -21,18 +22,19 @@ public class Database {
                 BufferedReader reader = new BufferedReader(new FileReader("credentials.txt"));
                 String credentialsStr = reader.readLine();
                 StringTokenizer stringTokenizer = new StringTokenizer(credentialsStr);
-                String credentials[] = new String[3];
+                String credentials[] = new String[4];
                 int i = 0;
                 while (stringTokenizer.hasMoreTokens()) {
                     credentials[i++] = stringTokenizer.nextToken();
                 }
                 DB_USER = credentials[0];
                 DB_NAME = credentials[1];
-                DB_PASSWORD = credentials[2];
+                HOST = credentials[2];
+                DB_PASSWORD = credentials[3];
 
 
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://localhost/" + DB_NAME +
+                connection = DriverManager.getConnection("jdbc:mysql://" +HOST+ "/" + DB_NAME +
                                 "?serverTimezone=UTC",
                         DB_USER,
                         DB_PASSWORD);
