@@ -12,7 +12,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         //logic for db form
-        // comment 2
+        // comment 3
         Scene dbScene = DbForm.CreateDBFormScene(stage);
         Scene loginScene = LoginPageScene.createLoginPage(stage);
 
