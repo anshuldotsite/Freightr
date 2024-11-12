@@ -66,5 +66,11 @@ public class Database {
         }
         return isConnected;
     }
+    public Connection getConnection() {
+        if (connection == null) {
+
+        }
+        return connection;
+    }
 }
 
