@@ -1,4 +1,6 @@
-package org.example.freightr.TableCreation;
+package org.example.freightr.TableCreation.DOA;
+
+import org.example.freightr.TableCreation.Customer;
 
 import java.util.ArrayList;
 

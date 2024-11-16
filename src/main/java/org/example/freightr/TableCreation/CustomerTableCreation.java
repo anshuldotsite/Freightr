@@ -2,6 +2,7 @@ package org.example.freightr.TableCreation;
 
 
 import org.example.freightr.Database;
+import org.example.freightr.TableCreation.DOA.CustomerDoa;
 
 
 import java.sql.PreparedStatement;
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static org.example.freightr.TableCreation.Tableconst.*;
+import static org.example.freightr.TableCreation.Dbconst.*;
 
 public class CustomerTableCreation implements CustomerDoa {
 

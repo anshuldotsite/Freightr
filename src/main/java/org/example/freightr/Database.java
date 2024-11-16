@@ -1,5 +1,7 @@
 package org.example.freightr;
 
+import org.example.freightr.TableCreation.Dbconst;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
@@ -39,9 +41,30 @@ public class Database {
                         DB_USER,
                         DB_PASSWORD);
                 System.out.println("Connection successful");
+                createTable(Dbconst.TABLE_CUSTOMER, Dbconst.CREATE_TABLE_CUSTOMER, connection);
+                createTable(Dbconst.TABLE_PACKAGE, Dbconst.CREATE_TABLE_PACKAGE, connection);
+                createTable(Dbconst.TABLE_CUSTOMER_PACKAGES, Dbconst.CREATE_TABLE_CUSTOMER_PACKAGES, connection);
+                createTable(Dbconst.TABLE_COMPANY_DETAILS, Dbconst.CREATE_TABLE_COMPANY_DETAILS, connection);
+                createTable(Dbconst.TABLE_PACKAGE_TRACKING, Dbconst.CREATE_TABLE_PACKAGE_TRACKING, connection);
+
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+    public void createTable(String tableName, String tableQuery, Connection connection) throws SQLException {
+        Statement createTable;
+        DatabaseMetaData md = connection.getMetaData();
+        ResultSet resultSet = md.getTables("kjeetjava", null, tableName, null);
+        if(resultSet.next()){
+            System.out.println(tableName + " table already exists");
+        }
+        else{
+            createTable = connection.createStatement();
+            createTable.execute(tableQuery);
+            System.out.println("The " + tableName + " table has been created");
         }
     }
 
