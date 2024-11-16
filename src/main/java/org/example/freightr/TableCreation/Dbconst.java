@@ -1,6 +1,6 @@
 package org.example.freightr.TableCreation;
 
-public class Tableconst {
+public class Dbconst {
     public static final String TABLE_CUSTOMER = "customer";
     public static final String CUSTOMER_COLUMN_ID = "customer_id";
     public static final String CUSTOMER_COLUMN_COMPANY_ID = "company_id";
@@ -14,6 +14,7 @@ public class Tableconst {
     public static final String CUSTOMER_COLUMN_PROVINCE = "province";
     public static final String CUSTOMER_COLUMN_COUNTRY = "country";
     public static final String CUSTOMER_COLUMN_TYPE = "customer_type";
+    // const for package
     public static final String TABLE_PACKAGE = "package";
     public static final String PACKAGE_COLUMN_ID = "package_id";
     public static final String PACKAGE_COLUMN_DESCRIPTION = "package_description";
@@ -23,6 +24,28 @@ public class Tableconst {
     public static final String PACKAGE_COLUMN_LENGTH = "length";
     public static final String PACKAGE_COLUMN_BREADTH = "breadth";
     public static final String PACKAGE_COLUMN_PRICE = "price";
+
+
+
+    //  constants for Customer Packages table
+    public static final String TABLE_CUSTOMER_PACKAGES = "customer_packages";
+
+    public static final String CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID = "customer_id";
+    public static final String CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID = "package_id";
+
+    //  constants  Company Details table
+    public static final String TABLE_COMPANY_DETAILS = "company_details";
+    public static final String COMPANY_COLUMN_ID = "company_id";
+    public static final String COMPANY_COLUMN_NAME = "company_name";
+    public static final String COMPANY_COLUMN_NUMBER = "company_number";
+    public static final String COMPANY_COLUMN_EMAIL = "company_email";
+
+    //  constants for Package Tracking table
+    public static final String TABLE_PACKAGE_TRACKING = "package_tracking";
+    public static final String TRACKING_COLUMN_ID = "tracking_id";
+    public static final String TRACKING_COLUMN_PACKAGE_ID = "package_id";
+    public static final String TRACKING_COLUMN_LOCATION = "location";
+    public static final String TRACKING_COLUMN_STATUS = "status";
 
 
     public static final String CREATE_TABLE_CUSTOMER =
@@ -52,4 +75,31 @@ public class Tableconst {
                     PACKAGE_COLUMN_BREADTH + " DECIMAL(10, 2), " +
                     PACKAGE_COLUMN_PRICE + " DECIMAL(10, 2), " +
                     "PRIMARY KEY(" + PACKAGE_COLUMN_ID + "));";
+
+
+    public static final String CREATE_TABLE_CUSTOMER_PACKAGES =
+            "CREATE TABLE " + TABLE_CUSTOMER_PACKAGES + " (" +
+                    CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + " int NOT NULL, " +
+                    CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + " int NOT NULL, " +
+                    "FOREIGN KEY(" + CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + ") REFERENCES " + TABLE_CUSTOMER + "(" + CUSTOMER_COLUMN_ID + "), " +
+                    "FOREIGN KEY(" + CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + ") REFERENCES " + TABLE_PACKAGE + "(" + PACKAGE_COLUMN_ID + "));";
+
+    // SQL to create CompanyDetails table
+    public static final String CREATE_TABLE_COMPANY_DETAILS =
+            "CREATE TABLE " + TABLE_COMPANY_DETAILS + " (" +
+                    COMPANY_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +
+                    COMPANY_COLUMN_NAME + " VARCHAR(255) NOT NULL, " +
+                    COMPANY_COLUMN_NUMBER + " VARCHAR(50) NOT NULL, " +
+                    COMPANY_COLUMN_EMAIL + " VARCHAR(150) NOT NULL, " +
+                    "PRIMARY KEY(" + COMPANY_COLUMN_ID + "));";
+
+    // SQL to create PackageTracking table
+    public static final String CREATE_TABLE_PACKAGE_TRACKING =
+            "CREATE TABLE " + TABLE_PACKAGE_TRACKING + " (" +
+                    TRACKING_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +
+                    TRACKING_COLUMN_PACKAGE_ID + " int NOT NULL, " +
+                    TRACKING_COLUMN_LOCATION + " VARCHAR(255) NOT NULL, " +
+                    TRACKING_COLUMN_STATUS + " VARCHAR(100) NOT NULL, " +
+                    "PRIMARY KEY(" + TRACKING_COLUMN_ID + "), " +
+                    "FOREIGN KEY(" + TRACKING_COLUMN_PACKAGE_ID + ") REFERENCES " + TABLE_PACKAGE + "(" + PACKAGE_COLUMN_ID + "));";
 }

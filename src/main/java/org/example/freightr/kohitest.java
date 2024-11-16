@@ -8,6 +8,7 @@ import org.example.freightr.scenes.PackageFormScene;
 public class kohitest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
+
         stage.setScene(PackageFormScene.CreatePackageFormScene(stage));
         stage.show();
     }

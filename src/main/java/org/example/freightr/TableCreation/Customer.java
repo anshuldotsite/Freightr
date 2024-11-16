@@ -125,8 +125,23 @@ public class Customer {
         this.customerType = customerType;
     }
 
+
     @Override
     public String toString() {
-        return firstName + " " + lastName;
+        return "Customer{" +
+                "id=" + customerId +
+                ", companyId=" + companyId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                ", city='" + city + '\'' +
+                ", province='" + province + '\'' +
+                ", country='" + country + '\'' +
+                ", customerType='" + customerType + '\'' +
+                '}';
     }
+
 }
