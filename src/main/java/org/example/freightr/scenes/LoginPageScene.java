@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.TableCreation.EmployeeLoginTable;
 
 /**
  * Sign In scene
@@ -42,6 +43,15 @@ public class LoginPageScene {
 
         //signIN button
         Button signInB = new Button("Sign In");
+
+        signInB.setOnAction(event -> {
+            EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
+            boolean signIn= employeeLoginTable.signIn(usernameInput.getText(), passwordInput.getText());
+            if (signIn==true){
+                Scene packageForm = PackageFormScene.CreatePackageFormScene(stage);
+                stage.setScene(packageForm);
+            }
+        });
 
         //hbox for forgot password and create account
         HBox buttonBox = new HBox();
