@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import org.example.freightr.TableCreation.DOA.EmployeeLogin;
 import org.example.freightr.TableCreation.EmployeeLoginTable;
 
+import static org.example.freightr.TableCreation.Dbconst.COMPANY_KEY;
+
 public class AccountCreation {
 
     public static Scene AccountCreationScene(Stage stage) {
@@ -63,25 +65,37 @@ public class AccountCreation {
         confirmPassword.setMinWidth(100);
         HBox confirmPasswordBox = new HBox(7, confirmPassword, confirmPasswordText);
 
+        // Label and text field for company key
+        Label companyKeyLabel = new Label("Company Key: ");
+        PasswordField companyKeyTF = new PasswordField();
+        companyKeyTF.setMinWidth(150);
+        companyKeyLabel.setMinWidth(100);
+        HBox companyKeyBox = new HBox(7, companyKeyLabel, companyKeyTF);
+
         Button createAccount = new Button("Create Account");
         createAccount.setOnAction(e -> {
-            if (passwordText.getText().equals(confirmPasswordText)){
-                EmployeeLogin newEmployee = new EmployeeLogin(nameField.getText(),emailText.getText(),designationText.getText(),usernameText.getText(),passwordText.getText());
-                EmployeeLoginTable employeeLoginTable =EmployeeLoginTable.getInstance();
-                employeeLoginTable.createAccount(newEmployee);
-                Label accountCreated = new Label("Account Created");
-                vbox.getChildren().add(accountCreated);
-                accountCreated.setAlignment(Pos.CENTER);
-
+            if (companyKeyTF.getText().equals(COMPANY_KEY)){
+                if (passwordText.getText().equals(confirmPasswordText.getText())){
+                    EmployeeLogin newEmployee = new EmployeeLogin(nameField.getText(),emailText.getText(),designationText.getText(),usernameText.getText(),passwordText.getText());
+                    EmployeeLoginTable employeeLoginTable =EmployeeLoginTable.getInstance();
+                    employeeLoginTable.createAccount(newEmployee);
+                    Label accountCreated = new Label("Account Created");
+                    vbox.getChildren().add(accountCreated);
+                    accountCreated.setAlignment(Pos.CENTER);
+                }else {
+                    Label unidenticalPass = new Label("Password and Confirm Password fields did not match.");
+                    vbox.getChildren().add(unidenticalPass);
+                    unidenticalPass.setAlignment(Pos.CENTER);
+                }
             }else {
-                Label unidenticalPass = new Label("Password and Confirm Password fields did not match.");
-                vbox.getChildren().add(unidenticalPass);
-                unidenticalPass.setAlignment(Pos.CENTER);
+                Label wrongKey = new Label("Wrong Company Key");
+                vbox.getChildren().add(wrongKey);
+                wrongKey.setAlignment(Pos.CENTER);
             }
         });
 
 
-        vbox.getChildren().addAll(nameBox, emailBox, designationBox, usernameBox, passwordBox, confirmPasswordBox, createAccount);
+        vbox.getChildren().addAll(nameBox, emailBox, designationBox, usernameBox, passwordBox, confirmPasswordBox, companyKeyBox,createAccount);
 
         return new Scene(vbox, 900, 640);
     }
