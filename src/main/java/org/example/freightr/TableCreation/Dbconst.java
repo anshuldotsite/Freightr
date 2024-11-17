@@ -54,6 +54,8 @@ public class Dbconst {
     public static final String TABLE_EMPLOYEE_LOGIN = "employee_login";
     public static final String EMPLOYEE_LOGIN_COLUMN_ID = "id";
     public static final String EMPLOYEE_FULL_NAME = "full_name";
+    public static final String EMPLOYEE_EMAIL="employee_email";
+    public static final String EMPLOYEE_DESIGNATION = "designation";
 
     public static final String EMPLOYEE_USER_NAME = "user_name";
     public static final String EMPLOYEE_PASSWORD = "password";
@@ -122,6 +124,8 @@ public class Dbconst {
             "CREATE TABLE " + TABLE_EMPLOYEE_LOGIN + " (" +
                     EMPLOYEE_LOGIN_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +
                     EMPLOYEE_FULL_NAME + " VARCHAR(100) NOT NULL, " +
+                    EMPLOYEE_EMAIL + " VARCHAR(50) NOT NULL, " +
+                    EMPLOYEE_DESIGNATION + " VARCHAR(50) NOT NULL, " +
                     EMPLOYEE_USER_NAME + " VARCHAR(50) NOT NULL, " +
                     EMPLOYEE_PASSWORD + " VARCHAR(100) NOT NULL, " +
                     "PRIMARY KEY(" + EMPLOYEE_LOGIN_COLUMN_ID + "));";
