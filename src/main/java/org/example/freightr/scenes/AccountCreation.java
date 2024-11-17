@@ -1,6 +1,7 @@
 package org.example.freightr.scenes;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.TableCreation.DOA.EmployeeLogin;
+import org.example.freightr.TableCreation.EmployeeLoginTable;
 
 public class AccountCreation {
 
@@ -18,7 +21,7 @@ public class AccountCreation {
         vbox.setPadding(new Insets(20));
 
         // Label and text field for name
-        Label name = new Label("Name: ");
+        Label name = new Label("Employee Name: ");
         TextField nameField = new TextField();
         nameField.setMinWidth(150);
         name.setMinWidth(100);
@@ -62,6 +65,19 @@ public class AccountCreation {
 
         Button createAccount = new Button("Create Account");
         createAccount.setOnAction(e -> {
+            if (passwordText.getText().equals(confirmPasswordText)){
+                EmployeeLogin newEmployee = new EmployeeLogin(nameField.getText(),emailText.getText(),designationText.getText(),usernameText.getText(),passwordText.getText());
+                EmployeeLoginTable employeeLoginTable =EmployeeLoginTable.getInstance();
+                employeeLoginTable.createAccount(newEmployee);
+                Label accountCreated = new Label("Account Created");
+                vbox.getChildren().add(accountCreated);
+                accountCreated.setAlignment(Pos.CENTER);
+
+            }else {
+                Label unidenticalPass = new Label("Password and Confirm Password fields did not match.");
+                vbox.getChildren().add(unidenticalPass);
+                unidenticalPass.setAlignment(Pos.CENTER);
+            }
         });
 
 

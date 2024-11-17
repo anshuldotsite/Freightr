@@ -1,9 +1,8 @@
-package org.example.freightr.TableCreation.Tables;
+package org.example.freightr.TableCreation;
 
 import org.example.freightr.Database;
 import org.example.freightr.TableCreation.DOA.EmployeeLogin;
 import org.example.freightr.TableCreation.DOA.LoginDOA;
-import org.example.freightr.TableCreation.Dbconst;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,10 @@ import java.util.ArrayList;
 import static org.example.freightr.TableCreation.Dbconst.*;
 
 
-
+/**
+ * CRUD functionality for employee login table
+ * @author Kautuk Prasad
+ */
 public class EmployeeLoginTable implements LoginDOA {
     private static EmployeeLoginTable instance;
     private EmployeeLoginTable(){
@@ -32,8 +34,10 @@ public class EmployeeLoginTable implements LoginDOA {
             ResultSet data = getLogins.executeQuery(query);
 
             while (data.next()){
-                employeeLogins.add(new EmployeeLogin(data.getInt(EMPLOYEE_LOGIN_COLUMN_ID),
+                employeeLogins.add(new EmployeeLogin(
                         data.getString(EMPLOYEE_FULL_NAME),
+                        data.getString(EMPLOYEE_EMAIL),
+                        data.getString(EMPLOYEE_DESIGNATION),
                         data.getString(EMPLOYEE_USER_NAME),
                         data.getString(EMPLOYEE_PASSWORD)));
             }
@@ -46,11 +50,12 @@ public class EmployeeLoginTable implements LoginDOA {
     @Override
     public void createAccount(EmployeeLogin employeeLogin) {
         String query = "INSERT INTO " + TABLE_EMPLOYEE_LOGIN +
-                "(" + EMPLOYEE_LOGIN_COLUMN_ID + ", " +
-                EMPLOYEE_FULL_NAME + "," +
+                "(" + EMPLOYEE_FULL_NAME + "," +
+                EMPLOYEE_EMAIL + "," +
+                EMPLOYEE_DESIGNATION + "," +
                 EMPLOYEE_USER_NAME + "," +
-                EMPLOYEE_PASSWORD + ") VALUES ('" +
-                employeeLogin.getId() + "','" + employeeLogin.getFullName() + "','" +
+                EMPLOYEE_PASSWORD + ") VALUES ('" + employeeLogin.getFullName() + "','" +
+                employeeLogin.getEmail() + "','" + employeeLogin.getDesignation() + "','" +
                 employeeLogin.getUserName() + "','" + employeeLogin.getPassword() +
                 "')";
         try {
@@ -68,6 +73,14 @@ public class EmployeeLoginTable implements LoginDOA {
 
     @Override
     public void checkUserExists(String userName) {
+
+    }
+
+    public static EmployeeLoginTable getInstance(){
+        if(instance == null){
+            instance = new EmployeeLoginTable();
+        }
+        return instance;
 
     }
 }

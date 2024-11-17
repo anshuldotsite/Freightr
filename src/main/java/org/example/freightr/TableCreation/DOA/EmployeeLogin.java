@@ -1,14 +1,21 @@
 package org.example.freightr.TableCreation.DOA;
 
+/**
+ * POJO for employee login table
+ * @author Kautuk Prasad
+ */
 public class EmployeeLogin {
     private int id;
     private String fullName;
+    private String email;
+    private String designation;
     private String userName;
     private String password;
 
-    public EmployeeLogin(int id, String fullName, String userName, String password) {
-        this.id = id;
+    public EmployeeLogin(String fullName, String email, String designation, String userName, String password) {
         this.fullName = fullName;
+        this.email = email;
+        this.designation = designation;
         this.userName = userName;
         this.password = password;
     }
@@ -27,6 +34,22 @@ public class EmployeeLogin {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
     public String getUserName() {
