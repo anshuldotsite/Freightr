@@ -4,6 +4,7 @@ import org.example.freightr.Database;
 import org.example.freightr.TableCreation.DOA.EmployeeLogin;
 import org.example.freightr.TableCreation.DOA.LoginDOA;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -74,6 +75,26 @@ public class EmployeeLoginTable implements LoginDOA {
     @Override
     public void checkUserExists(String userName) {
 
+    }
+
+    @Override
+    public boolean signIn(String userName,String password) {
+        boolean successSignIn=false;
+        try{
+            PreparedStatement checkSIgnIn =db.getConnection().prepareStatement("SELECT " + EMPLOYEE_PASSWORD + " FROM " + TABLE_EMPLOYEE_LOGIN +
+                    " WHERE " + EMPLOYEE_USER_NAME + " = '" + userName+"'");
+            ResultSet data = checkSIgnIn.executeQuery();
+            data.next();
+            String dataPassword = data.getString(EMPLOYEE_PASSWORD);
+            if (dataPassword.equals(password)){
+                successSignIn=true;
+            }else {
+                successSignIn=false;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return successSignIn;
     }
 
     public static EmployeeLoginTable getInstance(){
