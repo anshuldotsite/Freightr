@@ -1,4 +1,4 @@
-package org.example.freightr.TableCreation.DOA;
+package org.example.freightr.TableCreation;
 
 public class Company {
     private int companyId;

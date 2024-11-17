@@ -46,6 +46,7 @@ public class Database {
                 createTable(Dbconst.TABLE_CUSTOMER_PACKAGES, Dbconst.CREATE_TABLE_CUSTOMER_PACKAGES, connection);
                 createTable(Dbconst.TABLE_COMPANY_DETAILS, Dbconst.CREATE_TABLE_COMPANY_DETAILS, connection);
                 createTable(Dbconst.TABLE_PACKAGE_TRACKING, Dbconst.CREATE_TABLE_PACKAGE_TRACKING, connection);
+                createTable(Dbconst.TABLE_EMPLOYEE_LOGIN,Dbconst.CREATE_TABLE_EMPLOYEE_LOGIN,connection);
 
 
 
