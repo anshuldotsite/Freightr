@@ -47,6 +47,16 @@ public class Dbconst {
     public static final String TRACKING_COLUMN_LOCATION = "location";
     public static final String TRACKING_COLUMN_STATUS = "status";
 
+    /**
+     * Employee Login Table
+     * @author Kautuk Prasad
+     */
+    public static final String TABLE_EMPLOYEE_LOGIN = "employee_login";
+    public static final String EMPLOYEE_LOGIN_COLUMN_ID = "id";
+    public static final String EMPLOYEE_FULL_NAME = "full_name";
+
+    public static final String EMPLOYEE_USER_NAME = "user_name";
+    public static final String EMPLOYEE_PASSWORD = "password";
 
     public static final String CREATE_TABLE_CUSTOMER =
             "CREATE TABLE " + TABLE_CUSTOMER + " (" +
@@ -102,4 +112,17 @@ public class Dbconst {
                     TRACKING_COLUMN_STATUS + " VARCHAR(100) NOT NULL, " +
                     "PRIMARY KEY(" + TRACKING_COLUMN_ID + "), " +
                     "FOREIGN KEY(" + TRACKING_COLUMN_PACKAGE_ID + ") REFERENCES " + TABLE_PACKAGE + "(" + PACKAGE_COLUMN_ID + "));";
+
+    /**
+     *creating employee login table
+     * @author Kautuk Prasad
+     */
+
+    public static final String CREATE_TABLE_EMPLOYEE_LOGIN =
+            "CREATE TABLE " + TABLE_EMPLOYEE_LOGIN + " (" +
+                    EMPLOYEE_LOGIN_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +
+                    EMPLOYEE_FULL_NAME + " VARCHAR(100) NOT NULL, " +
+                    EMPLOYEE_USER_NAME + " VARCHAR(50) NOT NULL, " +
+                    EMPLOYEE_PASSWORD + " VARCHAR(100) NOT NULL, " +
+                    "PRIMARY KEY(" + EMPLOYEE_LOGIN_COLUMN_ID + "));";
 }
