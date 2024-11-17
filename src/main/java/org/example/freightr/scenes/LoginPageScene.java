@@ -9,6 +9,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Sign In scene
+ * @author Kautuk Prasad
+ */
 public class LoginPageScene {
     public static Scene createLoginPage(Stage stage) {
 
@@ -47,6 +51,11 @@ public class LoginPageScene {
 
         //new user button
         Button createAccountB = new Button("Create Account");
+
+        createAccountB.setOnAction(event -> {
+            Scene accountCreationScene = AccountCreation.AccountCreationScene(stage);
+            stage.setScene(accountCreationScene);
+        });
 
         buttonBox.getChildren().addAll(forgotPasswordB, createAccountB);
         buttonBox.setAlignment(Pos.CENTER);

@@ -60,6 +60,9 @@ public class Dbconst {
     public static final String EMPLOYEE_USER_NAME = "user_name";
     public static final String EMPLOYEE_PASSWORD = "password";
 
+    //Const company key for employee to create an account
+    public static final String COMPANY_KEY = "Freightr123";
+
     public static final String CREATE_TABLE_CUSTOMER =
             "CREATE TABLE " + TABLE_CUSTOMER + " (" +
                     CUSTOMER_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +

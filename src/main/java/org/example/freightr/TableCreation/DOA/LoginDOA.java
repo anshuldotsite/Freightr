@@ -2,6 +2,10 @@ package org.example.freightr.TableCreation.DOA;
 
 import java.util.ArrayList;
 
+/**
+ * DOA for employee login table
+ * @author Kautuk Prasad
+ */
 public interface LoginDOA {
     public ArrayList<EmployeeLogin> getAllEmployeeLogins();
     public void createAccount(EmployeeLogin employeeLogin);
