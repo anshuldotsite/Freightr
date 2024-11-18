@@ -4,10 +4,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.TableCreation.EmployeeLoginTable;
+
+import static org.example.freightr.TableCreation.Dbconst.COMPANY_KEY;
 
 /**
  * Forgot Password Scene
@@ -67,6 +71,25 @@ public class ForgotPasswordScene {
 
         //update password button
         Button updatePassB = new Button("Update Password");
+        updatePassB.setOnAction(event -> {
+            EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
+            if (companyKeyIn.getText().equals(COMPANY_KEY)){
+                if (passwordInput.getText().equals(confirmPasswordIn.getText())){
+                    employeeLoginTable.updatePassword(userNameInput.getText(),passwordInput.getText());
+                    CustomLabel updatedPassLabel = new CustomLabel("Password Updated");
+                    updatedPassLabel.setAlignment(Pos.CENTER);
+                    vBox.getChildren().add(updatedPassLabel);
+                }else {
+                    CustomLabel unidenticalPass = new CustomLabel("Password and Confirm password fields did not match.");
+                    unidenticalPass.setAlignment(Pos.CENTER);
+                    vBox.getChildren().add(unidenticalPass);
+                }
+            }else {
+                CustomLabel wrongCompanyKey = new CustomLabel("Wrong Company Key");
+                wrongCompanyKey.setAlignment(Pos.CENTER);
+                vBox.getChildren().add(wrongCompanyKey);
+            }
+        });
 
 
         vBox.getChildren().addAll(headingForgot, userNameBox, passwordBox, confirmPasswordBox, companyKeyBox,updatePassB);
