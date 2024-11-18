@@ -91,8 +91,19 @@ public class ForgotPasswordScene {
             }
         });
 
+        Button signInB = new Button("Sign In");
+        signInB.setOnAction(event -> {
+            Scene loginPageScene = LoginPageScene.createLoginPage(stage);
+            stage.setScene(loginPageScene);
+        });
 
-        vBox.getChildren().addAll(headingForgot, userNameBox, passwordBox, confirmPasswordBox, companyKeyBox,updatePassB);
+        //hbox for buttons
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().addAll(updatePassB,signInB);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setSpacing(5);
+
+        vBox.getChildren().addAll(headingForgot, userNameBox, passwordBox, confirmPasswordBox, companyKeyBox,buttonBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
