@@ -17,6 +17,11 @@ public class Database {
     private static String HOST;
     private static boolean isConnected;
 
+    /**
+     * @author Kautuk Prasad, Kohinoor Jeet Singh
+     * @description This constructor automatically connects to the database using credentials given in txt file
+     * and creates the specified table in the database upon connecting.
+     */
     private Database() {
         if (connection == null) {
             //reading the credentials from txt file and connecting to server
@@ -78,6 +83,12 @@ public class Database {
     }
 
     //checking the connection status
+
+    /**
+     * @author Kautuk Prasad
+     * @description It checks to see if the database is connected or not and returns a boolean depending on the result.
+     * @return boolean
+     */
     public boolean getStatus() {
         try {
             if (connection.isValid(300) == false) {

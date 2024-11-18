@@ -26,6 +26,11 @@ public class EmployeeLoginTable implements LoginDOA {
     ArrayList<EmployeeLogin> employeeLogins;
 
 
+    /**
+     * @author Kautuk Prasad
+     * @description It gets all the employee login data from the table and stores in an arraylist.
+     * @return All employee login data from the database.
+     */
     @Override
     public ArrayList<EmployeeLogin> getAllEmployeeLogins() {
         String query="SELECT * FROM " + Dbconst.TABLE_EMPLOYEE_LOGIN;
@@ -48,6 +53,11 @@ public class EmployeeLoginTable implements LoginDOA {
         return employeeLogins;
     }
 
+    /**
+     * @author Kautuk Prasad
+     * @description It takes in an employee object and adds a new row in the table based on the object properties.
+     * @param employeeLogin
+     */
     @Override
     public void createAccount(EmployeeLogin employeeLogin) {
         String query = "INSERT INTO " + TABLE_EMPLOYEE_LOGIN +
@@ -67,6 +77,12 @@ public class EmployeeLoginTable implements LoginDOA {
         }
     }
 
+    /**
+     * @author Kautuk Prasad
+     * @description It takes in username and the password from the employee and updates the password in matching column for the username in the databse.
+     * @param userName
+     * @param password
+     */
     @Override
     public void updatePassword(String userName, String password) {
         String query = "UPDATE  " + TABLE_EMPLOYEE_LOGIN +
@@ -85,6 +101,13 @@ public class EmployeeLoginTable implements LoginDOA {
 
     }
 
+    /**
+     * @author Kautuk Prasad
+     * @description It takes in the username and password and runs a query to see if the password matches the password present in the database for the particular username and returns a boolean based on the result.
+     * @param userName
+     * @param password
+     * @return boolean
+     */
     @Override
     public boolean signIn(String userName,String password) {
         boolean successSignIn=false;
