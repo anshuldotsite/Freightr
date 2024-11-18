@@ -94,8 +94,12 @@ public class AccountCreation {
             }
         });
 
-
-        vbox.getChildren().addAll(nameBox, emailBox, designationBox, usernameBox, passwordBox, confirmPasswordBox, companyKeyBox,createAccount);
+        Button signIn = new Button("Sign In");
+        signIn.setOnAction(event -> {
+            Scene loginPageScene = LoginPageScene.createLoginPage(stage);
+            stage.setScene(loginPageScene);
+        });
+        vbox.getChildren().addAll(nameBox, emailBox, designationBox, usernameBox, passwordBox, confirmPasswordBox, companyKeyBox,createAccount,signIn);
 
         return new Scene(vbox, 900, 640);
     }
