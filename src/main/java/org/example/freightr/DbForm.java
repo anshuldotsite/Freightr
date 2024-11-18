@@ -13,6 +13,10 @@ import org.example.freightr.scenes.LoginPageScene;
 
 import java.io.*;
 
+/**
+ * @author Kautuk Prasad
+ * @description This is a database configuration form which is used to connect to the database for the application.
+ */
 public class DbForm {
     public static Scene CreateDBFormScene (Stage stage){
 
