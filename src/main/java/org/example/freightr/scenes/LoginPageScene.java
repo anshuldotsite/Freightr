@@ -58,6 +58,10 @@ public class LoginPageScene {
 
         //forgot password
         Button forgotPasswordB = new Button("Forgot Password?");
+        forgotPasswordB.setOnAction(event -> {
+            Scene forgotPassScene = ForgotPasswordScene.createForgotPasswordScene(stage);
+            stage.setScene(forgotPassScene);
+        });
 
         //new user button
         Button createAccountB = new Button("Create Account");
