@@ -68,8 +68,16 @@ public class EmployeeLoginTable implements LoginDOA {
     }
 
     @Override
-    public void updatePassword(EmployeeLogin employeeLogin) {
-
+    public void updatePassword(String userName, String password) {
+        String query = "UPDATE  " + TABLE_EMPLOYEE_LOGIN +
+                " SET " + EMPLOYEE_PASSWORD + " = " + "'" + password +
+                "' WHERE " +  EMPLOYEE_USER_NAME + " = '" + userName +"'";
+        try{
+            Statement updatePass = db.getConnection().createStatement();
+            updatePass.executeUpdate(query);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
