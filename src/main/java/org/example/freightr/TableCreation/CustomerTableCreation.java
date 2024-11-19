@@ -20,7 +20,6 @@ public class CustomerTableCreation implements CustomerDoa {
     private final Database db = Database.getInstance();
 
     private CustomerTableCreation() {
-
     }
 
     public static synchronized CustomerTableCreation getInstance() {
@@ -95,7 +94,71 @@ public class CustomerTableCreation implements CustomerDoa {
     }
 
     @Override
-    public Customer deleteCustomer(int CustomerID) {
+    public Customer deleteCustomer(int customerID) {
+        String query = "DELETE FROM " + TABLE_CUSTOMER +
+                " WHERE " + CUSTOMER_COLUMN_ID + " = ?";
+        Customer deletedCustomer = getCustomer(customerID);
+
+        if (deletedCustomer == null) {
+            return null;
+        }
+        try {
+            PreparedStatement deleteStatement = db.getConnection().prepareStatement(query);
+            deleteStatement.setInt(1, customerID);
+            int rowsAffected = deleteStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                return deletedCustomer;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Customer updateCustomer(Customer customer) {
+        String query = "UPDATE " + TABLE_CUSTOMER +
+                " SET " +
+                CUSTOMER_COLUMN_COMPANY_ID + " = ?, " +
+                CUSTOMER_COLUMN_FIRST_NAME + " = ?, " +
+                CUSTOMER_COLUMN_LAST_NAME + " = ?, " +
+                CUSTOMER_COLUMN_CONTACT_NUMBER + " = ?, " +
+                CUSTOMER_COLUMN_EMAIL + " = ?, " +
+                CUSTOMER_COLUMN_ADDRESS + " = ?, " +
+                CUSTOMER_COLUMN_ZIPCODE + " = ?, " +
+                CUSTOMER_COLUMN_CITY + " = ?, " +
+                CUSTOMER_COLUMN_PROVINCE + " = ?, " +
+                CUSTOMER_COLUMN_COUNTRY + " = ?, " +
+                CUSTOMER_COLUMN_TYPE + " = ? " +
+                "WHERE " + CUSTOMER_COLUMN_ID + " = ?";
+        try {
+            PreparedStatement updateStatement = db.getConnection().prepareStatement(query);
+            updateStatement.setInt(1, customer.getCompanyId());
+            updateStatement.setString(2, customer.getFirstName());
+            updateStatement.setString(3, customer.getLastName());
+            updateStatement.setString(4, customer.getContactNumber());
+            updateStatement.setString(5, customer.getEmail());
+            updateStatement.setString(6, customer.getAddress());
+            updateStatement.setString(7, customer.getZipcode());
+            updateStatement.setString(8, customer.getCity());
+            updateStatement.setString(9, customer.getProvince());
+            updateStatement.setString(10, customer.getCountry());
+            updateStatement.setString(11, customer.getCustomerType());
+            updateStatement.setInt(12, customer.getCustomerId());
+
+            int rowsAffected = updateStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                return getCustomer(customer.getCustomerId());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }
+
+
+
+

@@ -36,7 +36,7 @@ public class Company {
     }
 
     public void setCompanyEmail(String companyEmail) {
-        CompanyEmail = companyEmail;
+        this.CompanyEmail = companyEmail;
     }
 
     public int getCompanyNumber() {
@@ -44,9 +44,6 @@ public class Company {
     }
 
     public void setCompanyNumber(int companyNumber) {
-        CompanyNumber = companyNumber;
+        this.CompanyNumber = companyNumber;
     }
-
-
-
 }

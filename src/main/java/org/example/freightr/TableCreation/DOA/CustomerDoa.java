@@ -10,4 +10,6 @@ public interface CustomerDoa {
     public Customer getCustomer(int CustomerID);
 
     public Customer deleteCustomer(int CustomerID);
+
+    public Customer updateCustomer(Customer customer);
 }
