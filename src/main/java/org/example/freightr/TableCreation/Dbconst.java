@@ -1,5 +1,6 @@
 package org.example.freightr.TableCreation;
 
+
 public class Dbconst {
     public static final String TABLE_CUSTOMER = "customer";
     public static final String CUSTOMER_COLUMN_ID = "customer_id";

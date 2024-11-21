@@ -10,4 +10,6 @@ public interface PackageDoa {
     public Package getPackage(int packageId);
 
     public Package deletePackage(int packageId);
+
+    void addPackage(Package Package);
 }
