@@ -100,7 +100,7 @@ public class Dbconst {
                     "FOREIGN KEY(" + CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + ") REFERENCES " + TABLE_CUSTOMER + "(" + CUSTOMER_COLUMN_ID + "), " +
                     "FOREIGN KEY(" + CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + ") REFERENCES " + TABLE_PACKAGE + "(" + PACKAGE_COLUMN_ID + "));";
 
-    // SQL to create CompanyDetails table
+
     public static final String CREATE_TABLE_COMPANY_DETAILS =
             "CREATE TABLE " + TABLE_COMPANY_DETAILS + " (" +
                     COMPANY_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +

@@ -3,6 +3,7 @@ package org.example.freightr.TableCreation;
 import org.example.freightr.Database;
 
 import org.example.freightr.TableCreation.DOA.PackageDoa;
+import org.example.freightr.TableCreation.ObjectClasses.Package;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ public class PackageTableCred implements PackageDoa {
         db= Database.getInstance();
     }
     Database db = Database.getInstance();
-    ArrayList<Package> Package;
+    ArrayList<org.example.freightr.TableCreation.ObjectClasses.Package> Package;
     /**
      * @description It gets all the package data from the table and stores it in an ArrayList.
      * @return All package data from the database.

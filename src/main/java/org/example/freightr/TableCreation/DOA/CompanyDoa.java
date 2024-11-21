@@ -1,6 +1,6 @@
 package org.example.freightr.TableCreation.DOA;
 
-import org.example.freightr.TableCreation.Company;
+import org.example.freightr.TableCreation.ObjectClasses.Company;
 
 import java.util.ArrayList;
 

@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.Package;
+import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.TableCreation.PackageTableCred;
 
 import java.util.Date;
