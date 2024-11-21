@@ -15,7 +15,7 @@ import static org.example.freightr.TableCreation.Dbconst.*;
 
 public class PackageTableCred implements PackageDoa {
     private static PackageTableCred instance;
-    private PackageTableCred(){
+    public PackageTableCred(){
         db= Database.getInstance();
     }
     Database db = Database.getInstance();
@@ -34,15 +34,14 @@ public class PackageTableCred implements PackageDoa {
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                int packageId = resultSet.getInt("packageId");
-                String packageDescription = resultSet.getString("packageDescription");
-                Date sentDate = resultSet.getDate("sentDate");
-                double weight = resultSet.getDouble("weight");
-                double height = resultSet.getDouble("height");
-                double length = resultSet.getDouble("length");
-                double breadth = resultSet.getDouble("breadth");
-                double price = resultSet.getDouble("price");
-
+                int packageId = resultSet.getInt(PACKAGE_COLUMN_ID);
+                String packageDescription = resultSet.getString(PACKAGE_COLUMN_DESCRIPTION);
+                Date sentDate = resultSet.getDate(PACKAGE_COLUMN_SENT_DATE);
+                double weight = resultSet.getDouble(PACKAGE_COLUMN_WEIGHT);
+                double height = resultSet.getDouble(PACKAGE_COLUMN_HEIGHT);
+                double length = resultSet.getDouble(PACKAGE_COLUMN_LENGTH);
+                double breadth = resultSet.getDouble(PACKAGE_COLUMN_BREADTH);
+                double price = resultSet.getDouble(PACKAGE_COLUMN_PRICE);
                 packages.add(new Package(packageId, packageDescription, sentDate, weight, height, length, breadth, price));
             }
         } catch (SQLException e) {
@@ -61,33 +60,35 @@ public class PackageTableCred implements PackageDoa {
      */
     @Override
     public Package getPackage(int packageId) {
-        String query = "SELECT * FROM " + TABLE_PACKAGE + " WHERE packageId = ?";
-        Package packageObj = null;
-        try (PreparedStatement preparedStatement = db.getConnection().prepareStatement(query)) {
-            preparedStatement.setInt(1, packageId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        String query = "SELECT * FROM " + TABLE_PACKAGE + " WHERE package_Id = ?";
+        Package Package = null;
 
-            if (resultSet.next()) {
-                String packageDescription = resultSet.getString("packageDescription");
-                Date sentDate = resultSet.getDate("sentDate");
-                double weight = resultSet.getDouble("weight");
-                double height = resultSet.getDouble("height");
-                double length = resultSet.getDouble("length");
-                double breadth = resultSet.getDouble("breadth");
-                double price = resultSet.getDouble("price");
+            try (PreparedStatement preparedStatement = db.getConnection().prepareStatement(query)) {
+                preparedStatement.setInt(1, packageId);
+                ResultSet resultSet = preparedStatement.executeQuery();
 
-                packageObj = new Package(packageId, packageDescription, sentDate, weight, height, length, breadth, price);
+                if (resultSet.next()) {
+                    String packageDescription = resultSet.getString(PACKAGE_COLUMN_DESCRIPTION);
+                    java.sql.Date sentDateSql = resultSet.getDate(PACKAGE_COLUMN_SENT_DATE);
+                    Date sentDate = sentDateSql != null ? new Date(sentDateSql.getTime()) : null;
+                    double weight = resultSet.getDouble(PACKAGE_COLUMN_WEIGHT);
+                    double height = resultSet.getDouble(PACKAGE_COLUMN_HEIGHT);
+                    double length = resultSet.getDouble(PACKAGE_COLUMN_LENGTH);
+                    double breadth = resultSet.getDouble(PACKAGE_COLUMN_BREADTH);
+                    double price = resultSet.getDouble(PACKAGE_COLUMN_PRICE);
+
+                    Package = new Package(packageId, packageDescription, sentDate, weight, height, length, breadth, price);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return Package;
         }
-        return packageObj;
-    }
 
 
     @Override
     public Package deletePackage(int packageId) {
-        String query = "DELETE FROM " + TABLE_PACKAGE + " WHERE packageId = ?";
+        String query = "DELETE FROM " + TABLE_PACKAGE + " WHERE package_Id = ?";
         Package deletedPackage = null;
         try {
             // First retrieve the package details before deletion
@@ -109,21 +110,21 @@ public class PackageTableCred implements PackageDoa {
 
     @Override
     public void addPackage(Package Package) {
-        String query = "INSERT INTO " + TABLE_PACKAGE +
-                "(" + PACKAGE_COLUMN_DESCRIPTION + "," +
-                PACKAGE_COLUMN_SENT_DATE + "," +
-                PACKAGE_COLUMN_WEIGHT + "," +
-                PACKAGE_COLUMN_HEIGHT + "," +
-                PACKAGE_COLUMN_LENGTH + "," +
-                PACKAGE_COLUMN_BREADTH + "," +
+        String query = "INSERT INTO " + TABLE_PACKAGE + " (" +
+                PACKAGE_COLUMN_DESCRIPTION + ", " +
+                PACKAGE_COLUMN_SENT_DATE + ", " +
+                PACKAGE_COLUMN_WEIGHT + ", " +
+                PACKAGE_COLUMN_HEIGHT + ", " +
+                PACKAGE_COLUMN_LENGTH + ", " +
+                PACKAGE_COLUMN_BREADTH + ", " +
                 PACKAGE_COLUMN_PRICE + ") VALUES ('" +
-                Package.getPackageDescription() + "','" +
-                new java.sql.Date(Package.getSentDate().getTime()) + "','" +
-                Package.getWeight() + "','" +
-                Package.getHeight() + "','" +
-                Package.getLength() + "','" +
-                Package.getBreadth() + "','" +
-                Package.getPrice() + "')";
+                Package.getPackageDescription() + "', '" +
+                new java.sql.Date(Package.getSentDate().getTime()) + "', " +
+                Package.getWeight() + ", " +
+                Package.getHeight() + ", " +
+                Package.getLength() + ", " +
+                Package.getBreadth() + ", " +
+                Package.getPrice() + ")";
 
         try {
             db.getConnection().createStatement().execute(query);
