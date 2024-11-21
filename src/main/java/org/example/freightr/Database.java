@@ -103,7 +103,7 @@ public class Database {
     }
     public Connection getConnection() {
         if (connection == null) {
-
+            System.out.println("no connection");
         }
         return connection;
     }

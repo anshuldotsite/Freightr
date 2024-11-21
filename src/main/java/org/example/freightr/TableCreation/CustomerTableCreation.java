@@ -3,6 +3,7 @@ package org.example.freightr.TableCreation;
 
 import org.example.freightr.Database;
 import org.example.freightr.TableCreation.DOA.CustomerDoa;
+import org.example.freightr.TableCreation.ObjectClasses.Customer;
 
 
 import java.sql.PreparedStatement;
@@ -64,10 +65,10 @@ public class CustomerTableCreation implements CustomerDoa {
     @Override
     public Customer getCustomer(int id) {
         String query = "SELECT * FROM " + TABLE_CUSTOMER +
-                " WHERE " + CUSTOMER_COLUMN_ID + " = ?";
+                " WHERE " + CUSTOMER_COLUMN_ID + " = "+id;
         try {
             PreparedStatement getCustomer = db.getConnection().prepareStatement(query);
-            getCustomer.setInt(1, id);
+
             ResultSet data = getCustomer.executeQuery();
 
             if (data.next()) {
@@ -96,7 +97,7 @@ public class CustomerTableCreation implements CustomerDoa {
     @Override
     public Customer deleteCustomer(int customerID) {
         String query = "DELETE FROM " + TABLE_CUSTOMER +
-                " WHERE " + CUSTOMER_COLUMN_ID + " = ?";
+                " WHERE " + CUSTOMER_COLUMN_ID + " = "+customerID;
         Customer deletedCustomer = getCustomer(customerID);
 
         if (deletedCustomer == null) {
@@ -104,7 +105,7 @@ public class CustomerTableCreation implements CustomerDoa {
         }
         try {
             PreparedStatement deleteStatement = db.getConnection().prepareStatement(query);
-            deleteStatement.setInt(1, customerID);
+
             int rowsAffected = deleteStatement.executeUpdate();
 
             if (rowsAffected > 0) {

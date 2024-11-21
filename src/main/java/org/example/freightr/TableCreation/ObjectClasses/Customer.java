@@ -1,4 +1,4 @@
-package org.example.freightr.TableCreation;
+package org.example.freightr.TableCreation.ObjectClasses;
 
 public class Customer {
     private int customerId;

@@ -1,6 +1,7 @@
 package org.example.freightr.TableCreation;
 
 import org.example.freightr.Database;
+import org.example.freightr.TableCreation.ObjectClasses.Company;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,9 +76,9 @@ public class CompanyTableCreation {
             return null;
         }
 
-        String query = "DELETE FROM " + TABLE_COMPANY_DETAILS + " WHERE " + COMPANY_COLUMN_ID + " = ?";
+        String query = "DELETE FROM " + TABLE_COMPANY_DETAILS + " WHERE " + COMPANY_COLUMN_ID + " = "+companyId;
         try (PreparedStatement statement = db.getConnection().prepareStatement(query)) {
-            statement.setInt(1, companyId);
+
             int rowsAffected = statement.executeUpdate();
 
             if (rowsAffected > 0) {
