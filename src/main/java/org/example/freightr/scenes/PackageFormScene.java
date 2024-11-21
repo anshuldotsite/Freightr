@@ -7,6 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import org.example.freightr.TableCreation.Package;
+import org.example.freightr.TableCreation.PackageTableCred;
+
+import java.util.Date;
 
 
 public class PackageFormScene {
@@ -74,6 +78,23 @@ public class PackageFormScene {
         BorderPane root = new BorderPane();
         root.setLeft(navigationVbox);
         root.setCenter(grid);
+
+        newOrderBtn.setOnAction(e -> {
+
+            String description = descriptionField.getText();
+            double height = Double.parseDouble(heightField.getText());
+            double width = Double.parseDouble(widthField.getText());
+            double length = Double.parseDouble(lengthField.getText());
+            double weight = Double.parseDouble(weightField.getText());
+           Date date = new java.sql.Date(System.currentTimeMillis());
+            int id = 0;
+            Package newPackage = new Package(id, description, date, weight, height, length, width, 0.0); // Price is set to 0 for now
+
+
+            PackageTableCred packageTableCred = new PackageTableCred();
+            packageTableCred.addPackage(newPackage);
+        });
+
 
 
         return new Scene(root, 900, 640);

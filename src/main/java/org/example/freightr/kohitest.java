@@ -1,18 +1,16 @@
 package org.example.freightr;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import org.example.freightr.scenes.PackageFormScene;
 
-public class kohitest extends Application {
-    @Override
-    public void start(Stage stage) throws Exception {
+import org.example.freightr.TableCreation.Package;
+import org.example.freightr.TableCreation.PackageTableCred;
 
-        stage.setScene(PackageFormScene.CreatePackageFormScene(stage));
-        stage.show();
-    }
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class kohitest {
     public static void main(String[] args) {
-        launch();
+
     }
+
 }

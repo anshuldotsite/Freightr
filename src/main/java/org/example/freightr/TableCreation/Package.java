@@ -15,7 +15,7 @@ public class Package {
     public Package(int packageId, String packageDescription, Date sentDate, double weight, double height, double length, double breadth, double price) {
         this.packageId = packageId;
         this.packageDescription = packageDescription;
-        this.sentDate = sentDate;
+        this.sentDate = sentDate != null ? sentDate : new Date();
         this.weight = weight;
         this.height = height;
         this.length = length;
