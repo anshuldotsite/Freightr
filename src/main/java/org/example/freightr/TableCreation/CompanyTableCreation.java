@@ -50,9 +50,9 @@ public class CompanyTableCreation {
 
     // Method to get a specific company by ID
     public Company getCompany(int companyId) {
-        String query = "SELECT * FROM " + TABLE_COMPANY_DETAILS + " WHERE " + COMPANY_COLUMN_ID + " = ?";
+        String query = "SELECT * FROM " + TABLE_COMPANY_DETAILS + " WHERE " + COMPANY_COLUMN_ID + " = "+ companyId;
         try (PreparedStatement statement = db.getConnection().prepareStatement(query)) {
-            statement.setInt(1, companyId);
+
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -93,15 +93,12 @@ public class CompanyTableCreation {
     public Company updateCompany(Company company) {
         String query = "UPDATE " + TABLE_COMPANY_DETAILS +
                 " SET " +
-                COMPANY_COLUMN_NAME + " = ?, " +
-                COMPANY_COLUMN_EMAIL + " = ?, " +
-                COMPANY_COLUMN_NUMBER + " = ? " +
-                "WHERE " + COMPANY_COLUMN_ID + " = ?";
+                COMPANY_COLUMN_NAME + " = '" + company.getCompanyName() + "', " +
+                COMPANY_COLUMN_EMAIL + " = '" + company.getCompanyEmail() + "', " +
+                COMPANY_COLUMN_NUMBER + " = " + company.getCompanyNumber() +
+                " WHERE " + COMPANY_COLUMN_ID + " = " + company.getCompanyId();
         try (PreparedStatement statement = db.getConnection().prepareStatement(query)) {
-            statement.setString(1, company.getCompanyName());
-            statement.setString(2, company.getCompanyEmail());
-            statement.setInt(3, company.getCompanyNumber());
-            statement.setInt(4, company.getCompanyId());
+
 
             int rowsAffected = statement.executeUpdate();
 
