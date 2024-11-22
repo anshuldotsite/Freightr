@@ -12,6 +12,10 @@ public class PackageTracking {
         this.status = status;
     }
 
+    public PackageTracking(){
+
+    }
+
     public int getTrackingId() {
         return trackingId;
     }

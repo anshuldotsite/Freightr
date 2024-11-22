@@ -15,6 +15,10 @@ public class Company {
 
     }
 
+    public Company(){
+
+    }
+
     public int getCompanyId() {
         return companyId;
     }
