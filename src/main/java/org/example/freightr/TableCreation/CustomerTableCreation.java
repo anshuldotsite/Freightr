@@ -23,7 +23,7 @@ public class CustomerTableCreation implements CustomerDoa {
     private CustomerTableCreation() {
     }
 
-    public static synchronized CustomerTableCreation getInstance() {
+    public static CustomerTableCreation getInstance() {
         if (instance == null) {
             instance = new CustomerTableCreation();
         }
@@ -66,13 +66,13 @@ public class CustomerTableCreation implements CustomerDoa {
     public Customer getCustomer(int id) {
         String query = "SELECT * FROM " + TABLE_CUSTOMER +
                 " WHERE " + CUSTOMER_COLUMN_ID + " = "+id;
+        Customer customer = new Customer();
         try {
             PreparedStatement getCustomer = db.getConnection().prepareStatement(query);
 
             ResultSet data = getCustomer.executeQuery();
-
             if (data.next()) {
-                return new Customer(
+                customer = new Customer(
                         data.getInt(CUSTOMER_COLUMN_ID),
                         data.getInt(CUSTOMER_COLUMN_COMPANY_ID),
                         data.getString(CUSTOMER_COLUMN_FIRST_NAME),
@@ -91,34 +91,25 @@ public class CustomerTableCreation implements CustomerDoa {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return customer;
     }
 
     @Override
-    public Customer deleteCustomer(int customerID) {
+    public void deleteCustomer(int customerID) {
         String query = "DELETE FROM " + TABLE_CUSTOMER +
                 " WHERE " + CUSTOMER_COLUMN_ID + " = "+customerID;
-        Customer deletedCustomer = getCustomer(customerID);
 
-        if (deletedCustomer == null) {
-            return null;
-        }
         try {
             PreparedStatement deleteStatement = db.getConnection().prepareStatement(query);
+            deleteStatement.executeQuery();
 
-            int rowsAffected = deleteStatement.executeUpdate();
-
-            if (rowsAffected > 0) {
-                return deletedCustomer;
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     @Override
-    public Customer updateCustomer(Customer customer) {
+    public void updateCustomer(Customer customer) {
         String query = "UPDATE " + TABLE_CUSTOMER +
                 " SET " +
                 CUSTOMER_COLUMN_COMPANY_ID + " = " + customer.getCompanyId() + ", " +
@@ -135,15 +126,10 @@ public class CustomerTableCreation implements CustomerDoa {
                 "WHERE " + CUSTOMER_COLUMN_ID + " = " + customer.getCustomerId();
         try {
             PreparedStatement updateStatement = db.getConnection().prepareStatement(query);
-            int rowsAffected = updateStatement.executeUpdate();
-
-            if (rowsAffected > 0) {
-                return getCustomer(customer.getCustomerId());
-            }
+            updateStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 }
 

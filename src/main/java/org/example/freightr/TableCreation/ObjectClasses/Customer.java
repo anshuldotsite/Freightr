@@ -29,6 +29,10 @@ public class Customer {
         this.customerType = customerType;
     }
 
+    public Customer(){
+
+    }
+
     public int getCustomerId() {
         return customerId;
     }

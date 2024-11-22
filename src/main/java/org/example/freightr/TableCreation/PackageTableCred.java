@@ -11,16 +11,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import org.example.freightr.TableCreation.ObjectClasses.Package;
 
 import static org.example.freightr.TableCreation.Dbconst.*;
 
 public class PackageTableCred implements PackageDoa {
     private static PackageTableCred instance;
-    public PackageTableCred(){
+    private PackageTableCred(){
         db= Database.getInstance();
     }
     Database db = Database.getInstance();
-    ArrayList<org.example.freightr.TableCreation.ObjectClasses.Package> Package;
+    ArrayList<Package> Package;
     /**
      * @description It gets all the package data from the table and stores it in an ArrayList.
      * @return All package data from the database.
@@ -61,13 +62,12 @@ public class PackageTableCred implements PackageDoa {
      */
     @Override
     public Package getPackage(int packageId) {
-        String query = "SELECT * FROM " + TABLE_PACKAGE + " WHERE package_Id = ?";
+        String query = "SELECT * FROM " + TABLE_PACKAGE + " WHERE " + PACKAGE_COLUMN_ID + " = " + packageId;
         Package Package = null;
 
-            try (PreparedStatement preparedStatement = db.getConnection().prepareStatement(query)) {
-                preparedStatement.setInt(1, packageId);
-                ResultSet resultSet = preparedStatement.executeQuery();
-
+            try{
+                Statement statement = db.getConnection().createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
                 if (resultSet.next()) {
                     String packageDescription = resultSet.getString(PACKAGE_COLUMN_DESCRIPTION);
                     java.sql.Date sentDateSql = resultSet.getDate(PACKAGE_COLUMN_SENT_DATE);
@@ -88,8 +88,8 @@ public class PackageTableCred implements PackageDoa {
 
 
     @Override
-    public Package deletePackage(int packageId) {
-        String query = "DELETE FROM " + TABLE_PACKAGE + " WHERE package_Id = ?";
+    public void deletePackage(int packageId) {
+        String query = "DELETE FROM " + TABLE_PACKAGE + " WHERE "+ PACKAGE_COLUMN_ID + " = " + packageId;
         Package deletedPackage = null;
         try {
             // First retrieve the package details before deletion
@@ -98,15 +98,13 @@ public class PackageTableCred implements PackageDoa {
             if (deletedPackage != null) {
                 // Perform the delete operation
                 try (PreparedStatement preparedStatement = db.getConnection().prepareStatement(query)) {
-                    preparedStatement.setInt(1, packageId);
-                    preparedStatement.executeUpdate();
+                    preparedStatement.execute();
                     System.out.println("Package deleted: " + packageId);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return deletedPackage;
     }
 
     @Override
@@ -133,6 +131,17 @@ public class PackageTableCred implements PackageDoa {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @author Kautuk Prasad
+     * @return Single Table Instance
+     */
+    public static PackageTableCred getInstance(){
+        if(instance == null){
+            instance = new PackageTableCred();
+        }
+        return instance;
     }
 
 

@@ -1,16 +1,18 @@
 package org.example.freightr.TableCreation;
 
 import org.example.freightr.Database;
+import org.example.freightr.TableCreation.DOA.CompanyDoa;
 import org.example.freightr.TableCreation.ObjectClasses.Company;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import static org.example.freightr.TableCreation.Dbconst.*;
 
-public class CompanyTableCreation {
+public class CompanyTableCreation implements CompanyDoa {
 
     private static CompanyTableCreation instance;
 
@@ -19,7 +21,7 @@ public class CompanyTableCreation {
     private CompanyTableCreation() {
     }
 
-    public static synchronized CompanyTableCreation getInstance() {
+    public static CompanyTableCreation getInstance() {
         if (instance == null) {
             instance = new CompanyTableCreation();
         }
@@ -42,7 +44,7 @@ public class CompanyTableCreation {
                         resultSet.getInt(COMPANY_COLUMN_NUMBER)
                 ));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return companies;
@@ -51,46 +53,38 @@ public class CompanyTableCreation {
     // Method to get a specific company by ID
     public Company getCompany(int companyId) {
         String query = "SELECT * FROM " + TABLE_COMPANY_DETAILS + " WHERE " + COMPANY_COLUMN_ID + " = "+ companyId;
+        Company company = new Company();
         try (PreparedStatement statement = db.getConnection().prepareStatement(query)) {
 
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                return new Company(
+                company= new Company(
                         resultSet.getInt(COMPANY_COLUMN_ID),
                         resultSet.getString(COMPANY_COLUMN_NAME),
                         resultSet.getString(COMPANY_COLUMN_EMAIL),
                         resultSet.getInt(COMPANY_COLUMN_NUMBER)
                 );
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return company;
     }
 
 
-    public Company deleteCompany(int companyId) {
-        Company company = getCompany(companyId);
-        if (company == null) {
-            return null;
-        }
+    public void deleteCompany(int companyId) {
+
 
         String query = "DELETE FROM " + TABLE_COMPANY_DETAILS + " WHERE " + COMPANY_COLUMN_ID + " = "+companyId;
         try (PreparedStatement statement = db.getConnection().prepareStatement(query)) {
-
-            int rowsAffected = statement.executeUpdate();
-
-            if (rowsAffected > 0) {
-                return company;
-            }
-        } catch (Exception e) {
+            statement.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
-    public Company updateCompany(Company company) {
+    public void updateCompany(Company company) {
         String query = "UPDATE " + TABLE_COMPANY_DETAILS +
                 " SET " +
                 COMPANY_COLUMN_NAME + " = '" + company.getCompanyName() + "', " +
@@ -98,16 +92,11 @@ public class CompanyTableCreation {
                 COMPANY_COLUMN_NUMBER + " = " + company.getCompanyNumber() +
                 " WHERE " + COMPANY_COLUMN_ID + " = " + company.getCompanyId();
         try (PreparedStatement statement = db.getConnection().prepareStatement(query)) {
+            statement.executeUpdate();
 
 
-            int rowsAffected = statement.executeUpdate();
-
-            if (rowsAffected > 0) {
-                return getCompany(company.getCompanyId());
-            }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
 }

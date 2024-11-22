@@ -22,6 +22,9 @@ public class Package {
         this.breadth = breadth;
         this.price = price;
     }
+    public  Package(){
+
+    }
 
     public int getPackageId() {
         return packageId;

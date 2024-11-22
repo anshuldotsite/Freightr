@@ -126,7 +126,7 @@ public class PackageFormScene {
             Package newPackage = new Package(id, description, date, weight, height, length, width, totalPrice);
 
 
-            PackageTableCred packageTableCred = new PackageTableCred();
+            PackageTableCred packageTableCred = PackageTableCred.getInstance();
             packageTableCred.addPackage(newPackage);
         });
 

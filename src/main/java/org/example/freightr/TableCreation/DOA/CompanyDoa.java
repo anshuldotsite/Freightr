@@ -9,8 +9,8 @@ public interface CompanyDoa {
 
     public Company getCompany(int companyId);
 
-    public Company deleteCompany(int companyId);
+    public void deleteCompany(int companyId);
 
-    public Company updateCompany(Company company);
+    public void updateCompany(Company company);
 }
 
