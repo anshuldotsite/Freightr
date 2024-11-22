@@ -11,9 +11,11 @@ import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.TableCreation.PackageTableCred;
 
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class PackageFormScene {
+    private static double totalPrice;
 
     public static Scene CreatePackageFormScene(Stage stage) {
 
@@ -78,17 +80,50 @@ public class PackageFormScene {
         BorderPane root = new BorderPane();
         root.setLeft(navigationVbox);
         root.setCenter(grid);
+        double height = Double.parseDouble(heightField.getText());
+        double width = Double.parseDouble(widthField.getText());
+        double length = Double.parseDouble(lengthField.getText());
+        double weight = Double.parseDouble(weightField.getText());
+
+
+        calculateChargesBtn.setOnAction(e -> {
+            int heightSurcharge=0;
+            int lengthSurcharge=0;
+            int widthSurcharge=0;
+
+            int WeightPrice =0;
+
+             if(height>100){
+                heightSurcharge=15;
+            }
+            if(width>100){
+                widthSurcharge=15;
+            }
+            if(length>100){
+                lengthSurcharge=15;
+            }
+            if(15<weight&&weight<25){
+                WeightPrice=20;
+            }
+            else if(weight>25&&weight<50){
+                WeightPrice=17;
+            }
+            else if (weight>50){
+                WeightPrice=13;
+            }else {
+                WeightPrice=30;
+            }
+           totalPrice =heightSurcharge + widthSurcharge + lengthSurcharge + (WeightPrice * weight);
+
+        });
 
         newOrderBtn.setOnAction(e -> {
 
             String description = descriptionField.getText();
-            double height = Double.parseDouble(heightField.getText());
-            double width = Double.parseDouble(widthField.getText());
-            double length = Double.parseDouble(lengthField.getText());
-            double weight = Double.parseDouble(weightField.getText());
+
            Date date = new java.sql.Date(System.currentTimeMillis());
             int id = 0;
-            Package newPackage = new Package(id, description, date, weight, height, length, width, 0.0); // Price is set to 0 for now
+            Package newPackage = new Package(id, description, date, weight, height, length, width, totalPrice);
 
 
             PackageTableCred packageTableCred = new PackageTableCred();
