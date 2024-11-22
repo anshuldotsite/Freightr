@@ -28,7 +28,7 @@ public class PackageTableCred implements PackageDoa {
      */
     @Override
     public ArrayList<Package> getAllPackages() {
-        String query = "SELECT * FROM " + TABLE_PACKAGE;
+        String query = "SELECT * FROM " + TABLE_PACKAGE ;
         ArrayList<Package> packages = new ArrayList<>();
         try {
             Statement statement = db.getConnection().createStatement();
