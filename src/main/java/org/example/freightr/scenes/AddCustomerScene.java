@@ -8,6 +8,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.TableCreation.CustomerTableCreation;
+import org.example.freightr.TableCreation.ObjectClasses.Customer;
 
 /**
  * @author Kautuk Prasad
@@ -89,6 +91,26 @@ public class AddCustomerScene {
 
         Button addButton = new Button("Add Customer");
         addButton.setAlignment(Pos.CENTER);
+
+        CustomLabel resultLabel= new CustomLabel("");
+        addButton.setOnAction(event -> {
+            if (firstNameTF.getText().equals("")||lastNameTF.getText().equals("")||contactTF.getText().equals("")||emailTF.getText().equals("")||
+                    addressTF.getText().equals("")||zipTF.getText().equals("")||cityTF.getText().equals("") ||provinceTF.getText().equals("") ||
+                    contactTF.getText().equals("")||typeTF.getText().equals("")){
+                vBox.getChildren().remove(resultLabel);
+                resultLabel.setText("Fill out all the fields");
+                vBox.getChildren().add(resultLabel);
+            }else {
+                vBox.getChildren().remove(resultLabel);
+                CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
+                Customer newCustomer = new Customer(firstNameTF.getText(), lastNameTF.getText(), contactTF.getText(),
+                        emailTF.getText(), addressTF.getText(), zipTF.getText(), cityTF.getText(), provinceTF.getText(),
+                        countryTF.getText(), typeTF.getText());
+                customerTableCreation.addCustomer(newCustomer);
+                resultLabel.setText("Customer Added");
+                vBox.getChildren().add(resultLabel);
+            }
+        });
 
         gridPane.setHgap(10);
         gridPane.setVgap(10);
