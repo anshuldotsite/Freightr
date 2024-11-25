@@ -15,9 +15,8 @@ public class NavigationVBox extends VBox {
         this.stage = stage;
 
         Button Button1 = new Button("Package Scene Button");
-        Button button2 = new Button("package tracking Button");
+        Button button2 = new Button("Track Package");
         Button button3 = new Button("All Customers");
-        Button button4 = new Button("dummy button");
         Button1.setOnAction(e -> stage.setScene(PackageFormScene.CreatePackageFormScene(stage)));
         button2.setOnAction(e -> stage.setScene(TrackPackageScene.createTrackPackageScene(stage)));
         button3.setOnAction(e -> stage.setScene(DisplayCustomerScene.createDisplayCustomer(stage)));
@@ -26,6 +25,6 @@ public class NavigationVBox extends VBox {
         this.setSpacing(15);
         this.setStyle("-fx-background-color: lightgray;");
 
-        this.getChildren().addAll(Button1, button2, button3, button4);
+        this.getChildren().addAll(Button1, button2, button3);
     }
 }
