@@ -18,6 +18,7 @@ import org.example.freightr.TableCreation.ObjectClasses.Customer;
  */
 public class DisplayCustomerScene {
     private static DisplayCustomerScene instance;
+    private static TableView tableView;
     public static Scene createDisplayCustomer(Stage stage){
 
         CustomerTableCreation customer = CustomerTableCreation.getInstance();
@@ -27,7 +28,7 @@ public class DisplayCustomerScene {
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
-        TableView tableView = new TableView();
+        tableView = new TableView();
 
         //column1
         TableColumn<Customer, String> column1= new TableColumn<>("First Name");
@@ -84,5 +85,18 @@ public class DisplayCustomerScene {
         root.setCenter(tableView);
 
         return new Scene(root, 900, 640);
+    }
+
+    public void refreshTable(){
+        CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
+        tableView.getItems().clear();
+        tableView.getItems().addAll(customerTableCreation.getAllCustomers());
+    }
+
+    public static DisplayCustomerScene getInstance(){
+        if(instance == null){
+            instance = new DisplayCustomerScene();
+        }
+        return instance;
     }
 }
