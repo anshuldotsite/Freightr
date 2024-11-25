@@ -80,13 +80,13 @@ public class PackageFormScene {
         BorderPane root = new BorderPane();
         root.setLeft(navigationVbox);
         root.setCenter(grid);
-        double height = Double.parseDouble(heightField.getText());
-        double width = Double.parseDouble(widthField.getText());
-        double length = Double.parseDouble(lengthField.getText());
-        double weight = Double.parseDouble(weightField.getText());
 
 
         calculateChargesBtn.setOnAction(e -> {
+            double height = Double.parseDouble(heightField.getText());
+            double width = Double.parseDouble(widthField.getText());
+            double length = Double.parseDouble(lengthField.getText());
+            double weight = Double.parseDouble(weightField.getText());
             int heightSurcharge=0;
             int lengthSurcharge=0;
             int widthSurcharge=0;
@@ -118,6 +118,10 @@ public class PackageFormScene {
         });
 
         newOrderBtn.setOnAction(e -> {
+            double height = Double.parseDouble(heightField.getText());
+            double width = Double.parseDouble(widthField.getText());
+            double length = Double.parseDouble(lengthField.getText());
+            double weight = Double.parseDouble(weightField.getText());
 
             String description = descriptionField.getText();
 
