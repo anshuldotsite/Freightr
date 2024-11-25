@@ -3,6 +3,7 @@ package org.example.freightr.scenes;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
@@ -68,6 +69,14 @@ public class DisplayCustomerScene {
         tableView.getItems().addAll(customer.getAllCustomers());
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
+        Button addButton = new Button("Add Customer");
+        navigationVbox.getChildren().add(addButton);
+        addButton.setOnAction(event -> {
+            Stage newStage = new Stage();
+            Scene addCustomerScene = AddCustomerScene.createAddCustomer(newStage);
+            newStage.setScene(addCustomerScene);
+            newStage.show();
+        });
 
         BorderPane root = new BorderPane();
         root.setTop(headingBox);
