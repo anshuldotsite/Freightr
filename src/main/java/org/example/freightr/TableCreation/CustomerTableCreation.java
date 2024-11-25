@@ -101,9 +101,7 @@ public class CustomerTableCreation implements CustomerDoa {
                 " WHERE " + CUSTOMER_COLUMN_ID + " = "+customerID;
 
         try {
-            PreparedStatement deleteStatement = db.getConnection().prepareStatement(query);
-            deleteStatement.executeQuery();
-
+            db.getConnection().createStatement().execute(query);
         } catch (Exception e) {
             e.printStackTrace();
         }

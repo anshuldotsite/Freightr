@@ -1,6 +1,8 @@
 package org.example.freightr.scenes;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,6 +20,7 @@ import org.example.freightr.TableCreation.ObjectClasses.Customer;
  */
 public class DisplayCustomerScene {
     private static DisplayCustomerScene instance;
+    private static TableView tableView;
     public static Scene createDisplayCustomer(Stage stage){
 
         CustomerTableCreation customer = CustomerTableCreation.getInstance();
@@ -27,7 +30,7 @@ public class DisplayCustomerScene {
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
-        TableView tableView = new TableView();
+        tableView = new TableView();
 
         //column1
         TableColumn<Customer, String> column1= new TableColumn<>("First Name");
@@ -70,7 +73,28 @@ public class DisplayCustomerScene {
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
         Button addButton = new Button("Add Customer");
-        navigationVbox.getChildren().add(addButton);
+        Button deleteButton = new Button("Delete Customer");
+        deleteButton.setDisable(true);
+        deleteButton.setOnAction(event -> {
+            Customer deleteCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
+            customer.deleteCustomer(deleteCustomer.getCustomerId());
+            DisplayCustomerScene displayCustomerScene = DisplayCustomerScene.getInstance();
+            displayCustomerScene.refreshTable();
+        });
+
+        tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                if (newValue!=null){
+                    deleteButton.setDisable(false);
+                }else {
+                    deleteButton.setDisable(true);
+                }
+            }
+        });
+
+
+        navigationVbox.getChildren().addAll(addButton,deleteButton);
         addButton.setOnAction(event -> {
             Stage newStage = new Stage();
             Scene addCustomerScene = AddCustomerScene.createAddCustomer(newStage);
@@ -84,5 +108,18 @@ public class DisplayCustomerScene {
         root.setCenter(tableView);
 
         return new Scene(root, 900, 640);
+    }
+
+    public void refreshTable(){
+        CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
+        tableView.getItems().clear();
+        tableView.getItems().addAll(customerTableCreation.getAllCustomers());
+    }
+
+    public static DisplayCustomerScene getInstance(){
+        if(instance == null){
+            instance = new DisplayCustomerScene();
+        }
+        return instance;
     }
 }
