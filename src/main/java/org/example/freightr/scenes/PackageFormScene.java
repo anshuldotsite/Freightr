@@ -4,9 +4,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.TableCreation.PackageTableCred;
 
@@ -73,6 +76,25 @@ public class PackageFormScene {
         grid.add(chargesLabel, 1, 7);
         grid.add(totalCharges, 1, 8);
         grid.add(newOrderBtn, 0, 9);
+
+
+       TableView tableView = new TableView();
+        TableColumn<Customer, String> column1 =
+                new TableColumn<>("first name");
+        TableColumn<Customer, String> column2 =
+                new TableColumn<>("last name");
+        TableColumn<Customer, String> column3 =
+                new TableColumn<>("email");
+        TableColumn<Customer, String> column4 =
+                new TableColumn<>("phone");
+        TableColumn<Customer, String> column5 =
+                new TableColumn<>("Zip Code ");
+        TableColumn<Customer, String> column6 =
+                new TableColumn<>(" address ");
+        TableColumn<Customer, String> column7 =
+                new TableColumn<>("city ");
+
+
 
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
