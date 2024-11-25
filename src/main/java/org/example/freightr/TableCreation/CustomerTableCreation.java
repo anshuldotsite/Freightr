@@ -8,6 +8,7 @@ import org.example.freightr.TableCreation.ObjectClasses.Customer;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -130,6 +131,44 @@ public class CustomerTableCreation implements CustomerDoa {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @author Kautuk Prasad
+     * @param customer to add in the table them executes a query to add that in table
+     */
+    @Override
+    public void addCustomer(Customer customer){
+        String query = "INSERT INTO " + TABLE_CUSTOMER + " (" +
+                CUSTOMER_COLUMN_FIRST_NAME + ", " +
+                CUSTOMER_COLUMN_LAST_NAME + ", " +
+                CUSTOMER_COLUMN_CONTACT_NUMBER + ", " +
+                CUSTOMER_COLUMN_EMAIL + ", " +
+                CUSTOMER_COLUMN_ADDRESS + ", " +
+                CUSTOMER_COLUMN_ZIPCODE + ", " +
+                CUSTOMER_COLUMN_CITY + ", " +
+                CUSTOMER_COLUMN_PROVINCE + ", " +
+                CUSTOMER_COLUMN_COUNTRY + ", " +
+                CUSTOMER_COLUMN_TYPE + ") VALUES (" +
+                "'" + customer.getFirstName() + "', " +
+                "'" + customer.getLastName() + "', " +
+                "'" + customer.getContactNumber() + "', " +
+                "'" + customer.getEmail() + "', " +
+                "'" + customer.getAddress() + "', " +
+                "'" + customer.getZipcode() + "', " +
+                "'" + customer.getCity() + "', " +
+                "'" + customer.getProvince() + "', " +
+                "'" + customer.getCountry() + "', " +
+                "'" + customer.getCustomerType() + "'" +
+                ");";
+
+        try {
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Added Customer");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 
