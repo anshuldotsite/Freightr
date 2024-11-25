@@ -110,6 +110,10 @@ public class DisplayCustomerScene {
         return new Scene(root, 900, 640);
     }
 
+    /**
+     * @author Kautuk Prasad
+     * @description This method refreshes the table to display all customers.
+     */
     public void refreshTable(){
         CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
         tableView.getItems().clear();
