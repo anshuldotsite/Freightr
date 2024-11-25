@@ -1,5 +1,6 @@
 package org.example.freightr.scenes;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,7 +9,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.TableCreation.PackageTableCred;
@@ -16,7 +19,9 @@ import org.example.freightr.TableCreation.PackageTableCred;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
 
-
+/***
+ * @author kohinoor jeet singh
+ */
 public class PackageFormScene {
     private static double totalPrice;
 
@@ -38,12 +43,6 @@ public class PackageFormScene {
         CustomLabel weightLabel = new CustomLabel("Weight (kg)");
         CustomTextField weightField = new CustomTextField();
 
-        CustomLabel customerIdLabel = new CustomLabel("Customer ID/Name:");
-        CustomTextField customerIdField = new CustomTextField();
-
-        CustomLabel receiverAddressLabel = new CustomLabel("Receiver Address:");
-        CustomTextField receiverAddressField = new CustomTextField();
-
         CustomLabel chargesLabel = new CustomLabel("Total Charges:");
         CustomLabel totalCharges = new CustomLabel("");
 
@@ -53,55 +52,82 @@ public class PackageFormScene {
         // made grid pane to accomodate all the components
         GridPane grid = new GridPane();
         // giving grid pane styles
-        grid.setPadding(new Insets(20));
-        grid.setVgap(15);
-        grid.setHgap(20);
+        grid.setPadding(new Insets(15));
+        grid.setVgap(13);
+        grid.setHgap(15);
         grid.setAlignment(Pos.CENTER);
-// adding all components to grid pane
-        grid.add(descriptionLabel, 0, 0);
+        VBox vb = new VBox();
+
+      grid.add(descriptionLabel, 0, 0);
         grid.add(descriptionField, 1, 0);
+
         grid.add(heightLabel, 0, 1);
         grid.add(heightField, 1, 1);
-        grid.add(widthLabel, 0, 2);
-        grid.add(widthField, 1, 2);
+        grid.add(widthLabel, 2, 1);
+        grid.add(widthField, 3, 1);
         grid.add(lengthLabel, 0, 3);
         grid.add(lengthField, 1, 3);
-        grid.add(weightLabel, 0, 4);
-        grid.add(weightField, 1, 4);
-        grid.add(customerIdLabel, 0, 5);
-        grid.add(customerIdField, 1, 5);
-        grid.add(receiverAddressLabel, 0, 6);
-        grid.add(receiverAddressField, 1, 6);
-        grid.add(calculateChargesBtn, 0, 7);
-        grid.add(chargesLabel, 1, 7);
-        grid.add(totalCharges, 1, 8);
-        grid.add(newOrderBtn, 0, 9);
+        grid.add(weightLabel, 2, 3);
+        grid.add(weightField, 3,3);
 
-
-       TableView tableView = new TableView();
-        TableColumn<Customer, String> column1 =
-                new TableColumn<>("first name");
-        TableColumn<Customer, String> column2 =
-                new TableColumn<>("last name");
-        TableColumn<Customer, String> column3 =
-                new TableColumn<>("email");
-        TableColumn<Customer, String> column4 =
-                new TableColumn<>("phone");
-        TableColumn<Customer, String> column5 =
-                new TableColumn<>("Zip Code ");
-        TableColumn<Customer, String> column6 =
-                new TableColumn<>(" address ");
-        TableColumn<Customer, String> column7 =
-                new TableColumn<>("city ");
+        grid.add(calculateChargesBtn, 0, 4);
+        grid.add(chargesLabel, 1, 4);
+        grid.add(totalCharges, 2, 4);
 
 
 
+        CustomerTableCreation customer = CustomerTableCreation.getInstance();
+        TableView tableView = new TableView();
+
+
+        TableColumn<Customer, String> column1= new TableColumn<>("First Name");
+        column1.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getFirstName()));
+
+
+        TableColumn<Customer, String> column2= new TableColumn<>("Last Name");
+        column2.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getLastName()));
+
+
+        TableColumn<Customer, String> column3= new TableColumn<>("Contact No");
+        column3.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getContactNumber()));
+
+
+        TableColumn<Customer, String> column5= new TableColumn<>("Address");
+        column5.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getAddress()));
+
+
+        TableColumn<Customer, String> column6= new TableColumn<>("City");
+        column6.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCity()));
+
+
+
+        TableColumn<Customer, String> column8= new TableColumn<>("Country");
+        column8.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCountry()));
+
+
+        tableView.getColumns().addAll(column1,column2,column3,column5,column6,column8);
+        tableView.getItems().addAll(customer.getAllCustomers());
+
+
+        int visibleRowCount = 5;
+        tableView.setFixedCellSize(25); // Set a fixed cell height (in pixels)
+        tableView.prefHeightProperty().bind(tableView.fixedCellSizeProperty().multiply(visibleRowCount + 1.01)); // +1 for header
+        tableView.minHeightProperty().bind(tableView.prefHeightProperty());
+        tableView.maxHeightProperty().bind(tableView.prefHeightProperty());
+        tableView.setPrefWidth(300);
+
+        VBox tableContainer = new VBox(tableView);
+        tableContainer.setPadding(new Insets(15, 15, 15, 15)); // Top, Right, Bottom, Left padding
+        tableContainer.setAlignment(Pos.CENTER); // Center the table within the VBox
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
 
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(grid,tableContainer);
         BorderPane root = new BorderPane();
         root.setLeft(navigationVbox);
-        root.setCenter(grid);
+        root.setCenter(vbox);
+
 
 
         calculateChargesBtn.setOnAction(e -> {
@@ -136,7 +162,6 @@ public class PackageFormScene {
                 WeightPrice=30;
             }
            totalPrice =heightSurcharge + widthSurcharge + lengthSurcharge + (WeightPrice * weight);
-
         });
 
         newOrderBtn.setOnAction(e -> {
