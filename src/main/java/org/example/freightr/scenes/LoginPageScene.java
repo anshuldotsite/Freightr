@@ -43,6 +43,7 @@ public class LoginPageScene {
 
         //signIN button
         Button signInB = new Button("Sign In");
+        CustomLabel resultLabel = new CustomLabel("");
 
         signInB.setOnAction(event -> {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
@@ -50,6 +51,10 @@ public class LoginPageScene {
             if (signIn==true){
                 Scene packageForm = PackageFormScene.CreatePackageFormScene(stage);
                 stage.setScene(packageForm);
+            }else{
+                vBox.getChildren().remove(resultLabel);
+                resultLabel.setText("Wrong User Name or Password");
+                vBox.getChildren().add(resultLabel);
             }
         });
 

@@ -18,6 +18,8 @@ import org.example.freightr.TableCreation.ObjectClasses.Customer;
 public class AddCustomerScene {
     public static Scene createAddCustomer(Stage stage){
 
+        NavigationVBox navigationVBox = new NavigationVBox(stage);
+
         //Hbox for heading
         CustomLabel heading = new CustomLabel("Add New Customer");
         HBox headingBox = new HBox();
@@ -122,6 +124,7 @@ public class AddCustomerScene {
 
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
+        root.setLeft(navigationVBox);
 
         return new Scene(root, 900,640);
     }
