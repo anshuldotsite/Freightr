@@ -96,10 +96,8 @@ public class DisplayCustomerScene {
 
         navigationVbox.getChildren().addAll(addButton,deleteButton);
         addButton.setOnAction(event -> {
-            Stage newStage = new Stage();
-            Scene addCustomerScene = AddCustomerScene.createAddCustomer(newStage);
-            newStage.setScene(addCustomerScene);
-            newStage.show();
+            Scene addCustomerScene = AddCustomerScene.createAddCustomer(stage);
+            stage.setScene(addCustomerScene);
         });
 
         BorderPane root = new BorderPane();
