@@ -105,7 +105,7 @@ public class Dbconst {
             "CREATE TABLE " + TABLE_COMPANY_DETAILS + " (" +
                     COMPANY_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +
                     COMPANY_COLUMN_NAME + " VARCHAR(255) NOT NULL, " +
-                    COMPANY_COLUMN_NUMBER + " VARCHAR(50) NOT NULL, " +
+                    COMPANY_COLUMN_NUMBER + " int NOT NULL, " +
                     COMPANY_COLUMN_EMAIL + " VARCHAR(150) NOT NULL, " +
                     "PRIMARY KEY(" + COMPANY_COLUMN_ID + "));";
 

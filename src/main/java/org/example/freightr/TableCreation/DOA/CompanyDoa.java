@@ -12,6 +12,6 @@ public interface CompanyDoa {
     public void deleteCompany(int companyId);
 
     public void updateCompany(Company company);
-    public  void addCustomer(Company company);
+    public  void addCompany(Company company);
 }
 

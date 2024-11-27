@@ -106,7 +106,7 @@ public class CompanyTableCreation implements CompanyDoa {
      * @description Adds a new record to the company table.
      */
     @Override
-    public void addCustomer(Company company) {
+    public void addCompany(Company company) {
         String query = "INSERT INTO " + TABLE_COMPANY_DETAILS + " (" +
                 COMPANY_COLUMN_NAME + ", " +
                 COMPANY_COLUMN_NUMBER + ", "  +
