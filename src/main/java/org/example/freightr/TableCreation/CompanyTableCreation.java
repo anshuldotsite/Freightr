@@ -40,8 +40,8 @@ public class CompanyTableCreation implements CompanyDoa {
                 companies.add(new Company(
                         resultSet.getInt(COMPANY_COLUMN_ID),
                         resultSet.getString(COMPANY_COLUMN_NAME),
-                        resultSet.getString(COMPANY_COLUMN_EMAIL),
-                        resultSet.getInt(COMPANY_COLUMN_NUMBER)
+                        resultSet.getInt(COMPANY_COLUMN_NUMBER),
+                        resultSet.getString(COMPANY_COLUMN_EMAIL)
                 ));
             }
         } catch (SQLException e) {
@@ -62,8 +62,9 @@ public class CompanyTableCreation implements CompanyDoa {
                 company= new Company(
                         resultSet.getInt(COMPANY_COLUMN_ID),
                         resultSet.getString(COMPANY_COLUMN_NAME),
-                        resultSet.getString(COMPANY_COLUMN_EMAIL),
-                        resultSet.getInt(COMPANY_COLUMN_NUMBER)
+                        resultSet.getInt(COMPANY_COLUMN_NUMBER),
+                        resultSet.getString(COMPANY_COLUMN_EMAIL)
+
                 );
             }
         } catch (SQLException e) {
@@ -99,4 +100,29 @@ public class CompanyTableCreation implements CompanyDoa {
             e.printStackTrace();
         }
     }
+
+    /**
+     * @author Kautuk Prasad
+     * @description Adds a new record to the company table.
+     */
+    @Override
+    public void addCustomer(Company company) {
+        String query = "INSERT INTO " + TABLE_COMPANY_DETAILS + " (" +
+                COMPANY_COLUMN_NAME + ", " +
+                COMPANY_COLUMN_NUMBER + ", "  +
+                COMPANY_COLUMN_EMAIL + ") VALUES (" +
+                "'" + company.getCompanyName() + "', " +
+                "'" + company.getCompanyNumber() + "', " +
+                "'" + company.getCompanyEmail() + "'" +
+                ");";
+
+        try {
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Added Company");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
+
