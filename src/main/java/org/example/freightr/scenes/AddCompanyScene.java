@@ -8,6 +8,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.TableCreation.CompanyTableCreation;
+import org.example.freightr.TableCreation.ObjectClasses.Company;
 
 /**
  * @author Kautuk Prasad
@@ -44,8 +46,25 @@ public class AddCompanyScene {
         gridPane.add(emailLabel, 0, 2);
         gridPane.add(emailTF, 1, 2);
 
+        CustomLabel resultLabel = new CustomLabel("");
+
         //add button
         Button addBtn = new Button("Add");
+
+        addBtn.setOnAction(event -> {
+            if (companyNameTF.getText().equals("")||contactTF.getText().equals("")||emailTF.getText().equals("")){
+                vBox.getChildren().remove(resultLabel);
+                resultLabel.setText("Please fill out all the fields");
+            }else {
+                vBox.getChildren().remove(resultLabel);
+                CompanyTableCreation company =  CompanyTableCreation.getInstance();
+                Company newCompany = new Company(companyNameTF.getText(),Integer.parseInt(contactTF.getText()), emailTF.getText());
+                company.addCompany(newCompany);
+                resultLabel.setText("Company Added");
+                vBox.getChildren().add(resultLabel);
+            }
+
+        });
 
 
         BorderPane root = new BorderPane();
