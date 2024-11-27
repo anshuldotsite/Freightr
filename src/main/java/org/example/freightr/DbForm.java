@@ -65,6 +65,16 @@ public class DbForm {
         passwordBox.setAlignment(Pos.CENTER);
         passwordBox.setSpacing(10);
 
+        //Hbox for companykey
+        HBox companyKeyBox = new HBox();
+        Label companyKeyLabel = new Label("Company Key");
+        TextField companyKeyInput = new TextField();
+        companyKeyLabel.setMinWidth(75);
+        companyKeyInput.setMinWidth(100);
+        companyKeyBox.getChildren().addAll(companyKeyLabel,companyKeyInput);
+        companyKeyBox.setAlignment(Pos.CENTER);
+        companyKeyBox.setSpacing(10);
+
 
         //test connection button
         Button testButton = new Button("Test Connection");
@@ -83,9 +93,9 @@ public class DbForm {
 
         //Vbox
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(pageHeading,userBox,dbNameBox,hostBox,passwordBox,buttonBox);
+        vBox.getChildren().addAll(pageHeading,userBox,dbNameBox,hostBox,passwordBox,companyKeyBox,buttonBox);
         vBox.setAlignment(Pos.CENTER);
-        vBox.setSpacing(10);
+        vBox.setSpacing(15);
 
         //writing to the file through the form and establishing connection
         testButton.setOnAction(actionEvent -> {
@@ -97,11 +107,13 @@ public class DbForm {
                 String dbNameIn = dbNameInput.getText()+empty;
                 String hostIN = hostInput.getText()+empty;
                 String passwordIn = passwordInput.getText()+empty;
+                String companyKeyIn = companyKeyInput.getText()+empty;
 
                 writer.write(userIn);
                 writer.write(dbNameIn);
                 writer.write(hostIN);
                 writer.write(passwordIn);
+                writer.write(companyKeyIn);
                 writer.flush();
 
                 Database db = Database.getInstance();
@@ -123,8 +135,8 @@ public class DbForm {
 
         //changing the scene if the connection is successful
         nextButton.setOnAction(actionEvent -> {
-            Scene r = LoginPageScene.createLoginPage(stage);
-            stage.setScene(r);
+            Scene loginPage = LoginPageScene.createLoginPage(stage);
+            stage.setScene(loginPage);
         });
 
         BorderPane root = new BorderPane();

@@ -9,9 +9,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.Database;
 import org.example.freightr.TableCreation.EmployeeLoginTable;
-
-import static org.example.freightr.TableCreation.Dbconst.COMPANY_KEY;
 
 /**
  * Forgot Password Scene
@@ -19,6 +18,8 @@ import static org.example.freightr.TableCreation.Dbconst.COMPANY_KEY;
  */
 public class ForgotPasswordScene {
     public static Scene createForgotPasswordScene(Stage stage){
+
+        Database db = Database.getInstance();
 
         VBox vBox = new VBox();
 
@@ -73,7 +74,7 @@ public class ForgotPasswordScene {
         Button updatePassB = new Button("Update Password");
         updatePassB.setOnAction(event -> {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
-            if (companyKeyIn.getText().equals(COMPANY_KEY)){
+            if (companyKeyIn.getText().equals(db.getCompanyKey())){
                 if (passwordInput.getText().equals(confirmPasswordIn.getText())){
                     employeeLoginTable.updatePassword(userNameInput.getText(),passwordInput.getText());
                     CustomLabel updatedPassLabel = new CustomLabel("Password Updated");
