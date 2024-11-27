@@ -56,4 +56,9 @@ public class Company {
     public void setCompanyNumber(int companyNumber) {
         this.companyNumber = companyNumber;
     }
+
+    @Override
+    public String toString() {
+        return companyName;
+    }
 }

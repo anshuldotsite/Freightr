@@ -12,5 +12,6 @@ public interface CustomerDoa {
     public void deleteCustomer(int CustomerID);
 
     public void updateCustomer(Customer customer);
-    public  void addCustomer(Customer customer);
+    public  void addCustomerWithoutCompany(Customer customer);
+    public void addCustomerWithCompany(Customer customer);
 }
