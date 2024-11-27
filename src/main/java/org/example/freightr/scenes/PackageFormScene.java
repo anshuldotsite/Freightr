@@ -24,6 +24,8 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class PackageFormScene {
     private static double totalPrice;
+    private static double packageGeneratedkey;
+    private static double CustomerSelectedKey;
 
     public static Scene CreatePackageFormScene(Stage stage) {
 
@@ -47,6 +49,9 @@ public class PackageFormScene {
         CustomLabel totalCharges = new CustomLabel("");
 
         Button calculateChargesBtn = new Button("Calculate Charges");
+
+        CustomLabel charge = new CustomLabel("");
+
         Button newOrderBtn = new Button("Create New Order");
 
         // made grid pane to accomodate all the components
@@ -73,6 +78,7 @@ public class PackageFormScene {
         grid.add(calculateChargesBtn, 0, 4);
         grid.add(chargesLabel, 1, 4);
         grid.add(totalCharges, 2, 4);
+        grid.add(charge,3,4);
 
 
 
@@ -110,23 +116,37 @@ public class PackageFormScene {
 
 
         int visibleRowCount = 5;
-        tableView.setFixedCellSize(25); // Set a fixed cell height (in pixels)
-        tableView.prefHeightProperty().bind(tableView.fixedCellSizeProperty().multiply(visibleRowCount + 1.01)); // +1 for header
+        tableView.setFixedCellSize(25);
+        tableView.prefHeightProperty().bind(tableView.fixedCellSizeProperty().multiply(visibleRowCount + 1.01));
         tableView.minHeightProperty().bind(tableView.prefHeightProperty());
         tableView.maxHeightProperty().bind(tableView.prefHeightProperty());
         tableView.setPrefWidth(300);
 
         VBox tableContainer = new VBox(tableView);
-        tableContainer.setPadding(new Insets(15, 15, 15, 15)); // Top, Right, Bottom, Left padding
-        tableContainer.setAlignment(Pos.CENTER); // Center the table within the VBox
+        tableContainer.setPadding(new Insets(15, 15, 15, 15));
+        tableContainer.setAlignment(Pos.CENTER);
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
 
+        CustomLabel details = new CustomLabel("select a customer from the table below or add a new customer and then select it ");
+
+
+        Button customerButton = new Button("Create a new Customer");
+        customerButton.setOnAction(e->{
+                Stage newStage = new Stage();
+                Scene addCustomerScene = AddCustomerScene.createAddCustomer(newStage);
+                newStage.setScene(addCustomerScene);
+                newStage.show();
+        });
+
+
+
         VBox vbox = new VBox();
-        vbox.getChildren().addAll(grid,tableContainer);
+        vbox.getChildren().addAll(grid,details,tableContainer,customerButton,newOrderBtn);
         BorderPane root = new BorderPane();
         root.setLeft(navigationVbox);
         root.setCenter(vbox);
+
 
 
 
@@ -162,7 +182,12 @@ public class PackageFormScene {
                 WeightPrice=30;
             }
            totalPrice =heightSurcharge + widthSurcharge + lengthSurcharge + (WeightPrice * weight);
+            charge.setText(String.valueOf(totalPrice));
         });
+
+        Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
+
+
 
         newOrderBtn.setOnAction(e -> {
             double height = Double.parseDouble(heightField.getText());
@@ -178,7 +203,9 @@ public class PackageFormScene {
 
 
             PackageTableCred packageTableCred = PackageTableCred.getInstance();
-            packageTableCred.addPackage(newPackage);
+         packageGeneratedkey = packageTableCred.addPackage(newPackage);
+
+
         });
 
 

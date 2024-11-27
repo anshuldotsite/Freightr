@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
-import org.example.freightr.TableCreation.ObjectClasses.Package;
 
 import static org.example.freightr.TableCreation.Dbconst.*;
 
@@ -108,7 +107,7 @@ public class PackageTableCred implements PackageDoa {
     }
 
     @Override
-    public void addPackage(Package Package) {
+    public int addPackage(Package Package) {
         String query = "INSERT INTO " + TABLE_PACKAGE + " (" +
                 PACKAGE_COLUMN_DESCRIPTION + ", " +
                 PACKAGE_COLUMN_SENT_DATE + ", " +
@@ -125,12 +124,28 @@ public class PackageTableCred implements PackageDoa {
                 Package.getBreadth() + ", " +
                 Package.getPrice() + ")";
 
+        int generatedId = 0;
         try {
-            db.getConnection().createStatement().execute(query);
+            Statement statement = db.getConnection().createStatement();
+
+            // Execute the query
+            int affectedRows = statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+            if (affectedRows > 0) {
+                // Retrieve the generated keys
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    generatedId = generatedKeys.getInt(1);
+
+                    System.out.println("Package added with ID: " + generatedId);
+                }
+            }
+
             System.out.println("Package Added");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return generatedId;
     }
 
     /**
