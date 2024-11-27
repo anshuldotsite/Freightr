@@ -3,16 +3,22 @@ package org.example.freightr.TableCreation.ObjectClasses;
 public class Company {
     private int companyId;
     private String companyName;
-    private String CompanyEmail;
-    private int CompanyNumber;
+    private int companyNumber;
+    private String companyEmail;
 
 
-    public Company(int CompanyId,String companyName,String companyEmail,int companyNumber){
+
+    public Company(int CompanyId,String companyName,int companyNumber,String companyEmail){
        this.companyId = CompanyId;
        this.companyName=companyName;
-       this.CompanyEmail=companyEmail;
-       this.CompanyNumber=companyNumber;
+       this.companyNumber=companyNumber;
+       this.companyEmail=companyEmail;
+    }
 
+    public Company(String companyName, int companyNumber, String companyEmail) {
+        this.companyName = companyName;
+        this.companyNumber = companyNumber;
+        this.companyEmail = companyEmail;
     }
 
     public Company(){
@@ -36,18 +42,18 @@ public class Company {
     }
 
     public String getCompanyEmail() {
-        return CompanyEmail;
+        return companyEmail;
     }
 
     public void setCompanyEmail(String companyEmail) {
-        this.CompanyEmail = companyEmail;
+        this.companyEmail = companyEmail;
     }
 
     public int getCompanyNumber() {
-        return CompanyNumber;
+        return companyNumber;
     }
 
     public void setCompanyNumber(int companyNumber) {
-        this.CompanyNumber = companyNumber;
+        this.companyNumber = companyNumber;
     }
 }
