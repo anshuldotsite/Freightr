@@ -8,6 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.example.freightr.TableCreation.Dbconst.*;
+
 
 /**
  * @author kohinoor jeet singh
@@ -23,9 +25,9 @@ public class CustomerPackageReceiverTableCred implements CustomerPackageReciever
     @Override
     public void addCustomerPackageReceiver(CustomerPackageReceiver customerPackageReceiver) {
         String query = "INSERT INTO " + Dbconst.TABLE_CUSTOMER_PACKAGES + " (" +
-                Dbconst.CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + ", " +
-                Dbconst.CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + ", " +
-                Dbconst.CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID + ") VALUES (" +
+                CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + ", " +
+                CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + ", " +
+                CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID + ") VALUES (" +
                 customerPackageReceiver.getCustomerId() + ", " +
                 customerPackageReceiver.getPackageId() + ", " +
                 customerPackageReceiver.getReceiverId() + ")";
@@ -42,7 +44,7 @@ public class CustomerPackageReceiverTableCred implements CustomerPackageReciever
     @Override
     public void deleteCustomerPackageReceiver(int packageId) {
         String query = "DELETE FROM " + Dbconst.TABLE_CUSTOMER_PACKAGES + " WHERE " +
-                Dbconst.CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + " = " + packageId;
+                CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + " = " + packageId;
         try (Statement statement = db.getConnection().createStatement()) {
             statement.executeUpdate(query);
             System.out.println("Package with ID " + packageId + " deleted.");
@@ -53,13 +55,13 @@ public class CustomerPackageReceiverTableCred implements CustomerPackageReciever
 
 
     public int getCustomerIdByPackageId(int packageId) {
-        String query = "SELECT " + Dbconst.CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + " FROM " + Dbconst.TABLE_CUSTOMER_PACKAGES +
-                " WHERE " + Dbconst.CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + " = " + packageId;
+        String query = "SELECT " + CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + " FROM " + TABLE_CUSTOMER_PACKAGES +
+                " WHERE " + CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + " = " + packageId;
         int customerId = -1;
         try (Statement statement = db.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             if (resultSet.next()) {
-                customerId = resultSet.getInt(Dbconst.CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID);
+                customerId = resultSet.getInt(CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,13 +73,13 @@ public class CustomerPackageReceiverTableCred implements CustomerPackageReciever
 
     @Override
     public ArrayList<Integer> getPackageIdsByCustomerId(int customerId) {
-        String query = "SELECT " + Dbconst.CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + " FROM " + Dbconst.TABLE_CUSTOMER_PACKAGES +
-                " WHERE " + Dbconst.CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + " = " + customerId;
+        String query = "SELECT " + CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + " FROM " + TABLE_CUSTOMER_PACKAGES +
+                " WHERE " + CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + " = " + customerId;
         ArrayList<Integer> packageIds = new ArrayList<>();
         try (Statement statement = db.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                packageIds.add(resultSet.getInt(Dbconst.CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID));
+                packageIds.add(resultSet.getInt(CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,13 +89,13 @@ public class CustomerPackageReceiverTableCred implements CustomerPackageReciever
 
 
     public ArrayList<Integer> getReceiverIdsByCustomerId(int customerId) {
-        String query = "SELECT " + Dbconst.CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID + " FROM " + Dbconst.TABLE_CUSTOMER_PACKAGES +
-                " WHERE " + Dbconst.CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + " = " + customerId;
+        String query = "SELECT " + CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID + " FROM " + TABLE_CUSTOMER_PACKAGES +
+                " WHERE " + CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + " = " + customerId;
         ArrayList<Integer> receiverIds = new ArrayList<>();
         try (Statement statement = db.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                receiverIds.add(resultSet.getInt(Dbconst.CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID));
+                receiverIds.add(resultSet.getInt(CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,14 +104,14 @@ public class CustomerPackageReceiverTableCred implements CustomerPackageReciever
     }
 
     public ArrayList<CustomerPackageReceiver> getAllCustomerPackageReceivers() {
-        String query = "SELECT * FROM " + Dbconst.TABLE_CUSTOMER_PACKAGES;
+        String query = "SELECT * FROM " + TABLE_CUSTOMER_PACKAGES;
         ArrayList<CustomerPackageReceiver> customerPackageReceivers = new ArrayList<>();
         try (Statement statement = db.getConnection().createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                int customerId = resultSet.getInt(Dbconst.CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID);
-                int packageId = resultSet.getInt(Dbconst.CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID);
-                int receiverId = resultSet.getInt(Dbconst.CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID);
+                int customerId = resultSet.getInt(CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID);
+                int packageId = resultSet.getInt(CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID);
+                int receiverId = resultSet.getInt(CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID);
 
                 // Assuming that CustomerPackageReceiver class only contains customerId, packageId, receiverId.
                 CustomerPackageReceiver customerPackageReceiver = new CustomerPackageReceiver(customerId, packageId, receiverId);

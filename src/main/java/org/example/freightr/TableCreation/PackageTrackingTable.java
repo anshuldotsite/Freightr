@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import static org.example.freightr.TableCreation.Dbconst.*;
+
 public class PackageTrackingTable implements PackageTrackDOA {
 
     private PackageTrackingTable(){
@@ -21,9 +23,9 @@ public class PackageTrackingTable implements PackageTrackDOA {
     @Override
     public void addPackageTracking(PackageTracking packageTracking) {
         String query = "INSERT INTO " + Dbconst.TABLE_PACKAGE_TRACKING + " (" +
-                Dbconst.TRACKING_COLUMN_PACKAGE_ID + ", " +
-                Dbconst.TRACKING_COLUMN_LOCATION + ", " +
-                Dbconst.TRACKING_COLUMN_STATUS + ") VALUES (" +
+                TRACKING_COLUMN_PACKAGE_ID + ", " +
+                TRACKING_COLUMN_LOCATION + ", " +
+                TRACKING_COLUMN_STATUS + ") VALUES (" +
                 packageTracking.getPackageId() + ", '" +
                 packageTracking.getLocation() + "', '" +
                 packageTracking.getStatus() + "')";
@@ -40,15 +42,15 @@ public class PackageTrackingTable implements PackageTrackDOA {
     @Override
     public PackageTracking getPackageTracking(int trackingId) {
         String query = "SELECT * FROM " + Dbconst.TABLE_PACKAGE_TRACKING + " WHERE " +
-                Dbconst.TRACKING_COLUMN_ID + " = " + trackingId;
+                TRACKING_COLUMN_ID + " = " + trackingId;
         PackageTracking packageTracking = new PackageTracking();
         try ( Statement statement = db.getConnection().createStatement();
               ResultSet resultSet = statement.executeQuery(query)) {
             if (resultSet.next()) {
                 packageTracking = new PackageTracking(trackingId,
-                        resultSet.getInt(Dbconst.TRACKING_COLUMN_PACKAGE_ID),
-                        resultSet.getString(Dbconst.TRACKING_COLUMN_LOCATION),
-                        resultSet.getString(Dbconst.TRACKING_COLUMN_STATUS));
+                        resultSet.getInt(TRACKING_COLUMN_PACKAGE_ID),
+                        resultSet.getString(TRACKING_COLUMN_LOCATION),
+                        resultSet.getString(TRACKING_COLUMN_STATUS));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,16 +65,16 @@ public class PackageTrackingTable implements PackageTrackDOA {
      */
     @Override
     public ArrayList<PackageTracking> getAllPackageTracking() {
-        String query = "SELECT * FROM " + Dbconst.TABLE_PACKAGE_TRACKING;
+        String query = "SELECT * FROM " + TABLE_PACKAGE_TRACKING;
         packageTracks = new ArrayList<PackageTracking>();
         try {
             Statement statement = db.getConnection().createStatement();
             ResultSet data = statement.executeQuery(query);
             while(data.next()) {
                 packageTracks.add(new PackageTracking(data.getInt(Dbconst.TRACKING_COLUMN_ID),
-                        data.getInt(Dbconst.TRACKING_COLUMN_PACKAGE_ID),
-                        data.getString(Dbconst.TRACKING_COLUMN_LOCATION),
-                        data.getString(Dbconst.TRACKING_COLUMN_STATUS)));
+                        data.getInt(TRACKING_COLUMN_PACKAGE_ID),
+                        data.getString(TRACKING_COLUMN_LOCATION),
+                        data.getString(TRACKING_COLUMN_STATUS)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,9 +84,9 @@ public class PackageTrackingTable implements PackageTrackDOA {
     @Override
     public void updatePackageTracking(PackageTracking packageTracking) {
         String query = "UPDATE " + Dbconst.TABLE_PACKAGE_TRACKING + " SET " +
-                Dbconst.TRACKING_COLUMN_LOCATION + " = '" + packageTracking.getLocation() + "', " +
-                Dbconst.TRACKING_COLUMN_STATUS + " = '" + packageTracking.getStatus() + "' WHERE " +
-                Dbconst.TRACKING_COLUMN_ID + " = " + packageTracking.getTrackingId();
+                TRACKING_COLUMN_LOCATION + " = '" + packageTracking.getLocation() + "', " +
+                TRACKING_COLUMN_STATUS + " = '" + packageTracking.getStatus() + "' WHERE " +
+                TRACKING_COLUMN_ID + " = " + packageTracking.getTrackingId();
         try {
             Statement statement = db.getConnection().createStatement();
             statement.executeUpdate(query);
