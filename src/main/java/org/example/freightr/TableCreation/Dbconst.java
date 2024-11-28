@@ -63,9 +63,6 @@ public class Dbconst {
     public static final String EMPLOYEE_USER_NAME = "user_name";
     public static final String EMPLOYEE_PASSWORD = "password";
 
-    //Const company key for employee to create an account
-    public static final String COMPANY_KEY = "Freightr123";
-
     public static final String CREATE_TABLE_CUSTOMER =
             "CREATE TABLE " + TABLE_CUSTOMER + " (" +
                     CUSTOMER_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +
@@ -109,7 +106,7 @@ public class Dbconst {
             "CREATE TABLE " + TABLE_COMPANY_DETAILS + " (" +
                     COMPANY_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +
                     COMPANY_COLUMN_NAME + " VARCHAR(255) NOT NULL, " +
-                    COMPANY_COLUMN_NUMBER + " VARCHAR(50) NOT NULL, " +
+                    COMPANY_COLUMN_NUMBER + " int NOT NULL, " +
                     COMPANY_COLUMN_EMAIL + " VARCHAR(150) NOT NULL, " +
                     "PRIMARY KEY(" + COMPANY_COLUMN_ID + "));";
 

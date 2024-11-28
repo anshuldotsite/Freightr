@@ -20,7 +20,9 @@ public class LoginPageScene {
 
         VBox vBox = new VBox();
 
-        CustomLabel signInHeading = new CustomLabel("Sign In");
+        CustomLabel welcomeLabel = new CustomLabel("Welcome, Freightr");
+
+        CustomLabel signInHeading = new CustomLabel("Employee Sign In");
 
         //Hbox for username
         HBox userBox = new HBox();
@@ -44,6 +46,7 @@ public class LoginPageScene {
 
         //signIN button
         Button signInB = new Button("Sign In");
+        CustomLabel resultLabel = new CustomLabel("");
 
         signInB.setOnAction(event -> {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
@@ -51,6 +54,10 @@ public class LoginPageScene {
             if (signIn==true){
                 Scene packageForm = PackageFormScene.CreatePackageFormScene(stage);
                 stage.setScene(packageForm);
+            }else{
+                vBox.getChildren().remove(resultLabel);
+                resultLabel.setText("Wrong User Name or Password");
+                vBox.getChildren().add(resultLabel);
             }
         });
 
@@ -77,7 +84,7 @@ public class LoginPageScene {
         buttonBox.setSpacing(5);
 
 
-        vBox.getChildren().addAll(signInHeading, userBox, passwordBox, signInB, buttonBox);
+        vBox.getChildren().addAll(welcomeLabel,signInHeading, userBox, passwordBox, signInB, buttonBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 

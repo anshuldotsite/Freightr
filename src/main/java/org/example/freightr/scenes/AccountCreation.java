@@ -10,14 +10,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.ObjectClasses.EmployeeLogin;
+
+import org.example.freightr.Database;
+import org.example.freightr.TableCreation.DOA.EmployeeLogin;
+
 import org.example.freightr.TableCreation.EmployeeLoginTable;
 
-import static org.example.freightr.TableCreation.Dbconst.COMPANY_KEY;
 
 public class AccountCreation {
 
     public static Scene AccountCreationScene(Stage stage) {
+        Database db = Database.getInstance();
 
         VBox vbox = new VBox(10);
         vbox.setPadding(new Insets(20));
@@ -74,7 +77,7 @@ public class AccountCreation {
 
         Button createAccount = new Button("Create Account");
         createAccount.setOnAction(e -> {
-            if (companyKeyTF.getText().equals(COMPANY_KEY)){
+            if (companyKeyTF.getText().equals(db.getCompanyKey())){
                 if (passwordText.getText().equals(confirmPasswordText.getText())){
                     EmployeeLogin newEmployee = new EmployeeLogin(nameField.getText(),emailText.getText(),designationText.getText(),usernameText.getText(),passwordText.getText());
                     EmployeeLoginTable employeeLoginTable =EmployeeLoginTable.getInstance();
