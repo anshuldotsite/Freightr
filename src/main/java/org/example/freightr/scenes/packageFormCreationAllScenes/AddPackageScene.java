@@ -1,8 +1,9 @@
-package org.example.freightr.scenes;
+package org.example.freightr.scenes.packageFormCreationAllScenes;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -10,10 +11,21 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.PackageTableCred;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
+import org.example.freightr.scenes.CustomLabel;
+import org.example.freightr.scenes.CustomTextField;
+import org.example.freightr.scenes.NavigationVBox;
 
 import java.util.Date;
 
+/***
+ * @author anshul/kohinoor
+ * @ description it is the first scene shown
+ */
 public class AddPackageScene {
+    private static double totalPrice;
+
+    private static Package packageDetails;
+
     public static Scene createAddPackage(Stage stage) {
 
         NavigationVBox navigationVBox = new NavigationVBox(stage);
@@ -59,14 +71,58 @@ public class AddPackageScene {
         gridPane.add(weightTF, 1, 4);
 
         // Price Calculation Button
-        Button calculatePriceBtn = new Button("Calculate Price");
+        Button calculateChargesBtn = new Button("Calculate Charges");
         CustomLabel priceLabel = new CustomLabel("Price: ");
-        gridPane.add(calculatePriceBtn, 0, 5);
+        CustomLabel charge = new CustomLabel("");
+        gridPane.add(calculateChargesBtn, 0, 5);
         gridPane.add(priceLabel, 1, 5);
+        gridPane.add(charge,2,5);
 
         // Add Package Button
-        Button addPackageBtn = new Button("Add Package");
-        CustomLabel resultLabel = new CustomLabel("");
+        Button addPackageBtn = new Button("Add sender details");
+        Label resultLabel = new Label("");
+
+
+
+
+
+
+        calculateChargesBtn.setOnAction(e -> {
+            double height = Double.parseDouble(heightTF.getText());
+            double width = Double.parseDouble(widthTF.getText());
+            double length = Double.parseDouble(lengthTF.getText());
+            double weight = Double.parseDouble(weightTF.getText());
+            int heightSurcharge=0;
+            int lengthSurcharge=0;
+            int widthSurcharge=0;
+
+            int WeightPrice =0;
+
+            if(height>100){
+                heightSurcharge=15;
+            }
+            if(width>100){
+                widthSurcharge=15;
+            }
+            if(length>100){
+                lengthSurcharge=15;
+            }
+            if(15<weight&&weight<25){
+                WeightPrice=20;
+            }
+            else if(weight>25&&weight<50){
+                WeightPrice=17;
+            }
+            else if (weight>50){
+                WeightPrice=13;
+            }else {
+                WeightPrice=30;
+            }
+            totalPrice =heightSurcharge + widthSurcharge + lengthSurcharge + (WeightPrice * weight);
+            charge.setText(String.valueOf(totalPrice));
+        });
+
+
 
         addPackageBtn.setOnAction(event -> {
             if (descriptionTF.getText().isEmpty() ||
@@ -78,30 +134,15 @@ public class AddPackageScene {
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Fill out all the fields");
                 vBox.getChildren().add(resultLabel);
-            } else {
-                try {
-                    double height = Double.parseDouble(heightTF.getText());
-                    double width = Double.parseDouble(widthTF.getText());
-                    double length = Double.parseDouble(lengthTF.getText());
-                    double weight = Double.parseDouble(weightTF.getText());
-
-                    // Calculate the price based on the dimensions and weight
-                    double totalPrice = calculatePrice(height, width, length, weight);
-
-                    // Display the calculated price
-                    priceLabel.setText(String.format("Price: $%.2f", totalPrice));
-
-                    // Create a new Package object
-                    Date currentDate = new java.util.Date();
-                    Package newPackage = new Package(0, descriptionTF.getText(), currentDate,
-                            weight, height, length, width, totalPrice);
-
-                    packageTableCred.addPackage(newPackage);
-
-                    vBox.getChildren().remove(resultLabel);
-                    resultLabel.setText("Package Added Successfully");
-                    vBox.getChildren().add(resultLabel);
-
+            }
+                else {  // Create package and pass to next scene
+                    packageDetails = new Package(0, descriptionTF.getText(),
+                            new Date(), Double.parseDouble(weightTF.getText()),
+                            Double.parseDouble(heightTF.getText()),
+                            Double.parseDouble(lengthTF.getText()),
+                            Double.parseDouble(widthTF.getText()), totalPrice);
+                    stage.setScene(SenderSelectionScene.CreateSenderSelectionScene(stage, packageDetails));
+                }
                     // Clear the fields after addition
                     descriptionTF.clear();
                     heightTF.clear();
@@ -110,19 +151,15 @@ public class AddPackageScene {
                     weightTF.clear();
                     priceLabel.setText("Price: ");
 
-                } catch (NumberFormatException ex) {
-                    vBox.getChildren().remove(resultLabel);
-                    resultLabel.setText("Invalid input. Please enter numeric values.");
-                    vBox.getChildren().add(resultLabel);
-                }
-            }
+
+
         });
 
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setAlignment(Pos.CENTER);
 
-        vBox.getChildren().addAll(headingBox, gridPane, calculatePriceBtn, addPackageBtn, resultLabel);
+        vBox.getChildren().addAll(headingBox, gridPane, addPackageBtn, resultLabel);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
@@ -134,26 +171,5 @@ public class AddPackageScene {
     }
 
     // Pricing Logic
-    private static double calculatePrice(double height, double width, double length, double weight) {
-        // If the dimension is greater than 100 cm,a surcharge of $15 will be added
-        int dimensionSurcharge = 0;
-        if (height > 100) dimensionSurcharge += 15;  // $15 for height > 100 cm
-        if (width > 100) dimensionSurcharge += 15;   // $15 for width > 100 cm
-        if (length > 100) dimensionSurcharge += 15;  // $15 for length > 100 cm
 
-        // Price is based on the weight of the package
-        int weightPrice = 0;
-        if (weight > 50) {
-            weightPrice = 13;  // Price per kg for weight > 50 kg
-        } else if (weight > 25) {
-            weightPrice = 17;  // Price per kg for weight between 25 and 50 kg
-        } else if (weight > 15) {
-            weightPrice = 20;  // Price per kg for weight between 15 and 25 kg
-        } else {
-            weightPrice = 30;  // Price per kg for weight less than 15 kg
-        }
-
-        // Total price is the sum of the dimension surcharge and weight price * weight
-        return dimensionSurcharge + (weightPrice * weight);
-    }
 }

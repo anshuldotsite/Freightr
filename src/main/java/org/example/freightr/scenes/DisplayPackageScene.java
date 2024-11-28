@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.PackageTableCred;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
+import org.example.freightr.scenes.packageFormCreationAllScenes.AddPackageScene;
 
 import java.text.SimpleDateFormat;
 
@@ -65,7 +66,7 @@ public class DisplayPackageScene {
         tableView.getItems().addAll(packageTable.getAllPackages());
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
-        Button addButton = new Button("Add Package");
+
         Button deleteButton = new Button("Delete Package");
         deleteButton.setDisable(true);
         deleteButton.setOnAction(event -> {
@@ -86,12 +87,7 @@ public class DisplayPackageScene {
             }
         });
 
-        navigationVbox.getChildren().addAll(addButton, deleteButton);
-        addButton.setOnAction(event -> {
-            Scene addPackageScene = AddPackageScene.createAddPackage(stage);
-            stage.setScene(addPackageScene);
 
-        });
 
         BorderPane root = new BorderPane();
         root.setTop(headingBox);
