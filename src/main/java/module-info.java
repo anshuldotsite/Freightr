@@ -8,4 +8,6 @@ module org.example.freightr {
     exports org.example.freightr;
     exports org.example.freightr.scenes;
     opens org.example.freightr.scenes to javafx.fxml;
+    exports org.example.freightr.scenes.packageFormCreationAllScenes;
+    opens org.example.freightr.scenes.packageFormCreationAllScenes to javafx.fxml;
 }

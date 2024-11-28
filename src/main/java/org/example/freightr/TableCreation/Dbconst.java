@@ -33,6 +33,8 @@ public class Dbconst {
 
     public static final String CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID = "customer_id";
     public static final String CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID = "package_id";
+    public static final String CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID = "receiver_id";
+
 
     //  constants  Company Details table
     public static final String TABLE_COMPANY_DETAILS = "company_details";
@@ -97,8 +99,10 @@ public class Dbconst {
             "CREATE TABLE " + TABLE_CUSTOMER_PACKAGES + " (" +
                     CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + " int NOT NULL, " +
                     CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + " int NOT NULL, " +
+                    CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID + " int NOT NULL, " +
                     "FOREIGN KEY(" + CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + ") REFERENCES " + TABLE_CUSTOMER + "(" + CUSTOMER_COLUMN_ID + "), " +
-                    "FOREIGN KEY(" + CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + ") REFERENCES " + TABLE_PACKAGE + "(" + PACKAGE_COLUMN_ID + "));";
+                    "FOREIGN KEY(" + CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + ") REFERENCES " + TABLE_PACKAGE + "(" + PACKAGE_COLUMN_ID + "), " +
+                    "FOREIGN KEY(" + CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID + ") REFERENCES " + TABLE_CUSTOMER + "(" + CUSTOMER_COLUMN_ID + "));";
 
 
     public static final String CREATE_TABLE_COMPANY_DETAILS =
@@ -123,6 +127,7 @@ public class Dbconst {
      *creating employee login table
      * @author Kautuk Prasad
      */
+
 
     public static final String CREATE_TABLE_EMPLOYEE_LOGIN =
             "CREATE TABLE " + TABLE_EMPLOYEE_LOGIN + " (" +

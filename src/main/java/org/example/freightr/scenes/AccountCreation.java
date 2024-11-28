@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.DOA.EmployeeLogin;
+import org.example.freightr.TableCreation.ObjectClasses.EmployeeLogin;
 import org.example.freightr.TableCreation.EmployeeLoginTable;
 
 import static org.example.freightr.TableCreation.Dbconst.COMPANY_KEY;
