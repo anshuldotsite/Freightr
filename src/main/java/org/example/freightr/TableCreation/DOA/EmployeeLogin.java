@@ -1,4 +1,4 @@
-package org.example.freightr.TableCreation.ObjectClasses;
+package org.example.freightr.TableCreation.DOA;
 
 /**
  * POJO for employee login table

@@ -1,7 +1,7 @@
 package org.example.freightr.TableCreation;
 
 import org.example.freightr.Database;
-import org.example.freightr.TableCreation.ObjectClasses.EmployeeLogin;
+import org.example.freightr.TableCreation.DOA.EmployeeLogin;
 import org.example.freightr.TableCreation.DOA.LoginDOA;
 
 import java.sql.PreparedStatement;

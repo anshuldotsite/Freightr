@@ -1,7 +1,5 @@
 package org.example.freightr.TableCreation.DOA;
 
-import org.example.freightr.TableCreation.ObjectClasses.EmployeeLogin;
-
 import java.util.ArrayList;
 
 /**
