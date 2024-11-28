@@ -10,9 +10,13 @@ import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 
+import org.example.freightr.TableCreation.PackageTableCred;
 import org.example.freightr.scenes.CustomLabel;
 
 public class FinalPackageDetailsAndCreationScene {
+    private static int packageGeneratedkey;
+    private int senderSelectedkey;
+    private int reciverSelectedkey;
 
     public static Scene createConfirmationScene(Stage stage, Package packageDetails, Customer sender, Customer receiver) {
 
@@ -40,13 +44,16 @@ public class FinalPackageDetailsAndCreationScene {
         // Button to add the data into the database
         Button addDataButton = new Button("Add Data to Tables");
         addDataButton.setOnAction(e -> {
-            // Call method to add the data into the tables
+            PackageTableCred packageTableCred = PackageTableCred.getInstance();
+            packageGeneratedkey = packageTableCred.addPackage(packageDetails);
+            System.out.println(packageGeneratedkey);
+
 
         });
 
         vbox.getChildren().add(addDataButton);
 
-        return new Scene(vbox, 600, 400);
+        return new Scene(vbox, 900, 640);
     }
 
 
