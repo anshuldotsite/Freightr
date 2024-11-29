@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public interface PackageTrackDOA {
     public void addPackageTracking(PackageTracking packageTracking);
-    public PackageTracking getPackageTracking(int trackingID);
+    PackageTracking getPackageTracking(int trackingID);
     public ArrayList<PackageTracking> getAllPackageTracking();
     public void updatePackageTracking(PackageTracking packageTracking);
 }

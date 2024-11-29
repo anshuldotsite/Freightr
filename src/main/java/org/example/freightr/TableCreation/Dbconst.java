@@ -48,7 +48,7 @@ public class Dbconst {
     public static final String TRACKING_COLUMN_ID = "tracking_id";
     public static final String TRACKING_COLUMN_PACKAGE_ID = "package_id";
     public static final String TRACKING_COLUMN_LOCATION = "location";
-    public static final String TRACKING_COLUMN_STATUS = "status";
+    public static final String TRACKING_COLUMN_STATUS = "status_id";
 
     /**
      * Employee Login Table
@@ -59,6 +59,11 @@ public class Dbconst {
     public static final String EMPLOYEE_FULL_NAME = "full_name";
     public static final String EMPLOYEE_EMAIL="employee_email";
     public static final String EMPLOYEE_DESIGNATION = "designation";
+
+    public static final String TABLE_STATUS = "status";
+    public static final String STATUS_COLUMN_ID = "status_id";
+    public static final String STATUS_COLUMN_NAME = "status_name";
+
 
     public static final String EMPLOYEE_USER_NAME = "user_name";
     public static final String EMPLOYEE_PASSWORD = "password";
@@ -78,6 +83,12 @@ public class Dbconst {
                     CUSTOMER_COLUMN_COUNTRY + " VARCHAR(60), " +
                     CUSTOMER_COLUMN_TYPE + " VARCHAR(50), " +
                     "PRIMARY KEY(" + CUSTOMER_COLUMN_ID + "));";
+
+    public static final String CREATE_TABLE_STATUS =
+            "CREATE TABLE " + TABLE_STATUS + " (" +
+                    STATUS_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +
+                    STATUS_COLUMN_NAME + " VARCHAR(50) NOT NULL, " +
+                    "PRIMARY KEY(" + STATUS_COLUMN_ID + "));";
 
     public static final String CREATE_TABLE_PACKAGE =
             "CREATE TABLE " + TABLE_PACKAGE + " (" +
@@ -116,9 +127,10 @@ public class Dbconst {
                     TRACKING_COLUMN_ID + " int NOT NULL AUTO_INCREMENT, " +
                     TRACKING_COLUMN_PACKAGE_ID + " int NOT NULL, " +
                     TRACKING_COLUMN_LOCATION + " VARCHAR(255) NOT NULL, " +
-                    TRACKING_COLUMN_STATUS + " VARCHAR(100) NOT NULL, " +
+                    TRACKING_COLUMN_STATUS + " int NOT NULL, " +
                     "PRIMARY KEY(" + TRACKING_COLUMN_ID + "), " +
-                    "FOREIGN KEY(" + TRACKING_COLUMN_PACKAGE_ID + ") REFERENCES " + TABLE_PACKAGE + "(" + PACKAGE_COLUMN_ID + "));";
+                    "FOREIGN KEY(" + TRACKING_COLUMN_PACKAGE_ID + ") REFERENCES " + TABLE_PACKAGE + "(" + PACKAGE_COLUMN_ID + "), " +
+                    "FOREIGN KEY(" + TRACKING_COLUMN_STATUS + ") REFERENCES " + TABLE_STATUS + "(" + STATUS_COLUMN_ID + "));";
 
     /**
      *creating employee login table

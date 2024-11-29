@@ -4,6 +4,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerPackageReceiverTableCred;
@@ -12,8 +14,11 @@ import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.CustomerPackageReceiver;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 
+import org.example.freightr.TableCreation.ObjectClasses.PackageTracking;
 import org.example.freightr.TableCreation.PackageTableCred;
+import org.example.freightr.TableCreation.PackageTrackingTable;
 import org.example.freightr.scenes.CustomLabel;
+import org.example.freightr.scenes.NavigationVBox;
 
 public class FinalPackageDetailsAndCreationScene {
     private static int packageGeneratedkey;
@@ -34,13 +39,15 @@ public class FinalPackageDetailsAndCreationScene {
         CustomLabel receiverEmailLabel = new CustomLabel("Receiver Email: " + receiver.getEmail());
         CustomLabel receiverContactLabel = new CustomLabel("Receiver Contact: " + receiver.getContactNumber());
 
+        CustomLabel warehouseLocation = new CustomLabel("which warehouse is the package at country loaction");
+        TextField location = new TextField();
         // Layout to display the information
         VBox vbox = new VBox(10);
         vbox.setPadding(new Insets(20));
         vbox.getChildren().addAll(
                 packageLabel,
                 senderLabel, senderAddressLabel, senderEmailLabel, senderContactLabel,
-                receiverLabel, receiverAddressLabel, receiverEmailLabel, receiverContactLabel
+                receiverLabel, receiverAddressLabel, receiverEmailLabel, receiverContactLabel,warehouseLocation,location
         );
 
         // Button to add the data into the database
@@ -56,14 +63,17 @@ public class FinalPackageDetailsAndCreationScene {
             CustomerPackageReceiver NewPackageConnection = new CustomerPackageReceiver(senderSelectedkey, packageGeneratedkey, reciverSelectedkey);
             CustomerPackageReceiverTableCred.getInstance().addCustomerPackageReceiver(NewPackageConnection);
 
-
-
+PackageTracking packageTracking = new PackageTracking(0,packageGeneratedkey,location.getText(),1);
+            PackageTrackingTable.getInstance().addPackageTracking(packageTracking);
 
         });
-
+        NavigationVBox navigationVBox = new NavigationVBox(stage);
         vbox.getChildren().add(addDataButton);
+        BorderPane bp = new BorderPane();
+        bp.setCenter(vbox);
+        bp.setLeft(navigationVBox);
 
-        return new Scene(vbox, 900, 640);
+        return new Scene(bp, 900, 640);
     }
 
 

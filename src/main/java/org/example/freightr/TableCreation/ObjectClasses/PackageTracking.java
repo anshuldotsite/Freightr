@@ -1,19 +1,20 @@
 package org.example.freightr.TableCreation.ObjectClasses;
+
+
 public class PackageTracking {
     private int trackingId;
     private int packageId;
     private String location;
-    private String status;
+    private int statusId;
 
-    public PackageTracking(int trackingId, int packageId, String location, String status) {
+    public PackageTracking(int trackingId, int packageId, String location, int statusId) {
         this.trackingId = trackingId;
         this.packageId = packageId;
         this.location = location;
-        this.status = status;
+        this.statusId = statusId;
     }
 
-    public PackageTracking(){
-
+    public PackageTracking() {
     }
 
     public int getTrackingId() {
@@ -40,11 +41,11 @@ public class PackageTracking {
         this.location = location;
     }
 
-    public String getStatus() {
-        return status;
+    public int getStatusId() {
+        return statusId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
     }
 }
