@@ -11,5 +11,5 @@ public interface PackageDoa {
 
     public void deletePackage(int packageId);
 
-    void addPackage(Package Package);
+    int addPackage(Package Package);
 }

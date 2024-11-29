@@ -1,6 +1,8 @@
-package org.example.freightr.scenes;
+package org.example.freightr.scenes.packageFormCreationAllScenes;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,15 +17,24 @@ import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.TableCreation.PackageTableCred;
+import org.example.freightr.scenes.AddCustomerScene;
+import org.example.freightr.scenes.CustomLabel;
+import org.example.freightr.scenes.CustomTextField;
+import org.example.freightr.scenes.NavigationVBox;
 
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
 
 /***
  * @author kohinoor jeet singh
+ * @ description it was form to add package detaisl but since anshul made a new one so we are not uisng it
  */
+
+
 public class PackageFormScene {
     private static double totalPrice;
+
+    private static Package packageDetails;
 
     public static Scene CreatePackageFormScene(Stage stage) {
 
@@ -47,7 +58,10 @@ public class PackageFormScene {
         CustomLabel totalCharges = new CustomLabel("");
 
         Button calculateChargesBtn = new Button("Calculate Charges");
-        Button newOrderBtn = new Button("Create New Order");
+
+        CustomLabel charge = new CustomLabel("");
+
+        Button goToCustomerBtn = new Button("add customer");
 
         // made grid pane to accomodate all the components
         GridPane grid = new GridPane();
@@ -73,60 +87,22 @@ public class PackageFormScene {
         grid.add(calculateChargesBtn, 0, 4);
         grid.add(chargesLabel, 1, 4);
         grid.add(totalCharges, 2, 4);
+        grid.add(charge,3,4);
 
 
 
-        CustomerTableCreation customer = CustomerTableCreation.getInstance();
-        TableView tableView = new TableView();
-
-
-        TableColumn<Customer, String> column1= new TableColumn<>("First Name");
-        column1.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getFirstName()));
-
-
-        TableColumn<Customer, String> column2= new TableColumn<>("Last Name");
-        column2.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getLastName()));
-
-
-        TableColumn<Customer, String> column3= new TableColumn<>("Contact No");
-        column3.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getContactNumber()));
-
-
-        TableColumn<Customer, String> column5= new TableColumn<>("Address");
-        column5.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getAddress()));
-
-
-        TableColumn<Customer, String> column6= new TableColumn<>("City");
-        column6.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCity()));
-
-
-
-        TableColumn<Customer, String> column8= new TableColumn<>("Country");
-        column8.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCountry()));
-
-
-        tableView.getColumns().addAll(column1,column2,column3,column5,column6,column8);
-        tableView.getItems().addAll(customer.getAllCustomers());
-
-
-        int visibleRowCount = 5;
-        tableView.setFixedCellSize(25); // Set a fixed cell height (in pixels)
-        tableView.prefHeightProperty().bind(tableView.fixedCellSizeProperty().multiply(visibleRowCount + 1.01)); // +1 for header
-        tableView.minHeightProperty().bind(tableView.prefHeightProperty());
-        tableView.maxHeightProperty().bind(tableView.prefHeightProperty());
-        tableView.setPrefWidth(300);
-
-        VBox tableContainer = new VBox(tableView);
-        tableContainer.setPadding(new Insets(15, 15, 15, 15)); // Top, Right, Bottom, Left padding
-        tableContainer.setAlignment(Pos.CENTER); // Center the table within the VBox
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
 
+
+
+
         VBox vbox = new VBox();
-        vbox.getChildren().addAll(grid,tableContainer);
+        vbox.getChildren().addAll(grid,goToCustomerBtn);
         BorderPane root = new BorderPane();
         root.setLeft(navigationVbox);
         root.setCenter(vbox);
+
 
 
 
@@ -162,26 +138,24 @@ public class PackageFormScene {
                 WeightPrice=30;
             }
            totalPrice =heightSurcharge + widthSurcharge + lengthSurcharge + (WeightPrice * weight);
-        });
-
-        newOrderBtn.setOnAction(e -> {
-            double height = Double.parseDouble(heightField.getText());
-            double width = Double.parseDouble(widthField.getText());
-            double length = Double.parseDouble(lengthField.getText());
-            double weight = Double.parseDouble(weightField.getText());
-
-            String description = descriptionField.getText();
-
-           Date date = new java.sql.Date(System.currentTimeMillis());
-            int id = 0;
-            Package newPackage = new Package(id, description, date, weight, height, length, width, totalPrice);
-
-
-            PackageTableCred packageTableCred = PackageTableCred.getInstance();
-            packageTableCred.addPackage(newPackage);
+            charge.setText(String.valueOf(totalPrice));
         });
 
 
+        goToCustomerBtn.setOnAction(e -> {
+            if (descriptionField.getText().isEmpty() || heightField.getText().isEmpty() ||
+                    widthField.getText().isEmpty() || lengthField.getText().isEmpty() ||
+                    weightField.getText().isEmpty()) {
+                charge.setText("Please fill in all fields.");
+            } else {  // Create package and pass to next scene
+                packageDetails = new Package(0, descriptionField.getText(),
+                        new Date(), Double.parseDouble(weightField.getText()),
+                        Double.parseDouble(heightField.getText()),
+                        Double.parseDouble(lengthField.getText()),
+                        Double.parseDouble(widthField.getText()), totalPrice);
+                stage.setScene(SenderSelectionScene.CreateSenderSelectionScene(stage, packageDetails));
+            }
+        });
 
         return new Scene(root, 900, 640);
 

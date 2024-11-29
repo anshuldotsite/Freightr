@@ -9,6 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.EmployeeLoginTable;
+import org.example.freightr.scenes.packageFormCreationAllScenes.AddPackageScene;
+import org.example.freightr.scenes.packageFormCreationAllScenes.PackageFormScene;
 
 /**
  * Sign In scene
@@ -51,7 +53,7 @@ public class LoginPageScene {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
             boolean signIn= employeeLoginTable.signIn(usernameInput.getText(), passwordInput.getText());
             if (signIn==true){
-                Scene packageForm = PackageFormScene.CreatePackageFormScene(stage);
+                Scene packageForm = AddPackageScene.createAddPackage(stage);
                 stage.setScene(packageForm);
             }else{
                 vBox.getChildren().remove(resultLabel);

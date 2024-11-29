@@ -90,8 +90,5 @@ public class Package {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Package ID: " + packageId + ", Description: " + packageDescription;
-    }
+
 }
