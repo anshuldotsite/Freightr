@@ -1,5 +1,9 @@
 package org.example.freightr.TableCreation.ObjectClasses;
 
+/**
+ * @author Kautuk Prasad
+ * @description POJO for Status Table
+ */
 public class StatusPOJO {
     private int id;
     private String status;

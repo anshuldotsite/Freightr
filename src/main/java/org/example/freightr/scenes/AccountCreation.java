@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -22,22 +24,32 @@ public class AccountCreation {
     public static Scene AccountCreationScene(Stage stage) {
         Database db = Database.getInstance();
 
+        HBox headingBox = new HBox();
+        CustomLabel heading = new CustomLabel("Create An Account");
+        headingBox.getChildren().add(heading);
+        headingBox.setAlignment(Pos.CENTER);
+
+
         VBox vbox = new VBox(10);
-        vbox.setPadding(new Insets(20));
+        GridPane gridPane = new GridPane();
 
         // Label and text field for name
         Label name = new Label("Employee Name: ");
         TextField nameField = new TextField();
         nameField.setMinWidth(150);
         name.setMinWidth(100);
-        HBox nameBox = new HBox(12, name, nameField);
+        gridPane.add(name,0,0);
+        gridPane.add(nameField,1,0);
+
 
         // Label and text field for email
         Label email = new Label("Email: ");
         TextField emailText = new TextField();
         emailText.setMinWidth(150);
         email.setMinWidth(100);
-        HBox emailBox = new HBox(12, email, emailText);
+        gridPane.add(email,0,1);
+        gridPane.add(emailText,1,1);
+
 
 
         // Label and text field for employee designation
@@ -45,65 +57,99 @@ public class AccountCreation {
         TextField designationText = new TextField();
         designationText.setMinWidth(150);
         designation.setMinWidth(100);
-        HBox designationBox = new HBox(12, designation, designationText);
+        gridPane.add(designation,0,2);
+        gridPane.add(designationText,1,2);
+
 
         // Label and text field for username
         Label username = new Label("Username: ");
         TextField usernameText = new TextField();
         usernameText.setMinWidth(150);
         username.setMinWidth(100);
-        HBox usernameBox = new HBox(12, username, usernameText);
+        gridPane.add(username,0,3);
+        gridPane.add(usernameText,1,3);
+
 
         // Label and text field for password
         Label password = new Label("Password: ");
         PasswordField passwordText = new PasswordField();
         passwordText.setMinWidth(150);
         password.setMinWidth(100);
-        HBox passwordBox = new HBox(12, password, passwordText);
+        gridPane.add(password,0,4);
+        gridPane.add(passwordText,1,4);
+
 
         // Label and text field for confirming password
         Label confirmPassword = new Label("Confirm Password: ");
         PasswordField confirmPasswordText = new PasswordField();
         confirmPasswordText.setMinWidth(150);
         confirmPassword.setMinWidth(100);
-        HBox confirmPasswordBox = new HBox(7, confirmPassword, confirmPasswordText);
+        gridPane.add(confirmPassword,0,5);
+        gridPane.add(confirmPasswordText,1,5);
+
 
         // Label and text field for company key
         Label companyKeyLabel = new Label("Company Key: ");
         PasswordField companyKeyTF = new PasswordField();
         companyKeyTF.setMinWidth(150);
         companyKeyLabel.setMinWidth(100);
-        HBox companyKeyBox = new HBox(7, companyKeyLabel, companyKeyTF);
+        gridPane.add(companyKeyLabel,0,6);
+        gridPane.add(companyKeyTF,1,6);
+
 
         Button createAccount = new Button("Create Account");
+        CustomLabel resultLabel = new CustomLabel("");
+        resultLabel.setAlignment(Pos.CENTER);
+
         createAccount.setOnAction(e -> {
+            vbox.getChildren().remove(resultLabel);
             if (companyKeyTF.getText().equals(db.getCompanyKey())){
                 if (passwordText.getText().equals(confirmPasswordText.getText())){
                     EmployeeLogin newEmployee = new EmployeeLogin(nameField.getText(),emailText.getText(),designationText.getText(),usernameText.getText(),passwordText.getText());
                     EmployeeLoginTable employeeLoginTable =EmployeeLoginTable.getInstance();
-                    employeeLoginTable.createAccount(newEmployee);
-                    Label accountCreated = new Label("Account Created");
-                    vbox.getChildren().add(accountCreated);
-                    accountCreated.setAlignment(Pos.CENTER);
+                    if (employeeLoginTable.checkUserExists(usernameText.getText()) == true){
+                        resultLabel.setText("User Name already exists, try another one.");
+                        vbox.getChildren().add(resultLabel);
+                    }else {
+                        employeeLoginTable.createAccount(newEmployee);
+                        resultLabel.setText("Account Created");
+                        vbox.getChildren().add(resultLabel);
+                    }
+
                 }else {
-                    Label unidenticalPass = new Label("Password and Confirm Password fields did not match.");
-                    vbox.getChildren().add(unidenticalPass);
-                    unidenticalPass.setAlignment(Pos.CENTER);
+                    resultLabel.setText("Password and Confirm Password fields did not match.");
+                    vbox.getChildren().add(resultLabel);
                 }
             }else {
-                Label wrongKey = new Label("Wrong Company Key");
-                vbox.getChildren().add(wrongKey);
-                wrongKey.setAlignment(Pos.CENTER);
+                resultLabel.setText("Wrong Company Key");
+                vbox.getChildren().add(resultLabel);
             }
         });
+
+
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
 
         Button signIn = new Button("Sign In");
         signIn.setOnAction(event -> {
             Scene loginPageScene = LoginPageScene.createLoginPage(stage);
             stage.setScene(loginPageScene);
         });
-        vbox.getChildren().addAll(nameBox, emailBox, designationBox, usernameBox, passwordBox, confirmPasswordBox, companyKeyBox,createAccount,signIn);
 
-        return new Scene(vbox, 900, 640);
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().addAll(createAccount,signIn);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setSpacing(5);
+
+
+        BorderPane root = new BorderPane();
+
+        vbox.getChildren().addAll(headingBox,gridPane,buttonBox);
+        vbox.setAlignment(Pos.CENTER);
+        root.setCenter(vbox);
+
+
+        return new Scene(root, 900, 640);
     }
 }
