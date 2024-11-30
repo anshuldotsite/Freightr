@@ -147,15 +147,16 @@ public class AddCustomerScene {
             companyStage.setScene(companyFormScene);
             companyStage.show();
         });
+        addCompanyBtn.setAlignment(Pos.CENTER);
 
-        navigationVBox.getChildren().add(addCompanyBtn);
+
 
 
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setAlignment(Pos.CENTER);
 
-        vBox.getChildren().addAll(headingBox,gridPane,addButton);
+        vBox.getChildren().addAll(headingBox,gridPane,addButton,addCompanyBtn);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 

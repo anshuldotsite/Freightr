@@ -6,10 +6,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
@@ -74,6 +76,19 @@ public class DisplayCustomerScene {
         NavigationVBox navigationVbox = new NavigationVBox(stage);
         Button addButton = new Button("Add Customer");
         Button deleteButton = new Button("Delete Customer");
+
+        VBox buttonVBox = new VBox();
+
+        HBox buttonBox = new HBox();
+        Label emptyLabel = new Label("");
+        Label emptyLabel2 = new Label("");
+
+        buttonBox.getChildren().addAll(addButton,deleteButton);
+        buttonBox.setSpacing(10);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonVBox.getChildren().addAll(emptyLabel,buttonBox,emptyLabel2);
+        buttonVBox.setAlignment(Pos.CENTER);
+
         deleteButton.setDisable(true);
         deleteButton.setOnAction(event -> {
             Customer deleteCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
@@ -94,16 +109,17 @@ public class DisplayCustomerScene {
         });
 
 
-        navigationVbox.getChildren().addAll(addButton,deleteButton);
         addButton.setOnAction(event -> {
             Scene addCustomerScene = AddCustomerScene.createAddCustomer(stage);
             stage.setScene(addCustomerScene);
         });
 
         BorderPane root = new BorderPane();
-        root.setTop(headingBox);
+
         root.setLeft(navigationVbox);
         root.setCenter(tableView);
+        root.setTop(headingBox);
+        root.setBottom(buttonVBox);
 
         return new Scene(root, 900, 640);
     }
