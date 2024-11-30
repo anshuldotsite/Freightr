@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public interface PackageTrackDOA {
     public void addPackageTracking(PackageTracking packageTracking);
     PackageTracking getPackageTracking(int trackingID);
+    public ArrayList<PackageTracking> getAllPackageTrackingWithStatus(int StatusID);
     public ArrayList<PackageTracking> getAllPackageTracking();
     public void updatePackageTracking(PackageTracking packageTracking);
 }

@@ -68,6 +68,20 @@ public class CustomerPackageReceiverTableCred implements CustomerPackageReciever
         }
         return customerId;
     }
+    public int getReciverIdByPackageId(int packageId) {
+        String query = "SELECT " + CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID+ " FROM " + TABLE_CUSTOMER_PACKAGES +
+                " WHERE " + CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID + " = " + packageId;
+        int ReciverID = -1;
+        try (Statement statement = db.getConnection().createStatement()) {
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) {
+                ReciverID = resultSet.getInt(CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ReciverID;
+    }
 
 
 

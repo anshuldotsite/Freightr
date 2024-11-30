@@ -14,6 +14,7 @@ import org.example.freightr.TableCreation.CompanyTableCreation;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Company;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
+import org.example.freightr.scenes.packageFormCreationAllScenes.SenderSelectionScene;
 
 /**
  * @author Kautuk Prasad
@@ -126,6 +127,10 @@ public class AddCustomerScene {
                     customerTableCreation.addCustomerWithoutCompany(newCustomer);
                     resultLabel.setText("Customer Added");
                     vBox.getChildren().add(resultLabel);
+
+                    // adding condition to refresh the table when adding customer in package
+                    SenderSelectionScene senderSelectionScene=SenderSelectionScene.getInstance();
+                    senderSelectionScene.refreshTable();
                 }else {
                     vBox.getChildren().remove(resultLabel);
                     CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();

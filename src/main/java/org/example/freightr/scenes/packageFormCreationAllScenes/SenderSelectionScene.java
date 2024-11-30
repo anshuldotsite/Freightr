@@ -3,8 +3,6 @@ package org.example.freightr.scenes.packageFormCreationAllScenes;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -17,9 +15,10 @@ import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.scenes.AddCustomerScene;
 import org.example.freightr.scenes.NavigationVBox;
-import org.example.freightr.scenes.packageFormCreationAllScenes.RecieverSelectionScene;
 
 public class SenderSelectionScene {
+    private static SenderSelectionScene instance;
+    private static TableView tableView;
 
     private static Package packageDetails;
 
@@ -28,7 +27,8 @@ public class SenderSelectionScene {
         packageDetails = packageData;
 
         CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
-        TableView<Customer> tableView = new TableView<>();
+
+         tableView = new TableView<>();
 
         TableColumn<Customer, String> column1 = new TableColumn<>("First Name");
         column1.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getFirstName()));
@@ -51,7 +51,7 @@ public class SenderSelectionScene {
         Button selectCustomerBtn = new Button("Select Customer");
         selectCustomerBtn.setOnAction(e -> {
 
-            Customer selectedCustomer = tableView.getSelectionModel().getSelectedItem();
+            Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
 
 
             if (selectedCustomer != null) {
@@ -82,5 +82,17 @@ public class SenderSelectionScene {
         root.setLeft(navigationVbox);
 
         return new Scene(root, 900, 640);
+    }
+    public void refreshTable(){
+        CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
+        tableView.getItems().clear();
+        tableView.getItems().addAll(customerTableCreation.getAllCustomers());
+    }
+
+    public static SenderSelectionScene getInstance(){
+        if(instance == null){
+            instance = new SenderSelectionScene();
+        }
+        return instance;
     }
 }

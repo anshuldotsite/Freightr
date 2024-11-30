@@ -23,6 +23,7 @@ public interface CustomerPackageRecieverDOA {
 
     // Method to get a customerId from a packageId
     int getCustomerIdByPackageId(int packageId);
+    int getReciverIdByPackageId(int packageId);
 
     // Method to get all CustomerPackageReceiver records
     ArrayList<CustomerPackageReceiver> getAllCustomerPackageReceivers();

@@ -71,6 +71,25 @@ public class PackageTrackingTable implements PackageTrackDOA {
         }
         return packageTracks;
     }
+
+    @Override
+    public ArrayList<PackageTracking> getAllPackageTrackingWithStatus(int StatusId) {
+        String query = "SELECT * FROM " + TABLE_PACKAGE_TRACKING + "WHERE"+TRACKING_COLUMN_STATUS +"="+StatusId;
+        ArrayList<PackageTracking> packageTracks = new ArrayList<>();
+        try (Statement statement = db.getConnection().createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                packageTracks.add(new PackageTracking(
+                        resultSet.getInt(TRACKING_COLUMN_ID),
+                        resultSet.getInt(TRACKING_COLUMN_PACKAGE_ID),
+                        resultSet.getString(TRACKING_COLUMN_LOCATION),
+                        resultSet.getInt(TRACKING_COLUMN_STATUS)));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error retrieving all Package Tracking records: " + e.getMessage());
+        }
+        return packageTracks;
+    }
     @Override
     public void updatePackageTracking(PackageTracking packageTracking) {
         String query = "UPDATE " + TABLE_PACKAGE_TRACKING + " SET " +
