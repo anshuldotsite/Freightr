@@ -41,7 +41,7 @@ public class UpdateCustomer {
         ComboBox<Company> companyComboBox = new ComboBox<>();
         ArrayList<Company> companies = company.getAllCompanies();
         companyComboBox.setItems(FXCollections.observableArrayList(company.getAllCompanies()));
-        companyComboBox.getSelectionModel().select(find(companies,customer.getCompanyId()));
+        companyComboBox.getSelectionModel().select(find(companies, customer.getCompanyId()));
         companyComboBox.setPlaceholder(companyLabel);
         gridPane.add(companyLabel,0,0);
         gridPane.add(companyComboBox,1,0);

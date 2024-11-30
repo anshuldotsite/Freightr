@@ -15,6 +15,22 @@ public class Customer {
     private String country;
     private String customerType;
 
+    public Customer(int customerId, int companyId, String companyName, String firstName, String lastName, String contactNumber, String email, String address, String zipcode, String city, String province, String country, String customerType) {
+        this.customerId = customerId;
+        this.companyId = companyId;
+        this.companyName = companyName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.contactNumber = contactNumber;
+        this.email = email;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.province = province;
+        this.country = country;
+        this.customerType = customerType;
+    }
+
     public Customer(int customerId, int companyId,
                     String firstName, String lastName, String contactNumber, String email, String address, String zipcode, String city, String province, String country, String customerType) {
         this.customerId = customerId;
