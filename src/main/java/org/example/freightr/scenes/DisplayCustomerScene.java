@@ -75,7 +75,7 @@ public class DisplayCustomerScene {
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
         Button addButton = new Button("Add Customer");
-        Button deleteButton = new Button("Delete Customer");
+        Button updateButton = new Button("Update Customer");
 
         VBox buttonVBox = new VBox();
 
@@ -83,29 +83,30 @@ public class DisplayCustomerScene {
         Label emptyLabel = new Label("");
         Label emptyLabel2 = new Label("");
 
-        buttonBox.getChildren().addAll(addButton,deleteButton);
+        buttonBox.getChildren().addAll(addButton,updateButton);
         buttonBox.setSpacing(10);
         buttonBox.setAlignment(Pos.CENTER);
         buttonVBox.getChildren().addAll(emptyLabel,buttonBox,emptyLabel2);
         buttonVBox.setAlignment(Pos.CENTER);
 
-        deleteButton.setDisable(true);
-        deleteButton.setOnAction(event -> {
-            Customer deleteCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
-            customer.deleteCustomer(deleteCustomer.getCustomerId());
-            DisplayCustomerScene displayCustomerScene = DisplayCustomerScene.getInstance();
-            displayCustomerScene.refreshTable();
-        });
+        updateButton.setDisable(true);
+
 
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 if (newValue!=null){
-                    deleteButton.setDisable(false);
+                    updateButton.setDisable(false);
                 }else {
-                    deleteButton.setDisable(true);
+                    updateButton.setDisable(true);
                 }
             }
+        });
+
+        updateButton.setOnAction(event -> {
+            Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
+            Scene updateCustomer = UpdateCustomer.createUpdateCustomer(stage,selectedCustomer);
+            stage.setScene(updateCustomer);
         });
 
 

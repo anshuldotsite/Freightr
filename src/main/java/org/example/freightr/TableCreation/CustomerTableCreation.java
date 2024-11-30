@@ -126,7 +126,8 @@ public class CustomerTableCreation implements CustomerDoa {
         try {
             PreparedStatement updateStatement = db.getConnection().prepareStatement(query);
             updateStatement.executeUpdate();
-        } catch (Exception e) {
+            System.out.println("Customer Updated");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
