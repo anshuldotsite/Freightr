@@ -224,7 +224,7 @@ public class CustomerTableCreation implements CustomerDoa {
                 " customer.zipcode, customer.city, " +
                 " customer.province, customer.country, customer.customer_type" +
                 " from customer " +
-                "JOIN company_details on customer.company_id = company_details.company_id " +
+                "LEFT OUTER JOIN company_details on customer.company_id = company_details.company_id " +
                 "ORDER BY customer.customer_id ASC";
         try {
             Statement getItems = db.getConnection().createStatement();
