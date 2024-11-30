@@ -10,10 +10,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.PackageTableCred;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.scenes.packageFormCreationAllScenes.AddPackageScene;
+import org.example.freightr.scenes.packageFormCreationAllScenes.ShowSenderReciverDetailsScene;
 
 import java.text.SimpleDateFormat;
 
@@ -76,16 +78,34 @@ public class DisplayPackageScene {
             displayPackageScene.refreshTable();
         });
 
+
+        Button viewDetailsButton = new Button("View Details");
+        viewDetailsButton.setDisable(true);
+        viewDetailsButton.setOnAction(event -> {
+            Package selectedPackage = (Package) tableView.getSelectionModel().getSelectedItem();
+            if (selectedPackage != null) {
+                int packageId = selectedPackage.getPackageId();
+                Scene detailsScene = ShowSenderReciverDetailsScene.CreateSenderReciverDetailsPage(packageId, stage);
+                stage.setScene(detailsScene);
+            }
+        });
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 if (newValue != null) {
                     deleteButton.setDisable(false);
+                    viewDetailsButton.setDisable(false);
                 } else {
                     deleteButton.setDisable(true);
+
                 }
             }
         });
+
+
+
+        HBox hBox = new HBox();
+        hBox.getChildren().addAll(deleteButton,viewDetailsButton);
 
 
 
@@ -93,6 +113,7 @@ public class DisplayPackageScene {
         root.setTop(headingBox);
         root.setLeft(navigationVbox);
         root.setCenter(tableView);
+        root.setBottom(hBox);
 
         return new Scene(root, 900, 640);
     }

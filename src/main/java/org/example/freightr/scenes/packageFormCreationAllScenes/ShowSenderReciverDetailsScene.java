@@ -1,0 +1,90 @@
+package org.example.freightr.scenes.packageFormCreationAllScenes;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import org.example.freightr.TableCreation.CompanyTableCreation;
+import org.example.freightr.TableCreation.CustomerPackageReceiverTableCred;
+import org.example.freightr.TableCreation.CustomerTableCreation;
+import org.example.freightr.TableCreation.ObjectClasses.Company;
+import org.example.freightr.TableCreation.ObjectClasses.Customer;
+import org.example.freightr.scenes.NavigationVBox;
+
+public class ShowSenderReciverDetailsScene {
+
+    public static Scene CreateSenderReciverDetailsPage(int PackageId, Stage stage) {
+        BorderPane bp = new BorderPane();
+        NavigationVBox navigationVBox = new NavigationVBox(stage);
+        bp.setLeft(navigationVBox);
+
+        // Fetching sender and receiver details
+        CustomerPackageReceiverTableCred customerPackageReceiverTableCred = CustomerPackageReceiverTableCred.getInstance();
+        int senderId = customerPackageReceiverTableCred.getCustomerIdByPackageId(PackageId);
+        int receiverId = customerPackageReceiverTableCred.getReciverIdByPackageId(PackageId);
+
+        CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
+        Customer sender = customerTableCreation.getCustomer(senderId);
+        Customer receiver = customerTableCreation.getCustomer(receiverId);
+
+        CompanyTableCreation companyTableCreation = CompanyTableCreation.getInstance();
+        Company senderCompany = sender.getCompanyId() != 0 ? companyTableCreation.getCompany(sender.getCompanyId()) : null;
+        Company receiverCompany = receiver.getCompanyId() != 0 ? companyTableCreation.getCompany(receiver.getCompanyId()) : null;
+
+        // Creating a styled GridPane
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(20));
+        gridPane.setVgap(15);
+        gridPane.setHgap(30);
+        gridPane.setAlignment(Pos.CENTER);
+
+        Label headerSender = new Label("Sender Details");
+        headerSender.setFont(new Font("Arial", 18));
+        gridPane.add(headerSender, 0, 0);
+
+        gridPane.add(new Label("Name: "), 0, 1);
+        gridPane.add(new Label(sender.getFirstName() + " " + sender.getLastName()), 0, 2);
+
+        gridPane.add(new Label("Contact: "), 0, 3);
+        gridPane.add(new Label(sender.getContactNumber()), 0, 4);
+        gridPane.add(new Label("Email: "), 0, 5);
+        gridPane.add(new Label(sender.getEmail()), 0, 6);
+
+        gridPane.add(new Label("Address: "), 0, 7);
+        gridPane.add(new Label(sender.getAddress()), 0, 8);
+        if (senderCompany != null) {
+            gridPane.add(new Label("Company: "), 0, 9);
+            gridPane.add(new Label(senderCompany.getCompanyName()), 0, 10);
+        }
+
+        Label headerReceiver = new Label("Receiver Details");
+        headerReceiver.setFont(new Font("Arial", 18));
+        gridPane.add(headerReceiver, 1, 0);
+        gridPane.add(new Label("Name: "), 1, 1);
+        gridPane.add(new Label(receiver.getFirstName() + " " + receiver.getLastName()), 1, 2);
+
+        gridPane.add(new Label("Contact: "), 1, 3);
+        gridPane.add(new Label(receiver.getContactNumber()), 1, 4);
+        gridPane.add(new Label("Email: "), 1, 5);
+        gridPane.add(new Label(receiver.getEmail()), 1, 6);
+        gridPane.add(new Label("Address: "), 1, 7);
+        gridPane.add(new Label(receiver.getAddress()), 1, 8);
+
+        if (receiverCompany != null) {
+            gridPane.add(new Label("Company: "), 1, 9);
+            gridPane.add(new Label(receiverCompany.getCompanyName()), 1, 10);
+        }
+
+        // Adding the GridPane to the BorderPane
+        bp.setCenter(gridPane);
+
+
+
+
+        return  new Scene(bp, 900, 640);
+    }
+}
