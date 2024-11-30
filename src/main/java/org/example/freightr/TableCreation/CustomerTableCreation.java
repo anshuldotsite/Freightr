@@ -4,6 +4,7 @@ package org.example.freightr.TableCreation;
 import org.example.freightr.Database;
 import org.example.freightr.TableCreation.DOA.CustomerDoa;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
+import org.example.freightr.TableCreation.ObjectClasses.DisplayCustomerPOJO;
 
 
 import java.sql.PreparedStatement;
@@ -208,6 +209,46 @@ public class CustomerTableCreation implements CustomerDoa {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @author Kautuk Prasad
+     * @description This is a method to retrieve customer data from different tables and combining to show them.
+     * @return Combined Customer Data from different tables in the form of array list.
+     */
+    @Override
+    public ArrayList<DisplayCustomerPOJO> getPrettyData() {
+        ArrayList<DisplayCustomerPOJO> customers = new ArrayList<DisplayCustomerPOJO>();
+        String query = "SELECT customer.customer_id, company_details.company_name AS company_name, " +
+                " customer.first_name, customer.last_name, customer.contact_number, customer.email, customer.address," +
+                " customer.zipcode, customer.city, " +
+                " customer.province, customer.country, customer.customer_type" +
+                " from customer " +
+                "JOIN company_details on customer.company_id = company_details.company_id " +
+                "ORDER BY customer.customer_id ASC";
+        try {
+            Statement getItems = db.getConnection().createStatement();
+            ResultSet data = getItems.executeQuery(query);
+            while(data.next()) {
+                customers.add(new DisplayCustomerPOJO(
+                        data.getInt(CUSTOMER_COLUMN_ID),
+                        data.getString("company_name"),
+                        data.getString(CUSTOMER_COLUMN_FIRST_NAME),
+                        data.getString(CUSTOMER_COLUMN_LAST_NAME),
+                        data.getString(CUSTOMER_COLUMN_CONTACT_NUMBER),
+                        data.getString(CUSTOMER_COLUMN_EMAIL),
+                        data.getString(CUSTOMER_COLUMN_ADDRESS),
+                        data.getString(CUSTOMER_COLUMN_ZIPCODE),
+                        data.getString(CUSTOMER_COLUMN_CITY),
+                        data.getString(CUSTOMER_COLUMN_PROVINCE),
+                        data.getString(CUSTOMER_COLUMN_COUNTRY),
+                        data.getString(CUSTOMER_COLUMN_TYPE)));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return customers;
     }
 }
 
