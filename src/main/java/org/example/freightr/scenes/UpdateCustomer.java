@@ -182,6 +182,7 @@ public class UpdateCustomer {
         ArrayList<Company> searchList = (ArrayList<Company>) ((ArrayList<?>) arrayList);
         for(int i = 0; i < searchList.size(); i++){
             if(searchList.get(i).getCompanyId() == id){
+                System.out.println(i);
                 return i;
             }
         }

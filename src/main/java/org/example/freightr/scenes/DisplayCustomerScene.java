@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.DisplayCustomerPOJO;
+import org.example.freightr.TableCreation.ObjectClasses.StatusPOJO;
+
+import java.util.ArrayList;
 
 /**
  * @author Kautuk Prasad
@@ -36,43 +39,43 @@ public class DisplayCustomerScene {
         tableView = new TableView();
 
         //column1
-        TableColumn<DisplayCustomerPOJO, String> column1= new TableColumn<>("First Name");
+        TableColumn<Customer, String> column1= new TableColumn<>("First Name");
         column1.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getFirstName()));
 
         //column2
-        TableColumn<DisplayCustomerPOJO, String> column2= new TableColumn<>("Last Name");
+        TableColumn<Customer, String> column2= new TableColumn<>("Last Name");
         column2.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getLastName()));
 
         //column3
-        TableColumn<DisplayCustomerPOJO, String> column3= new TableColumn<>("Company");
-        column3.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCompany()));
+        TableColumn<Customer, String> column3= new TableColumn<>("Company");
+        column3.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCompanyName()));
 
         //column4
-        TableColumn<DisplayCustomerPOJO, String> column4= new TableColumn<>("Contact No");
+        TableColumn<Customer, String> column4= new TableColumn<>("Contact No");
         column4.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getContactNumber()));
 
         //column5
-        TableColumn<DisplayCustomerPOJO, String> column5= new TableColumn<>("Email");
+        TableColumn<Customer, String> column5= new TableColumn<>("Email");
         column5.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getEmail()));
 
         //column6
-        TableColumn<DisplayCustomerPOJO, String> column6= new TableColumn<>("Address");
+        TableColumn<Customer, String> column6= new TableColumn<>("Address");
         column6.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getAddress()));
 
         //column7
-        TableColumn<DisplayCustomerPOJO, String> column7= new TableColumn<>("City");
+        TableColumn<Customer, String> column7= new TableColumn<>("City");
         column7.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCity()));
 
         //column8
-        TableColumn<DisplayCustomerPOJO, String> column8= new TableColumn<>("Province");
+        TableColumn<Customer, String> column8= new TableColumn<>("Province");
         column8.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getProvince()));
 
         //column9
-        TableColumn<DisplayCustomerPOJO, String> column9= new TableColumn<>("Country");
+        TableColumn<Customer, String> column9= new TableColumn<>("Country");
         column9.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCountry()));
 
         //column10
-        TableColumn<DisplayCustomerPOJO, String> column10= new TableColumn<>("Customer Type");
+        TableColumn<Customer, String> column10= new TableColumn<>("Customer Type");
         column10.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCustomerType()));
 
         tableView.getColumns().addAll(column1,column2,column3,column4,column5,column6,column7,column8,column9,column10);

@@ -3,6 +3,7 @@ package org.example.freightr.TableCreation.ObjectClasses;
 public class Customer {
     private int customerId;
     private int companyId;
+    private String companyName;
     private String firstName;
     private String lastName;
     private String contactNumber;
@@ -14,7 +15,8 @@ public class Customer {
     private String country;
     private String customerType;
 
-    public Customer(int customerId, int companyId, String firstName, String lastName, String contactNumber, String email, String address, String zipcode, String city, String province, String country, String customerType) {
+    public Customer(int customerId, int companyId,
+                    String firstName, String lastName, String contactNumber, String email, String address, String zipcode, String city, String province, String country, String customerType) {
         this.customerId = customerId;
         this.companyId = companyId;
         this.firstName = firstName;
@@ -29,7 +31,22 @@ public class Customer {
         this.customerType = customerType;
     }
 
-    public Customer(int companyId,String firstName, String lastName, String contactNumber, String email, String address, String zipcode, String city, String province, String country, String customerType) {
+    public Customer(int customerId, String companyName, String firstName, String lastName, String contactNumber, String email, String address, String zipcode, String city, String province, String country, String customerType) {
+        this.customerId = customerId;
+        this.companyName = companyName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.contactNumber = contactNumber;
+        this.email = email;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.province = province;
+        this.country = country;
+        this.customerType = customerType;
+    }
+
+    public Customer(int companyId, String firstName, String lastName, String contactNumber, String email, String address, String zipcode, String city, String province, String country, String customerType) {
         this.companyId=companyId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -157,6 +174,14 @@ public class Customer {
     }
 
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -174,5 +199,7 @@ public class Customer {
                 ", customerType='" + customerType + '\'' +
                 '}';
     }
+
+
 
 }
