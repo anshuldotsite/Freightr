@@ -15,6 +15,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
+import org.example.freightr.TableCreation.ObjectClasses.DisplayCustomerPOJO;
+import org.example.freightr.TableCreation.ObjectClasses.StatusPOJO;
+
+import java.util.ArrayList;
 
 /**
  * @author Kautuk Prasad
@@ -43,39 +47,43 @@ public class DisplayCustomerScene {
         column2.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getLastName()));
 
         //column3
-        TableColumn<Customer, String> column3= new TableColumn<>("Contact No");
-        column3.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getContactNumber()));
+        TableColumn<Customer, String> column3= new TableColumn<>("Company");
+        column3.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCompanyName()));
 
         //column4
-        TableColumn<Customer, String> column4= new TableColumn<>("Email");
-        column4.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getEmail()));
+        TableColumn<Customer, String> column4= new TableColumn<>("Contact No");
+        column4.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getContactNumber()));
 
         //column5
-        TableColumn<Customer, String> column5= new TableColumn<>("Address");
-        column5.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getAddress()));
+        TableColumn<Customer, String> column5= new TableColumn<>("Email");
+        column5.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getEmail()));
 
         //column6
-        TableColumn<Customer, String> column6= new TableColumn<>("City");
-        column6.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCity()));
+        TableColumn<Customer, String> column6= new TableColumn<>("Address");
+        column6.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getAddress()));
 
         //column7
-        TableColumn<Customer, String> column7= new TableColumn<>("Province");
-        column7.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getProvince()));
+        TableColumn<Customer, String> column7= new TableColumn<>("City");
+        column7.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCity()));
 
         //column8
-        TableColumn<Customer, String> column8= new TableColumn<>("Country");
-        column8.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCountry()));
+        TableColumn<Customer, String> column8= new TableColumn<>("Province");
+        column8.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getProvince()));
 
         //column9
-        TableColumn<Customer, String> column9= new TableColumn<>("Customer Type");
-        column9.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCustomerType()));
+        TableColumn<Customer, String> column9= new TableColumn<>("Country");
+        column9.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCountry()));
 
-        tableView.getColumns().addAll(column1,column2,column3,column4,column5,column6,column7,column8,column9);
-        tableView.getItems().addAll(customer.getAllCustomers());
+        //column10
+        TableColumn<Customer, String> column10= new TableColumn<>("Customer Type");
+        column10.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCustomerType()));
+
+        tableView.getColumns().addAll(column1,column2,column3,column4,column5,column6,column7,column8,column9,column10);
+        tableView.getItems().addAll(customer.getPrettyData());
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
         Button addButton = new Button("Add Customer");
-        Button deleteButton = new Button("Delete Customer");
+        Button updateButton = new Button("Update Customer");
 
         VBox buttonVBox = new VBox();
 
@@ -83,29 +91,30 @@ public class DisplayCustomerScene {
         Label emptyLabel = new Label("");
         Label emptyLabel2 = new Label("");
 
-        buttonBox.getChildren().addAll(addButton,deleteButton);
+        buttonBox.getChildren().addAll(addButton,updateButton);
         buttonBox.setSpacing(10);
         buttonBox.setAlignment(Pos.CENTER);
         buttonVBox.getChildren().addAll(emptyLabel,buttonBox,emptyLabel2);
         buttonVBox.setAlignment(Pos.CENTER);
 
-        deleteButton.setDisable(true);
-        deleteButton.setOnAction(event -> {
-            Customer deleteCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
-            customer.deleteCustomer(deleteCustomer.getCustomerId());
-            DisplayCustomerScene displayCustomerScene = DisplayCustomerScene.getInstance();
-            displayCustomerScene.refreshTable();
-        });
+        updateButton.setDisable(true);
+
 
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 if (newValue!=null){
-                    deleteButton.setDisable(false);
+                    updateButton.setDisable(false);
                 }else {
-                    deleteButton.setDisable(true);
+                    updateButton.setDisable(true);
                 }
             }
+        });
+
+        updateButton.setOnAction(event -> {
+            Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
+            Scene updateCustomer = UpdateCustomer.createUpdateCustomer(stage,selectedCustomer);
+            stage.setScene(updateCustomer);
         });
 
 

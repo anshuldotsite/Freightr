@@ -82,7 +82,8 @@ public class Dbconst {
                     CUSTOMER_COLUMN_PROVINCE + " VARCHAR(50), " +
                     CUSTOMER_COLUMN_COUNTRY + " VARCHAR(60), " +
                     CUSTOMER_COLUMN_TYPE + " VARCHAR(50), " +
-                    "PRIMARY KEY(" + CUSTOMER_COLUMN_ID + "));";
+                    "PRIMARY KEY(" + CUSTOMER_COLUMN_ID + "), " +
+                    "FOREIGN KEY(" + CUSTOMER_COLUMN_COMPANY_ID + ") REFERENCES " + TABLE_COMPANY_DETAILS + "(" + COMPANY_COLUMN_ID + "));";
 
     public static final String CREATE_TABLE_STATUS =
             "CREATE TABLE " + TABLE_STATUS + " (" +

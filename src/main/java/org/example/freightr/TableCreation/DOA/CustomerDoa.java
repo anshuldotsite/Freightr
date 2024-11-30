@@ -14,4 +14,5 @@ public interface CustomerDoa {
     public void updateCustomer(Customer customer);
     public  void addCustomerWithoutCompany(Customer customer);
     public void addCustomerWithCompany(Customer customer);
+    public ArrayList<Customer> getPrettyData();
 }
