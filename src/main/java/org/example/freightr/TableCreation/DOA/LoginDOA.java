@@ -10,6 +10,6 @@ public interface LoginDOA {
     public ArrayList<EmployeeLogin> getAllEmployeeLogins();
     public void createAccount(EmployeeLogin employeeLogin);
     public void updatePassword(String userName, String password);
-    public void checkUserExists(String userName);
+    public boolean checkUserExists(String userName);
     public boolean signIn(String userName,String password);
 }

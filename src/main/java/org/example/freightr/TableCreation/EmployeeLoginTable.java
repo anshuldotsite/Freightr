@@ -96,9 +96,32 @@ public class EmployeeLoginTable implements LoginDOA {
         }
     }
 
-    @Override
-    public void checkUserExists(String userName) {
+    /**
+     * @author Kautuk Prasad
+     * @description This method takes in the username entered by the user and returns a boolean values after checking
+     * the database for the same username.
+     * @param userName the username entered by the user.
+     * @return a boolean value after checking the databse if the username exists.
+     */
 
+    @Override
+    public boolean checkUserExists(String userName) {
+
+        boolean userExists=false;
+        String query = "SELECT " + EMPLOYEE_USER_NAME + " FROM " + TABLE_EMPLOYEE_LOGIN +
+                " WHERE " + EMPLOYEE_USER_NAME + " = '" + userName + "'";
+        try {
+            Statement checkUser=db.getConnection().createStatement();
+            ResultSet data = checkUser.executeQuery(query);
+
+            if (data.next()){
+                userExists=true;
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return userExists;
     }
 
     /**
