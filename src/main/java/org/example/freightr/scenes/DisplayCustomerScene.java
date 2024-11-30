@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
+import org.example.freightr.TableCreation.ObjectClasses.DisplayCustomerPOJO;
 
 /**
  * @author Kautuk Prasad
@@ -35,43 +36,47 @@ public class DisplayCustomerScene {
         tableView = new TableView();
 
         //column1
-        TableColumn<Customer, String> column1= new TableColumn<>("First Name");
+        TableColumn<DisplayCustomerPOJO, String> column1= new TableColumn<>("First Name");
         column1.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getFirstName()));
 
         //column2
-        TableColumn<Customer, String> column2= new TableColumn<>("Last Name");
+        TableColumn<DisplayCustomerPOJO, String> column2= new TableColumn<>("Last Name");
         column2.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getLastName()));
 
         //column3
-        TableColumn<Customer, String> column3= new TableColumn<>("Contact No");
-        column3.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getContactNumber()));
+        TableColumn<DisplayCustomerPOJO, String> column3= new TableColumn<>("Company");
+        column3.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCompany()));
 
         //column4
-        TableColumn<Customer, String> column4= new TableColumn<>("Email");
-        column4.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getEmail()));
+        TableColumn<DisplayCustomerPOJO, String> column4= new TableColumn<>("Contact No");
+        column4.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getContactNumber()));
 
         //column5
-        TableColumn<Customer, String> column5= new TableColumn<>("Address");
-        column5.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getAddress()));
+        TableColumn<DisplayCustomerPOJO, String> column5= new TableColumn<>("Email");
+        column5.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getEmail()));
 
         //column6
-        TableColumn<Customer, String> column6= new TableColumn<>("City");
-        column6.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCity()));
+        TableColumn<DisplayCustomerPOJO, String> column6= new TableColumn<>("Address");
+        column6.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getAddress()));
 
         //column7
-        TableColumn<Customer, String> column7= new TableColumn<>("Province");
-        column7.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getProvince()));
+        TableColumn<DisplayCustomerPOJO, String> column7= new TableColumn<>("City");
+        column7.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCity()));
 
         //column8
-        TableColumn<Customer, String> column8= new TableColumn<>("Country");
-        column8.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCountry()));
+        TableColumn<DisplayCustomerPOJO, String> column8= new TableColumn<>("Province");
+        column8.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getProvince()));
 
         //column9
-        TableColumn<Customer, String> column9= new TableColumn<>("Customer Type");
-        column9.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCustomerType()));
+        TableColumn<DisplayCustomerPOJO, String> column9= new TableColumn<>("Country");
+        column9.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCountry()));
 
-        tableView.getColumns().addAll(column1,column2,column3,column4,column5,column6,column7,column8,column9);
-        tableView.getItems().addAll(customer.getAllCustomers());
+        //column10
+        TableColumn<DisplayCustomerPOJO, String> column10= new TableColumn<>("Customer Type");
+        column10.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCustomerType()));
+
+        tableView.getColumns().addAll(column1,column2,column3,column4,column5,column6,column7,column8,column9,column10);
+        tableView.getItems().addAll(customer.getPrettyData());
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
         Button addButton = new Button("Add Customer");

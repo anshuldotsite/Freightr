@@ -1,6 +1,7 @@
 package org.example.freightr.TableCreation.DOA;
 
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
+import org.example.freightr.TableCreation.ObjectClasses.DisplayCustomerPOJO;
 
 import java.util.ArrayList;
 
@@ -14,4 +15,5 @@ public interface CustomerDoa {
     public void updateCustomer(Customer customer);
     public  void addCustomerWithoutCompany(Customer customer);
     public void addCustomerWithCompany(Customer customer);
+    public ArrayList<DisplayCustomerPOJO> getPrettyData();
 }
