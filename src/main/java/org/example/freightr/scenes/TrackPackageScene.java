@@ -84,6 +84,15 @@ public class TrackPackageScene {
         return new Scene(root, 900, 640);
     }
 
+    /**
+     * @author Kautuk Prasad
+     * @description This method matches the status id with the status name and then returns
+     * the status name for display.
+     * @param arrayList
+     * @param id
+     * @return
+     */
+
     public static String find(ArrayList<?> arrayList, int id){
         ArrayList<StatusPOJO> searchList = (ArrayList<StatusPOJO>) ((ArrayList<?>) arrayList);
         for(int i = 0; i < searchList.size(); i++){
