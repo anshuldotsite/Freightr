@@ -78,7 +78,6 @@ public class DisplayPackageScene {
             displayPackageScene.refreshTable();
         });
 
-
         Button viewDetailsButton = new Button("View Details");
         viewDetailsButton.setDisable(true);
         viewDetailsButton.setOnAction(event -> {

@@ -19,10 +19,12 @@ public class PackageCustomTrackingAll {
                 "pt." + TRACKING_COLUMN_PACKAGE_ID + ", " +
                 "pt." + TRACKING_COLUMN_LOCATION + ", " +
                 "pt." + TRACKING_COLUMN_STATUS + ", " +
-                "p."+PACKAGE_COLUMN_DESCRIPTION+", "+ "p."+PACKAGE_COLUMN_SENT_DATE +
-                "FROM " + TABLE_PACKAGE_TRACKING + " pt " +
+                "p." + PACKAGE_COLUMN_DESCRIPTION + ", " +
+                "p." + PACKAGE_COLUMN_SENT_DATE +
+                " FROM " + TABLE_PACKAGE_TRACKING + " pt " +
                 "JOIN " + TABLE_PACKAGE + " p ON pt." + TRACKING_COLUMN_PACKAGE_ID + " = p." + PACKAGE_COLUMN_ID + " " +
                 "WHERE pt." + TRACKING_COLUMN_STATUS + " = " + statusId;
+
 
         ArrayList<PackageCustomTracking> packageTracks = new ArrayList<>();
         try (Statement statement = db.getConnection().createStatement();
@@ -44,5 +46,6 @@ public class PackageCustomTrackingAll {
         }
         return packageTracks;
     }
+
 
 }
