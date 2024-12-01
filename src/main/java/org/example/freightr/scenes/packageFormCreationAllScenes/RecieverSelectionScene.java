@@ -1,21 +1,26 @@
 package org.example.freightr.scenes.packageFormCreationAllScenes;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.scenes.AddCustomerScene;
+import org.example.freightr.scenes.CustomLabel;
 import org.example.freightr.scenes.NavigationVBox;
 
 public class RecieverSelectionScene {
@@ -23,6 +28,12 @@ public class RecieverSelectionScene {
     public static Scene createReceiverTableScene(Stage stage, Package packageData, Customer selectedCustomer) {
 
         packageDetails = packageData;
+
+        HBox headingBox = new HBox();
+        CustomLabel heading = new CustomLabel("Select receiver");
+        headingBox.getChildren().add(heading);
+        headingBox.setAlignment(Pos.CENTER);
+
 
         CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
         TableView<Customer> tableView = new TableView<>();
@@ -43,31 +54,59 @@ public class RecieverSelectionScene {
         ObservableList<Customer> customerList = FXCollections.observableArrayList(customerTableCreation.getAllCustomers());
         tableView.setItems(customerList);
 
-        Button selectrecieverBtn = new Button("\"Select Receiver\"");
-        selectrecieverBtn.setOnAction(e -> {
-            Customer selectedReciever = tableView.getSelectionModel().getSelectedItem();
-            if (selectedReciever != null) {
-                stage.setScene(FinalPackageDetailsAndCreationScene.createConfirmationScene(stage,packageDetails,selectedCustomer,selectedReciever));
-                System.out.println("Package Details: " + packageDetails);
-                System.out.println("Customer Details: " + selectedCustomer);
-                System.out.println("Receiver Details: " + selectedReciever);
+        Button selectReceiverBtn = new Button("Select Receiver");
+        selectReceiverBtn.setDisable(true);
+
+        tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                if (newValue != null) {
+                    selectReceiverBtn.setDisable(false);
+
+                } else {
+                    selectReceiverBtn.setDisable(true);
+
+                }
             }
         });
-        Button recieverButton = new Button("Create a new reciever");
-        recieverButton.setOnAction(e->{
+
+
+        selectReceiverBtn.setOnAction(e -> {
+            Customer selectedReceiver = tableView.getSelectionModel().getSelectedItem();
+            if (selectedReceiver != null) {
+                stage.setScene(FinalPackageDetailsAndCreationScene.createConfirmationScene(stage,packageDetails,selectedCustomer,selectedReceiver));
+                System.out.println("Package Details: " + packageDetails);
+                System.out.println("Customer Details: " + selectedCustomer);
+                System.out.println("Receiver Details: " + selectedReceiver);
+            }
+        });
+        Button createReceiver = new Button("Create a new receiver");
+        createReceiver.setOnAction(e->{
             Stage newStage = new Stage();
             Scene addCustomerScene = AddCustomerScene.createAddCustomer(newStage);
             newStage.setScene(addCustomerScene);
             newStage.show();
         });
 
-        NavigationVBox navigationVbox = new NavigationVBox(stage);
-        VBox vbox = new VBox();
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().addAll(selectReceiverBtn,createReceiver);
+        buttonBox.setSpacing(10);
+        buttonBox.setAlignment(Pos.CENTER);
 
-        vbox.getChildren().addAll(tableView, selectrecieverBtn,recieverButton);
+        VBox buttonVbox = new VBox();
+        Label emptyLabel = new Label("");
+        Label emptyLabel2 = new Label("");
+
+        buttonVbox.getChildren().addAll(emptyLabel,buttonBox,emptyLabel2);
+        buttonVbox.setAlignment(Pos.CENTER);
+
+        NavigationVBox navigationVbox = new NavigationVBox(stage);
+
         BorderPane root = new BorderPane();
-        root.setCenter(vbox);
+        root.setCenter(tableView);
         root.setLeft(navigationVbox);
+        root.setTop(headingBox);
+        root.setBottom(buttonVbox);
         return new Scene(root, 900, 640);
     }
 }
