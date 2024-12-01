@@ -218,7 +218,7 @@ public class CustomerTableCreation implements CustomerDoa {
     @Override
     public ArrayList<Customer> getPrettyData() {
         ArrayList<Customer> customers = new ArrayList<Customer>();
-        String query = "SELECT customer.customer_id, company_details.company_name AS company_name, " +
+        String query = "SELECT customer.customer_id, customer.company_id, company_details.company_name AS company_name, " +
                 " customer.first_name, customer.last_name, customer.contact_number, customer.email, customer.address," +
                 " customer.zipcode, customer.city, " +
                 " customer.province, customer.country, customer.customer_type" +
@@ -231,6 +231,7 @@ public class CustomerTableCreation implements CustomerDoa {
             while(data.next()) {
                 customers.add(new Customer(
                         data.getInt(CUSTOMER_COLUMN_ID),
+                        data.getInt(CUSTOMER_COLUMN_COMPANY_ID),
                         data.getString("company_name"),
                         data.getString(CUSTOMER_COLUMN_FIRST_NAME),
                         data.getString(CUSTOMER_COLUMN_LAST_NAME),

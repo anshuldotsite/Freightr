@@ -32,7 +32,7 @@ public class PackageTrackingTable implements PackageTrackDOA {
             statement.executeUpdate(query);
             System.out.println("Package Tracking added successfully.");
         } catch (SQLException e) {
-            System.err.println("Error adding Package Tracking: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     @Override
@@ -49,7 +49,7 @@ public class PackageTrackingTable implements PackageTrackDOA {
                         resultSet.getInt(TRACKING_COLUMN_STATUS));
             }
         } catch (SQLException e) {
-            System.err.println("Error retrieving Package Tracking: " + e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -67,7 +67,7 @@ public class PackageTrackingTable implements PackageTrackDOA {
                         resultSet.getInt(TRACKING_COLUMN_STATUS)));
             }
         } catch (SQLException e) {
-            System.err.println("Error retrieving all Package Tracking records: " + e.getMessage());
+            e.printStackTrace();
         }
         return packageTracks;
     }
@@ -86,7 +86,7 @@ public class PackageTrackingTable implements PackageTrackDOA {
                         resultSet.getInt(TRACKING_COLUMN_STATUS)));
             }
         } catch (SQLException e) {
-            System.err.println("Error retrieving all Package Tracking records: " + e.getMessage());
+            e.printStackTrace();
         }
         return packageTracks;
     }
@@ -100,7 +100,7 @@ public class PackageTrackingTable implements PackageTrackDOA {
             statement.executeUpdate(query);
             System.out.println("Package Tracking updated successfully.");
         } catch (SQLException e) {
-            System.err.println("Error updating Package Tracking: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     public static PackageTrackingTable getInstance() {
