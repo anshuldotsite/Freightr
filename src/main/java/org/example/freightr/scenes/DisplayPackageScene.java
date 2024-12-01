@@ -6,6 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
@@ -103,16 +104,29 @@ public class DisplayPackageScene {
 
 
 
-        HBox hBox = new HBox();
-        hBox.getChildren().addAll(deleteButton,viewDetailsButton);
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().addAll(deleteButton,viewDetailsButton);
+        buttonBox.setSpacing(10);
+        buttonBox.setAlignment(Pos.CENTER);
+
+        VBox vBox = new VBox();
+        Label emptyLabel = new Label("");
+        Label emptyLabel2 = new Label("");
+        vBox.getChildren().addAll(emptyLabel,buttonBox,emptyLabel2);
+
+        vBox.setAlignment(Pos.BASELINE_CENTER);
+
+
 
 
 
         BorderPane root = new BorderPane();
-        root.setTop(headingBox);
         root.setLeft(navigationVbox);
         root.setCenter(tableView);
-        root.setBottom(hBox);
+        root.setTop(headingBox);
+        root.setBottom(vBox);
+
+
 
         return new Scene(root, 900, 640);
     }

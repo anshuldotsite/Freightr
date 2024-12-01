@@ -89,6 +89,7 @@ public class UpdatePackageStatus {
                     packageCustomTracking.getTrackingId(),locationTF.getText(),packageStatusComboBox.getSelectionModel().getSelectedItem().getId());
             packageCustomTrackingAll.updatePackage(packageCustomTracked);
             resultLabel.setText("Updated Package");
+            vBox.getChildren().add(resultLabel);
 
         });
 

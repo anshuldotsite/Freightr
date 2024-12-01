@@ -83,11 +83,11 @@ public class AllPackageTrackingScene {
         VBox alignBox = new VBox();
 
         buttonBox.getChildren().addAll(viewDetailsButton,updateButton);
-        buttonBox.setAlignment(Pos.BASELINE_CENTER);
+        buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(10);
 
         alignBox.getChildren().addAll(emptyLabel,buttonBox,emptyLabel2);
-        alignBox.setAlignment(Pos.BASELINE_CENTER);
+        alignBox.setAlignment(Pos.CENTER);
 
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
