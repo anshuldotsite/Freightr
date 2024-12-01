@@ -6,11 +6,11 @@ public class PackageCustomTracking {
     private int packageId;
     private String description;
     private Date sentDate;
-    private String trackingId;
+    private int trackingId;
     private String location;
     private int statusId;
 
-    public PackageCustomTracking(int packageId, String description, Date sentDate, String trackingId, String location, int statusId) {
+    public PackageCustomTracking(int packageId, String description, Date sentDate, int trackingId, String location, int statusId) {
         this.packageId = packageId;
         this.description = description;
         this.sentDate = sentDate;
@@ -44,11 +44,11 @@ public class PackageCustomTracking {
         this.sentDate = sentDate;
     }
 
-    public String getTrackingId() {
+    public int getTrackingId() {
         return trackingId;
     }
 
-    public void setTrackingId(String trackingId) {
+    public void setTrackingId(int trackingId) {
         this.trackingId = trackingId;
     }
 
