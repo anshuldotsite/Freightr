@@ -41,7 +41,6 @@ public class AddCustomerScene {
         ComboBox<Company> companyComboBox = new ComboBox<>();
         companyComboBox.setItems(FXCollections.observableArrayList(company.getAllCompanies()));
         companyComboBox.getSelectionModel().select(null);
-        companyComboBox.setPlaceholder(companyLabel);
         gridPane.add(companyLabel,0,0);
         gridPane.add(companyComboBox,1,0);
 
