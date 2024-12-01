@@ -1,19 +1,25 @@
 package org.example.freightr.scenes.packageFormCreationAllScenes;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.scenes.AddCustomerScene;
+import org.example.freightr.scenes.CustomLabel;
 import org.example.freightr.scenes.NavigationVBox;
 
 public class SenderSelectionScene {
@@ -29,6 +35,11 @@ public class SenderSelectionScene {
         CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
 
          tableView = new TableView<>();
+
+        CustomLabel heading = new CustomLabel("Select Sender");
+        HBox headingBox = new HBox();
+        headingBox.getChildren().add(heading);
+        headingBox.setAlignment(Pos.CENTER);
 
         TableColumn<Customer, String> column1 = new TableColumn<>("First Name");
         column1.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getFirstName()));
@@ -49,6 +60,8 @@ public class SenderSelectionScene {
         tableView.setItems(customerList);
 
         Button selectCustomerBtn = new Button("Select Customer");
+        selectCustomerBtn.setDisable(true);
+
         selectCustomerBtn.setOnAction(e -> {
 
             Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
@@ -66,6 +79,19 @@ public class SenderSelectionScene {
             }
         });
 
+        tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                if (newValue != null) {
+                    selectCustomerBtn.setDisable(false);
+
+                } else {
+                    selectCustomerBtn.setDisable(true);
+
+                }
+            }
+        });
+
 
         Button SenderButton = new Button("Create a new sender");
         SenderButton.setOnAction(e->{
@@ -75,11 +101,22 @@ public class SenderSelectionScene {
             newStage.show();
         });
         NavigationVBox navigationVbox = new NavigationVBox(stage);
-        VBox vbox = new VBox();
-        vbox.getChildren().addAll(tableView, selectCustomerBtn,SenderButton);
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().addAll(selectCustomerBtn,SenderButton);
+        buttonBox.setSpacing(10);
+        buttonBox.setAlignment(Pos.CENTER);
+
+        VBox buttonVBox = new VBox();
+        Label emptyLabel = new Label("");
+        Label emptyLabel2 = new Label("");
+        buttonVBox.getChildren().addAll(emptyLabel,buttonBox,emptyLabel2);
+        buttonVBox.setAlignment(Pos.CENTER);
+
         BorderPane root = new BorderPane();
-        root.setCenter(vbox);
+        root.setTop(headingBox);
+        root.setCenter(tableView);
         root.setLeft(navigationVbox);
+        root.setBottom(buttonVBox);
 
         return new Scene(root, 900, 640);
     }
