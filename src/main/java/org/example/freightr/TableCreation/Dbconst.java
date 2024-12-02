@@ -15,6 +15,7 @@ public class Dbconst {
     public static final String CUSTOMER_COLUMN_PROVINCE = "province";
     public static final String CUSTOMER_COLUMN_COUNTRY = "country";
     public static final String CUSTOMER_COLUMN_TYPE = "customer_type";
+
     // const for package
     public static final String TABLE_PACKAGE = "package";
     public static final String PACKAGE_COLUMN_ID = "package_id";
@@ -26,15 +27,12 @@ public class Dbconst {
     public static final String PACKAGE_COLUMN_BREADTH = "breadth";
     public static final String PACKAGE_COLUMN_PRICE = "price";
 
-
-
     //  constants for Customer Packages table
     public static final String TABLE_CUSTOMER_PACKAGES = "customer_packages";
 
     public static final String CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID = "customer_id";
     public static final String CUSTOMER_PACKAGES_COLUMN_PACKAGE_ID = "package_id";
     public static final String CUSTOMER_PACKAGES_COLUMN_RECEIVER_ID = "receiver_id";
-
 
     //  constants  Company Details table
     public static final String TABLE_COMPANY_DETAILS = "company_details";
@@ -63,7 +61,6 @@ public class Dbconst {
     public static final String TABLE_STATUS = "status";
     public static final String STATUS_COLUMN_ID = "status_id";
     public static final String STATUS_COLUMN_NAME = "status_name";
-
 
     public static final String EMPLOYEE_USER_NAME = "user_name";
     public static final String EMPLOYEE_PASSWORD = "password";
@@ -137,7 +134,6 @@ public class Dbconst {
      *creating employee login table
      * @author Kautuk Prasad
      */
-
 
     public static final String CREATE_TABLE_EMPLOYEE_LOGIN =
             "CREATE TABLE " + TABLE_EMPLOYEE_LOGIN + " (" +

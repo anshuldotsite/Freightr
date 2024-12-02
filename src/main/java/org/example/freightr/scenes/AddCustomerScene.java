@@ -24,21 +24,22 @@ import org.example.freightr.scenes.packageFormCreationAllScenes.SenderSelectionS
  */
 public class AddCustomerScene {
     public static Scene createAddCustomer(Stage stage){
-
+        // A navigation VBox to navigate different scenes
         NavigationVBox navigationVBox = new NavigationVBox(stage);
+        // A singleton instance for the database
         CompanyTableCreation company = CompanyTableCreation.getInstance();
 
-        //Hbox for heading
+        // HBox for heading
         CustomLabel heading = new CustomLabel("Add New Customer");
         HBox headingBox = new HBox();
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
-
+        // VBox and GridPane for layout
         VBox vBox = new VBox();
         GridPane gridPane = new GridPane();
 
-        //combobox for company
+        // Combobox for company
         CustomLabel companyLabel = new CustomLabel("Company");
         ComboBox<Company> companyComboBox = new ComboBox<>();
         companyComboBox.setItems(FXCollections.observableArrayList(company.getAllCompanies()));
@@ -46,66 +47,77 @@ public class AddCustomerScene {
         gridPane.add(companyLabel,0,0);
         gridPane.add(companyComboBox,1,0);
 
-
-        //first name
+        // Label for first name
         CustomLabel firstNameLabel = new CustomLabel("First Name");
         CustomTextField firstNameTF = new CustomTextField();
         gridPane.add(firstNameLabel, 0, 1);
         gridPane.add(firstNameTF, 1, 1);
 
-        //last name
+        // Label for last name
         CustomLabel lastNameLabel = new CustomLabel("Last Name");
         CustomTextField lastNameTF = new CustomTextField();
         gridPane.add(lastNameLabel, 0, 2);
         gridPane.add(lastNameTF, 1, 2);
 
-        //contact name
+        // Label for the contact number
         CustomLabel contactLabel = new CustomLabel("Contact Number");
         CustomTextField contactTF = new CustomTextField();
         gridPane.add(contactLabel, 0, 3);
         gridPane.add(contactTF, 1, 3);
 
-        //email
+        // Label for the email address
         CustomLabel emailLabel = new CustomLabel("Email");
         CustomTextField emailTF = new CustomTextField();
         gridPane.add(emailLabel, 0, 4);
         gridPane.add(emailTF, 1, 4);
 
-        //address
+        // Label for the street address
         CustomLabel addressLabel = new CustomLabel("Address");
         CustomTextField addressTF = new CustomTextField();
         gridPane.add(addressLabel, 0, 5);
         gridPane.add(addressTF, 1, 5);
 
-        //zip code
+        // Label for the zip code
         CustomLabel zipLabel = new CustomLabel("Zip Code");
         CustomTextField zipTF = new CustomTextField();
         gridPane.add(zipLabel, 0, 6);
         gridPane.add(zipTF, 1, 6);
 
-        //city
+        // Label for city
         CustomLabel cityLabel = new CustomLabel("City");
         CustomTextField cityTF = new CustomTextField();
         gridPane.add(cityLabel, 0, 7);
         gridPane.add(cityTF, 1, 7);
 
-        //province
+        // Label for province
         CustomLabel provinceLabel = new CustomLabel("Province");
         CustomTextField provinceTF = new CustomTextField();
         gridPane.add(provinceLabel, 0, 8);
         gridPane.add(provinceTF, 1, 8);
 
-        //country
+        // Label for country
         CustomLabel countryLabel = new CustomLabel("Country");
         CustomTextField countryTF = new CustomTextField();
         gridPane.add(countryLabel, 0, 9);
         gridPane.add(countryTF, 1, 9);
 
+        // Label for customer type
+        CustomLabel typeLabel = new CustomLabel("Customer Type");
+        CustomTextField typeTF = new CustomTextField();
+        gridPane.add(typeLabel, 0, 10);
+        gridPane.add(typeTF, 1, 10);
 
+        // A button to the add customer to the database
         Button addButton = new Button("Add Customer");
         addButton.setAlignment(Pos.CENTER);
 
+        // Label for displaying errors if any
         CustomLabel resultLabel= new CustomLabel("");
+
+        /**
+         * This event handler checks if any of the labels are empty, displays an error message if they do
+         * and if they're not, customer gets added to the database
+         */
         addButton.setOnAction(event -> {
             if (firstNameTF.getText().equals("")||lastNameTF.getText().equals("")||contactTF.getText().equals("")||emailTF.getText().equals("")||
                     addressTF.getText().equals("")||zipTF.getText().equals("")||cityTF.getText().equals("") ||provinceTF.getText().equals("") ||
@@ -143,10 +155,10 @@ public class AddCustomerScene {
                     SenderSelectionScene senderSelectionScene=SenderSelectionScene.getInstance();
                     senderSelectionScene.refreshTable();
                 }
-
             }
         });
 
+        // A button to add company to the database
         Button addCompanyBtn = new Button("Add Company");
         addCompanyBtn.setOnAction(event -> {
             Scene companyFormScene = AddCompanyScene.createAddCompanyScene(stage);
@@ -154,17 +166,16 @@ public class AddCustomerScene {
         });
         addCompanyBtn.setAlignment(Pos.CENTER);
 
-
-
-
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setAlignment(Pos.CENTER);
 
+        // Adding all elements to the vbox and that to the root to display
         vBox.getChildren().addAll(headingBox,gridPane,addButton,addCompanyBtn);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
+        // BorderPane for layout
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
         root.setLeft(navigationVBox);
