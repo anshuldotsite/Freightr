@@ -16,6 +16,7 @@ public class Database {
     private static String DB_USER;
     private static String HOST;
     private String COMPANY_KEY;
+    private String COMPANY_NAME;
     private static boolean isConnected;
 
     /**
@@ -30,7 +31,7 @@ public class Database {
                 BufferedReader reader = new BufferedReader(new FileReader("credentials.txt"));
                 String credentialsStr = reader.readLine();
                 StringTokenizer stringTokenizer = new StringTokenizer(credentialsStr);
-                String credentials[] = new String[5];
+                String credentials[] = new String[6];
                 int i = 0;
                 while (stringTokenizer.hasMoreTokens()) {
                     credentials[i++] = stringTokenizer.nextToken();
@@ -39,7 +40,8 @@ public class Database {
                 DB_NAME = credentials[1];
                 HOST = credentials[2];
                 DB_PASSWORD = credentials[3];
-                COMPANY_KEY = credentials[4];
+                COMPANY_NAME = credentials[4];
+                COMPANY_KEY = credentials[5];
 
 
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -112,6 +114,10 @@ public class Database {
 
     public String getCompanyKey(){
         return COMPANY_KEY;
+    }
+
+    public String getCompanyName(){
+        return COMPANY_NAME;
     }
 }
 

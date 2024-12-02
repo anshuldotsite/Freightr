@@ -77,7 +77,10 @@ public class AddCompanyScene {
         vBox.setSpacing(15);
         vBox.setAlignment(Pos.CENTER);
 
+        NavigationVBox navigationVBox = new NavigationVBox(stage);
+
         root.setCenter(vBox);
+        root.setLeft(navigationVBox);
 
         return new Scene(root, 900,640);
     }
