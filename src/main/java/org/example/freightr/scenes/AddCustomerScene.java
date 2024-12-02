@@ -14,6 +14,7 @@ import org.example.freightr.TableCreation.CompanyTableCreation;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Company;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
+import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.scenes.packageFormCreationAllScenes.RecieverSelectionScene;
 import org.example.freightr.scenes.packageFormCreationAllScenes.SenderSelectionScene;
 
@@ -100,11 +101,6 @@ public class AddCustomerScene {
         gridPane.add(countryLabel, 0, 9);
         gridPane.add(countryTF, 1, 9);
 
-        //customer type
-        CustomLabel typeLabel = new CustomLabel("Customer Type");
-        CustomTextField typeTF = new CustomTextField();
-        gridPane.add(typeLabel, 0, 10);
-        gridPane.add(typeTF, 1, 10);
 
         Button addButton = new Button("Add Customer");
         addButton.setAlignment(Pos.CENTER);
@@ -113,7 +109,7 @@ public class AddCustomerScene {
         addButton.setOnAction(event -> {
             if (firstNameTF.getText().equals("")||lastNameTF.getText().equals("")||contactTF.getText().equals("")||emailTF.getText().equals("")||
                     addressTF.getText().equals("")||zipTF.getText().equals("")||cityTF.getText().equals("") ||provinceTF.getText().equals("") ||
-                    contactTF.getText().equals("")||typeTF.getText().equals("")){
+                    contactTF.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Fill out all the fields");
                 vBox.getChildren().add(resultLabel);
@@ -123,12 +119,14 @@ public class AddCustomerScene {
                     CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
                     Customer newCustomer = new Customer(firstNameTF.getText(), lastNameTF.getText(), contactTF.getText(),
                             emailTF.getText(), addressTF.getText(), zipTF.getText(), cityTF.getText(), provinceTF.getText(),
-                            countryTF.getText(), typeTF.getText());
+                            countryTF.getText(), "Self");
                     customerTableCreation.addCustomerWithoutCompany(newCustomer);
                     resultLabel.setText("Customer Added");
                     vBox.getChildren().add(resultLabel);
 
                     // adding condition to refresh the table when adding customer in package
+                    Package packages = new Package();
+                    Scene senderScene = SenderSelectionScene.CreateSenderSelectionScene(stage,packages);
                     SenderSelectionScene senderSelectionScene=SenderSelectionScene.getInstance();
                     senderSelectionScene.refreshTable();
                 }else {
@@ -136,10 +134,12 @@ public class AddCustomerScene {
                     CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
                     Customer newCustomer = new Customer(companyComboBox.getSelectionModel().getSelectedItem().getCompanyId(),firstNameTF.getText(), lastNameTF.getText(), contactTF.getText(),
                             emailTF.getText(), addressTF.getText(), zipTF.getText(), cityTF.getText(), provinceTF.getText(),
-                            countryTF.getText(), typeTF.getText());
+                            countryTF.getText(), "Corporate");
                     customerTableCreation.addCustomerWithCompany(newCustomer);
                     resultLabel.setText("Customer Added and associated with the company");
                     vBox.getChildren().add(resultLabel);
+                    Package packages = new Package();
+                    Scene senderScene = SenderSelectionScene.CreateSenderSelectionScene(stage,packages);
                     SenderSelectionScene senderSelectionScene=SenderSelectionScene.getInstance();
                     senderSelectionScene.refreshTable();
                 }
