@@ -103,27 +103,37 @@ public class AccountCreation {
 
         createAccount.setOnAction(e -> {
             vbox.getChildren().remove(resultLabel);
-            if (companyKeyTF.getText().equals(db.getCompanyKey())){
-                if (passwordText.getText().equals(confirmPasswordText.getText())){
-                    EmployeeLogin newEmployee = new EmployeeLogin(nameField.getText(),emailText.getText(),designationText.getText(),usernameText.getText(),passwordText.getText());
-                    EmployeeLoginTable employeeLoginTable =EmployeeLoginTable.getInstance();
-                    if (employeeLoginTable.checkUserExists(usernameText.getText()) == true){
-                        resultLabel.setText("User Name already exists, try another one.");
-                        vbox.getChildren().add(resultLabel);
+
+            if (nameField.getText().equals("")||emailText.getText().equals("")||designationText.getText().equals("")||
+            usernameText.getText().equals("")||passwordText.getText().equals("")||confirmPassword.getText().equals("")||
+            companyKeyTF.getText().equals("")){
+                resultLabel.setText("Please fill out all the fields");
+                vbox.getChildren().add(resultLabel);
+            }else {
+                if (companyKeyTF.getText().equals(db.getCompanyKey())){
+                    if (passwordText.getText().equals(confirmPasswordText.getText())){
+                        EmployeeLogin newEmployee = new EmployeeLogin(nameField.getText(),emailText.getText(),designationText.getText(),usernameText.getText(),passwordText.getText());
+                        EmployeeLoginTable employeeLoginTable =EmployeeLoginTable.getInstance();
+                        if (employeeLoginTable.checkUserExists(usernameText.getText()) == true){
+                            resultLabel.setText("User Name already exists, try another one.");
+                            vbox.getChildren().add(resultLabel);
+                        }else {
+                            employeeLoginTable.createAccount(newEmployee);
+                            resultLabel.setText("Account Created");
+                            vbox.getChildren().add(resultLabel);
+                        }
+
                     }else {
-                        employeeLoginTable.createAccount(newEmployee);
-                        resultLabel.setText("Account Created");
+                        resultLabel.setText("Password and Confirm Password fields did not match.");
                         vbox.getChildren().add(resultLabel);
                     }
-
                 }else {
-                    resultLabel.setText("Password and Confirm Password fields did not match.");
+                    resultLabel.setText("Wrong Company Key");
                     vbox.getChildren().add(resultLabel);
                 }
-            }else {
-                resultLabel.setText("Wrong Company Key");
-                vbox.getChildren().add(resultLabel);
             }
+
+
         });
 
 
