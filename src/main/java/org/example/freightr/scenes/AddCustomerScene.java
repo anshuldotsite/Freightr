@@ -149,10 +149,8 @@ public class AddCustomerScene {
 
         Button addCompanyBtn = new Button("Add Company");
         addCompanyBtn.setOnAction(event -> {
-            Stage companyStage = new Stage();
-            Scene companyFormScene = AddCompanyScene.createAddCompanyScene(companyStage);
-            companyStage.setScene(companyFormScene);
-            companyStage.show();
+            Scene companyFormScene = AddCompanyScene.createAddCompanyScene(stage);
+            stage.setScene(companyFormScene);
         });
         addCompanyBtn.setAlignment(Pos.CENTER);
 
