@@ -20,19 +20,22 @@ public class NavigationVBox extends VBox {
         Button button3 = new Button("All Customers");
         Button button4 = new Button("All Packages");
         Button button6 = new Button("All Packages Tracking");
-
+        Button button7 = new Button("Statistics");
         Button button5 = new Button("Logout");
+
+
         Button1.setOnAction(e -> stage.setScene(AddPackageScene.createAddPackage(stage)));
         button2.setOnAction(e -> stage.setScene(TrackPackageScene.createTrackPackageScene(stage)));
         button3.setOnAction(e -> stage.setScene(DisplayCustomerScene.createDisplayCustomer(stage)));
         button4.setOnAction(e -> stage.setScene(DisplayPackageScene.createDisplayPackage(stage)));
         button5.setOnAction(e -> stage.setScene(LoginPageScene.createLoginPage(stage)));
-button6.setOnAction(e -> stage.setScene(AllPackageTrackingScene.createAllPackageTrackingScene(stage)));
+        button6.setOnAction(e -> stage.setScene(AllPackageTrackingScene.createAllPackageTrackingScene(stage)));
+        button7.setOnAction(e -> stage.setScene(StatisticsScene.createStatisticScene(stage)));
 
         this.setPadding(new Insets(20));
         this.setSpacing(15);
         this.setStyle("-fx-background-color: lightgray;");
 
-        this.getChildren().addAll(Button1, button2, button3, button4, button6,button5);
+        this.getChildren().addAll(Button1, button2, button3, button4, button6,button7,button5);
     }
 }

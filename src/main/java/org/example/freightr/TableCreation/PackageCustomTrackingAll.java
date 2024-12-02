@@ -4,6 +4,7 @@ import org.example.freightr.Database;
 import org.example.freightr.TableCreation.ObjectClasses.PackageCustomTracking;
 import org.example.freightr.TableCreation.ObjectClasses.PackageTrackAllDOA;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -49,7 +50,11 @@ public class PackageCustomTrackingAll implements PackageTrackAllDOA {
         return packageTracks;
     }
 
-
+    /**
+     * @author Kautuk Prasad
+     * @description Takes in the package object and updates it in the table
+     * @param packageCustomTracking
+     */
     @Override
     public void updatePackage(PackageCustomTracking packageCustomTracking) {
         String query = "UPDATE " + TABLE_PACKAGE_TRACKING + " SET " +
@@ -65,6 +70,28 @@ public class PackageCustomTrackingAll implements PackageTrackAllDOA {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @author Kautuk Prasad
+     * @description  This is a method to get the packages count.
+     */
+    @Override
+    public int getPackageCount(int packageTrack) {
+        int count = -1;
+        try {
+            PreparedStatement getCount = db.getConnection()
+                    .prepareStatement("SELECT * FROM " + TABLE_PACKAGE_TRACKING + " WHERE "
+                                    + TRACKING_COLUMN_STATUS + " = '" + packageTrack + "'", ResultSet.TYPE_SCROLL_SENSITIVE,
+                            ResultSet.CONCUR_UPDATABLE);
+            ResultSet data = getCount.executeQuery();
+            data.last();
+            count = data.getRow();
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 
     public static PackageCustomTrackingAll getInstance(){

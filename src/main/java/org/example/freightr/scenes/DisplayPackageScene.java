@@ -41,7 +41,7 @@ public class DisplayPackageScene {
 
         // Column for Description
         TableColumn<Package, String> column1 = new TableColumn<>("Description");
-        column.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getPackageDescription()));
+        column1.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getPackageDescription()));
 
         // Column for Sent Date
         TableColumn<Package, String> column2 = new TableColumn<>("Sent Date");
