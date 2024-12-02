@@ -147,8 +147,8 @@ public class AllPackageTrackingScene {
 
     private static int getStatusIdFromString(String status) {
         switch (status) {
-            case "In Transit": return 1;
-            case "In Warehouse": return 2;
+            case "In Warehouse": return 1;
+            case "In Transit": return 2;
             case "Delivered": return 3;
             default: return 1;
         }
