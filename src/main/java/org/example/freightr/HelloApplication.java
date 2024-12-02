@@ -17,9 +17,9 @@ public class HelloApplication extends Application {
         Scene loginScene = LoginPageScene.createLoginPage(stage);
 
         // CSS Stylesheets
-        String stylesheet = getClass().getResource("/styles.css").toExternalForm();
-        dbScene.getStylesheets().add(stylesheet);
-        loginScene.getStylesheets().add(stylesheet);
+       // String stylesheet = getClass().getResource("/styles.css").toExternalForm();
+       // dbScene.getStylesheets().add(stylesheet);
+       // loginScene.getStylesheets().add(stylesheet);
 
         File file = new File("credentials.txt");
         if (!file.exists()){
