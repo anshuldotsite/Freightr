@@ -12,4 +12,5 @@ public interface LoginDOA {
     public void updatePassword(String userName, String password);
     public boolean checkUserExists(String userName);
     public boolean signIn(String userName,String password);
+    public String getEmployeeName(String userName);
 }

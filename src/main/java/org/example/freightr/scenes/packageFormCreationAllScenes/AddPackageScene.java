@@ -9,10 +9,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.TableCreation.EmployeeLoginTable;
 import org.example.freightr.TableCreation.PackageTableCred;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.scenes.CustomLabel;
 import org.example.freightr.scenes.CustomTextField;
+import org.example.freightr.scenes.LoginPageScene;
 import org.example.freightr.scenes.NavigationVBox;
 
 import java.util.Date;
@@ -30,6 +32,15 @@ public class AddPackageScene {
 
         NavigationVBox navigationVBox = new NavigationVBox(stage);
         PackageTableCred packageTableCred = PackageTableCred.getInstance();
+        LoginPageScene loginPageScene = LoginPageScene.getInstance();
+
+
+        //welcome label
+        CustomLabel welcome = new CustomLabel("Welcome "+ loginPageScene.getEmployeeName());
+        HBox welcomeBox = new HBox();
+        welcomeBox.getChildren().add(welcome);
+        welcomeBox.setAlignment(Pos.CENTER);
+
 
         // Heading
         CustomLabel heading = new CustomLabel("Add New Package");
@@ -159,7 +170,7 @@ public class AddPackageScene {
         gridPane.setVgap(10);
         gridPane.setAlignment(Pos.CENTER);
 
-        vBox.getChildren().addAll(headingBox, gridPane, addPackageBtn, resultLabel);
+        vBox.getChildren().addAll(welcomeBox,headingBox, gridPane, addPackageBtn, resultLabel);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 

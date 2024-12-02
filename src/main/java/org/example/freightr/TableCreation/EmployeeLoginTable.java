@@ -151,6 +151,32 @@ public class EmployeeLoginTable implements LoginDOA {
         return successSignIn;
     }
 
+    /**
+     * @author Kautuk Prasad
+     * @description This takes in the username of the employee and returns the name of the employee.
+     * @return Employee Name
+     */
+    @Override
+    public String getEmployeeName(String userName) {
+        String employeeName="";
+        String query="SELECT "+  EMPLOYEE_FULL_NAME + " FROM " + TABLE_EMPLOYEE_LOGIN +
+                " WHERE " + EMPLOYEE_USER_NAME + " = '" + userName +"'";
+        try {
+            Statement getName=db.getConnection().createStatement();
+            ResultSet data = getName.executeQuery(query);
+
+            if (data.next()){
+                employeeName=data.getString(EMPLOYEE_FULL_NAME);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return employeeName;
+    }
+
+
+
     public static EmployeeLoginTable getInstance(){
         if(instance == null){
             instance = new EmployeeLoginTable();

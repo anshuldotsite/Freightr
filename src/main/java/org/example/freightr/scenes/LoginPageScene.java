@@ -12,11 +12,19 @@ import org.example.freightr.TableCreation.EmployeeLoginTable;
 import org.example.freightr.scenes.packageFormCreationAllScenes.AddPackageScene;
 import org.example.freightr.scenes.packageFormCreationAllScenes.PackageFormScene;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+
 /**
  * Sign In scene
  * @author Kautuk Prasad
  */
 public class LoginPageScene {
+    private static String userName;
+    private static String employeeName;
+    private static LoginPageScene instance;
     public static Scene createLoginPage(Stage stage) {
 
         VBox vBox = new VBox();
@@ -53,6 +61,13 @@ public class LoginPageScene {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
             boolean signIn= employeeLoginTable.signIn(usernameInput.getText(), passwordInput.getText());
             if (signIn==true){
+                try {
+                    BufferedWriter bw = new BufferedWriter(new FileWriter("EmployeeSignIn.txt"));
+                    bw.write(usernameInput.getText());
+                    bw.flush();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 Scene packageForm = AddPackageScene.createAddPackage(stage);
                 stage.setScene(packageForm);
             }else{
@@ -93,5 +108,29 @@ public class LoginPageScene {
         root.setCenter(vBox);
 
         return new Scene(root, 900, 640);
+    }
+
+    /**
+     * @author Kautuk Prasad
+     * @description This is a method to get the employee name by using the username stored in the file.
+     * @return Signed In Employee's Name
+     */
+    public String getEmployeeName(){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("employeeSignIn.txt"));
+            userName= br.readLine();
+            EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
+            employeeName=employeeLoginTable.getEmployeeName(userName);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return employeeName;
+    }
+
+    public static LoginPageScene getInstance(){
+        if (instance==null){
+            instance=new LoginPageScene();
+        }
+        return instance;
     }
 }
