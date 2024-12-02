@@ -47,9 +47,11 @@ public class RecieverSelectionScene {
         TableColumn<Customer, String> column3 = new TableColumn<>("Contact No");
         column3.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getContactNumber()));
 
+        TableColumn<Customer, String> column4 = new TableColumn<>("Address");
+        column4.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getAddress()));
 
 
-        tableView.getColumns().addAll(column1, column2, column3);
+        tableView.getColumns().addAll(column1, column2, column3,column4);
 
         ObservableList<Customer> customerList = FXCollections.observableArrayList(customerTableCreation.getAllCustomers());
         tableView.setItems(customerList);

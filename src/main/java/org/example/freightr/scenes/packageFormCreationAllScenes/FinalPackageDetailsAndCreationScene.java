@@ -1,11 +1,14 @@
 package org.example.freightr.scenes.packageFormCreationAllScenes;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerPackageReceiverTableCred;
@@ -27,33 +30,120 @@ public class FinalPackageDetailsAndCreationScene {
 
     public static Scene createConfirmationScene(Stage stage, Package packageDetails, Customer sender, Customer receiver) {
 
+
+        VBox mainBox = new VBox();
+
+        CustomLabel heading = new CustomLabel("Package Details");
+        HBox headingBox = new HBox();
+        headingBox.getChildren().add(heading);
+        headingBox.setAlignment(Pos.CENTER);
+
         // Use the custom label to display package details, sender, and receiver info
-        CustomLabel packageLabel = new CustomLabel("Package Description: " + packageDetails.getPackageDescription());
-        CustomLabel senderLabel = new CustomLabel("Sender Name: " + sender.getFirstName() + " " + sender.getLastName());
-        CustomLabel senderAddressLabel = new CustomLabel("Sender Address: " + sender.getAddress());
-        CustomLabel senderEmailLabel = new CustomLabel("Sender Email: " + sender.getEmail());
-        CustomLabel senderContactLabel = new CustomLabel("Sender Contact: " + sender.getContactNumber());
 
-        CustomLabel receiverLabel = new CustomLabel("Receiver Name: " + receiver.getFirstName() + " " + receiver.getLastName());
-        CustomLabel receiverAddressLabel = new CustomLabel("Receiver Address: " + receiver.getAddress());
-        CustomLabel receiverEmailLabel = new CustomLabel("Receiver Email: " + receiver.getEmail());
-        CustomLabel receiverContactLabel = new CustomLabel("Receiver Contact: " + receiver.getContactNumber());
 
-        CustomLabel warehouseLocation = new CustomLabel("which warehouse is the package at country loaction");
+        GridPane headingPane = new GridPane();
+
+        //package description
+        CustomLabel packageLabel = new CustomLabel("Package Description: ");
+        CustomLabel packageDescription = new CustomLabel(packageDetails.getPackageDescription());
+        headingPane.add(packageLabel,0,0);
+        headingPane.add(packageDescription,1,0);
+
+
+
+        GridPane customerPane = new GridPane();
+
+        CustomLabel senderHeading = new CustomLabel("Sender Info");
+        HBox senderBox = new HBox();
+        senderBox.getChildren().add(senderHeading);
+        senderBox.setAlignment(Pos.CENTER);
+
+
+
+        //sender details
+        CustomLabel senderLabel = new CustomLabel("Sender Name: ");
+        CustomLabel senderName = new CustomLabel(sender.getFirstName()+" "+sender.getLastName());
+        customerPane.add(senderLabel,0,0);
+        customerPane.add(senderName,1,0);
+
+
+        //sender address
+        CustomLabel senderAddressLabel = new CustomLabel("Sender Address: " );
+        CustomLabel senderAddress = new CustomLabel(sender.getAddress()+" "+sender.getCity()+
+                " "+sender.getProvince()+" "+ sender.getCountry());
+        customerPane.add(senderAddressLabel,0,1);
+        customerPane.add(senderAddress,1,1);
+
+
+        //sender email
+        CustomLabel senderEmailLabel = new CustomLabel("Sender Email: ");
+        CustomLabel senderEmail = new CustomLabel(sender.getEmail());
+        customerPane.add(senderEmailLabel,0,2);
+        customerPane.add(senderEmail,1,2);
+
+
+        //sender contact
+        CustomLabel senderContactLabel = new CustomLabel("Sender Contact: ");
+        CustomLabel senderContact = new CustomLabel(sender.getContactNumber());
+        customerPane.add(senderContactLabel,0,3);
+        customerPane.add(senderContact,1,3);
+
+        GridPane receiverPane = new GridPane();
+
+        CustomLabel receiverHeading = new CustomLabel("Receiver Info");
+        HBox receiverBox = new HBox();
+        receiverBox.getChildren().add(receiverHeading);
+        receiverBox.setAlignment(Pos.CENTER);
+
+
+        //receiver name
+        CustomLabel receiverLabel = new CustomLabel("Receiver Name: ");
+        CustomLabel receiverName = new CustomLabel(receiver.getFirstName()+" "+receiver.getLastName());
+        receiverPane.add(receiverLabel,0,0);
+        receiverPane.add(receiverName,1,0);
+
+
+        //sender address
+        CustomLabel receiverAddressLabel = new CustomLabel("Receiver Address: " );
+        CustomLabel receiverAddress = new CustomLabel(receiver.getAddress()+" "+receiver.getCity()+
+                " "+receiver.getProvince()+" "+ receiver.getCountry());
+        receiverPane.add(receiverAddressLabel,0,1);
+        receiverPane.add(receiverAddress,1,1);
+
+
+        //sender email
+        CustomLabel receiverEmailLabel = new CustomLabel("Receiver Email: ");
+        CustomLabel receiverEmail = new CustomLabel(receiver.getEmail());
+        receiverPane.add(receiverEmailLabel,0,2);
+        receiverPane.add(receiverEmail,1,2);
+
+
+        //sender contact
+        CustomLabel receiverContactLabel = new CustomLabel("Receiver Contact: ");
+        CustomLabel receiverContact = new CustomLabel(receiver.getContactNumber());
+        receiverPane.add(receiverContactLabel,0,3);
+        receiverPane.add(receiverContact,1,3);
+
+        CustomLabel warehouseLocation = new CustomLabel("Package at Warehouse In: ");
         TextField location = new TextField();
-        // Layout to display the information
-        VBox vbox = new VBox(10);
-        vbox.setPadding(new Insets(20));
-        vbox.getChildren().addAll(
-                packageLabel,
-                senderLabel, senderAddressLabel, senderEmailLabel, senderContactLabel,
-                receiverLabel, receiverAddressLabel, receiverEmailLabel, receiverContactLabel,warehouseLocation,location
-        );
+        location.setText(sender.getCity());
+
+        HBox buttonBox = new HBox();
+
+
+
 
         // Button to add the data into the database
-        Button addDataButton = new Button("Add Data to Tables");
-        addDataButton.setOnAction(e -> {
+        Button addDataButton = new Button("Create Package");
 
+        buttonBox.getChildren().addAll(warehouseLocation,addDataButton);
+        buttonBox.setSpacing(10);
+        buttonBox.setAlignment(Pos.CENTER);
+
+        CustomLabel resultLabel = new CustomLabel("");
+
+        addDataButton.setOnAction(e -> {
+            mainBox.getChildren().remove(resultLabel);
             PackageTableCred packageTableCred = PackageTableCred.getInstance();
             packageGeneratedkey = packageTableCred.addPackage(packageDetails);
             System.out.println(packageGeneratedkey);
@@ -65,12 +155,23 @@ public class FinalPackageDetailsAndCreationScene {
 
 PackageTracking packageTracking = new PackageTracking(0,packageGeneratedkey,location.getText(),1);
             PackageTrackingTable.getInstance().addPackageTracking(packageTracking);
+            resultLabel.setText("Package Created Successfully");
+            mainBox.getChildren().add(resultLabel);
 
         });
         NavigationVBox navigationVBox = new NavigationVBox(stage);
-        vbox.getChildren().add(addDataButton);
+
+        customerPane.setAlignment(Pos.CENTER);
+        receiverPane.setAlignment(Pos.CENTER);
+        receiverBox.setAlignment(Pos.CENTER);
+
+
+        mainBox.getChildren().addAll(headingBox,senderBox,customerPane,receiverBox,receiverPane,buttonBox);
+        mainBox.setSpacing(20);
+        mainBox.setAlignment(Pos.CENTER);
+
         BorderPane bp = new BorderPane();
-        bp.setCenter(vbox);
+        bp.setCenter(mainBox);
         bp.setLeft(navigationVBox);
 
         return new Scene(bp, 900, 640);
