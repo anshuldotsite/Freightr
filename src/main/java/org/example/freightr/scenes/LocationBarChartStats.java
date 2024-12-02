@@ -30,8 +30,6 @@ public class LocationBarChartStats {
 
         LocationAxis.setLabel("Location");
         NumberAxis.setLabel("Package Count");
-
-        // Create the BarChart with the axes
         barChart = new BarChart<>(LocationAxis, NumberAxis);
         barChart.setTitle("Packages by Location");
 
@@ -45,7 +43,6 @@ public class LocationBarChartStats {
         VBox buttonBox = new VBox();
         buttonBox.getChildren().addAll(refreshBtn);
         buttonBox.setAlignment(Pos.CENTER);
-
         NavigationVBox navigationVBox = new NavigationVBox(stage);
 
         BorderPane root = new BorderPane();
@@ -58,27 +55,21 @@ public class LocationBarChartStats {
 
     public void generateChart() {
         LocationTable locationTable = LocationTable.getInstance();
-
-        // Fetch the locations and package count data
         ArrayList<LocationForStats> locations = locationTable.getPackagesAtLocations();
         ObservableList<BarChart.Series<String, Number>> chartData = FXCollections.observableArrayList();
 
 
         BarChart.Series<String, Number> series = new BarChart.Series<>();
         series.setName("Package Count");
-
         for (LocationForStats location : locations) {
             int count = location.getPackageCount();
             if (count > 0) {
                 series.getData().add(new BarChart.Data<>(location.getLocation(), count));
             }
         }
-
-
         barChart.getData().clear();
         barChart.getData().add(series);
     }
-
     public static LocationBarChartStats getInstance() {
         if (instance == null) {
             instance = new LocationBarChartStats();
