@@ -232,4 +232,5 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 credentials.txt
+EmployeeSignIn.txt
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,gradle,macos,windows
