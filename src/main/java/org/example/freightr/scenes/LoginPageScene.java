@@ -27,7 +27,6 @@ public class LoginPageScene {
     private static String employeeName;
     private static LoginPageScene instance;
     public static Scene createLoginPage(Stage stage) {
-
         VBox vBox = new VBox();
 
         String companyName = Database.getInstance().getCompanyName();
@@ -101,7 +100,6 @@ public class LoginPageScene {
         buttonBox.getChildren().addAll(forgotPasswordB, createAccountB);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(5);
-
 
         vBox.getChildren().addAll(welcomeLabel,signInHeading, userBox, passwordBox, signInB, buttonBox);
         vBox.setAlignment(Pos.CENTER);

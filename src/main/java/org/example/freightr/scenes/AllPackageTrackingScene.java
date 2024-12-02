@@ -25,26 +25,31 @@ import java.util.Date;
 
 import static javafx.geometry.Pos.BOTTOM_CENTER;
 
+/**
+ * A scene to track all packages
+ */
 public class AllPackageTrackingScene {
+    // A tableview variable
     private static TableView tableView;
-
     public static Scene createAllPackageTrackingScene(Stage stage) {
+        // A BorderPane for layout
         BorderPane bp = new BorderPane();
-
+        // A singleton instance for the database
         StatusTable statusTable = StatusTable.getInstance();
 
+        // HBox for updating package
         HBox headingBox = new HBox();
         CustomLabel heading = new CustomLabel("Update Package");
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
-
+        // Comobox for tracking status
         ComboBox<StatusPOJO> statusComboBox = new ComboBox<>();
         statusComboBox.setItems(FXCollections.observableArrayList(statusTable.getAllStatus()));
         statusComboBox.getSelectionModel().select(0);
         statusComboBox.setOnAction(event -> filterTableByStatus(statusComboBox.getValue().getStatus()));
 
-
+        // A tableview object
         tableView = new TableView<>();
 
         // Define Columns
@@ -139,7 +144,6 @@ public class AllPackageTrackingScene {
         ObservableList<PackageCustomTracking> filteredData = FXCollections.observableArrayList(
                 trackingData.getAllPackageTrackingWithStatus(statusId)
         );
-
 
         tableView.setItems(filteredData);
     }

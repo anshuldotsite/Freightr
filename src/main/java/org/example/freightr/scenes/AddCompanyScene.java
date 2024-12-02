@@ -17,40 +17,43 @@ import org.example.freightr.TableCreation.ObjectClasses.Company;
  */
 public class AddCompanyScene {
     public static Scene createAddCompanyScene(Stage stage){
-
-        //Hbox for heading
+        // HBox for heading
         CustomLabel heading = new CustomLabel("Add new Company");
         HBox headingBox = new HBox();
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
-
+        // VBox and a GridPane for layout
         VBox vBox = new VBox();
         GridPane gridPane = new GridPane();
 
-        //company name
+        // Label for the company name
         CustomLabel companyNameLabel = new CustomLabel("Enter Company Name");
         CustomTextField companyNameTF = new CustomTextField();
         gridPane.add(companyNameLabel, 0, 0);
         gridPane.add(companyNameTF, 1, 0);
 
-        //contact number
+        // Label for the contact number
         CustomLabel contactLabel = new CustomLabel("Enter Contact Number");
         CustomTextField contactTF = new CustomTextField();
         gridPane.add(contactLabel, 0, 1);
         gridPane.add(contactTF, 1, 1);
 
-        //email
+        // Label for the email address
         CustomLabel emailLabel = new CustomLabel("Email");
         CustomTextField emailTF = new CustomTextField();
         gridPane.add(emailLabel, 0, 2);
         gridPane.add(emailTF, 1, 2);
 
+        // Label for displaying errors if any
         CustomLabel resultLabel = new CustomLabel("");
 
-        //add button
+        // An add button to add the company to the database
         Button addBtn = new Button("Add");
 
+        /**
+         * This event handler has conditions to check if any of the input fields are empty or not, if not a company will be added to the database
+         */
         addBtn.setOnAction(event -> {
             if (companyNameTF.getText().equals("")||contactTF.getText().equals("")||emailTF.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
@@ -63,16 +66,16 @@ public class AddCompanyScene {
                 resultLabel.setText("Company Added");
                 vBox.getChildren().add(resultLabel);
             }
-
         });
 
-
+        // Border Pane for layout
         BorderPane root = new BorderPane();
 
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setAlignment(Pos.CENTER);
 
+        // Adding all elements to the vbox and that to the root to display
         vBox.getChildren().addAll(headingBox,gridPane,addBtn);
         vBox.setSpacing(15);
         vBox.setAlignment(Pos.CENTER);
@@ -84,5 +87,4 @@ public class AddCompanyScene {
 
         return new Scene(root, 900,640);
     }
-
 }
