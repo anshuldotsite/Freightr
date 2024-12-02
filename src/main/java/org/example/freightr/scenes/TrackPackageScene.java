@@ -30,6 +30,7 @@ public class TrackPackageScene {
         StatusTable statusTable = StatusTable.getInstance();
 
         VBox vBox = new VBox();
+        GridPane gridPane = new GridPane();
 
         NavigationVBox navigationVbox = new NavigationVBox(stage);
         CustomLabel pageHeading = new CustomLabel("Track Your Package");
@@ -39,12 +40,14 @@ public class TrackPackageScene {
         Button trackButton = new Button("Track Package");
 
         trackButton.setOnAction(event -> {
+            vBox.getChildren().remove(gridPane);
+            gridPane.getChildren().clear();
             PackageTracking trackedPackage = new PackageTracking();
             trackedPackage = packageTrackingTable.getPackageTracking(Integer.parseInt(input.getText()));
 
-            GridPane gridPane = new GridPane();
+
             CustomLabel trackIDLabel = new CustomLabel("Tracking ID");
-            CustomLabel trackIDData = new CustomLabel(String.valueOf(trackedPackage.getStatusId()));
+            CustomLabel trackIDData = new CustomLabel(String.valueOf(trackedPackage.getTrackingId()));
             gridPane.add(trackIDLabel,0,0);
             gridPane.add(trackIDData,1,0);
 
@@ -59,7 +62,7 @@ public class TrackPackageScene {
             status=StatusTable.getInstance().getAllStatus();
 
             CustomLabel statusLabel = new CustomLabel("Status");
-            CustomLabel statusData = new CustomLabel(String.valueOf(find(status,trackedPackage.getTrackingId())));
+            CustomLabel statusData = new CustomLabel(String.valueOf(find(status,trackedPackage.getStatusId())));
             gridPane.add(statusLabel,0,2);
             gridPane.add(statusData,1,2);
 
@@ -73,7 +76,7 @@ public class TrackPackageScene {
         inputBox.getChildren().addAll(trackLabel, input, trackButton);
         inputBox.setSpacing(10);
         inputBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(pageHeading, inputBox);
+        vBox.getChildren().addAll(pageHeading, inputBox,gridPane);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(50);
 
