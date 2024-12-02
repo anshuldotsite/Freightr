@@ -25,6 +25,8 @@ import org.example.freightr.scenes.NavigationVBox;
 
 public class RecieverSelectionScene {
     private static Package packageDetails;
+    private static RecieverSelectionScene instance;
+    private static TableView<Customer> tableView;
     public static Scene createReceiverTableScene(Stage stage, Package packageData, Customer selectedCustomer) {
 
         packageDetails = packageData;
@@ -36,7 +38,7 @@ public class RecieverSelectionScene {
 
 
         CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
-        TableView<Customer> tableView = new TableView<>();
+        tableView = new TableView<>();
 
         TableColumn<Customer, String> column1 = new TableColumn<>("First Name");
         column1.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getFirstName()));
@@ -110,6 +112,19 @@ public class RecieverSelectionScene {
         root.setTop(headingBox);
         root.setBottom(buttonVbox);
         return new Scene(root, 900, 640);
+    }
+
+    public void refreshTable(){
+        CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
+        tableView.getItems().clear();
+        tableView.getItems().addAll(customerTableCreation.getAllCustomers());
+    }
+
+    public static RecieverSelectionScene getInstance(){
+        if (instance==null){
+            instance=new RecieverSelectionScene();
+        }
+        return instance;
     }
 }
 

@@ -14,6 +14,7 @@ import org.example.freightr.TableCreation.CompanyTableCreation;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Company;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
+import org.example.freightr.scenes.packageFormCreationAllScenes.RecieverSelectionScene;
 import org.example.freightr.scenes.packageFormCreationAllScenes.SenderSelectionScene;
 
 /**
@@ -139,6 +140,8 @@ public class AddCustomerScene {
                     customerTableCreation.addCustomerWithCompany(newCustomer);
                     resultLabel.setText("Customer Added and associated with the company");
                     vBox.getChildren().add(resultLabel);
+                    SenderSelectionScene senderSelectionScene=SenderSelectionScene.getInstance();
+                    senderSelectionScene.refreshTable();
                 }
 
             }
