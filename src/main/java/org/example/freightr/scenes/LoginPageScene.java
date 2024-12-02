@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.Database;
 import org.example.freightr.TableCreation.EmployeeLoginTable;
 import org.example.freightr.scenes.packageFormCreationAllScenes.AddPackageScene;
 import org.example.freightr.scenes.packageFormCreationAllScenes.PackageFormScene;
@@ -29,7 +30,9 @@ public class LoginPageScene {
 
         VBox vBox = new VBox();
 
-        CustomLabel welcomeLabel = new CustomLabel("Welcome, Freightr");
+        String companyName = Database.getInstance().getCompanyName();
+
+        CustomLabel welcomeLabel = new CustomLabel("Welcome, Freightr." + companyName);
 
         CustomLabel signInHeading = new CustomLabel("Employee Sign In");
 
