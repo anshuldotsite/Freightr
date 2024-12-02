@@ -102,23 +102,17 @@ public class DisplayPackageScene {
             }
         });
 
-
-
         HBox buttonBox = new HBox();
-        buttonBox.getChildren().addAll(deleteButton,viewDetailsButton);
+        buttonBox.getChildren().addAll(deleteButton, viewDetailsButton);
         buttonBox.setSpacing(10);
         buttonBox.setAlignment(Pos.CENTER);
 
         VBox vBox = new VBox();
         Label emptyLabel = new Label("");
         Label emptyLabel2 = new Label("");
-        vBox.getChildren().addAll(emptyLabel,buttonBox,emptyLabel2);
+        vBox.getChildren().addAll(emptyLabel, buttonBox, emptyLabel2);
 
         vBox.setAlignment(Pos.BASELINE_CENTER);
-
-
-
-
 
         BorderPane root = new BorderPane();
         root.setLeft(navigationVbox);
@@ -126,11 +120,8 @@ public class DisplayPackageScene {
         root.setTop(headingBox);
         root.setBottom(vBox);
 
-
-
         return new Scene(root, 900, 640);
     }
-
     /**
      * @description This method refreshes the table to display all packages
      */

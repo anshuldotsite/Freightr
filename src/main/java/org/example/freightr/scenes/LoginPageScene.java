@@ -18,7 +18,6 @@ import org.example.freightr.scenes.packageFormCreationAllScenes.PackageFormScene
  */
 public class LoginPageScene {
     public static Scene createLoginPage(Stage stage) {
-
         VBox vBox = new VBox();
 
         CustomLabel welcomeLabel = new CustomLabel("Welcome, Freightr");
@@ -83,7 +82,6 @@ public class LoginPageScene {
         buttonBox.getChildren().addAll(forgotPasswordB, createAccountB);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(5);
-
 
         vBox.getChildren().addAll(welcomeLabel,signInHeading, userBox, passwordBox, signInB, buttonBox);
         vBox.setAlignment(Pos.CENTER);

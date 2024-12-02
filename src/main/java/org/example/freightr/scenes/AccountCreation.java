@@ -18,18 +18,23 @@ import org.example.freightr.TableCreation.DOA.EmployeeLogin;
 
 import org.example.freightr.TableCreation.EmployeeLoginTable;
 
-
 public class AccountCreation {
-
+    /**
+     * A form for employee registration with input fields
+     * @param stage
+     * @return
+     */
     public static Scene AccountCreationScene(Stage stage) {
+        // Initialise database singleton
         Database db = Database.getInstance();
 
+        // HBox for heading
         HBox headingBox = new HBox();
         CustomLabel heading = new CustomLabel("Create An Account");
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
-
+        // VBox for layout
         VBox vbox = new VBox(10);
         GridPane gridPane = new GridPane();
 
@@ -41,7 +46,6 @@ public class AccountCreation {
         gridPane.add(name,0,0);
         gridPane.add(nameField,1,0);
 
-
         // Label and text field for email
         Label email = new Label("Email: ");
         TextField emailText = new TextField();
@@ -49,8 +53,6 @@ public class AccountCreation {
         email.setMinWidth(100);
         gridPane.add(email,0,1);
         gridPane.add(emailText,1,1);
-
-
 
         // Label and text field for employee designation
         Label designation = new Label("Designation: ");
@@ -60,7 +62,6 @@ public class AccountCreation {
         gridPane.add(designation,0,2);
         gridPane.add(designationText,1,2);
 
-
         // Label and text field for username
         Label username = new Label("Username: ");
         TextField usernameText = new TextField();
@@ -68,7 +69,6 @@ public class AccountCreation {
         username.setMinWidth(100);
         gridPane.add(username,0,3);
         gridPane.add(usernameText,1,3);
-
 
         // Label and text field for password
         Label password = new Label("Password: ");
@@ -78,7 +78,6 @@ public class AccountCreation {
         gridPane.add(password,0,4);
         gridPane.add(passwordText,1,4);
 
-
         // Label and text field for confirming password
         Label confirmPassword = new Label("Confirm Password: ");
         PasswordField confirmPasswordText = new PasswordField();
@@ -86,7 +85,6 @@ public class AccountCreation {
         confirmPassword.setMinWidth(100);
         gridPane.add(confirmPassword,0,5);
         gridPane.add(confirmPasswordText,1,5);
-
 
         // Label and text field for company key
         Label companyKeyLabel = new Label("Company Key: ");
@@ -96,11 +94,16 @@ public class AccountCreation {
         gridPane.add(companyKeyLabel,0,6);
         gridPane.add(companyKeyTF,1,6);
 
-
+        // Button to create account
         Button createAccount = new Button("Create Account");
         CustomLabel resultLabel = new CustomLabel("");
         resultLabel.setAlignment(Pos.CENTER);
 
+        /**
+         * This event handler validates company key, creates a new employee login object
+         * and conditions to check if a username already exists or not and creates an account if username is unique
+         * along with conditions to handle wrong passwords and handle wrong company key
+         */
         createAccount.setOnAction(e -> {
             vbox.getChildren().remove(resultLabel);
             if (companyKeyTF.getText().equals(db.getCompanyKey())){
@@ -126,29 +129,30 @@ public class AccountCreation {
             }
         });
 
-
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
 
+        // A sign in button to sign in the application
         Button signIn = new Button("Sign In");
         signIn.setOnAction(event -> {
             Scene loginPageScene = LoginPageScene.createLoginPage(stage);
             stage.setScene(loginPageScene);
         });
 
+        // HBox for layout
         HBox buttonBox = new HBox();
         buttonBox.getChildren().addAll(createAccount,signIn);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(5);
 
-
+        // BorderPane for layout
         BorderPane root = new BorderPane();
 
+        // Adding all elements to the vbox and that to the root to display
         vbox.getChildren().addAll(headingBox,gridPane,buttonBox);
         vbox.setAlignment(Pos.CENTER);
         root.setCenter(vbox);
-
 
         return new Scene(root, 900, 640);
     }
