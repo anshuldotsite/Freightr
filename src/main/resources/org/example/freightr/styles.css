@@ -18,8 +18,8 @@
 
 /* Forgot Password and Create Account buttons */
 .button-small {
-    -fx-background-color: #3498db;
-    -fx-text-fill: white;
+    -fx-background-color: #C5705D;
+    -fx-text-fill: #F8EDE3;
     -fx-border-color: transparent;
     -fx-background-radius: 5px;
     -fx-padding: 5px 10px;
