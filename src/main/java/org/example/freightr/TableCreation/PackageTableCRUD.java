@@ -4,6 +4,7 @@ import org.example.freightr.Database;
 
 import org.example.freightr.TableCreation.DOA.PackageDoa;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
+import org.example.freightr.TableCreation.ObjectClasses.PackageTracking;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -91,19 +92,24 @@ public class PackageTableCRUD implements PackageDoa {
     public void deletePackage(int packageId) {
         String query = "DELETE FROM " + TABLE_PACKAGE + " WHERE "+ PACKAGE_COLUMN_ID + " = " + packageId;
         Package deletedPackage = null;
-        try {
-            // First retrieve the package details before deletion
-            deletedPackage = getPackage(packageId);
+        // First retrieve the package details before deletion
+        deletedPackage = getPackage(packageId);
 
-            if (deletedPackage != null) {
-                // Perform the delete operation
-                try (PreparedStatement preparedStatement = db.getConnection().prepareStatement(query)) {
-                    preparedStatement.execute();
-                    System.out.println("Package deleted: " + packageId);
-                }
+        if (deletedPackage != null) {
+            // Perform the delete operation
+            try {
+                CustomerPackageReceiverCRUD customerPackageReceiverCRUD = CustomerPackageReceiverCRUD.getInstance();
+                customerPackageReceiverCRUD.deleteCustomerPackageReceiver(packageId);
+
+                PackageTrackingTable packageTrackingTable = PackageTrackingTable.getInstance();
+                packageTrackingTable.deletePackageTrack(packageId);
+
+                PreparedStatement preparedStatement = db.getConnection().prepareStatement(query);
+                preparedStatement.execute();
+                System.out.println("Package deleted: " + packageId);
+            }catch (SQLException e){
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
