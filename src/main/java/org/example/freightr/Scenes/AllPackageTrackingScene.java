@@ -134,6 +134,7 @@ public class AllPackageTrackingScene {
         bp.setLeft(navigationVBox);
         bp.setBottom(alignBox);
         bp.setTop(headingBox);
+        bp.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(bp, 900, 640);
     }

@@ -61,6 +61,7 @@ public class LocationBarChartStats {
         root.setLeft(navigationVBox);
         root.setCenter(barChart);
         root.setBottom(buttonBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }

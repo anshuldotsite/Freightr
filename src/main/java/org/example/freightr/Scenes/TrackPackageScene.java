@@ -89,6 +89,7 @@ public class TrackPackageScene {
         BorderPane root = new BorderPane();
         root.setLeft(navigationVbox);
         root.setCenter(vBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }
