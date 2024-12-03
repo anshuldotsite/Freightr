@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * @description Data Access Object interface for CustomerPackageReceiver table operations
  */
-public interface CustomerPackageRecieverDOA {
+public interface CustomerPackageReceiverDOA {
 
 
     void addCustomerPackageReceiver(CustomerPackageReceiver customerPackageReceiver);

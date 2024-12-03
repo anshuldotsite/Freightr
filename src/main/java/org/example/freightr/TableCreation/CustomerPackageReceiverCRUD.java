@@ -1,12 +1,11 @@
 package org.example.freightr.TableCreation;
 
 import org.example.freightr.Database;
-import org.example.freightr.TableCreation.DOA.CustomerPackageRecieverDOA;
+import org.example.freightr.TableCreation.DOA.CustomerPackageReceiverDOA;
 import org.example.freightr.TableCreation.ObjectClasses.CustomerPackageReceiver;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.example.freightr.TableCreation.Dbconst.*;
 
@@ -14,11 +13,11 @@ import static org.example.freightr.TableCreation.Dbconst.*;
  * @author kohinoor jeet singh
  * @description Implementation for CustomerPackageReceiver table operations
  */
-public class CustomerPackageReceiverTableCred implements CustomerPackageRecieverDOA {
-    private static CustomerPackageReceiverTableCred instance;
+public class CustomerPackageReceiverCRUD implements CustomerPackageReceiverDOA {
+    private static CustomerPackageReceiverCRUD instance;
     private final Database db = Database.getInstance();
 
-    private CustomerPackageReceiverTableCred() { }
+    private CustomerPackageReceiverCRUD() { }
 
 
     @Override
@@ -134,9 +133,9 @@ public class CustomerPackageReceiverTableCred implements CustomerPackageReciever
     }
 
 
-    public static CustomerPackageReceiverTableCred getInstance() {
+    public static CustomerPackageReceiverCRUD getInstance() {
         if (instance == null) {
-            instance = new CustomerPackageReceiverTableCred();
+            instance = new CustomerPackageReceiverCRUD();
         }
         return instance;
     }

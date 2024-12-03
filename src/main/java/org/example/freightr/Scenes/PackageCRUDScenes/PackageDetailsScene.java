@@ -1,4 +1,4 @@
-package org.example.freightr.scenes.packageFormCreationAllScenes;
+package org.example.freightr.Scenes.PackageCRUDScenes;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,16 +9,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CompanyTableCreation;
-import org.example.freightr.TableCreation.CustomerPackageReceiverTableCred;
+import org.example.freightr.TableCreation.CustomerPackageReceiverCRUD;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Company;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
-import org.example.freightr.scenes.NavigationVBox;
+import org.example.freightr.Scenes.NavigationVBox;
 
 /**
  * This class shows the details of both the sender and the receiver of the package
  */
-public class ShowSenderReciverDetailsScene {
+public class PackageDetailsScene {
 
     public static Scene CreateSenderReciverDetailsPage(int PackageId, Stage stage) {
         // BorderPane for layout
@@ -29,9 +29,9 @@ public class ShowSenderReciverDetailsScene {
         bp.setLeft(navigationVBox);
 
         // Fetching sender and receiver details
-        CustomerPackageReceiverTableCred customerPackageReceiverTableCred = CustomerPackageReceiverTableCred.getInstance();
-        int senderId = customerPackageReceiverTableCred.getCustomerIdByPackageId(PackageId);
-        int receiverId = customerPackageReceiverTableCred.getReciverIdByPackageId(PackageId);
+        CustomerPackageReceiverCRUD customerPackageReceiverCRUD = CustomerPackageReceiverCRUD.getInstance();
+        int senderId = customerPackageReceiverCRUD.getCustomerIdByPackageId(PackageId);
+        int receiverId = customerPackageReceiverCRUD.getReciverIdByPackageId(PackageId);
 
         // Fetch customer details
         CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();

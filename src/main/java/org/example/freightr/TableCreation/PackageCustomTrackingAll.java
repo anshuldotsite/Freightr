@@ -2,7 +2,7 @@ package org.example.freightr.TableCreation;
 
 import org.example.freightr.Database;
 import org.example.freightr.TableCreation.ObjectClasses.PackageCustomTracking;
-import org.example.freightr.TableCreation.ObjectClasses.PackageTrackAllDOA;
+import org.example.freightr.TableCreation.DOA.PackageTrackAllDOA;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

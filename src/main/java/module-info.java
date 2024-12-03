@@ -6,8 +6,8 @@ module org.example.freightr {
 
     opens org.example.freightr to javafx.fxml;
     exports org.example.freightr;
-    exports org.example.freightr.scenes;
-    opens org.example.freightr.scenes to javafx.fxml;
-    exports org.example.freightr.scenes.packageFormCreationAllScenes;
-    opens org.example.freightr.scenes.packageFormCreationAllScenes to javafx.fxml;
+    exports org.example.freightr.Scenes;
+    opens org.example.freightr.Scenes to javafx.fxml;
+    exports org.example.freightr.Scenes.PackageCRUDScenes;
+    opens org.example.freightr.Scenes.PackageCRUDScenes to javafx.fxml;
 }

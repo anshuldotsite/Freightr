@@ -1,4 +1,4 @@
-package org.example.freightr.scenes;
+package org.example.freightr.Scenes;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -13,10 +13,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.PackageTableCred;
+import org.example.freightr.TableCreation.PackageTableCRUD;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
-import org.example.freightr.scenes.packageFormCreationAllScenes.AddPackageScene;
-import org.example.freightr.scenes.packageFormCreationAllScenes.ShowSenderReciverDetailsScene;
+import org.example.freightr.Scenes.PackageCRUDScenes.PackageDetailsScene;
 
 import java.text.SimpleDateFormat;
 
@@ -28,7 +27,7 @@ public class DisplayPackageScene {
     private static TableView tableView;
 
     public static Scene createDisplayPackage(Stage stage) {
-        PackageTableCred packageTable = PackageTableCred.getInstance();
+        PackageTableCRUD packageTable = PackageTableCRUD.getInstance();
 
         // HBox for heading
         HBox headingBox = new HBox();
@@ -92,7 +91,7 @@ public class DisplayPackageScene {
             Package selectedPackage = (Package) tableView.getSelectionModel().getSelectedItem();
             if (selectedPackage != null) {
                 int packageId = selectedPackage.getPackageId();
-                Scene detailsScene = ShowSenderReciverDetailsScene.CreateSenderReciverDetailsPage(packageId, stage);
+                Scene detailsScene = PackageDetailsScene.CreateSenderReciverDetailsPage(packageId, stage);
                 stage.setScene(detailsScene);
             }
         });
@@ -138,9 +137,9 @@ public class DisplayPackageScene {
      * @description This method refreshes the table to display all packages
      */
     public void refreshTable() {
-        PackageTableCred packageTableCred = PackageTableCred.getInstance();
+        PackageTableCRUD packageTableCRUD = PackageTableCRUD.getInstance();
         tableView.getItems().clear();
-        tableView.getItems().addAll(packageTableCred.getAllPackages());
+        tableView.getItems().addAll(packageTableCRUD.getAllPackages());
     }
 
     /**

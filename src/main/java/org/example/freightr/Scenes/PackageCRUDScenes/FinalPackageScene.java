@@ -1,9 +1,7 @@
-package org.example.freightr.scenes.packageFormCreationAllScenes;
+package org.example.freightr.Scenes.PackageCRUDScenes;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -11,19 +9,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.CustomerPackageReceiverTableCred;
-import org.example.freightr.TableCreation.CustomerTableCreation;
+import org.example.freightr.TableCreation.CustomerPackageReceiverCRUD;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.CustomerPackageReceiver;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 
 import org.example.freightr.TableCreation.ObjectClasses.PackageTracking;
-import org.example.freightr.TableCreation.PackageTableCred;
+import org.example.freightr.TableCreation.PackageTableCRUD;
 import org.example.freightr.TableCreation.PackageTrackingTable;
-import org.example.freightr.scenes.CustomLabel;
-import org.example.freightr.scenes.NavigationVBox;
+import org.example.freightr.Scenes.CustomLabel;
+import org.example.freightr.Scenes.NavigationVBox;
 
-public class FinalPackageDetailsAndCreationScene {
+public class FinalPackageScene {
     // Member Variables
     private static int packageGeneratedkey;
     private static int senderSelectedkey;
@@ -158,14 +155,14 @@ public class FinalPackageDetailsAndCreationScene {
          */
         addDataButton.setOnAction(e -> {
             mainBox.getChildren().remove(resultLabel);
-            PackageTableCred packageTableCred = PackageTableCred.getInstance();
-            packageGeneratedkey = packageTableCred.addPackage(packageDetails);
+            PackageTableCRUD packageTableCRUD = PackageTableCRUD.getInstance();
+            packageGeneratedkey = packageTableCRUD.addPackage(packageDetails);
             System.out.println(packageGeneratedkey);
             senderSelectedkey = sender.getCustomerId();
             reciverSelectedkey = receiver.getCustomerId();
 
             CustomerPackageReceiver NewPackageConnection = new CustomerPackageReceiver(senderSelectedkey, packageGeneratedkey, reciverSelectedkey);
-            CustomerPackageReceiverTableCred.getInstance().addCustomerPackageReceiver(NewPackageConnection);
+            CustomerPackageReceiverCRUD.getInstance().addCustomerPackageReceiver(NewPackageConnection);
 
 PackageTracking packageTracking = new PackageTracking(0,packageGeneratedkey,location.getText(),1);
             PackageTrackingTable.getInstance().addPackageTracking(packageTracking);

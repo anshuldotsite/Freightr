@@ -1,4 +1,4 @@
-package org.example.freightr.scenes;
+package org.example.freightr.Scenes;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,10 +8,8 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.ObjectClasses.PackageCustomTracking;
 import org.example.freightr.TableCreation.ObjectClasses.StatusPOJO;
 import org.example.freightr.TableCreation.PackageCustomTrackingAll;
 import org.example.freightr.TableCreation.StatusTable;

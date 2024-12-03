@@ -17,9 +17,9 @@ import static org.example.freightr.TableCreation.Dbconst.*;
 /**
  * This class has CRUD operations for package table
  */
-public class PackageTableCred implements PackageDoa {
-    private static PackageTableCred instance;
-    private PackageTableCred(){
+public class PackageTableCRUD implements PackageDoa {
+    private static PackageTableCRUD instance;
+    private PackageTableCRUD(){
         db= Database.getInstance();
     }
     Database db = Database.getInstance();
@@ -153,9 +153,9 @@ public class PackageTableCred implements PackageDoa {
      * @author Kautuk Prasad
      * @return Single Table Instance
      */
-    public static PackageTableCred getInstance(){
+    public static PackageTableCRUD getInstance(){
         if(instance == null){
-            instance = new PackageTableCred();
+            instance = new PackageTableCRUD();
         }
         return instance;
     }

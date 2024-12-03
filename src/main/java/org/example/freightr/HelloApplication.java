@@ -3,8 +3,7 @@ package org.example.freightr;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.example.freightr.scenes.ForgotPasswordScene;
-import org.example.freightr.scenes.LoginPageScene;
+import org.example.freightr.Scenes.LoginPageScene;
 
 import java.io.File;
 import java.io.IOException;

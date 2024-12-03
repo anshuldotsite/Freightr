@@ -1,4 +1,4 @@
-package org.example.freightr.scenes;
+package org.example.freightr.Scenes;
 
 
 import javafx.geometry.Pos;
@@ -13,13 +13,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.Database;
 import org.example.freightr.TableCreation.EmployeeLoginTable;
-import org.example.freightr.scenes.packageFormCreationAllScenes.AddPackageScene;
+import org.example.freightr.Scenes.PackageCRUDScenes.AddPackageScene;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.Objects;
 
 /**
  * A sign in scene for the user to sign in

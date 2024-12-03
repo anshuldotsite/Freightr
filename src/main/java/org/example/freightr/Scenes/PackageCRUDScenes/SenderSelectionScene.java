@@ -1,4 +1,4 @@
-package org.example.freightr.scenes.packageFormCreationAllScenes;
+package org.example.freightr.Scenes.PackageCRUDScenes;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -18,9 +18,9 @@ import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
-import org.example.freightr.scenes.AddCustomerScene;
-import org.example.freightr.scenes.CustomLabel;
-import org.example.freightr.scenes.NavigationVBox;
+import org.example.freightr.Scenes.AddCustomerScene;
+import org.example.freightr.Scenes.CustomLabel;
+import org.example.freightr.Scenes.NavigationVBox;
 
 /**
  * @description This class allows the user to select the sender of the package and displays the table of customers and allows the user to choose as the sender
@@ -78,7 +78,7 @@ public class SenderSelectionScene {
             Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
             if (selectedCustomer != null) {
                 System.out.println("Selected Customer: " + selectedCustomer.getFirstName() + " " + selectedCustomer.getLastName());
-                stage.setScene(  RecieverSelectionScene.createReceiverTableScene(stage, packageDetails, selectedCustomer));
+                stage.setScene(  ReceiverSelectionScene.createReceiverTableScene(stage, packageDetails, selectedCustomer));
             } else {
                 System.out.println("No customer selected! Please select a customer.");
             }

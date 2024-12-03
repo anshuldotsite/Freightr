@@ -1,11 +1,10 @@
-package org.example.freightr.scenes.packageFormCreationAllScenes;
+package org.example.freightr.Scenes.PackageCRUDScenes;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,18 +18,18 @@ import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
-import org.example.freightr.scenes.AddCustomerScene;
-import org.example.freightr.scenes.CustomLabel;
-import org.example.freightr.scenes.NavigationVBox;
+import org.example.freightr.Scenes.AddCustomerScene;
+import org.example.freightr.Scenes.CustomLabel;
+import org.example.freightr.Scenes.NavigationVBox;
 
 /**
  * This class allows the user to select a receiver for the package created
  * and displays a table of customers from the database and allows the user
  * to choose the receiver
  */
-public class RecieverSelectionScene {
+public class ReceiverSelectionScene {
     private static Package packageDetails;
-    private static RecieverSelectionScene instance;
+    private static ReceiverSelectionScene instance;
     private static TableView<Customer> tableView;
     public static Scene createReceiverTableScene(Stage stage, Package packageData, Customer selectedCustomer) {
         // Set package details for the scene
@@ -89,7 +88,7 @@ public class RecieverSelectionScene {
         selectReceiverBtn.setOnAction(e -> {
             Customer selectedReceiver = tableView.getSelectionModel().getSelectedItem();
             if (selectedReceiver != null) {
-                stage.setScene(FinalPackageDetailsAndCreationScene.createConfirmationScene(stage,packageDetails,selectedCustomer,selectedReceiver));
+                stage.setScene(FinalPackageScene.createConfirmationScene(stage,packageDetails,selectedCustomer,selectedReceiver));
                 System.out.println("Package Details: " + packageDetails);
                 System.out.println("Customer Details: " + selectedCustomer);
                 System.out.println("Receiver Details: " + selectedReceiver);
@@ -138,9 +137,9 @@ public class RecieverSelectionScene {
 
 
     // Singleton instance
-    public static RecieverSelectionScene getInstance(){
+    public static ReceiverSelectionScene getInstance(){
         if (instance==null){
-            instance=new RecieverSelectionScene();
+            instance=new ReceiverSelectionScene();
         }
         return instance;
     }

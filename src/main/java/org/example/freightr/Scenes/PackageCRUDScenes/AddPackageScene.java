@@ -1,4 +1,4 @@
-package org.example.freightr.scenes.packageFormCreationAllScenes;
+package org.example.freightr.Scenes.PackageCRUDScenes;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,13 +9,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.EmployeeLoginTable;
-import org.example.freightr.TableCreation.PackageTableCred;
+import org.example.freightr.TableCreation.PackageTableCRUD;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
-import org.example.freightr.scenes.CustomLabel;
-import org.example.freightr.scenes.CustomTextField;
-import org.example.freightr.scenes.LoginPageScene;
-import org.example.freightr.scenes.NavigationVBox;
+import org.example.freightr.Scenes.CustomLabel;
+import org.example.freightr.Scenes.CustomTextField;
+import org.example.freightr.Scenes.LoginPageScene;
+import org.example.freightr.Scenes.NavigationVBox;
 
 import java.util.Date;
 
@@ -32,7 +31,7 @@ public class AddPackageScene {
 
         // NavigationVBox for navigating to different scenes
         NavigationVBox navigationVBox = new NavigationVBox(stage);
-        PackageTableCred packageTableCred = PackageTableCred.getInstance();
+        PackageTableCRUD packageTableCRUD = PackageTableCRUD.getInstance();
         LoginPageScene loginPageScene = LoginPageScene.getInstance();
 
         // Label to welcome employees to the application

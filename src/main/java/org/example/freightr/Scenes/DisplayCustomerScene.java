@@ -1,4 +1,4 @@
-package org.example.freightr.scenes;
+package org.example.freightr.Scenes;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -15,10 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
-import org.example.freightr.TableCreation.ObjectClasses.DisplayCustomerPOJO;
-import org.example.freightr.TableCreation.ObjectClasses.StatusPOJO;
-
-import java.util.ArrayList;
 
 /**
  * @author Kautuk Prasad

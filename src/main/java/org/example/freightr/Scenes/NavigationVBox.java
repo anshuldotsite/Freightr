@@ -1,12 +1,10 @@
-package org.example.freightr.scenes;
+package org.example.freightr.Scenes;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.ObjectClasses.PackageCustomTracking;
-import org.example.freightr.scenes.packageFormCreationAllScenes.AddPackageScene;
-import org.example.freightr.scenes.packageFormCreationAllScenes.PackageFormScene;
+import org.example.freightr.Scenes.PackageCRUDScenes.AddPackageScene;
 
 /**
  * @description This class has a navigation vbox has a vbox for navigation between

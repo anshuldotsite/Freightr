@@ -1,6 +1,5 @@
-package org.example.freightr.scenes;
+package org.example.freightr.Scenes;
 
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 
 public class CustomLabel extends Label {

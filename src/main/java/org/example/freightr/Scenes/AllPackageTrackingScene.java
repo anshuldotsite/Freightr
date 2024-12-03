@@ -1,4 +1,4 @@
-package org.example.freightr.scenes;
+package org.example.freightr.Scenes;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -12,18 +12,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.ObjectClasses.Customer;
-import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.TableCreation.ObjectClasses.StatusPOJO;
 import org.example.freightr.TableCreation.PackageCustomTrackingAll;
 import org.example.freightr.TableCreation.ObjectClasses.PackageCustomTracking;
 import org.example.freightr.TableCreation.StatusTable;
-import org.example.freightr.scenes.packageFormCreationAllScenes.ShowSenderReciverDetailsScene;
+import org.example.freightr.Scenes.PackageCRUDScenes.PackageDetailsScene;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static javafx.geometry.Pos.BOTTOM_CENTER;
 
 /**
  * @description A scene to track all packages
@@ -118,7 +114,7 @@ public class AllPackageTrackingScene {
             PackageCustomTracking trackingData1 = (PackageCustomTracking) tableView.getSelectionModel().getSelectedItem();
             if (trackingData1 != null) {
                 int packageId = trackingData1.getPackageId();
-                Scene detailsScene = ShowSenderReciverDetailsScene.CreateSenderReciverDetailsPage(packageId, stage);
+                Scene detailsScene = PackageDetailsScene.CreateSenderReciverDetailsPage(packageId, stage);
                 stage.setScene(detailsScene);
             }
         });
