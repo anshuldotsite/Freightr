@@ -41,7 +41,7 @@ public class LoginPageScene {
         String companyName = Database.getInstance().getCompanyName();
 
         // Welcome label
-        CustomLabel welcomeLabel = new CustomLabel("Freightr " + companyName);
+        CustomLabel welcomeLabel = new CustomLabel(companyName + ".Freightr");
 
         // Sign in label
         CustomLabel signInHeading = new CustomLabel("Employee Sign In");
