@@ -112,6 +112,7 @@ public class UpdatePackageStatus {
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
         root.setLeft(navigationVBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }

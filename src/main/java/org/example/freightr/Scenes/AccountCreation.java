@@ -161,6 +161,7 @@ public class AccountCreation {
         vbox.getChildren().addAll(headingBox,gridPane,buttonBox);
         vbox.setAlignment(Pos.CENTER);
         root.setCenter(vbox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }

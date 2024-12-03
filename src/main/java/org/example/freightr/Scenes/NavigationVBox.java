@@ -1,6 +1,7 @@
 package org.example.freightr.Scenes;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -14,6 +15,13 @@ public class NavigationVBox extends VBox {
     private Stage stage;
     public NavigationVBox(Stage stage) {
         this.stage = stage;
+
+        //Getting employee's name
+        LoginPageScene loginPageScene = LoginPageScene.getInstance();
+        String employeeName = loginPageScene.getEmployeeName();
+
+        //Signed in Employee's Name
+        CustomLabel employeeLabel = new CustomLabel(employeeName);
 
         // Button for create new package
         Button Button1 = new Button("Create New Package");
@@ -50,6 +58,8 @@ public class NavigationVBox extends VBox {
         this.setStyle("-fx-background-color: lightgray;");
 
         // Add all buttons to the vbox
-        this.getChildren().addAll(Button1, button2, button3, button4, button6,button7,button8,button9,button5);
+
+        this.getChildren().addAll(employeeLabel,Button1, button2, button3, button4, button6,button7,button8,button9,button5);
+
     }
 }

@@ -84,6 +84,7 @@ public class PackageDetailsScene {
 
         // Adding the GridPane to the BorderPane
         bp.setCenter(gridPane);
+        bp.setStyle("-fx-background-color: #F8EDE3");
 
 
 

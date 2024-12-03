@@ -34,11 +34,6 @@ public class AddPackageScene {
         PackageTableCRUD packageTableCRUD = PackageTableCRUD.getInstance();
         LoginPageScene loginPageScene = LoginPageScene.getInstance();
 
-        // Label to welcome employees to the application
-        CustomLabel welcome = new CustomLabel("Welcome "+ loginPageScene.getEmployeeName());
-        HBox welcomeBox = new HBox();
-        welcomeBox.getChildren().add(welcome);
-        welcomeBox.setAlignment(Pos.CENTER);
 
         // Heading Label
         CustomLabel heading = new CustomLabel("Add New Package");
@@ -169,7 +164,7 @@ public class AddPackageScene {
         gridPane.setAlignment(Pos.CENTER);
 
         // Adding all elements to the VBox
-        vBox.getChildren().addAll(welcomeBox,headingBox, gridPane, addPackageBtn, resultLabel);
+        vBox.getChildren().addAll(headingBox, gridPane, addPackageBtn, resultLabel);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
@@ -177,6 +172,7 @@ public class AddPackageScene {
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
         root.setLeft(navigationVBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }

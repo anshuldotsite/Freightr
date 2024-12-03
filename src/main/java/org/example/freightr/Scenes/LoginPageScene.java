@@ -63,7 +63,7 @@ public class LoginPageScene {
         userBox.setAlignment(Pos.CENTER);
         userBox.setSpacing(12);
         userLabel.setStyle("-fx-text-fill: #C5705D; -fx-font-weight: bold; -fx-font-size: 20px");
-        usernameInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #C5705D; -fx-font-size: 14px; -fx-font-weight: bold");
+        usernameInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000; -fx-font-size: 14px; -fx-font-weight: bold");
 
         // HBox for password
         HBox passwordBox = new HBox();
@@ -73,7 +73,7 @@ public class LoginPageScene {
         passwordBox.setAlignment(Pos.CENTER);
         passwordBox.setSpacing(13);
         passwordLabel.setStyle("-fx-text-fill: #C5705D; -fx-font-weight: bold; -fx-font-size: 20px");
-        passwordInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #C5705D;  -fx-font-size: 14px;");
+        passwordInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000;  -fx-font-size: 14px;");
 
         // Sign-in button
         Button signInB = new Button("Sign In");
