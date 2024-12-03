@@ -4,6 +4,7 @@ import org.example.freightr.Database;
 import org.example.freightr.TableCreation.DOA.PackageTrackDOA;
 import org.example.freightr.TableCreation.ObjectClasses.PackageTracking;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -107,6 +108,23 @@ public class PackageTrackingTable implements PackageTrackDOA {
             e.printStackTrace();
         }
     }
+
+    /**
+     * @author Kautuk Prasad
+     * @description This methods takes in the tracking ID and deletes it from table.
+     * @param packageID
+     */
+    @Override
+    public void deletePackageTrack(int packageID) {
+        String query = "DELETE FROM " + TABLE_PACKAGE_TRACKING + " WHERE "+ TRACKING_COLUMN_PACKAGE_ID + " = " + packageID;
+
+        try {
+            db.getConnection().createStatement().execute(query);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
     public static PackageTrackingTable getInstance() {
         if (instance == null) {
             instance = new PackageTrackingTable();

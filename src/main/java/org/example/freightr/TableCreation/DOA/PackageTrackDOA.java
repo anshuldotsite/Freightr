@@ -14,4 +14,5 @@ public interface PackageTrackDOA {
     public ArrayList<PackageTracking> getAllPackageTrackingWithStatus(int StatusID);
     public ArrayList<PackageTracking> getAllPackageTracking();
     public void updatePackageTracking(PackageTracking packageTracking);
+    public void deletePackageTrack(int packageID);
 }
