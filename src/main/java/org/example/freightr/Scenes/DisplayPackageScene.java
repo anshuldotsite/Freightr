@@ -75,7 +75,7 @@ public class DisplayPackageScene {
         NavigationVBox navigationVbox = new NavigationVBox(stage);
 
         // Button to delete package and event handler to delete packages
-        Button deleteButton = new Button("Delete Package");
+        CustomButton deleteButton = new CustomButton("Delete Package");
         deleteButton.setDisable(true);
         deleteButton.setOnAction(event -> {
             Package deletePackage = (Package) tableView.getSelectionModel().getSelectedItem();
@@ -85,7 +85,7 @@ public class DisplayPackageScene {
         });
 
         // Button to view details of the package
-        Button viewDetailsButton = new Button("View Details");
+        CustomButton viewDetailsButton = new CustomButton("View Details");
         viewDetailsButton.setDisable(true);
         viewDetailsButton.setOnAction(event -> {
             Package selectedPackage = (Package) tableView.getSelectionModel().getSelectedItem();

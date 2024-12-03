@@ -82,8 +82,8 @@ public class DisplayCustomerScene {
         NavigationVBox navigationVbox = new NavigationVBox(stage);
 
         // Buttons for add and delete customer
-        Button addButton = new Button("Add Customer");
-        Button updateButton = new Button("Update Customer");
+        CustomButton addButton = new CustomButton("Add Customer");
+        CustomButton updateButton = new CustomButton("Update Customer");
 
         // VBox for buttons
         VBox buttonVBox = new VBox();

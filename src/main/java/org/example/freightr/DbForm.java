@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.Scenes.CustomButton;
 import org.example.freightr.Scenes.LoginPageScene;
 
 import java.io.*;
@@ -79,15 +80,13 @@ public class DbForm {
         companyKeyInput.setStyle("-fx-text-fill: #3498db;");
 
         //test connection button
-        Button testButton = new Button("Test Connection");
+        CustomButton testButton = new CustomButton("Test Connection");
         testButton.setMinWidth(35);
-        testButton.setStyle("  -fx-background-color: #3498db; -fx-text-fill: white;  -fx-padding: 10px 20px;       -fx-font-size: 16px; -fx-background-radius: 5px;  -fx-cursor: hand;");
 
         //next page button
-        Button nextButton = new Button("Next");
+        CustomButton nextButton = new CustomButton("Next");
         nextButton.setMinWidth(35);
         nextButton.setDisable(true);
-        nextButton.setStyle("  -fx-background-color: #3498db; -fx-text-fill: white;  -fx-padding: 10px 20px;       -fx-font-size: 16px; -fx-background-radius: 5px;  -fx-cursor: hand;");
 
         //button box
         HBox buttonBox = new HBox();

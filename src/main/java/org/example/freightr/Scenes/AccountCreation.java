@@ -94,7 +94,7 @@ public class AccountCreation {
         gridPane.add(companyKeyTF,1,6);
 
         // Button to create account
-        Button createAccount = new Button("Create Account");
+        CustomButton createAccount = new CustomButton("Create Account");
         CustomLabel resultLabel = new CustomLabel("");
         resultLabel.setAlignment(Pos.CENTER);
 
@@ -142,7 +142,7 @@ public class AccountCreation {
         gridPane.setVgap(10);
 
         // A sign in button to sign in the application
-        Button signIn = new Button("Sign In");
+        CustomButton signIn = new CustomButton("Sign In");
         signIn.setOnAction(event -> {
             Scene loginPageScene = LoginPageScene.createLoginPage(stage);
             stage.setScene(loginPageScene);

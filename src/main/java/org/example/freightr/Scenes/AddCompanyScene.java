@@ -49,7 +49,7 @@ public class AddCompanyScene {
         CustomLabel resultLabel = new CustomLabel("");
 
         // An add button to add the company to the database
-        Button addBtn = new Button("Add");
+        CustomButton addBtn = new CustomButton("Add");
 
         /**
          * This event handler has conditions to check if any of the input fields are empty or not, if not a company will be added to the database

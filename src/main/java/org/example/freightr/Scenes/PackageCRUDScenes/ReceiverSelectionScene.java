@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.Scenes.CustomButton;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
@@ -66,7 +67,7 @@ public class ReceiverSelectionScene {
         tableView.setItems(customerList);
 
         // Button to select a receiver
-        Button selectReceiverBtn = new Button("Select Receiver");
+        CustomButton selectReceiverBtn = new CustomButton("Select Receiver");
         selectReceiverBtn.setDisable(true);
 
         // A listener to enable the select button when any row is selected by the user
@@ -96,7 +97,7 @@ public class ReceiverSelectionScene {
         });
 
         // Button to create a new receiver
-        Button createReceiver = new Button("Create a new receiver");
+        CustomButton createReceiver = new CustomButton("Create a new receiver");
         createReceiver.setOnAction(e->{
             Stage newStage = new Stage();
             Scene addCustomerScene = AddCustomerScene.createAddCustomer(newStage);

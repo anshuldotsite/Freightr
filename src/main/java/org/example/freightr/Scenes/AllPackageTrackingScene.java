@@ -78,8 +78,8 @@ public class AllPackageTrackingScene {
         HBox buttonBox = new HBox();
 
         // Buttons for updating and viewing
-        Button viewDetailsButton = new Button("View Details");
-        Button updateButton = new Button("Update");
+        CustomButton viewDetailsButton = new CustomButton("View Details");
+        CustomButton updateButton = new CustomButton("Update");
         updateButton.setDisable(true);
         Label emptyLabel = new Label("");
         Label emptyLabel2 = new Label("");
