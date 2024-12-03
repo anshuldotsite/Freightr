@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -16,17 +17,19 @@ import org.example.freightr.TableCreation.EmployeeLoginTable;
  * @description A forgot password scene for users to reset their passwords
  * @author Kautuk Prasad
  */
-public class ForgotPasswordScene {
-    public static Scene createForgotPasswordScene(Stage stage){
+public class ForgotPasswordScene  {
+    public static Scene createForgotPasswordScene(Stage stage) {
         // Initialise database singleton
         Database db = Database.getInstance();
 
         // Vbox for layout
         VBox vBox = new VBox();
+        vBox.setStyle("-fx-spacing: 10px;");
 
         // Forgot password for label
-        Label headingForgot = new Label("Forgot password? No Problem!");
+        Label headingForgot = new Label("Forgot your password? No Problem!");
         headingForgot.setAlignment(Pos.CENTER);
+        headingForgot.setStyle("-fx-font-size: 18px;-fx-font-weight: bold; -fx-text-fill: #7f8c8d; -fx-min-width: 75px;");
 
         // HBox for username
         HBox userNameBox = new HBox();
@@ -34,8 +37,6 @@ public class ForgotPasswordScene {
         // Username Label
         CustomLabel userNameLabel = new CustomLabel("Enter your username");
         CustomTextField userNameInput = new CustomTextField();
-        userNameLabel.setMinWidth(75);
-        userNameInput.setMinWidth(100);
         userNameBox.getChildren().addAll(userNameLabel, userNameInput);
         userNameBox.setAlignment(Pos.CENTER);
         userNameBox.setSpacing(10);
@@ -45,21 +46,18 @@ public class ForgotPasswordScene {
 
         // Password Label
         CustomLabel passwordLabel = new CustomLabel("Enter new password");
-        CustomTextField passwordInput = new CustomTextField();
-        passwordLabel.setMinWidth(75);
-        passwordInput.setMinWidth(100);
+        PasswordField passwordInput = new PasswordField();
         passwordBox.getChildren().addAll(passwordLabel, passwordInput);
         passwordBox.setAlignment(Pos.CENTER);
         passwordBox.setSpacing(10);
+
 
         // Hbox for confirm password
         HBox confirmPasswordBox = new HBox();
 
         // Confirm Password Label
         CustomLabel confirmPassLabel = new CustomLabel("Confirm Password");
-        CustomTextField confirmPasswordIn = new CustomTextField();
-        confirmPassLabel.setMinWidth(75);
-        confirmPasswordIn.setMinWidth(100);
+        PasswordField confirmPasswordIn = new PasswordField();
         confirmPasswordBox.getChildren().addAll(confirmPassLabel, confirmPasswordIn);
         confirmPasswordBox.setAlignment(Pos.CENTER);
         confirmPasswordBox.setSpacing(10);
@@ -70,32 +68,35 @@ public class ForgotPasswordScene {
         // Label for company key
         CustomLabel companyKeyLabel = new CustomLabel("Enter Company Key");
         CustomTextField companyKeyIn = new CustomTextField();
-        companyKeyLabel.setMinWidth(75);
-        companyKeyIn.setMinWidth(100);
         companyKeyBox.getChildren().addAll(companyKeyLabel, companyKeyIn);
         companyKeyBox.setAlignment(Pos.CENTER);
         companyKeyBox.setSpacing(10);
 
         // Update password button
         Button updatePassB = new Button("Update Password");
+        updatePassB.setStyle("-fx-background-color: #3498db; -fx-text-fill: white;-fx-border-color: transparent; -fx-background-radius: 5px; -fx-padding: 5px 10px;-fx-font-size: 14px;");
+
         /**
          * This event handler checks for conditions to update the user's password with errors if they passwords not match and you enter the wrong company key
          */
         updatePassB.setOnAction(event -> {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
-            if (companyKeyIn.getText().equals(db.getCompanyKey())){
-                if (passwordInput.getText().equals(confirmPasswordIn.getText())){
-                    employeeLoginTable.updatePassword(userNameInput.getText(),passwordInput.getText());
+            if (companyKeyIn.getText().equals(db.getCompanyKey())) {
+                if (passwordInput.getText().equals(confirmPasswordIn.getText())) {
+                    employeeLoginTable.updatePassword(userNameInput.getText(), passwordInput.getText());
                     CustomLabel updatedPassLabel = new CustomLabel("Password Updated");
+                    updatedPassLabel.setStyle("-fx-text-fill: green");
                     updatedPassLabel.setAlignment(Pos.CENTER);
                     vBox.getChildren().add(updatedPassLabel);
-                }else {
+                } else {
                     CustomLabel unidenticalPass = new CustomLabel("Password and Confirm password fields did not match.");
+                    unidenticalPass.setStyle("-fx-text-fill: red");
                     unidenticalPass.setAlignment(Pos.CENTER);
                     vBox.getChildren().add(unidenticalPass);
                 }
-            }else {
+            } else {
                 CustomLabel wrongCompanyKey = new CustomLabel("Wrong Company Key");
+                wrongCompanyKey.setStyle("-fx-text-fill: red");
                 wrongCompanyKey.setAlignment(Pos.CENTER);
                 vBox.getChildren().add(wrongCompanyKey);
             }
@@ -107,15 +108,16 @@ public class ForgotPasswordScene {
             Scene loginPageScene = LoginPageScene.createLoginPage(stage);
             stage.setScene(loginPageScene);
         });
+        signInB.setStyle("  -fx-background-color: #3498db; -fx-text-fill: white;  -fx-padding: 10px;       -fx-font-size: 16px; -fx-background-radius: 5px;  -fx-cursor: hand;");
 
         // HBox for buttons
         HBox buttonBox = new HBox();
-        buttonBox.getChildren().addAll(updatePassB,signInB);
+        buttonBox.getChildren().addAll(updatePassB, signInB);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(5);
 
         // Adding all elements to the vbox
-        vBox.getChildren().addAll(headingForgot, userNameBox, passwordBox, confirmPasswordBox, companyKeyBox,buttonBox);
+        vBox.getChildren().addAll(headingForgot, userNameBox, passwordBox, confirmPasswordBox, companyKeyBox, buttonBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 

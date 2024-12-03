@@ -130,12 +130,12 @@ public class RecieverSelectionScene {
         return new Scene(root, 900, 640);
     }
 
-//    public void refreshTable(){
-//        CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
-//        tableView.getItems().clear();
-//        tableView.getItems().addAll(customerTableCreation.getAllCustomers());
-//    }
-//
+    public void refreshTable(){
+        CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
+        tableView.getItems().clear();
+        tableView.getItems().addAll(customerTableCreation.getAllCustomers());
+    }
+
 
     // Singleton instance
     public static RecieverSelectionScene getInstance(){

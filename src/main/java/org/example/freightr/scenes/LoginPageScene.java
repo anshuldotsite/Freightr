@@ -5,6 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -12,10 +14,12 @@ import javafx.stage.Stage;
 import org.example.freightr.Database;
 import org.example.freightr.TableCreation.EmployeeLoginTable;
 import org.example.freightr.scenes.packageFormCreationAllScenes.AddPackageScene;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Objects;
 
 /**
  * A sign in scene for the user to sign in
@@ -32,55 +36,56 @@ public class LoginPageScene {
     public static Scene createLoginPage(Stage stage) {
         // VBox for layout
         VBox vBox = new VBox();
+        vBox.setStyle("-fx-spacing: 10px;");
 
         // Retrieving company name
         String companyName = Database.getInstance().getCompanyName();
 
         // Welcome label
-        CustomLabel welcomeLabel = new CustomLabel("Welcome, Freightr." + companyName);
+        CustomLabel welcomeLabel = new CustomLabel("Freightr " + companyName);
 
         // Sign in label
         CustomLabel signInHeading = new CustomLabel("Employee Sign In");
 
         // HBox for username
         HBox userBox = new HBox();
-        CustomLabel userLabel = new CustomLabel("User Name");
+        CustomLabel userLabel = new CustomLabel("Userame");
         CustomTextField usernameInput = new CustomTextField();
-        userLabel.setMinWidth(75);
-        usernameInput.setMinWidth(100);
         userBox.getChildren().addAll(userLabel, usernameInput);
         userBox.setAlignment(Pos.CENTER);
-        userBox.setSpacing(10);
+        userBox.setSpacing(12);
 
         // HBox for password
         HBox passwordBox = new HBox();
         CustomLabel passwordLabel = new CustomLabel("Password");
         PasswordField passwordInput = new PasswordField();
-        passwordLabel.setMinWidth(75);
-        passwordInput.setMinWidth(100);
         passwordBox.getChildren().addAll(passwordLabel, passwordInput);
         passwordBox.setAlignment(Pos.CENTER);
-        passwordBox.setSpacing(10);
+        passwordBox.setSpacing(13);
 
         // Sign-in button
         Button signInB = new Button("Sign In");
+        signInB.setStyle("  -fx-background-color: #3498db; -fx-text-fill: white;  -fx-padding: 10px 20px;       -fx-font-size: 16px; -fx-background-radius: 5px;  -fx-cursor: hand;");
+
+        // Result Label
         CustomLabel resultLabel = new CustomLabel("");
+        resultLabel.setStyle("-fx-text-fill: #red;");
 
         // This event handler creates a file which stores the details, and if any errors gives an error
         signInB.setOnAction(event -> {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
-            boolean signIn= employeeLoginTable.signIn(usernameInput.getText(), passwordInput.getText());
-            if (signIn==true){
+            boolean signIn = employeeLoginTable.signIn(usernameInput.getText(), passwordInput.getText());
+            if (signIn == true) {
                 try {
                     BufferedWriter bw = new BufferedWriter(new FileWriter("EmployeeSignIn.txt"));
                     bw.write(usernameInput.getText());
                     bw.flush();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 Scene packageForm = AddPackageScene.createAddPackage(stage);
                 stage.setScene(packageForm);
-            }else{
+            } else {
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Wrong User Name or Password");
                 vBox.getChildren().add(resultLabel);
@@ -92,6 +97,7 @@ public class LoginPageScene {
 
         // Button for forgot password
         Button forgotPasswordB = new Button("Forgot Password?");
+        forgotPasswordB.getStyleClass().add("button-small");
         forgotPasswordB.setOnAction(event -> {
             Scene forgotPassScene = ForgotPasswordScene.createForgotPasswordScene(stage);
             stage.setScene(forgotPassScene);
@@ -99,6 +105,7 @@ public class LoginPageScene {
 
         // Button for creating a new user account
         Button createAccountB = new Button("Create Account");
+        createAccountB.getStyleClass().add("button-small");
 
         createAccountB.setOnAction(event -> {
             Scene accountCreationScene = AccountCreation.AccountCreationScene(stage);
@@ -110,37 +117,43 @@ public class LoginPageScene {
         buttonBox.setSpacing(5);
 
         // Adding all elements to vbox
-        vBox.getChildren().addAll(welcomeLabel,signInHeading, userBox, passwordBox, signInB, buttonBox);
+        vBox.getChildren().addAll(welcomeLabel, signInHeading, userBox, passwordBox, signInB, buttonBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
+        // Image
+        ImageView imageView = new ImageView(new Image("logo.png"));
+        imageView.setFitWidth(300);
+        imageView.setPreserveRatio(true);
+
         BorderPane root = new BorderPane();
-        root.setCenter(vBox);
+        root.setRight(vBox);
+        root.setLeft(imageView);
 
         return new Scene(root, 900, 640);
     }
 
     /**
+     * @return Signed In Employee's Name
      * @author Kautuk Prasad
      * @description This is a method to get the employee name by using the username stored in the file.
-     * @return Signed In Employee's Name
      */
-    public String getEmployeeName(){
+    public String getEmployeeName() {
         try {
             BufferedReader br = new BufferedReader(new FileReader("employeeSignIn.txt"));
-            userName= br.readLine();
+            userName = br.readLine();
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
-            employeeName=employeeLoginTable.getEmployeeName(userName);
-        }catch (Exception e){
+            employeeName = employeeLoginTable.getEmployeeName(userName);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return employeeName;
     }
 
     // Singleton instance
-    public static LoginPageScene getInstance(){
-        if (instance==null){
-            instance=new LoginPageScene();
+    public static LoginPageScene getInstance() {
+        if (instance == null) {
+            instance = new LoginPageScene();
         }
         return instance;
     }
