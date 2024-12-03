@@ -43,6 +43,7 @@ public class LoginPageScene {
 
         // Welcome label
         CustomLabel welcomeLabel = new CustomLabel(companyName + ".Freightr");
+        welcomeLabel.setStyle("-fx-font-size: 30px; -fx-text-fill: #C5705D; -fx-font-weight: bold; -fx-font-family: Helvetica, sans-serif");
 
         // Image
         ImageView imageView = new ImageView(new Image("logo.png"));
@@ -52,6 +53,7 @@ public class LoginPageScene {
 
         // Sign in label
         CustomLabel signInHeading = new CustomLabel("Employee Sign In");
+        signInHeading.setStyle("-fx-text-fill: #C5705D; -fx-font-size: 22px; -fx-font-weight: bold");
 
         // HBox for username
         HBox userBox = new HBox();
@@ -60,6 +62,8 @@ public class LoginPageScene {
         userBox.getChildren().addAll(userLabel, usernameInput);
         userBox.setAlignment(Pos.CENTER);
         userBox.setSpacing(12);
+        userLabel.setStyle("-fx-text-fill: #C5705D; -fx-font-weight: bold; -fx-font-size: 20px");
+        usernameInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #C5705D; -fx-font-size: 14px; -fx-font-weight: bold");
 
         // HBox for password
         HBox passwordBox = new HBox();
@@ -68,10 +72,12 @@ public class LoginPageScene {
         passwordBox.getChildren().addAll(passwordLabel, passwordInput);
         passwordBox.setAlignment(Pos.CENTER);
         passwordBox.setSpacing(13);
+        passwordLabel.setStyle("-fx-text-fill: #C5705D; -fx-font-weight: bold; -fx-font-size: 20px");
+        passwordInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #C5705D;  -fx-font-size: 14px;");
 
         // Sign-in button
         Button signInB = new Button("Sign In");
-        signInB.setStyle(" -fx-background-color: #3498db; -fx-padding: 10px; -fx-text-fill: white; -fx-background-radius: 5px;  -fx-cursor: hand;");
+        signInB.setStyle(" -fx-background-color: #C5705D; -fx-padding: 10px; -fx-text-fill: #F8EDE3; -fx-background-radius: 5px;  -fx-cursor: hand;");
 
         // Result Label
         CustomLabel resultLabel = new CustomLabel("");
@@ -103,7 +109,7 @@ public class LoginPageScene {
 
         // Button for forgot password
         Button forgotPasswordB = new Button("Forgot Password?");
-        forgotPasswordB.getStyleClass().add("button-small");
+        forgotPasswordB.setStyle(" -fx-background-color: #C5705D; -fx-padding: 10px; -fx-text-fill: #F8EDE3; -fx-background-radius: 5px;  -fx-cursor: hand;");
         forgotPasswordB.setOnAction(event -> {
             Scene forgotPassScene = ForgotPasswordScene.createForgotPasswordScene(stage);
             stage.setScene(forgotPassScene);
@@ -111,7 +117,7 @@ public class LoginPageScene {
 
         // Button for creating a new user account
         Button createAccountB = new Button("Create Account");
-        createAccountB.getStyleClass().add("button-small");
+        createAccountB.setStyle(" -fx-background-color: #C5705D; -fx-padding: 10px; -fx-text-fill: #F8EDE3; -fx-background-radius: 5px;  -fx-cursor: hand;");
 
         createAccountB.setOnAction(event -> {
             Scene accountCreationScene = AccountCreation.AccountCreationScene(stage);
@@ -130,6 +136,7 @@ public class LoginPageScene {
         // Border Pane for layout
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }
