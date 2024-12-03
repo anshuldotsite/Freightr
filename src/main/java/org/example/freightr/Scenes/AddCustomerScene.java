@@ -100,11 +100,6 @@ public class AddCustomerScene {
         gridPane.add(countryLabel, 0, 9);
         gridPane.add(countryTF, 1, 9);
 
-        // Label for customer type
-        CustomLabel typeLabel = new CustomLabel("Customer Type");
-        CustomTextField typeTF = new CustomTextField();
-        gridPane.add(typeLabel, 0, 10);
-        gridPane.add(typeTF, 1, 10);
 
         // A button to the add customer to the database
         Button addButton = new Button("Add Customer");
