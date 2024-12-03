@@ -6,11 +6,12 @@ import org.example.freightr.TableCreation.ObjectClasses.CustomerCountByCity;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class CustomerTable {
-    private Database db = Database.getInstance();
     private static CustomerTable instance;
+    private Database db = Database.getInstance();
 
     public static CustomerTable getInstance() {
         if (instance == null) {
@@ -23,17 +24,16 @@ public class CustomerTable {
         ArrayList<CustomerCountByCity> customerCounts = new ArrayList<>();
         String query = "SELECT city, COUNT(*) as customer_count FROM customer GROUP BY city";
 
-        try (Connection connection = db.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
+        try (Statement getLocations = db.getConnection().createStatement();
+             ResultSet data = getLocations.executeQuery(query)) {
 
-            while (resultSet.next()) {
-                String city = resultSet.getString("city");
-                int count = resultSet.getInt("customer_count");
+            while (data.next()) {
+                String city = data.getString("city");
+                int count = data.getInt("customer_count");
                 customerCounts.add(new CustomerCountByCity(city, count));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
         return customerCounts;
     }
