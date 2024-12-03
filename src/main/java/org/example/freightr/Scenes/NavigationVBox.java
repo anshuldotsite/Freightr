@@ -22,24 +22,25 @@ public class NavigationVBox extends VBox {
 
         //Signed in Employee's Name
         CustomLabel employeeLabel = new CustomLabel(employeeName);
+        employeeLabel.setStyle("-fx-text-fill: #F8EDE3;-fx-font-size: 22px; -fx-padding: 10px;");
 
         // Button for create new package
-        Button Button1 = new Button("Create New Package");
+        CustomNavButton Button1 = new CustomNavButton("Create New Package");
         // Button for track package
-        Button button2 = new Button("Track Package");
+        CustomNavButton button2 = new CustomNavButton("Track Package");
         // Button for navigation to all customers
-        Button button3 = new Button("All Customers");
+        CustomNavButton button3 = new CustomNavButton("All Customers");
         // Button for navigation to all packages
-        Button button4 = new Button("All Packages");
+        CustomNavButton button4 = new CustomNavButton("All Packages");
         // Button for navigation to package tracking
-        Button button6 = new Button("All Packages Tracking");
+        CustomNavButton button6 = new CustomNavButton("All Packages Tracking");
         // Button for seeing stats
-        Button button7 = new Button("Statistics");
+        CustomNavButton button7 = new CustomNavButton("Statistics");
         // Button to see the bar chart
-        Button button8 = new Button("barchart location");
-        Button button9 = new Button("Customer Location");
+        CustomNavButton button8 = new CustomNavButton("barchart location");
+        CustomNavButton button9 = new CustomNavButton("Customer Location");
         // Button to log out from the application
-        Button button5 = new Button("Logout");
+        CustomNavButton button5 = new CustomNavButton("Logout");
 
         // Event handler for all buttons to switch between scenes
         Button1.setOnAction(e -> stage.setScene(AddPackageScene.createAddPackage(stage)));
@@ -55,7 +56,8 @@ public class NavigationVBox extends VBox {
         // Layout and styling
         this.setPadding(new Insets(20));
         this.setSpacing(15);
-        this.setStyle("-fx-background-color: lightgray;");
+
+        this.setStyle("-fx-padding: 20px;-fx-background-color: #C5705D;");
 
         // Add all buttons to the vbox
 
