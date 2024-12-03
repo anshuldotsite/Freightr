@@ -102,7 +102,7 @@ public class AddCustomerScene {
 
 
         // A button to the add customer to the database
-        Button addButton = new Button("Add Customer");
+        CustomButton addButton = new CustomButton("Add Customer");
         addButton.setAlignment(Pos.CENTER);
 
         // Label for displaying errors if any
@@ -157,7 +157,7 @@ public class AddCustomerScene {
         HBox buttonBox = new HBox();
 
         // A button to add company to the database
-        Button addCompanyBtn = new Button("Add Company");
+        CustomButton addCompanyBtn = new CustomButton("Add Company");
         addCompanyBtn.setOnAction(event -> {
             Scene companyFormScene = AddCompanyScene.createAddCompanyScene(stage);
             stage.setScene(companyFormScene);

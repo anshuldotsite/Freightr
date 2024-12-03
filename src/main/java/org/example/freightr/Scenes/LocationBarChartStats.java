@@ -39,9 +39,6 @@ public class LocationBarChartStats {
         barChart = new BarChart<>(LocationAxis, NumberAxis);
         barChart.setTitle("Packages by Location");
 
-        // Refresh Button to refresh the chart data
-
-
         // Generate chart data
         LocationBarChartStats.getInstance().generateChart();
 
@@ -57,7 +54,6 @@ public class LocationBarChartStats {
         BorderPane root = new BorderPane();
         root.setLeft(navigationVBox);
         root.setCenter(barChart);
-        root.setBottom(buttonBox);
         root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);

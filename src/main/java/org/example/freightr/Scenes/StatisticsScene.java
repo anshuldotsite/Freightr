@@ -31,21 +31,8 @@ public class StatisticsScene {
         pieChart.setTitle("All Packages Status");
         pieChart.setLabelsVisible(false);
 
-        // Refresh button to refresh data
-        Button refreshBtn = new Button("Refresh");
-        refreshBtn.setOnAction(event -> {
-            StatisticsScene.getInstance().generateChart();
-        });
-
         // Generate chart data
         StatisticsScene.getInstance().generateChart();
-
-        // Layout for refresh button
-        VBox buttonBox = new VBox();
-        Label emptyLabel = new Label("");
-        Label emptyLabel2 = new Label("");
-        buttonBox.getChildren().addAll(emptyLabel,refreshBtn,emptyLabel2);
-        buttonBox.setAlignment(Pos.CENTER);
 
         // NavigationVBox for navigation to different scenes
         NavigationVBox navigationVBox = new NavigationVBox(stage);
@@ -54,7 +41,6 @@ public class StatisticsScene {
         BorderPane root = new BorderPane();
         root.setLeft(navigationVBox);
         root.setCenter(pieChart);
-        root.setBottom(buttonBox);
         root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);

@@ -125,7 +125,7 @@ public class UpdateCustomer {
         gridPane.add(typeTF, 1, 10);
 
         // Button for update
-        Button updateBtn = new Button("Update Customer");
+        CustomButton updateBtn = new CustomButton("Update Customer");
         updateBtn.setAlignment(Pos.CENTER);
 
         // Label for result

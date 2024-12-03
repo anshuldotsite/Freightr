@@ -41,7 +41,7 @@ public class TrackPackageScene {
         HBox inputBox = new HBox();
         CustomLabel trackLabel = new CustomLabel("Please enter the Package ID");
         CustomTextField input = new CustomTextField();
-        Button trackButton = new Button("Track Package");
+        CustomButton trackButton = new CustomButton("Track Package");
 
         /**
          * This event handler retrieves the package details and populates the grid with the package details,

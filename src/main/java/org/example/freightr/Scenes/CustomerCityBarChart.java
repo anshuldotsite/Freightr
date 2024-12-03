@@ -34,26 +34,16 @@ public class CustomerCityBarChart {
         barChart = new BarChart<>(cityAxis, countAxis);
         barChart.setTitle("Customer Count by City");
 
-        // Refresh button
-        Button refreshBtn = new Button("Refresh");
-        refreshBtn.setOnAction(event -> {
-            CustomerCityBarChart.getInstance().generateChart();
-        });
-
         // Generate initial chart
         CustomerCityBarChart.getInstance().generateChart();
 
-        // Layout setup
-        VBox buttonBox = new VBox();
-        buttonBox.getChildren().addAll(refreshBtn);
-        buttonBox.setAlignment(Pos.CENTER);
-
+        // NavigationVBox to navigate to different scenes
         NavigationVBox navigationVBox = new NavigationVBox(stage);
 
         BorderPane root = new BorderPane();
         root.setLeft(navigationVBox);
         root.setCenter(barChart);
-        root.setBottom(buttonBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }
