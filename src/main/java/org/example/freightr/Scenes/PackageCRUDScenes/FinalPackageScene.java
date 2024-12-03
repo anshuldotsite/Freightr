@@ -174,6 +174,7 @@ PackageTracking packageTracking = new PackageTracking(0,packageGeneratedkey,loca
         BorderPane bp = new BorderPane();
         bp.setCenter(mainBox);
         bp.setLeft(navigationVBox);
+        bp.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(bp, 900, 640);
     }

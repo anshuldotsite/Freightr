@@ -55,6 +55,7 @@ public class StatisticsScene {
         root.setLeft(navigationVBox);
         root.setCenter(pieChart);
         root.setBottom(buttonBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }

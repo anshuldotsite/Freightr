@@ -40,17 +40,14 @@ public class LocationBarChartStats {
         barChart.setTitle("Packages by Location");
 
         // Refresh Button to refresh the chart data
-        Button refreshBtn = new Button("Refresh");
-        refreshBtn.setOnAction(event -> {
-            LocationBarChartStats.getInstance().generateChart();
-        });
+
 
         // Generate chart data
         LocationBarChartStats.getInstance().generateChart();
 
         // VBox for layout
         VBox buttonBox = new VBox();
-        buttonBox.getChildren().addAll(refreshBtn);
+        buttonBox.getChildren().addAll();
         buttonBox.setAlignment(Pos.CENTER);
 
         // NavigationVBox for navigation scenes
@@ -61,6 +58,7 @@ public class LocationBarChartStats {
         root.setLeft(navigationVBox);
         root.setCenter(barChart);
         root.setBottom(buttonBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }

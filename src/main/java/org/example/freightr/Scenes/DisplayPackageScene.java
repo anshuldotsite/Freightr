@@ -130,6 +130,7 @@ public class DisplayPackageScene {
         root.setCenter(tableView);
         root.setTop(headingBox);
         root.setBottom(vBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }

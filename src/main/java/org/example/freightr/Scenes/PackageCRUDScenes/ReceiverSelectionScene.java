@@ -126,6 +126,8 @@ public class ReceiverSelectionScene {
         root.setLeft(navigationVbox);
         root.setTop(headingBox);
         root.setBottom(buttonVbox);
+        root.setStyle("-fx-background-color: #F8EDE3");
+
         return new Scene(root, 900, 640);
     }
 
