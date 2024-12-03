@@ -136,15 +136,20 @@ public class PackageTableCRUD implements PackageDoa {
             Statement statement = db.getConnection().createStatement();
 
             // Execute the query
-            int affectedRows = statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+            int affectedRows = statement.executeUpdate(query);
 
             if (affectedRows > 0) {
                 // Retrieve the generated keys
-                ResultSet generatedKeys = statement.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    generatedId = generatedKeys.getInt(1);
-
-                    System.out.println("Package added with ID: " + generatedId);
+                String getInsertedKey = "SELECT LAST_INSERT_ID();";
+                try{
+                    Statement retrieveStatement = db.getConnection().createStatement();
+                    retrieveStatement.executeQuery(getInsertedKey);
+                    ResultSet data = retrieveStatement.getResultSet();
+                    if (data.next()){
+                        generatedId=data.getInt(1);
+                    }
+                }catch (SQLException e){
+                    e.printStackTrace();
                 }
             }
 
