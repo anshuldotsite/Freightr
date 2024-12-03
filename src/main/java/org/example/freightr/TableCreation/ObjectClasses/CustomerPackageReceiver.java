@@ -15,7 +15,6 @@ public class CustomerPackageReceiver {
         this.customerId = customerId;
         this.packageId = packageId;
         this.receiverId = receiverId;
-
     }
 
     // Getters and Setters
@@ -42,6 +41,5 @@ public class CustomerPackageReceiver {
     public void setReceiverId(int receiverId) {
         this.receiverId = receiverId;
     }
-
 
 }

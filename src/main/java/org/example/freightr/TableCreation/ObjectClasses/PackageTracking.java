@@ -1,5 +1,8 @@
 package org.example.freightr.TableCreation.ObjectClasses;
 
+/**
+ * @description This class has constructors for package tracking objects, along with getters and setters
+ */
 
 public class PackageTracking {
     private int trackingId;

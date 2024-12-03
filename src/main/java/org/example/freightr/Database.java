@@ -7,6 +7,9 @@ import java.io.FileReader;
 import java.sql.*;
 import java.util.StringTokenizer;
 
+/**
+ * This class creates the connection between the database and the host
+ */
 
 public class Database {
     private static Database instance;

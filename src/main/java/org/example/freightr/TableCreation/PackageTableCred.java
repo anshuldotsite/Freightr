@@ -14,6 +14,9 @@ import java.util.Date;
 
 import static org.example.freightr.TableCreation.Dbconst.*;
 
+/**
+ * This class has CRUD operations for package table
+ */
 public class PackageTableCred implements PackageDoa {
     private static PackageTableCred instance;
     private PackageTableCred(){
@@ -50,8 +53,6 @@ public class PackageTableCred implements PackageDoa {
         }
         return packages;
     }
-
-
 
     /**
      * @description It gets a single package from the database

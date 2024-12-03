@@ -14,6 +14,10 @@ import java.util.ArrayList;
 
 import static org.example.freightr.TableCreation.Dbconst.*;
 
+/**
+ * @description  This class creates the customer table
+ */
+
 public class CustomerTableCreation implements CustomerDoa {
 
     private static CustomerTableCreation instance;

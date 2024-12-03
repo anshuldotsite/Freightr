@@ -21,61 +21,61 @@ import java.util.Date;
 
 /***
  * @author anshul/kohinoor
- * @ description it is the first scene shown
+ * @description This scene add a package
  */
 public class AddPackageScene {
+    // Member Variables
     private static double totalPrice;
-
     private static Package packageDetails;
 
     public static Scene createAddPackage(Stage stage) {
 
+        // NavigationVBox for navigating to different scenes
         NavigationVBox navigationVBox = new NavigationVBox(stage);
         PackageTableCred packageTableCred = PackageTableCred.getInstance();
         LoginPageScene loginPageScene = LoginPageScene.getInstance();
 
-
-        //welcome label
+        // Label to welcome employees to the application
         CustomLabel welcome = new CustomLabel("Welcome "+ loginPageScene.getEmployeeName());
         HBox welcomeBox = new HBox();
         welcomeBox.getChildren().add(welcome);
         welcomeBox.setAlignment(Pos.CENTER);
 
-
-        // Heading
+        // Heading Label
         CustomLabel heading = new CustomLabel("Add New Package");
         HBox headingBox = new HBox();
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
+        // VBox and GridPane for layout
         VBox vBox = new VBox();
         GridPane gridPane = new GridPane();
 
-        // Description
+        // Description Label
         CustomLabel descriptionLabel = new CustomLabel("Package Description");
         CustomTextField descriptionTF = new CustomTextField();
         gridPane.add(descriptionLabel, 0, 0);
         gridPane.add(descriptionTF, 1, 0);
 
-        // Height
+        // Height Label
         CustomLabel heightLabel = new CustomLabel("Height (cm)");
         CustomTextField heightTF = new CustomTextField();
         gridPane.add(heightLabel, 0, 1);
         gridPane.add(heightTF, 1, 1);
 
-        // Width
+        // Width Label
         CustomLabel widthLabel = new CustomLabel("Width (cm)");
         CustomTextField widthTF = new CustomTextField();
         gridPane.add(widthLabel, 0, 2);
         gridPane.add(widthTF, 1, 2);
 
-        // Length
+        // Length Label
         CustomLabel lengthLabel = new CustomLabel("Length (cm)");
         CustomTextField lengthTF = new CustomTextField();
         gridPane.add(lengthLabel, 0, 3);
         gridPane.add(lengthTF, 1, 3);
 
-        // Weight
+        // Weight Label
         CustomLabel weightLabel = new CustomLabel("Weight (kg)");
         CustomTextField weightTF = new CustomTextField();
         gridPane.add(weightLabel, 0, 4);
@@ -93,22 +93,22 @@ public class AddPackageScene {
         Button addPackageBtn = new Button("Add sender details");
         Label resultLabel = new Label("");
 
-
-
-
-
-
+        // Pricing Logic
         calculateChargesBtn.setOnAction(e -> {
             double height = Double.parseDouble(heightTF.getText());
             double width = Double.parseDouble(widthTF.getText());
             double length = Double.parseDouble(lengthTF.getText());
             double weight = Double.parseDouble(weightTF.getText());
+
+            // Surcharge Variables
             int heightSurcharge=0;
             int lengthSurcharge=0;
             int widthSurcharge=0;
 
+            // Price per kg based on weight
             int WeightPrice =0;
 
+            // Determine weight-based pricing
             if(height>100){
                 heightSurcharge=15;
             }
@@ -133,8 +133,9 @@ public class AddPackageScene {
             charge.setText(String.valueOf(totalPrice));
         });
 
-
-
+        /**
+         * This event handler adds a package ang navigates to the scene, and displays error if any of the field are empty
+         */
         addPackageBtn.setOnAction(event -> {
             if (descriptionTF.getText().isEmpty() ||
                     heightTF.getText().isEmpty() ||
@@ -161,26 +162,23 @@ public class AddPackageScene {
                     lengthTF.clear();
                     weightTF.clear();
                     priceLabel.setText("Price: ");
-
-
-
         });
 
+        // Grid Pane for layout
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setAlignment(Pos.CENTER);
 
+        // Adding all elements to the VBox
         vBox.getChildren().addAll(welcomeBox,headingBox, gridPane, addPackageBtn, resultLabel);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
+        // BorderPane for layout
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
         root.setLeft(navigationVBox);
 
         return new Scene(root, 900, 640);
     }
-
-    // Pricing Logic
-
 }

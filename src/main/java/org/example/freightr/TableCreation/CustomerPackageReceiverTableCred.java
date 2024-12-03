@@ -10,7 +10,6 @@ import java.util.List;
 
 import static org.example.freightr.TableCreation.Dbconst.*;
 
-
 /**
  * @author kohinoor jeet singh
  * @description Implementation for CustomerPackageReceiver table operations
@@ -39,8 +38,6 @@ public class CustomerPackageReceiverTableCred implements CustomerPackageReciever
         }
     }
 
-
-
     @Override
     public void deleteCustomerPackageReceiver(int packageId) {
         String query = "DELETE FROM " + Dbconst.TABLE_CUSTOMER_PACKAGES + " WHERE " +
@@ -52,7 +49,6 @@ public class CustomerPackageReceiverTableCred implements CustomerPackageReciever
             e.printStackTrace();
         }
     }
-
 
     public int getCustomerIdByPackageId(int packageId) {
         String query = "SELECT " + CUSTOMER_PACKAGES_COLUMN_CUSTOMER_ID + " FROM " + TABLE_CUSTOMER_PACKAGES +

@@ -16,35 +16,47 @@ import org.example.freightr.TableCreation.ObjectClasses.LocationForStats;
 
 import java.util.ArrayList;
 
+/**
+ * @description This class generates and displays a bar chart and refreshes the chart date dynamically
+ */
 public class LocationBarChartStats {
 
+    // Bar chart for displaying packages by location
     private static BarChart<String, Number> barChart;
+    // Singleton instance of the class
     private static LocationBarChartStats instance;
 
     public static Scene createBarChartScene(Stage stage) {
-
-
+        //Axis for locations and package counts
         CategoryAxis LocationAxis = new CategoryAxis();
         NumberAxis NumberAxis = new NumberAxis();
 
-
+        // Labels for axis
         LocationAxis.setLabel("Location");
         NumberAxis.setLabel("Package Count");
+
+        // Initialising bar chart with axes
         barChart = new BarChart<>(LocationAxis, NumberAxis);
         barChart.setTitle("Packages by Location");
 
+        // Refresh Button to refresh the chart data
         Button refreshBtn = new Button("Refresh");
         refreshBtn.setOnAction(event -> {
             LocationBarChartStats.getInstance().generateChart();
         });
 
+        // Generate chart data
         LocationBarChartStats.getInstance().generateChart();
 
+        // VBox for layout
         VBox buttonBox = new VBox();
         buttonBox.getChildren().addAll(refreshBtn);
         buttonBox.setAlignment(Pos.CENTER);
+
+        // NavigationVBox for navigation scenes
         NavigationVBox navigationVBox = new NavigationVBox(stage);
 
+        // BorderPane for layout
         BorderPane root = new BorderPane();
         root.setLeft(navigationVBox);
         root.setCenter(barChart);
@@ -53,12 +65,11 @@ public class LocationBarChartStats {
         return new Scene(root, 900, 640);
     }
 
+    // This method generates and updates the bar chart with data from the database
     public void generateChart() {
         LocationTable locationTable = LocationTable.getInstance();
         ArrayList<LocationForStats> locations = locationTable.getPackagesAtLocations();
         ObservableList<BarChart.Series<String, Number>> chartData = FXCollections.observableArrayList();
-
-
         BarChart.Series<String, Number> series = new BarChart.Series<>();
         series.setName("Package Count");
         for (LocationForStats location : locations) {
@@ -70,6 +81,8 @@ public class LocationBarChartStats {
         barChart.getData().clear();
         barChart.getData().add(series);
     }
+
+    // Singleton instance
     public static LocationBarChartStats getInstance() {
         if (instance == null) {
             instance = new LocationBarChartStats();

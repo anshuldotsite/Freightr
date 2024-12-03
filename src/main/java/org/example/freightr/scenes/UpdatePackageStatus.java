@@ -21,28 +21,31 @@ import java.util.ArrayList;
  * @author Kautuk Prasad
  * @description This scene is an update scene for package status.
  */
-
 public class UpdatePackageStatus {
     public static Scene createUpdateStatus(Stage stage, PackageCustomTracking packageCustomTracking){
-
+        // Instance of the table
         StatusTable statusTable = StatusTable.getInstance();
         PackageCustomTrackingAll packageCustomTrackingAll = PackageCustomTrackingAll.getInstance();
 
-
-
+        // Retrieve all statues
         ArrayList<StatusPOJO> statusPOJOS = new ArrayList<>();
         statusPOJOS = statusTable.getAllStatus();
 
+        // GridPane for layout
         GridPane gridPane = new GridPane();
 
+        // VBox for layout
         VBox vBox = new VBox();
 
+        // HBox for heading
         HBox headingBox = new HBox();
 
+        // Label for updating the package
         CustomLabel heading = new CustomLabel("Update Package");
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
+        // Label for tracking ID
         CustomLabel trackingIDLabel = new CustomLabel("Tracking ID");
         CustomTextField trackingTF = new CustomTextField();
         trackingTF.setText(String.valueOf(packageCustomTracking.getTrackingId()));
@@ -50,6 +53,7 @@ public class UpdatePackageStatus {
         gridPane.add(trackingIDLabel,0,0);
         gridPane.add(trackingTF,1,0);
 
+        // Label for seeing the package status
         CustomLabel packageStatus = new CustomLabel("Package Status");
         ComboBox<StatusPOJO>packageStatusComboBox = new ComboBox<>();
         packageStatusComboBox.setItems(FXCollections.observableArrayList(statusTable.getAllStatus()));
@@ -57,6 +61,7 @@ public class UpdatePackageStatus {
         gridPane.add(packageStatus,0,1);
         gridPane.add(packageStatusComboBox,1,1);
 
+        // Label for description
         CustomLabel descriptionLabel = new CustomLabel("Description");
         CustomTextField descriptionTF = new CustomTextField();
         descriptionTF.setText(packageCustomTracking.getDescription());
@@ -64,6 +69,7 @@ public class UpdatePackageStatus {
         gridPane.add(descriptionLabel,0,2);
         gridPane.add(descriptionTF,1,2);
 
+        // Label for location
         CustomLabel locationLabel = new CustomLabel("Location");
         CustomTextField locationTF = new CustomTextField();
         locationTF.setText(packageCustomTracking.getLocation());
@@ -73,16 +79,21 @@ public class UpdatePackageStatus {
         gridPane.setVgap(10);
         gridPane.setHgap(10);
 
+        // Navigation VBox for navigating to different scenes
         NavigationVBox navigationVBox = new NavigationVBox(stage);
-
 
         gridPane.setAlignment(Pos.CENTER);
 
+        // Button to update the status
         Button updateBtn = new Button("Update");
         updateBtn.setAlignment(Pos.CENTER);
 
+        // Label for result
         CustomLabel resultLabel = new CustomLabel("");
 
+        /**
+         * This event handler creates a package objected with updated status and it updates the packages in the database and displays the result
+         */
         updateBtn.setOnAction(event -> {
             vBox.getChildren().remove(resultLabel);
             PackageCustomTracking packageCustomTracked = new PackageCustomTracking(packageCustomTracking.getPackageId(),descriptionTF.getText(),packageCustomTracking.getSentDate(),
@@ -90,22 +101,22 @@ public class UpdatePackageStatus {
             packageCustomTrackingAll.updatePackage(packageCustomTracked);
             resultLabel.setText("Updated Package");
             vBox.getChildren().add(resultLabel);
-
         });
 
+        // Add all elements to the vbox
         vBox.getChildren().addAll(headingBox,gridPane,updateBtn);
         vBox.setSpacing(10);
         vBox.setAlignment(Pos.CENTER);
 
-
+        // BorderPane for layout
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
         root.setLeft(navigationVBox);
 
-
         return new Scene(root, 900, 640);
     }
 
+    // Finds the index of a company by its ID
     public static int find(ArrayList<?> arrayList, int id){
         ArrayList<StatusPOJO> searchList = (ArrayList<StatusPOJO>) ((ArrayList<?>) arrayList);
         for(int i = 0; i < searchList.size(); i++){

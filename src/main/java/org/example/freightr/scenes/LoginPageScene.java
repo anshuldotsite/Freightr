@@ -65,7 +65,7 @@ public class LoginPageScene {
         Button signInB = new Button("Sign In");
         CustomLabel resultLabel = new CustomLabel("");
 
-        //
+        // This event handler creates a file which stores the details, and if any errors gives an error
         signInB.setOnAction(event -> {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
             boolean signIn= employeeLoginTable.signIn(usernameInput.getText(), passwordInput.getText());

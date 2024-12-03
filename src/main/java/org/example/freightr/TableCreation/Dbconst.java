@@ -1,5 +1,8 @@
 package org.example.freightr.TableCreation;
 
+/**
+ * @description  This class has all the SQL statements needed for the application
+ */
 
 public class Dbconst {
     public static final String TABLE_CUSTOMER = "customer";

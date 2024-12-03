@@ -4,6 +4,9 @@ import org.example.freightr.TableCreation.ObjectClasses.Customer;
 
 import java.util.ArrayList;
 
+/**
+ * @description This interface has DOA for customer
+ */
 public interface CustomerDoa {
     public ArrayList<Customer> getAllCustomers();
 

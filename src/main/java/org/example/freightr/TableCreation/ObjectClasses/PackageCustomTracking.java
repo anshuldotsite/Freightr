@@ -2,6 +2,10 @@ package org.example.freightr.TableCreation.ObjectClasses;
 
 import java.util.Date;
 
+/**
+ * @description This class has constructors for creating package tracking objects, along with getters and setters
+ */
+
 public class PackageCustomTracking {
     private int packageId;
     private String description;
@@ -67,6 +71,4 @@ public class PackageCustomTracking {
     public void setStatusId(int statusId) {
         this.statusId = statusId;
     }
-
-
 }

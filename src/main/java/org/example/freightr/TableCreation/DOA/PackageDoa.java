@@ -4,6 +4,9 @@ import org.example.freightr.TableCreation.ObjectClasses.Package;
 
 import java.util.ArrayList;
 
+/**
+ * @description This interface has DOA for package
+ */
 public interface PackageDoa {
     public ArrayList<Package> getAllPackages();
 

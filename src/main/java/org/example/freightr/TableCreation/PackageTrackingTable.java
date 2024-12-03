@@ -11,6 +11,10 @@ import java.util.ArrayList;
 
 import static org.example.freightr.TableCreation.Dbconst.*;
 
+/**
+ * This class has CRUD operations for package tracking
+ */
+
 public class PackageTrackingTable implements PackageTrackDOA {
 
     private static PackageTrackingTable instance;

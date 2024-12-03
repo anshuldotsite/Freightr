@@ -1,5 +1,8 @@
 package org.example.freightr.TableCreation.ObjectClasses;
 
+/**
+ * @description This class has constructors for creating customer objects, along with getters and setters
+ */
 public class Customer {
     private int customerId;
     private int companyId;
@@ -215,7 +218,4 @@ public class Customer {
                 ", customerType='" + customerType + '\'' +
                 '}';
     }
-
-
-
 }

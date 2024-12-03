@@ -1,5 +1,8 @@
 package org.example.freightr.TableCreation.ObjectClasses;
 
+/**
+ * @description This class has constructors for creating location stat objects, along with getters and setters
+ */
 public class LocationForStats {
     private String location;
     private int packageCount;

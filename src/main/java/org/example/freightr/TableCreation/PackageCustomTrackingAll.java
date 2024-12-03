@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 import static org.example.freightr.TableCreation.Dbconst.*;
 
+/**
+ * @description This class has methods to fetch package tracking details
+ */
+
 public class PackageCustomTrackingAll implements PackageTrackAllDOA {
     private final Database db = Database.getInstance();
     private static PackageCustomTrackingAll instance;

@@ -1,5 +1,9 @@
 package org.example.freightr.TableCreation.ObjectClasses;
 
+/**
+ * @description This class has constructors for creating package objects, along with getters and setters
+ */
+
 import java.util.Date;
 
 public class Package {
@@ -23,7 +27,6 @@ public class Package {
         this.price = price;
     }
     public  Package(){
-
     }
 
     public int getPackageId() {
@@ -89,6 +92,4 @@ public class Package {
     public void setPrice(double price) {
         this.price = price;
     }
-
-
 }

@@ -12,6 +12,10 @@ import java.util.ArrayList;
 
 import static org.example.freightr.TableCreation.Dbconst.*;
 
+/**
+ * @description  This class creates the company table
+ */
+
 public class CompanyTableCreation implements CompanyDoa {
 
     private static CompanyTableCreation instance;
