@@ -28,69 +28,76 @@ public class DisplayCustomerScene {
     private static DisplayCustomerScene instance;
     private static TableView tableView;
     public static Scene createDisplayCustomer(Stage stage){
-
         CustomerTableCreation customer = CustomerTableCreation.getInstance();
-        //heading
+
+        // HBox for heading
         HBox headingBox = new HBox();
         CustomLabel heading = new CustomLabel("Customers");
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
+        // A table view object
         tableView = new TableView();
 
-        //column1
+        // Column for First Name
         TableColumn<Customer, String> column1= new TableColumn<>("First Name");
         column1.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getFirstName()));
 
-        //column2
+        // Column for Last Name
         TableColumn<Customer, String> column2= new TableColumn<>("Last Name");
         column2.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getLastName()));
 
-        //column3
+        // Column for Company
         TableColumn<Customer, String> column3= new TableColumn<>("Company");
         column3.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCompanyName()));
 
-        //column4
+        // Column for Contact Number
         TableColumn<Customer, String> column4= new TableColumn<>("Contact No");
         column4.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getContactNumber()));
 
-        //column5
+        // Column for Email
         TableColumn<Customer, String> column5= new TableColumn<>("Email");
         column5.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getEmail()));
 
-        //column6
+        // Column for Street Address
         TableColumn<Customer, String> column6= new TableColumn<>("Address");
         column6.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getAddress()));
 
-        //column7
+        // Column for City
         TableColumn<Customer, String> column7= new TableColumn<>("City");
         column7.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCity()));
 
-        //column8
+        // Column for Province
         TableColumn<Customer, String> column8= new TableColumn<>("Province");
         column8.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getProvince()));
 
-        //column9
+        // Column for Country
         TableColumn<Customer, String> column9= new TableColumn<>("Country");
         column9.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCountry()));
 
-        //column10
+        // Column for Customer Type
         TableColumn<Customer, String> column10= new TableColumn<>("Customer Type");
         column10.setCellValueFactory(e-> new SimpleStringProperty(e.getValue().getCustomerType()));
 
         tableView.getColumns().addAll(column1,column2,column3,column4,column5,column6,column7,column8,column9,column10);
         tableView.getItems().addAll(customer.getPrettyData());
 
+        // NavigationVBox for navigation scenes
         NavigationVBox navigationVbox = new NavigationVBox(stage);
+
+        // Buttons for add and delete customer
         Button addButton = new Button("Add Customer");
         Button updateButton = new Button("Update Customer");
 
+        // VBox for buttons
         VBox buttonVBox = new VBox();
 
+        // HBox for layout
         HBox buttonBox = new HBox();
         Label emptyLabel = new Label("");
         Label emptyLabel2 = new Label("");
 
+        // Adding all elements to the vbox
         buttonBox.getChildren().addAll(addButton,updateButton);
         buttonBox.setSpacing(10);
         buttonBox.setAlignment(Pos.CENTER);
@@ -99,7 +106,7 @@ public class DisplayCustomerScene {
 
         updateButton.setDisable(true);
 
-
+       // Enable/Disable button that checks based on the selection in table view
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -111,18 +118,20 @@ public class DisplayCustomerScene {
             }
         });
 
+        // This event handler handles the update button which updates the customer and navigates to a new scene
         updateButton.setOnAction(event -> {
             Customer selectedCustomer = (Customer) tableView.getSelectionModel().getSelectedItem();
             Scene updateCustomer = UpdateCustomer.createUpdateCustomer(stage,selectedCustomer);
             stage.setScene(updateCustomer);
         });
 
-
+        // This event handler handles the add button which add a new customer and navigates to a new scene
         addButton.setOnAction(event -> {
             Scene addCustomerScene = AddCustomerScene.createAddCustomer(stage);
             stage.setScene(addCustomerScene);
         });
 
+        // BorderPane for layout
         BorderPane root = new BorderPane();
 
         root.setLeft(navigationVbox);
@@ -143,6 +152,7 @@ public class DisplayCustomerScene {
         tableView.getItems().addAll(customerTableCreation.getAllCustomers());
     }
 
+    // Singleton instance
     public static DisplayCustomerScene getInstance(){
         if(instance == null){
             instance = new DisplayCustomerScene();

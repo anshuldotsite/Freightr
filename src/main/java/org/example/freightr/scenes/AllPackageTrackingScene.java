@@ -26,7 +26,7 @@ import java.util.Date;
 import static javafx.geometry.Pos.BOTTOM_CENTER;
 
 /**
- * A scene to track all packages
+ * @description A scene to track all packages
  */
 public class AllPackageTrackingScene {
     // A tableview variable
@@ -43,7 +43,7 @@ public class AllPackageTrackingScene {
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
-        // Comobox for tracking status
+        // Combobox for tracking status
         ComboBox<StatusPOJO> statusComboBox = new ComboBox<>();
         statusComboBox.setItems(FXCollections.observableArrayList(statusTable.getAllStatus()));
         statusComboBox.getSelectionModel().select(0);
@@ -69,16 +69,19 @@ public class AllPackageTrackingScene {
         TableColumn<PackageCustomTracking, String> column4 = new TableColumn<>("Location");
         column4.setCellValueFactory(e -> new SimpleStringProperty(e.getValue().getLocation()));
 
+        // Add columns to tableview
         tableView.getColumns().addAll(column1, column2, column3, column4);
 
-
+        // Load data and set it to the TableView
         PackageCustomTrackingAll trackingData = new PackageCustomTrackingAll();
         ObservableList<PackageCustomTracking> data = FXCollections.observableArrayList(
                 trackingData.getAllPackageTrackingWithStatus(1)
         );
 
+        // HBox for layout
         HBox buttonBox = new HBox();
 
+        // Buttons for updating and viewing
         Button viewDetailsButton = new Button("View Details");
         Button updateButton = new Button("Update");
         updateButton.setDisable(true);
@@ -87,6 +90,7 @@ public class AllPackageTrackingScene {
 
         VBox alignBox = new VBox();
 
+        // Adding all elements to the hbox
         buttonBox.getChildren().addAll(viewDetailsButton,updateButton);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(10);
@@ -94,6 +98,7 @@ public class AllPackageTrackingScene {
         alignBox.getChildren().addAll(emptyLabel,buttonBox,emptyLabel2);
         alignBox.setAlignment(Pos.CENTER);
 
+        // Enable/Disable button that checks based on the selection in table view
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -105,7 +110,10 @@ public class AllPackageTrackingScene {
             }
         });
 
-
+        /**
+         * This event handler handles the view button which retrieves the selected package and navigates to a new scene
+         * and update button retrieves the package and updates it and navigates the statys
+         */
         viewDetailsButton.setOnAction(event -> {
             PackageCustomTracking trackingData1 = (PackageCustomTracking) tableView.getSelectionModel().getSelectedItem();
             if (trackingData1 != null) {
@@ -123,19 +131,18 @@ public class AllPackageTrackingScene {
 
         tableView.setItems(data);
 
-
-
+        // Set up layout structure
         bp.setCenter(tableView);
         NavigationVBox navigationVBox = new NavigationVBox(stage);
         navigationVBox.getChildren().add(statusComboBox);
         bp.setLeft(navigationVBox);
         bp.setBottom(alignBox);
         bp.setTop(headingBox);
-        // Return Scene
+
         return new Scene(bp, 900, 640);
     }
 
-
+    // Filters the table view data based on the selected status and updates the table view.
     private static void filterTableByStatus(String selectedStatus) {
         PackageCustomTrackingAll trackingData = new PackageCustomTrackingAll();
         int statusId = getStatusIdFromString(selectedStatus);
@@ -148,7 +155,7 @@ public class AllPackageTrackingScene {
         tableView.setItems(filteredData);
     }
 
-
+    // A status string for its ID
     private static int getStatusIdFromString(String status) {
         switch (status) {
             case "In Warehouse": return 1;

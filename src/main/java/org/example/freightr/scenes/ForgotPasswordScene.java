@@ -13,22 +13,25 @@ import org.example.freightr.Database;
 import org.example.freightr.TableCreation.EmployeeLoginTable;
 
 /**
- * Forgot Password Scene
+ * @description A forgot password scene for users to reset their passwords
  * @author Kautuk Prasad
  */
 public class ForgotPasswordScene {
     public static Scene createForgotPasswordScene(Stage stage){
-
+        // Initialise database singleton
         Database db = Database.getInstance();
 
+        // Vbox for layout
         VBox vBox = new VBox();
 
+        // Forgot password for label
         Label headingForgot = new Label("Forgot password? No Problem!");
         headingForgot.setAlignment(Pos.CENTER);
 
-        //hbox for username
+        // HBox for username
         HBox userNameBox = new HBox();
 
+        // Username Label
         CustomLabel userNameLabel = new CustomLabel("Enter your username");
         CustomTextField userNameInput = new CustomTextField();
         userNameLabel.setMinWidth(75);
@@ -37,9 +40,10 @@ public class ForgotPasswordScene {
         userNameBox.setAlignment(Pos.CENTER);
         userNameBox.setSpacing(10);
 
-        //hbox for new password
+        // HBox for new password
         HBox passwordBox = new HBox();
 
+        // Password Label
         CustomLabel passwordLabel = new CustomLabel("Enter new password");
         CustomTextField passwordInput = new CustomTextField();
         passwordLabel.setMinWidth(75);
@@ -48,9 +52,10 @@ public class ForgotPasswordScene {
         passwordBox.setAlignment(Pos.CENTER);
         passwordBox.setSpacing(10);
 
-        //hbox for confirm password
+        // Hbox for confirm password
         HBox confirmPasswordBox = new HBox();
 
+        // Confirm Password Label
         CustomLabel confirmPassLabel = new CustomLabel("Confirm Password");
         CustomTextField confirmPasswordIn = new CustomTextField();
         confirmPassLabel.setMinWidth(75);
@@ -59,9 +64,10 @@ public class ForgotPasswordScene {
         confirmPasswordBox.setAlignment(Pos.CENTER);
         confirmPasswordBox.setSpacing(10);
 
-        //hbox for company key
+        // HBox for company key
         HBox companyKeyBox = new HBox();
 
+        // Label for company key
         CustomLabel companyKeyLabel = new CustomLabel("Enter Company Key");
         CustomTextField companyKeyIn = new CustomTextField();
         companyKeyLabel.setMinWidth(75);
@@ -70,8 +76,11 @@ public class ForgotPasswordScene {
         companyKeyBox.setAlignment(Pos.CENTER);
         companyKeyBox.setSpacing(10);
 
-        //update password button
+        // Update password button
         Button updatePassB = new Button("Update Password");
+        /**
+         * This event handler checks for conditions to update the user's password with errors if they passwords not match and you enter the wrong company key
+         */
         updatePassB.setOnAction(event -> {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
             if (companyKeyIn.getText().equals(db.getCompanyKey())){
@@ -92,25 +101,25 @@ public class ForgotPasswordScene {
             }
         });
 
+        // Button to sign in
         Button signInB = new Button("Sign In");
         signInB.setOnAction(event -> {
             Scene loginPageScene = LoginPageScene.createLoginPage(stage);
             stage.setScene(loginPageScene);
         });
 
-        //hbox for buttons
+        // HBox for buttons
         HBox buttonBox = new HBox();
         buttonBox.getChildren().addAll(updatePassB,signInB);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(5);
 
+        // Adding all elements to the vbox
         vBox.getChildren().addAll(headingForgot, userNameBox, passwordBox, confirmPasswordBox, companyKeyBox,buttonBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
-
-
-
+        // BorderPane for root
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
 

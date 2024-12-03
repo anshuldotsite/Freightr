@@ -20,7 +20,7 @@ import org.example.freightr.TableCreation.EmployeeLoginTable;
 
 public class AccountCreation {
     /**
-     * A form for employee registration with input fields
+     * @description A form for employee registration with input fields
      * @param stage
      * @return
      */
@@ -136,7 +136,6 @@ public class AccountCreation {
                 }
             }
 
-
         });
 
         gridPane.setAlignment(Pos.CENTER);
@@ -159,7 +158,7 @@ public class AccountCreation {
         // BorderPane for layout
         BorderPane root = new BorderPane();
 
-        // Adding all elements to the vbox and that to the root to display
+        // Adding all elements to the vbox
         vbox.getChildren().addAll(headingBox,gridPane,buttonBox);
         vbox.setAlignment(Pos.CENTER);
         root.setCenter(vbox);

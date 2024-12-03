@@ -20,19 +20,23 @@ import org.example.freightr.scenes.packageFormCreationAllScenes.ShowSenderRecive
 
 import java.text.SimpleDateFormat;
 
+/**
+ * @description  This scene displays all package details
+ */
 public class DisplayPackageScene {
-
     private static DisplayPackageScene instance;
     private static TableView tableView;
 
     public static Scene createDisplayPackage(Stage stage) {
         PackageTableCred packageTable = PackageTableCred.getInstance();
 
+        // HBox for heading
         HBox headingBox = new HBox();
         CustomLabel heading = new CustomLabel("Packages");
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
+        // A tableview object
         tableView = new TableView();
 
         // Column for Package ID
@@ -68,8 +72,10 @@ public class DisplayPackageScene {
         tableView.getColumns().addAll(column, column1, column2, column3, column4, column5);
         tableView.getItems().addAll(packageTable.getAllPackages());
 
+        // Navigation VBox for navigation to different scenes
         NavigationVBox navigationVbox = new NavigationVBox(stage);
 
+        // Button to delete package and event handler to delete packages
         Button deleteButton = new Button("Delete Package");
         deleteButton.setDisable(true);
         deleteButton.setOnAction(event -> {
@@ -79,6 +85,7 @@ public class DisplayPackageScene {
             displayPackageScene.refreshTable();
         });
 
+        // Button to view details of the package
         Button viewDetailsButton = new Button("View Details");
         viewDetailsButton.setDisable(true);
         viewDetailsButton.setOnAction(event -> {
@@ -89,6 +96,8 @@ public class DisplayPackageScene {
                 stage.setScene(detailsScene);
             }
         });
+
+        // Enable/Disable button that checks based on the selection in table view
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -102,11 +111,13 @@ public class DisplayPackageScene {
             }
         });
 
+        // HBox for layout
         HBox buttonBox = new HBox();
         buttonBox.getChildren().addAll(deleteButton, viewDetailsButton);
         buttonBox.setSpacing(10);
         buttonBox.setAlignment(Pos.CENTER);
 
+        // VBox for layout
         VBox vBox = new VBox();
         Label emptyLabel = new Label("");
         Label emptyLabel2 = new Label("");
@@ -114,6 +125,7 @@ public class DisplayPackageScene {
 
         vBox.setAlignment(Pos.BASELINE_CENTER);
 
+        // BorderPane for layout
         BorderPane root = new BorderPane();
         root.setLeft(navigationVbox);
         root.setCenter(tableView);

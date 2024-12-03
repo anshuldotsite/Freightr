@@ -11,31 +11,37 @@ import javafx.stage.Stage;
 import org.example.freightr.Database;
 import org.example.freightr.TableCreation.EmployeeLoginTable;
 import org.example.freightr.scenes.packageFormCreationAllScenes.AddPackageScene;
-import org.example.freightr.scenes.packageFormCreationAllScenes.PackageFormScene;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 
 /**
- * Sign In scene
+ * A sign in scene for the user to sign in
  * @author Kautuk Prasad
  */
 public class LoginPageScene {
+    // Variables for storing user and employee names
     private static String userName;
     private static String employeeName;
+
+    // Singleton instance
     private static LoginPageScene instance;
+
     public static Scene createLoginPage(Stage stage) {
+        // VBox for layout
         VBox vBox = new VBox();
 
+        // Retrieving company name
         String companyName = Database.getInstance().getCompanyName();
 
+        // Welcome label
         CustomLabel welcomeLabel = new CustomLabel("Welcome, Freightr." + companyName);
 
+        // Sign in label
         CustomLabel signInHeading = new CustomLabel("Employee Sign In");
 
-        //Hbox for username
+        // HBox for username
         HBox userBox = new HBox();
         CustomLabel userLabel = new CustomLabel("User Name");
         CustomTextField usernameInput = new CustomTextField();
@@ -45,7 +51,7 @@ public class LoginPageScene {
         userBox.setAlignment(Pos.CENTER);
         userBox.setSpacing(10);
 
-        //Hbox for password
+        // HBox for password
         HBox passwordBox = new HBox();
         CustomLabel passwordLabel = new CustomLabel("Password");
         CustomTextField passwordInput = new CustomTextField();
@@ -55,10 +61,11 @@ public class LoginPageScene {
         passwordBox.setAlignment(Pos.CENTER);
         passwordBox.setSpacing(10);
 
-        //signIN button
+        // Sign-in button
         Button signInB = new Button("Sign In");
         CustomLabel resultLabel = new CustomLabel("");
 
+        //
         signInB.setOnAction(event -> {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
             boolean signIn= employeeLoginTable.signIn(usernameInput.getText(), passwordInput.getText());
@@ -79,17 +86,17 @@ public class LoginPageScene {
             }
         });
 
-        //hbox for forgot password and create account
+        // HBox for forgot password and create account
         HBox buttonBox = new HBox();
 
-        //forgot password
+        // Button for forgot password
         Button forgotPasswordB = new Button("Forgot Password?");
         forgotPasswordB.setOnAction(event -> {
             Scene forgotPassScene = ForgotPasswordScene.createForgotPasswordScene(stage);
             stage.setScene(forgotPassScene);
         });
 
-        //new user button
+        // Button for creating a new user account
         Button createAccountB = new Button("Create Account");
 
         createAccountB.setOnAction(event -> {
@@ -101,6 +108,7 @@ public class LoginPageScene {
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(5);
 
+        // Adding all elements to vbox
         vBox.getChildren().addAll(welcomeLabel,signInHeading, userBox, passwordBox, signInB, buttonBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
@@ -128,6 +136,7 @@ public class LoginPageScene {
         return employeeName;
     }
 
+    // Singleton instance
     public static LoginPageScene getInstance(){
         if (instance==null){
             instance=new LoginPageScene();

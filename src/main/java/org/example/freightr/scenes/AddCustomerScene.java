@@ -170,7 +170,7 @@ public class AddCustomerScene {
         gridPane.setVgap(10);
         gridPane.setAlignment(Pos.CENTER);
 
-        // Adding all elements to the vbox and that to the root to display
+        // Adding all elements to the vbox
         vBox.getChildren().addAll(headingBox,gridPane,addButton,addCompanyBtn);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
