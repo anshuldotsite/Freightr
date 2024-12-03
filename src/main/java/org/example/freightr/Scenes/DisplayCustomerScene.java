@@ -83,6 +83,7 @@ public class DisplayCustomerScene {
 
         // Buttons for add and delete customer
         Button addButton = new Button("Add Customer");
+        addButton.setStyle("-fx-text-fill: red");
         Button updateButton = new Button("Update Customer");
 
         // VBox for buttons

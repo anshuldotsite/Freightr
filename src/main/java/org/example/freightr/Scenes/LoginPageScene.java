@@ -36,6 +36,7 @@ public class LoginPageScene {
         // VBox for layout
         VBox vBox = new VBox();
         vBox.setStyle("-fx-spacing: 10px;");
+        vBox.setAlignment(Pos.CENTER);
 
         // Retrieving company name
         String companyName = Database.getInstance().getCompanyName();
@@ -43,12 +44,18 @@ public class LoginPageScene {
         // Welcome label
         CustomLabel welcomeLabel = new CustomLabel(companyName + ".Freightr");
 
+        // Image
+        ImageView imageView = new ImageView(new Image("logo.png"));
+        imageView.setFitWidth(200);
+        imageView.setFitHeight(200);
+        imageView.setPreserveRatio(true);
+
         // Sign in label
         CustomLabel signInHeading = new CustomLabel("Employee Sign In");
 
         // HBox for username
         HBox userBox = new HBox();
-        CustomLabel userLabel = new CustomLabel("Userame");
+        CustomLabel userLabel = new CustomLabel("Username");
         CustomTextField usernameInput = new CustomTextField();
         userBox.getChildren().addAll(userLabel, usernameInput);
         userBox.setAlignment(Pos.CENTER);
@@ -64,11 +71,11 @@ public class LoginPageScene {
 
         // Sign-in button
         Button signInB = new Button("Sign In");
-        signInB.setStyle("  -fx-background-color: #3498db; -fx-text-fill: white;  -fx-padding: 10px 20px;       -fx-font-size: 16px; -fx-background-radius: 5px;  -fx-cursor: hand;");
+        signInB.setStyle(" -fx-background-color: #3498db; -fx-padding: 10px; -fx-text-fill: white; -fx-background-radius: 5px;  -fx-cursor: hand;");
 
         // Result Label
         CustomLabel resultLabel = new CustomLabel("");
-        resultLabel.setStyle("-fx-text-fill: #red;");
+        resultLabel.setStyle("-fx-text-fill: red;");
 
         // This event handler creates a file which stores the details, and if any errors gives an error
         signInB.setOnAction(event -> {
@@ -116,18 +123,13 @@ public class LoginPageScene {
         buttonBox.setSpacing(5);
 
         // Adding all elements to vbox
-        vBox.getChildren().addAll(welcomeLabel, signInHeading, userBox, passwordBox, signInB, buttonBox);
+        vBox.getChildren().addAll(imageView, welcomeLabel, signInHeading, userBox, passwordBox, signInB, buttonBox);
         vBox.setAlignment(Pos.CENTER);
-        vBox.setSpacing(15);
+        vBox.setSpacing(10);
 
-        // Image
-        ImageView imageView = new ImageView(new Image("logo.png"));
-        imageView.setFitWidth(300);
-        imageView.setPreserveRatio(true);
-
+        // Border Pane for layout
         BorderPane root = new BorderPane();
-        root.setRight(vBox);
-        root.setLeft(imageView);
+        root.setCenter(vBox);
 
         return new Scene(root, 900, 640);
     }

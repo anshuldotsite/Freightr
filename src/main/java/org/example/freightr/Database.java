@@ -53,15 +53,13 @@ public class Database {
                         DB_USER,
                         DB_PASSWORD);
                 System.out.println("Connection successful");
+                createTable(Dbconst.TABLE_COMPANY_DETAILS, Dbconst.CREATE_TABLE_COMPANY_DETAILS, connection);
                 createTable(Dbconst.TABLE_CUSTOMER, Dbconst.CREATE_TABLE_CUSTOMER, connection);
                 createTable(Dbconst.TABLE_PACKAGE, Dbconst.CREATE_TABLE_PACKAGE, connection);
-                createTable(Dbconst.TABLE_CUSTOMER_PACKAGES, Dbconst.CREATE_TABLE_CUSTOMER_PACKAGES, connection);
-                createTable(Dbconst.TABLE_COMPANY_DETAILS, Dbconst.CREATE_TABLE_COMPANY_DETAILS, connection);
                 createTable(Dbconst.TABLE_STATUS,Dbconst.CREATE_TABLE_STATUS,connection);
+                 createTable(Dbconst.TABLE_CUSTOMER_PACKAGES, Dbconst.CREATE_TABLE_CUSTOMER_PACKAGES, connection);
                 createTable(Dbconst.TABLE_PACKAGE_TRACKING, Dbconst.CREATE_TABLE_PACKAGE_TRACKING, connection);
                 createTable(Dbconst.TABLE_EMPLOYEE_LOGIN,Dbconst.CREATE_TABLE_EMPLOYEE_LOGIN,connection);
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

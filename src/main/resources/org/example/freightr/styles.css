@@ -7,14 +7,14 @@
 /*    -fx-font-size: 14px;*/
 /*}*/
 
-.button {
-    -fx-background-color: #3498db;
-    -fx-text-fill: white;
-    -fx-padding: 10px;
-    -fx-font-size: 14px;
-    -fx-background-radius: 5px;
-    -fx-cursor: hand;
-}
+/*.button {*/
+/*    -fx-background-color: #3498db;*/
+/*    -fx-text-fill: white;*/
+/*    -fx-padding: 10px;*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-background-radius: 5px;*/
+/*    -fx-cursor: hand;*/
+/*}*/
 
 /* Forgot Password and Create Account buttons */
 .button-small {
@@ -26,10 +26,10 @@
     -fx-font-size: 14px;
 }
 
-/* Input Field Labels */
-.label {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #7f8c8d;
-    -fx-min-width: 75px;
-}
+/*!* Input Field Labels *!*/
+/*.label {*/
+/*    -fx-font-size: 14px;*/
+/*    -fx-font-weight: bold;*/
+/*    -fx-text-fill: #7f8c8d;*/
+/*    -fx-min-width: 75px;*/
+/*}*/
