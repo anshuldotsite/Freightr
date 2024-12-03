@@ -133,8 +133,9 @@ public class AddCustomerScene {
                     // adding condition to refresh the table when adding customer in package
                     Package packages = new Package();
                     Scene senderScene = SenderSelectionScene.CreateSenderSelectionScene(stage,packages);
-                    SenderSelectionScene senderSelectionScene=SenderSelectionScene.getInstance();
-                    senderSelectionScene.refreshTable();
+                    Scene displayCustomerScene = DisplayCustomerScene.createDisplayCustomer(stage);
+                    DisplayCustomerScene.getInstance().refreshTable();
+                    SenderSelectionScene.getInstance().refreshTable();
                 }else {
                     vBox.getChildren().remove(resultLabel);
                     CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
@@ -146,11 +147,14 @@ public class AddCustomerScene {
                     vBox.getChildren().add(resultLabel);
                     Package packages = new Package();
                     Scene senderScene = SenderSelectionScene.CreateSenderSelectionScene(stage,packages);
-                    SenderSelectionScene senderSelectionScene=SenderSelectionScene.getInstance();
-                    senderSelectionScene.refreshTable();
+                    Scene displayCustomerScene = DisplayCustomerScene.createDisplayCustomer(stage);
+                    DisplayCustomerScene.getInstance().refreshTable();
+                    SenderSelectionScene.getInstance().refreshTable();
                 }
             }
         });
+
+        HBox buttonBox = new HBox();
 
         // A button to add company to the database
         Button addCompanyBtn = new Button("Add Company");
@@ -160,12 +164,16 @@ public class AddCustomerScene {
         });
         addCompanyBtn.setAlignment(Pos.CENTER);
 
+        buttonBox.getChildren().addAll(addButton,addCompanyBtn);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setSpacing(10);
+
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setAlignment(Pos.CENTER);
 
         // Adding all elements to the vbox
-        vBox.getChildren().addAll(headingBox,gridPane,addButton,addCompanyBtn);
+        vBox.getChildren().addAll(headingBox,gridPane,buttonBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
