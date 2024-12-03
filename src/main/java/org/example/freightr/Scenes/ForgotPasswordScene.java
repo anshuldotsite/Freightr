@@ -72,8 +72,7 @@ public class ForgotPasswordScene  {
         companyKeyBox.setSpacing(10);
 
         // Update password button
-        Button updatePassB = new Button("Update Password");
-        updatePassB.setStyle("-fx-background-color: #3498db; -fx-text-fill: white;-fx-border-color: transparent; -fx-background-radius: 5px; -fx-padding: 5px 10px;-fx-font-size: 14px;");
+        CustomButton updatePassB = new CustomButton("Update Password");
 
         /**
          * This event handler checks for conditions to update the user's password with errors if they passwords not match and you enter the wrong company key
@@ -102,12 +101,11 @@ public class ForgotPasswordScene  {
         });
 
         // Button to sign in
-        Button signInB = new Button("Sign In");
+        CustomButton signInB = new CustomButton("Sign In");
         signInB.setOnAction(event -> {
             Scene loginPageScene = LoginPageScene.createLoginPage(stage);
             stage.setScene(loginPageScene);
         });
-        signInB.setStyle("  -fx-background-color: #3498db; -fx-text-fill: white;  -fx-padding: 10px;       -fx-font-size: 16px; -fx-background-radius: 5px;  -fx-cursor: hand;");
 
         // HBox for buttons
         HBox buttonBox = new HBox();

@@ -32,7 +32,7 @@ public class StatisticsScene {
         pieChart.setLabelsVisible(false);
 
         // Refresh button to refresh data
-        Button refreshBtn = new Button("Refresh");
+        CustomButton refreshBtn = new CustomButton("Refresh");
         refreshBtn.setOnAction(event -> {
             StatisticsScene.getInstance().generateChart();
         });

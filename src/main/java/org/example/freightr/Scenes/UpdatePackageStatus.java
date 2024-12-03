@@ -85,7 +85,7 @@ public class UpdatePackageStatus {
         gridPane.setAlignment(Pos.CENTER);
 
         // Button to update the status
-        Button updateBtn = new Button("Update");
+        CustomButton updateBtn = new CustomButton("Update");
         updateBtn.setAlignment(Pos.CENTER);
 
         // Label for result

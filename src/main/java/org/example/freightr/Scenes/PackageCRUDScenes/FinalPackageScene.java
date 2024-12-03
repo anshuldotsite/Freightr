@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.Scenes.CustomButton;
 import org.example.freightr.TableCreation.CustomerPackageReceiverCRUD;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.CustomerPackageReceiver;
@@ -131,7 +132,7 @@ public class FinalPackageScene {
 
 
         // Button to add the data into the database
-        Button addDataButton = new Button("Create Package");
+        CustomButton addDataButton = new CustomButton("Create Package");
 
         // Label for errors
         CustomLabel resultLabel = new CustomLabel("");

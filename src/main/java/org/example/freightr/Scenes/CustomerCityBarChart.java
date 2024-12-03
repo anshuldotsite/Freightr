@@ -35,7 +35,7 @@ public class CustomerCityBarChart {
         barChart.setTitle("Customer Count by City");
 
         // Refresh button
-        Button refreshBtn = new Button("Refresh");
+        CustomButton refreshBtn = new CustomButton("Refresh");
         refreshBtn.setOnAction(event -> {
             CustomerCityBarChart.getInstance().generateChart();
         });

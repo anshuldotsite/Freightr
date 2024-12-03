@@ -7,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.Scenes.CustomButton;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
@@ -70,7 +70,7 @@ public class SenderSelectionScene {
         tableView.setItems(customerList);
 
         // Button to select the customers
-        Button selectCustomerBtn = new Button("Select Customer");
+        CustomButton selectCustomerBtn = new CustomButton("Select Customer");
         selectCustomerBtn.setDisable(true);
 
         // This event handler enables the select button when a customer is selected
@@ -100,7 +100,7 @@ public class SenderSelectionScene {
 
 
         // Button to create a new sender
-        Button SenderButton = new Button("Create a new sender");
+        CustomButton SenderButton = new CustomButton("Create a new sender");
         SenderButton.setOnAction(e->{
             Stage newStage = new Stage();
             Scene addCustomerScene = AddCustomerScene.createAddCustomer(newStage);
@@ -112,7 +112,7 @@ public class SenderSelectionScene {
         NavigationVBox navigationVbox = new NavigationVBox(stage);
 
         //Refresh button
-        Button refreshButton = new Button("Refresh");
+        CustomButton refreshButton = new CustomButton("Refresh");
 
         // HBox for layout
         HBox buttonBox = new HBox();

@@ -9,12 +9,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.Scenes.*;
 import org.example.freightr.TableCreation.PackageTableCRUD;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
-import org.example.freightr.Scenes.CustomLabel;
-import org.example.freightr.Scenes.CustomTextField;
-import org.example.freightr.Scenes.LoginPageScene;
-import org.example.freightr.Scenes.NavigationVBox;
 
 import java.util.Date;
 
@@ -33,7 +30,6 @@ public class AddPackageScene {
         NavigationVBox navigationVBox = new NavigationVBox(stage);
         PackageTableCRUD packageTableCRUD = PackageTableCRUD.getInstance();
         LoginPageScene loginPageScene = LoginPageScene.getInstance();
-
 
         // Heading Label
         CustomLabel heading = new CustomLabel("Add New Package");
@@ -76,15 +72,16 @@ public class AddPackageScene {
         gridPane.add(weightTF, 1, 4);
 
         // Price Calculation Button
-        Button calculateChargesBtn = new Button("Calculate Charges");
+        CustomButton calculateChargesBtn = new CustomButton("Calculate Charges");
         CustomLabel priceLabel = new CustomLabel("Price: ");
         CustomLabel charge = new CustomLabel("");
         gridPane.add(calculateChargesBtn, 0, 5);
         gridPane.add(priceLabel, 1, 5);
         gridPane.add(charge,2,5);
 
+
         // Add Package Button
-        Button addPackageBtn = new Button("Add sender details");
+        CustomButton addPackageBtn = new CustomButton("Add sender details");
         Label resultLabel = new Label("");
 
         // Pricing Logic
