@@ -126,26 +126,12 @@ public class FinalPackageScene {
         receiverPane.add(receiverEmail,1,2);
 
 
-        // Label for receiver's contact
-        CustomLabel receiverContactLabel = new CustomLabel("Receiver Contact: ");
-        CustomLabel receiverContact = new CustomLabel(receiver.getContactNumber());
-        receiverPane.add(receiverContactLabel,0,3);
-        receiverPane.add(receiverContact,1,3);
+        CustomLabel location = new CustomLabel(sender.getCity());
 
-        // Label for warehouse location
-        CustomLabel warehouseLocation = new CustomLabel("Package at Warehouse In: ");
-        TextField location = new TextField();
-        location.setText(sender.getCity());
 
-        // HBox for buttons
-        HBox buttonBox = new HBox();
 
         // Button to add the data into the database
         Button addDataButton = new Button("Create Package");
-
-        buttonBox.getChildren().addAll(warehouseLocation,addDataButton);
-        buttonBox.setSpacing(10);
-        buttonBox.setAlignment(Pos.CENTER);
 
         // Label for errors
         CustomLabel resultLabel = new CustomLabel("");
@@ -166,6 +152,7 @@ public class FinalPackageScene {
 
 PackageTracking packageTracking = new PackageTracking(0,packageGeneratedkey,location.getText(),1);
             PackageTrackingTable.getInstance().addPackageTracking(packageTracking);
+            //start get tracking id here
             resultLabel.setText("Package Created Successfully");
             mainBox.getChildren().add(resultLabel);
 
@@ -179,7 +166,7 @@ PackageTracking packageTracking = new PackageTracking(0,packageGeneratedkey,loca
         receiverBox.setAlignment(Pos.CENTER);
 
         // Adding all elements to the VBox
-        mainBox.getChildren().addAll(headingBox,senderBox,customerPane,receiverBox,receiverPane,buttonBox);
+        mainBox.getChildren().addAll(headingBox,senderBox,customerPane,receiverBox,receiverPane,addDataButton);
         mainBox.setSpacing(20);
         mainBox.setAlignment(Pos.CENTER);
 
