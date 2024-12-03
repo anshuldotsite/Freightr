@@ -120,9 +120,10 @@ public class ForgotPasswordScene  {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
-        // BorderPane for root
+        // BorderPane for layout
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }

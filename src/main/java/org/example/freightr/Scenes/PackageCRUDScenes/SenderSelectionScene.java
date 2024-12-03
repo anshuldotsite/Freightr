@@ -133,6 +133,7 @@ public class SenderSelectionScene {
         root.setCenter(tableView);
         root.setLeft(navigationVbox);
         root.setBottom(buttonVBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900, 640);
     }
