@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
         // CSS Stylesheets
        // String stylesheet = getClass().getResource("/styles.css").toExternalForm();
        // dbScene.getStylesheets().add(stylesheet);
-       // loginScene.getStylesheets().add(stylesheet);
+       //  loginScene.getStylesheets().add(stylesheet);
 
         File file = new File("credentials.txt");
         if (!file.exists()){

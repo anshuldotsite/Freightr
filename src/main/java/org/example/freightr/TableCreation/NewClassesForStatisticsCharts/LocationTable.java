@@ -1,4 +1,4 @@
-package org.example.freightr.TableCreation;
+package org.example.freightr.TableCreation.NewClassesForStatisticsCharts;
 
 import org.example.freightr.Database;
 import org.example.freightr.TableCreation.DOA.LocationDOA;

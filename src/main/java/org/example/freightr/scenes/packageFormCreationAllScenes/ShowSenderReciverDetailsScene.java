@@ -47,44 +47,46 @@ public class ShowSenderReciverDetailsScene {
         gridPane.add(headerSender, 0, 0);
 
         gridPane.add(new Label("Name: "), 0, 1);
-        gridPane.add(new Label(sender.getFirstName() + " " + sender.getLastName()), 0, 2);
+        gridPane.add(new Label(sender.getFirstName() + " " + sender.getLastName()), 1, 1);
 
-        gridPane.add(new Label("Contact: "), 0, 3);
-        gridPane.add(new Label(sender.getContactNumber()), 0, 4);
-        gridPane.add(new Label("Email: "), 0, 5);
-        gridPane.add(new Label(sender.getEmail()), 0, 6);
+        gridPane.add(new Label("Contact: "), 0, 2);
+        gridPane.add(new Label(sender.getContactNumber()), 1, 2);
 
-        gridPane.add(new Label("Address: "), 0, 7);
-        gridPane.add(new Label(sender.getAddress()), 0, 8);
+        gridPane.add(new Label("Email: "), 0, 3);
+        gridPane.add(new Label(sender.getEmail()), 1, 3);
+
+
+        gridPane.add(new Label("Address: "), 0, 4);
+        gridPane.add(new Label(sender.getAddress()), 1, 4);
+
         if (senderCompany != null) {
-            gridPane.add(new Label("Company: "), 0, 9);
-            gridPane.add(new Label(senderCompany.getCompanyName()), 0, 10);
+            gridPane.add(new Label("Company: "), 0, 5);
+            gridPane.add(new Label(senderCompany.getCompanyName()), 1, 5);
         }
+
 
         Label headerReceiver = new Label("Receiver Details");
         headerReceiver.setFont(new Font("Arial", 18));
-        gridPane.add(headerReceiver, 1, 0);
-        gridPane.add(new Label("Name: "), 1, 1);
-        gridPane.add(new Label(receiver.getFirstName() + " " + receiver.getLastName()), 1, 2);
+        gridPane.add(headerReceiver, 2, 0);
+        gridPane.add(new Label("Name: "), 2, 1);
+        gridPane.add(new Label(receiver.getFirstName() + " " + receiver.getLastName()), 3, 1);
 
-        gridPane.add(new Label("Contact: "), 1, 3);
-        gridPane.add(new Label(receiver.getContactNumber()), 1, 4);
-        gridPane.add(new Label("Email: "), 1, 5);
-        gridPane.add(new Label(receiver.getEmail()), 1, 6);
-        gridPane.add(new Label("Address: "), 1, 7);
-        gridPane.add(new Label(receiver.getAddress()), 1, 8);
+        gridPane.add(new Label("Contact: "), 2, 2);
+        gridPane.add(new Label(receiver.getContactNumber()), 3, 2);
+
+        gridPane.add(new Label("Email: "), 2, 3);
+        gridPane.add(new Label(receiver.getEmail()), 3, 3);
+
+        gridPane.add(new Label("Address: "), 2, 4);
+        gridPane.add(new Label(receiver.getAddress()), 3, 4);
 
         if (receiverCompany != null) {
-            gridPane.add(new Label("Company: "), 1, 9);
-            gridPane.add(new Label(receiverCompany.getCompanyName()), 1, 10);
+            gridPane.add(new Label("Company: "), 2, 5);
+            gridPane.add(new Label(receiverCompany.getCompanyName()), 3, 5);
         }
 
-        // Adding the GridPane to the BorderPane
+
         bp.setCenter(gridPane);
-
-
-
-
         return  new Scene(bp, 900, 640);
     }
 }

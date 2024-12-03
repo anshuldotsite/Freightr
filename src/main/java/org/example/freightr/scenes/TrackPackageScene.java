@@ -4,17 +4,15 @@ package org.example.freightr.scenes;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.ObjectClasses.Company;
 import org.example.freightr.TableCreation.ObjectClasses.PackageTracking;
 import org.example.freightr.TableCreation.ObjectClasses.StatusPOJO;
 import org.example.freightr.TableCreation.PackageTrackingTable;
-import org.example.freightr.TableCreation.StatusTable;
+import org.example.freightr.TableCreation.NewClassesForStatisticsCharts.StatusTable;
 
 import java.util.ArrayList;
 

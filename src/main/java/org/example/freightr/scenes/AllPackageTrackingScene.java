@@ -12,18 +12,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.ObjectClasses.Customer;
-import org.example.freightr.TableCreation.ObjectClasses.Package;
 import org.example.freightr.TableCreation.ObjectClasses.StatusPOJO;
 import org.example.freightr.TableCreation.PackageCustomTrackingAll;
 import org.example.freightr.TableCreation.ObjectClasses.PackageCustomTracking;
-import org.example.freightr.TableCreation.StatusTable;
+import org.example.freightr.TableCreation.NewClassesForStatisticsCharts.StatusTable;
 import org.example.freightr.scenes.packageFormCreationAllScenes.ShowSenderReciverDetailsScene;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static javafx.geometry.Pos.BOTTOM_CENTER;
 
 /**
  * A scene to track all packages

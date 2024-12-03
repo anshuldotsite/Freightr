@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import org.example.freightr.TableCreation.ObjectClasses.PackageCustomTracking;
 import org.example.freightr.TableCreation.ObjectClasses.StatusPOJO;
 import org.example.freightr.TableCreation.PackageCustomTrackingAll;
-import org.example.freightr.TableCreation.StatusTable;
+import org.example.freightr.TableCreation.NewClassesForStatisticsCharts.StatusTable;
 
 import java.util.ArrayList;
 

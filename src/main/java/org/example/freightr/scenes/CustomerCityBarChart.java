@@ -11,38 +11,42 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.example.freightr.TableCreation.NewClassesForStatisticsCharts.LocationTable;
-import org.example.freightr.TableCreation.ObjectClasses.LocationForStats;
+import org.example.freightr.TableCreation.NewClassesForStatisticsCharts.CustomerTable;
+import org.example.freightr.TableCreation.ObjectClasses.CustomerCountByCity;
 
 import java.util.ArrayList;
 
-public class LocationBarChartStats {
+public class CustomerCityBarChart {
 
     private static BarChart<String, Number> barChart;
-    private static LocationBarChartStats instance;
+    private static CustomerCityBarChart instance;
 
     public static Scene createBarChartScene(Stage stage) {
+        // Define axes
+        CategoryAxis cityAxis = new CategoryAxis();
+        NumberAxis countAxis = new NumberAxis();
 
+        cityAxis.setLabel("City");
+        countAxis.setLabel("Customer Count");
 
-        CategoryAxis LocationAxis = new CategoryAxis();
-        NumberAxis NumberAxis = new NumberAxis();
+        // Create bar chart
+        barChart = new BarChart<>(cityAxis, countAxis);
+        barChart.setTitle("Customer Count by City");
 
-
-        LocationAxis.setLabel("Location");
-        NumberAxis.setLabel("Package Count");
-        barChart = new BarChart<>(LocationAxis, NumberAxis);
-        barChart.setTitle("Packages by Location");
-
+        // Refresh button
         Button refreshBtn = new Button("Refresh");
         refreshBtn.setOnAction(event -> {
-            LocationBarChartStats.getInstance().generateChart();
+            CustomerCityBarChart.getInstance().generateChart();
         });
 
-        LocationBarChartStats.getInstance().generateChart();
+        // Generate initial chart
+        CustomerCityBarChart.getInstance().generateChart();
 
+        // Layout setup
         VBox buttonBox = new VBox();
         buttonBox.getChildren().addAll(refreshBtn);
         buttonBox.setAlignment(Pos.CENTER);
+
         NavigationVBox navigationVBox = new NavigationVBox(stage);
 
         BorderPane root = new BorderPane();
@@ -54,25 +58,24 @@ public class LocationBarChartStats {
     }
 
     public void generateChart() {
-        LocationTable locationTable = LocationTable.getInstance();
-        ArrayList<LocationForStats> locations = locationTable.getPackagesAtLocations();
+        CustomerTable customerTable = CustomerTable.getInstance();
+        ArrayList<CustomerCountByCity> customerData = customerTable.getCustomerCountByCity();
         ObservableList<BarChart.Series<String, Number>> chartData = FXCollections.observableArrayList();
 
-
         BarChart.Series<String, Number> series = new BarChart.Series<>();
-        series.setName("Package Count");
-        for (LocationForStats location : locations) {
-            int count = location.getPackageCount();
-            if (count > 0) {
-                series.getData().add(new BarChart.Data<>(location.getLocation(), count));
-            }
+        series.setName("Customer Count");
+
+        for (CustomerCountByCity data : customerData) {
+            series.getData().add(new BarChart.Data<>(data.getCity(), data.getCustomerCount()));
         }
+
         barChart.getData().clear();
         barChart.getData().add(series);
     }
-    public static LocationBarChartStats getInstance() {
+
+    public static CustomerCityBarChart getInstance() {
         if (instance == null) {
-            instance = new LocationBarChartStats();
+            instance = new CustomerCityBarChart();
         }
         return instance;
     }
