@@ -27,6 +27,7 @@ import java.util.Date;
 public class AllPackageTrackingScene {
     // A tableview variable
     private static TableView tableView;
+
     public static Scene createAllPackageTrackingScene(Stage stage) {
         // A BorderPane for layout
         BorderPane bp = new BorderPane();
@@ -44,6 +45,7 @@ public class AllPackageTrackingScene {
         statusComboBox.setItems(FXCollections.observableArrayList(statusTable.getAllStatus()));
         statusComboBox.getSelectionModel().select(0);
         statusComboBox.setOnAction(event -> filterTableByStatus(statusComboBox.getValue().getStatus()));
+        statusComboBox.setStyle("-fx-background-color: #C5705D; -fx-font-size: 14px; ;-fx-padding: 5px 10px; -fx-border-color: #C5705D;");
 
         // A tableview object
         tableView = new TableView<>();
@@ -87,20 +89,20 @@ public class AllPackageTrackingScene {
         VBox alignBox = new VBox();
 
         // Adding all elements to the hbox
-        buttonBox.getChildren().addAll(viewDetailsButton,updateButton);
+        buttonBox.getChildren().addAll(viewDetailsButton, updateButton);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(10);
 
-        alignBox.getChildren().addAll(emptyLabel,buttonBox,emptyLabel2);
+        alignBox.getChildren().addAll(emptyLabel, buttonBox, emptyLabel2);
         alignBox.setAlignment(Pos.CENTER);
 
         // Enable/Disable button that checks based on the selection in table view
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                if (newValue!=null){
+                if (newValue != null) {
                     updateButton.setDisable(false);
-                }else {
+                } else {
                     updateButton.setDisable(true);
                 }
             }
@@ -121,7 +123,7 @@ public class AllPackageTrackingScene {
 
         updateButton.setOnAction(event -> {
             PackageCustomTracking selectedPackage = (PackageCustomTracking) tableView.getSelectionModel().getSelectedItem();
-            Scene updatePackageStatus = UpdatePackageStatus.createUpdateStatus(stage,selectedPackage);
+            Scene updatePackageStatus = UpdatePackageStatus.createUpdateStatus(stage, selectedPackage);
             stage.setScene(updatePackageStatus);
         });
 
@@ -155,10 +157,14 @@ public class AllPackageTrackingScene {
     // A status string for its ID
     private static int getStatusIdFromString(String status) {
         switch (status) {
-            case "In Warehouse": return 1;
-            case "In Transit": return 2;
-            case "Delivered": return 3;
-            default: return 1;
+            case "In Warehouse":
+                return 1;
+            case "In Transit":
+                return 2;
+            case "Delivered":
+                return 3;
+            default:
+                return 1;
         }
     }
 }
