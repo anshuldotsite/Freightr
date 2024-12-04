@@ -5,6 +5,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -77,7 +78,7 @@ public class AllPackageTrackingScene {
         );
 
         // HBox for layout
-        HBox buttonBox = new HBox();
+        HBox buttonBox = new HBox(20);
 
         // Buttons for updating and viewing
         CustomButton viewDetailsButton = new CustomButton("View Details");
@@ -90,11 +91,11 @@ public class AllPackageTrackingScene {
 
         // Adding all elements to the hbox
         buttonBox.getChildren().addAll(viewDetailsButton, updateButton);
-        buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.setSpacing(10);
+        buttonBox.setAlignment(Pos.BOTTOM_CENTER);
+        buttonBox.setPadding(new Insets(10, 0, 0, 0));
 
-        alignBox.getChildren().addAll(emptyLabel, buttonBox, emptyLabel2);
-        alignBox.setAlignment(Pos.CENTER);
+        alignBox.getChildren().addAll(buttonBox, emptyLabel, emptyLabel2);
+        alignBox.setAlignment(Pos.BOTTOM_CENTER);
 
         // Enable/Disable button that checks based on the selection in table view
         tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
@@ -134,8 +135,8 @@ public class AllPackageTrackingScene {
         NavigationVBox navigationVBox = new NavigationVBox(stage);
         navigationVBox.getChildren().add(statusComboBox);
         bp.setLeft(navigationVBox);
-        bp.setBottom(alignBox);
         bp.setTop(headingBox);
+        bp.setBottom(alignBox);
         bp.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(bp, 900, 640);
