@@ -32,7 +32,6 @@ public class CustomNavButton extends Button {
         ));
 
 
-
         this.setOnMouseExited(e -> this.setStyle(
                 "-fx-background-color: #F8EDE3; " +
                         "-fx-text-fill: #C5705D; " +
