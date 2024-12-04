@@ -25,20 +25,21 @@ public class NavigationVBox extends VBox {
         employeeLabel.setStyle("-fx-text-fill: #F8EDE3;-fx-font-size: 22px; -fx-padding: 10px;");
 
         // Button for create new package
-        CustomNavButton Button1 = new CustomNavButton("Create New Package");
+        CustomNavButton Button1 = new CustomNavButton("Create a new package");
         // Button for track package
-        CustomNavButton button2 = new CustomNavButton("Track Package");
+        CustomNavButton button2 = new CustomNavButton("Track your package by ID");
         // Button for navigation to all customers
-        CustomNavButton button3 = new CustomNavButton("All Customers");
+        CustomNavButton button3 = new CustomNavButton("Your customers");
         // Button for navigation to all packages
-        CustomNavButton button4 = new CustomNavButton("All Packages");
+        CustomNavButton button4 = new CustomNavButton("Your packages");
         // Button for navigation to package tracking
-        CustomNavButton button6 = new CustomNavButton("All Packages Tracking");
-        // Button for seeing stats
-        CustomNavButton button7 = new CustomNavButton("Statistics");
-        // Button to see the bar chart
-        CustomNavButton button8 = new CustomNavButton("barchart location");
-        CustomNavButton button9 = new CustomNavButton("Customer Location");
+        CustomNavButton button6 = new CustomNavButton("Track your packages");
+        // Button to see package status
+        CustomNavButton button7 = new CustomNavButton("Current package status");
+        // Button to see the packages by location
+        CustomNavButton button8 = new CustomNavButton("Current package location");
+        // Button to see the number of customers per city
+        CustomNavButton button9 = new CustomNavButton("View customers by city");
         // Button to log out from the application
         CustomNavButton button5 = new CustomNavButton("Logout");
 
