@@ -94,13 +94,14 @@ public class LoginPageScene {
 
         // Result Label
         CustomLabel resultLabel = new CustomLabel("");
-        resultLabel.setStyle("-fx-text-fill: red;");
+        resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px");
 
         // This event handler creates a file which stores the details, and if any errors gives an error
         signInB.setOnAction(event -> {
             if (usernameInput.getText().equals("")||passwordInput.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Please fill out all the fields");
+                resultLabel.setStyle("-fx-text-fill: red;");
                 vBox.getChildren().add(resultLabel);
             }else {
                 EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
@@ -118,6 +119,7 @@ public class LoginPageScene {
                 } else {
                     vBox.getChildren().remove(resultLabel);
                     resultLabel.setText("Wrong User Name or Password");
+                    resultLabel.setStyle("-fx-text-fill: red;");
                     vBox.getChildren().add(resultLabel);
                 }
             }

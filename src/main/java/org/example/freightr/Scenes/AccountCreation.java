@@ -84,7 +84,10 @@ public class AccountCreation {
 
         // Button to create account
         CustomButton createAccount = new CustomButton("Create Account");
+
+        // CustomLabel
         CustomLabel resultLabel = new CustomLabel("");
+        resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px");
         resultLabel.setAlignment(Pos.CENTER);
 
         /**
@@ -99,7 +102,7 @@ public class AccountCreation {
             usernameText.getText().equals("")||passwordText.getText().equals("")||confirmPassword.getText().equals("")||
             companyKeyTF.getText().equals("")){
                 resultLabel.setText("Please fill out all the fields");
-                resultLabel.setStyle("-fx-background-color: red;");
+                resultLabel.setStyle("-fx-text-fill: red;");
                 vbox.getChildren().add(resultLabel);
             }else {
                 if (companyKeyTF.getText().equals(db.getCompanyKey())){
@@ -108,17 +111,17 @@ public class AccountCreation {
                         EmployeeLoginTable employeeLoginTable =EmployeeLoginTable.getInstance();
                         if (employeeLoginTable.checkUserExists(usernameText.getText()) == true){
                             resultLabel.setText("User Name already exists, try another one.");
-                            resultLabel.setStyle("-fx-background-color: red;");
+                            resultLabel.setStyle("-fx-text-fill: red;");
                             vbox.getChildren().add(resultLabel);
                         }else {
                             employeeLoginTable.createAccount(newEmployee);
                             resultLabel.setText("Account Created");
-                            resultLabel.setStyle("-fx-background-color: green;");
+                            resultLabel.setStyle("-fx-text-fill: green;");
                             vbox.getChildren().add(resultLabel);
                         }
                     }else {
                         resultLabel.setText("Password and Confirm Password fields did not match.");
-                        resultLabel.setStyle("-fx-background-color: red;");
+                        resultLabel.setStyle("-fx-text-fill: red;");
                         vbox.getChildren().add(resultLabel);
                     }
                 }else {

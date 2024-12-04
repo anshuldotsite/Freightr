@@ -69,6 +69,7 @@ public class ForgotPasswordScene  {
 
         // Result Label
         CustomLabel resultLabel = new CustomLabel("");
+        resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px");
 
         /**
          * This event handler checks for conditions to update the user's password with errors if they passwords not match and you enter the wrong company key
@@ -78,8 +79,8 @@ public class ForgotPasswordScene  {
             if (userNameInput.getText().equals("")||passwordInput.getText().equals("")||
                     confirmPasswordIn.getText().equals("")||companyKeyIn.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
-                resultLabel.setStyle("-fx-text-fill: red;");
                 resultLabel.setText("Please fill out all the fields");
+                resultLabel.setStyle("-fx-text-fill: red;");
                 vBox.getChildren().add(resultLabel);
             }
             else{
