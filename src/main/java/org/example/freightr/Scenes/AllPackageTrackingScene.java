@@ -45,7 +45,7 @@ public class AllPackageTrackingScene {
         statusComboBox.setItems(FXCollections.observableArrayList(statusTable.getAllStatus()));
         statusComboBox.getSelectionModel().select(0);
         statusComboBox.setOnAction(event -> filterTableByStatus(statusComboBox.getValue().getStatus()));
-        statusComboBox.setStyle("-fx-background-color: #C5705D; -fx-font-size: 14px; ;-fx-padding: 5px 10px; -fx-border-color: #C5705D;");
+        statusComboBox.setStyle("-fx-background-color: #C5705D; -fx-font-size: 18px; ;-fx-padding: 5px 10px; -fx-border-color: #C5705D; -fx-font-family: 'Roboto';");
 
         // A tableview object
         tableView = new TableView<>();

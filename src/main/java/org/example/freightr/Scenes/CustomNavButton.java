@@ -11,12 +11,13 @@ public class CustomNavButton extends Button {
                 "-fx-background-color: #F8EDE3; " +
                         "-fx-text-fill: #C5705D; " +
                         "-fx-padding: 5px 7.5px; " +
-                        "-fx-font-size: 14px; " +
+                        "-fx-font-size: 16px; " +
                         "-fx-border-color: #000; " +
                         "-fx-border-width: 0px; " +
                         "-fx-border-radius: 1.5px; " +
                         "-fx-background-radius: 3px; " +
-                        "-fx-cursor: hand;"
+                        "-fx-cursor: hand;" +
+                        "-fx-font-weight: bold"
         );
 
 
@@ -25,12 +26,13 @@ public class CustomNavButton extends Button {
                 "-fx-background-color: #FAF3E3; " +
                         "-fx-text-fill: #C5705D; " +
                         "-fx-padding: 5px 7.5px; " +
-                        "-fx-font-size: 16px; " +
+                        "-fx-font-size: 18px; " +
                         "-fx-border-color: #000; " +
                         "-fx-border-width: 0px; " +
                         "-fx-border-radius: 1.5px; " +
                         "-fx-background-radius: 3px; " +
-                        "-fx-cursor: hand;"
+                        "-fx-cursor: hand;" +
+                        "-fx-font-weight: bold"
         ));
 
 
@@ -39,12 +41,13 @@ public class CustomNavButton extends Button {
                 "-fx-background-color: #F8EDE3; " +
                         "-fx-text-fill: #C5705D; " +
                         "-fx-padding: 5px 7.5px; " +
-                        "-fx-font-size: 15px; " +
+                        "-fx-font-size: 16px; " +
                         "-fx-border-color: #000; " +
                         "-fx-border-width: 0px; " +
                         "-fx-border-radius: 1.5px; " +
                         "-fx-background-radius: 3px; " +
-                        "-fx-cursor: hand;"
+                        "-fx-cursor: hand;" +
+                        "-fx-font-weight: bold"
         ));
     }
 }
