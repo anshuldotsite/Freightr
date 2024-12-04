@@ -36,9 +36,6 @@ public class PackageDetailsScene {
         Customer sender = customerTableCreation.getCustomer(senderId);
         Customer receiver = customerTableCreation.getCustomer(receiverId);
 
-        CompanyTableCreation companyTableCreation = CompanyTableCreation.getInstance();
-        Company senderCompany = sender.getCompanyId() != 0 ? companyTableCreation.getCompany(sender.getCompanyId()) : null;
-        Company receiverCompany = receiver.getCompanyId() != 0 ? companyTableCreation.getCompany(receiver.getCompanyId()) : null;
 
         // Creating a styled GridPane
         GridPane gridPane = new GridPane();
@@ -62,10 +59,10 @@ public class PackageDetailsScene {
 
         gridPane.add(new CustomLabel("Address: "), 0, 4);
         gridPane.add(new CustomLabel2(sender.getAddress()), 1, 4);
-        if (senderCompany != null) {
-            gridPane.add(new CustomLabel("Company: "), 0, 5);
-            gridPane.add(new CustomLabel2(senderCompany.getCompanyName()), 1, 5);
-        }
+
+        gridPane.add(new CustomLabel("Type: "), 0, 5);
+        gridPane.add(new CustomLabel2(sender.getCustomerType()), 1, 5);
+
 
         CustomLabel headerReceiver = new CustomLabel("Receiver Details");
         headerReceiver.setFont(new Font("Arial", 18));
@@ -81,10 +78,10 @@ public class PackageDetailsScene {
         gridPane.add(new CustomLabel("Address: "), 2, 4);
         gridPane.add(new CustomLabel2(receiver.getAddress()), 3, 4);
 
-        if (receiverCompany != null) {
-            gridPane.add(new CustomLabel("Company: "), 2, 5);
-            gridPane.add(new Label(receiverCompany.getCompanyName()), 3, 5);
-        }
+
+        gridPane.add(new CustomLabel("Type: "), 2, 5);
+        gridPane.add(new CustomLabel2(receiver.getCustomerType()), 3, 5);
+
 
         // Adding the GridPane to the BorderPane
         bp.setCenter(gridPane);
