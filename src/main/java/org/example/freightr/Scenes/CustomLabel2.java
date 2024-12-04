@@ -1,0 +1,10 @@
+package org.example.freightr.Scenes;
+
+import javafx.scene.control.Label;
+
+public class CustomLabel2 extends Label {
+    public CustomLabel2(String text) {
+        super(text);
+        this.setStyle("-fx-font-size: 18px; -fx-text-fill: #C5705D; -fx-font-family: Helvetica, sans-serif");
+    }
+}
