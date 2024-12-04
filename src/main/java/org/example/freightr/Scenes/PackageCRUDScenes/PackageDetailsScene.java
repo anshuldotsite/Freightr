@@ -6,16 +6,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.example.freightr.Scenes.CustomLabel;
-import org.example.freightr.Scenes.CustomLabel2;
+import org.example.freightr.Scenes.*;
 import org.example.freightr.TableCreation.CompanyTableCreation;
 import org.example.freightr.TableCreation.CustomerPackageReceiverCRUD;
 import org.example.freightr.TableCreation.CustomerTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Company;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
-import org.example.freightr.Scenes.NavigationVBox;
 
 /**
  * This class shows the details of both the sender and the receiver of the package
@@ -35,6 +34,9 @@ public class PackageDetailsScene {
         CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
         Customer sender = customerTableCreation.getCustomer(senderId);
         Customer receiver = customerTableCreation.getCustomer(receiverId);
+
+        //Vbox
+        VBox vBox = new VBox();
 
 
         // Creating a styled GridPane
@@ -82,9 +84,20 @@ public class PackageDetailsScene {
         gridPane.add(new CustomLabel("Type: "), 2, 5);
         gridPane.add(new CustomLabel2(receiver.getCustomerType()), 3, 5);
 
+        //back button
+        CustomButton backButton = new CustomButton("Back");
+        backButton.setOnAction(event -> {
+            Scene allPackageScene = DisplayPackageScene.createDisplayPackage(stage);
+            stage.setScene(allPackageScene);
+        });
+
+        vBox.getChildren().addAll(gridPane,backButton);
+        vBox.setSpacing(10);
+        vBox.setAlignment(Pos.CENTER);
+
 
         // Adding the GridPane to the BorderPane
-        bp.setCenter(gridPane);
+        bp.setCenter(vBox);
         bp.setStyle("-fx-background-color: #F8EDE3");
 
         return  new Scene(bp, 900, 640);

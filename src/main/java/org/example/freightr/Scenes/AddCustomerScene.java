@@ -164,6 +164,13 @@ public class AddCustomerScene {
         });
         addCompanyBtn.setAlignment(Pos.CENTER);
 
+        //back button
+        CustomButton backButton = new CustomButton("Back");
+        backButton.setOnAction(event -> {
+            Scene allCustomerScene = DisplayCustomerScene.createDisplayCustomer(stage);
+            stage.setScene(allCustomerScene);
+        });
+
         buttonBox.getChildren().addAll(addButton,addCompanyBtn);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(10);
@@ -173,7 +180,7 @@ public class AddCustomerScene {
         gridPane.setAlignment(Pos.CENTER);
 
         // Adding all elements to the vbox
-        vBox.getChildren().addAll(headingBox,gridPane,buttonBox);
+        vBox.getChildren().addAll(headingBox,gridPane,buttonBox,backButton);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
