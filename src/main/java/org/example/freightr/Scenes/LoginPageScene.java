@@ -56,7 +56,9 @@ public class LoginPageScene {
         // HBox for username
         HBox userBox = new HBox();
         CustomLabel userLabel = new CustomLabel("Username");
+        userLabel.setMinWidth(100);
         CustomTextField usernameInput = new CustomTextField();
+        usernameInput.setPrefWidth(200);
         userBox.getChildren().addAll(userLabel, usernameInput);
         userBox.setAlignment(Pos.CENTER);
         userBox.setSpacing(12);
@@ -64,11 +66,13 @@ public class LoginPageScene {
         // HBox for password
         HBox passwordBox = new HBox();
         CustomLabel passwordLabel = new CustomLabel("Password");
+        passwordLabel.setMinWidth(100);
         PasswordField passwordInput = new PasswordField();
+        passwordInput.setPrefWidth(200);
         passwordBox.getChildren().addAll(passwordLabel, passwordInput);
         passwordBox.setAlignment(Pos.CENTER);
-        passwordBox.setSpacing(14);
-        passwordInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000;  -fx-font-size: 14px;");
+        passwordBox.setSpacing(12);
+        passwordInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000; -fx-font-size: 14px;");
 
         // Sign-in button
         CustomButton signInB = new CustomButton("Sign In");
