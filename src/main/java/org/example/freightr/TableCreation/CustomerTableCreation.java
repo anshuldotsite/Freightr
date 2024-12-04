@@ -254,6 +254,114 @@ public class CustomerTableCreation implements CustomerDoa {
         }
         return customers;
     }
+
+    /**
+     * @author Kautuk Prasad
+     * @param customer
+     * @return newly inserted company associated customer object with id
+     */
+    @Override
+    public Customer addCustomerWCompany(Customer customer) {
+        Customer newCustomer = new Customer();
+        String query = "INSERT INTO " + TABLE_CUSTOMER + " (" +
+                CUSTOMER_COLUMN_COMPANY_ID + ", " +
+                CUSTOMER_COLUMN_FIRST_NAME + ", " +
+                CUSTOMER_COLUMN_LAST_NAME + ", " +
+                CUSTOMER_COLUMN_CONTACT_NUMBER + ", " +
+                CUSTOMER_COLUMN_EMAIL + ", " +
+                CUSTOMER_COLUMN_ADDRESS + ", " +
+                CUSTOMER_COLUMN_ZIPCODE + ", " +
+                CUSTOMER_COLUMN_CITY + ", " +
+                CUSTOMER_COLUMN_PROVINCE + ", " +
+                CUSTOMER_COLUMN_COUNTRY + ", " +
+                CUSTOMER_COLUMN_TYPE + ") VALUES (" +
+                "'" + customer.getCompanyId() + "', " +
+                "'" + customer.getFirstName() + "', " +
+                "'" + customer.getLastName() + "', " +
+                "'" + customer.getContactNumber() + "', " +
+                "'" + customer.getEmail() + "', " +
+                "'" + customer.getAddress() + "', " +
+                "'" + customer.getZipcode() + "', " +
+                "'" + customer.getCity() + "', " +
+                "'" + customer.getProvince() + "', " +
+                "'" + customer.getCountry() + "', " +
+                "'" + customer.getCustomerType() + "'" +
+                ");";
+
+        try {
+            int id;
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Added Customer");
+            String getInsertedKey = "SELECT LAST_INSERT_ID();";
+            try{
+                Statement retrieveStatement = db.getConnection().createStatement();
+                retrieveStatement.executeQuery(getInsertedKey);
+                ResultSet data = retrieveStatement.getResultSet();
+                if (data.next()){
+                    id=data.getInt(1);
+                    newCustomer=CustomerTableCreation.getInstance().getCustomer(id);
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newCustomer;
+    }
+
+    /**
+     * @author Kautuk Prasad
+     * @param customer
+     * @return newly inserted customer object with id
+     */
+    @Override
+    public Customer addCustomerWOCompany(Customer customer) {
+        Customer newCustomer = new Customer();
+        String query = "INSERT INTO " + TABLE_CUSTOMER + " (" +
+                CUSTOMER_COLUMN_FIRST_NAME + ", " +
+                CUSTOMER_COLUMN_LAST_NAME + ", " +
+                CUSTOMER_COLUMN_CONTACT_NUMBER + ", " +
+                CUSTOMER_COLUMN_EMAIL + ", " +
+                CUSTOMER_COLUMN_ADDRESS + ", " +
+                CUSTOMER_COLUMN_ZIPCODE + ", " +
+                CUSTOMER_COLUMN_CITY + ", " +
+                CUSTOMER_COLUMN_PROVINCE + ", " +
+                CUSTOMER_COLUMN_COUNTRY + ", " +
+                CUSTOMER_COLUMN_TYPE + ") VALUES (" +
+                "'" + customer.getFirstName() + "', " +
+                "'" + customer.getLastName() + "', " +
+                "'" + customer.getContactNumber() + "', " +
+                "'" + customer.getEmail() + "', " +
+                "'" + customer.getAddress() + "', " +
+                "'" + customer.getZipcode() + "', " +
+                "'" + customer.getCity() + "', " +
+                "'" + customer.getProvince() + "', " +
+                "'" + customer.getCountry() + "', " +
+                "'" + customer.getCustomerType() + "'" +
+                ");";
+
+        try {
+            int id;
+            db.getConnection().createStatement().execute(query);
+            System.out.println("Added Customer");
+            String getInsertedKey = "SELECT LAST_INSERT_ID();";
+            try{
+                Statement retrieveStatement = db.getConnection().createStatement();
+                retrieveStatement.executeQuery(getInsertedKey);
+                ResultSet data = retrieveStatement.getResultSet();
+                if (data.next()){
+                    id=data.getInt(1);
+                    newCustomer=CustomerTableCreation.getInstance().getCustomer(id);
+                }
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newCustomer;
+    }
 }
 
 
