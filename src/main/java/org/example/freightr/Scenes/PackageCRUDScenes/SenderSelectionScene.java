@@ -109,12 +109,10 @@ public class SenderSelectionScene {
         // NavigationVBox for navigation to different scenes
         NavigationVBox navigationVbox = new NavigationVBox(stage);
 
-        //Refresh button
-        CustomButton refreshButton = new CustomButton("Refresh");
 
         // HBox for layout
         HBox buttonBox = new HBox();
-        buttonBox.getChildren().addAll(selectCustomerBtn,SenderButton,refreshButton);
+        buttonBox.getChildren().addAll(selectCustomerBtn,SenderButton);
         buttonBox.setSpacing(10);
         buttonBox.setAlignment(Pos.CENTER);
 
