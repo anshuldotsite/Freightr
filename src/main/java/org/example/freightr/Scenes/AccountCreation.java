@@ -29,7 +29,7 @@ public class AccountCreation {
 
         // HBox for heading
         HBox headingBox = new HBox();
-        CustomLabel heading = new CustomLabel("Create An Account");
+        CustomLabel heading = new CustomLabel("Create your account");
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
@@ -38,60 +38,49 @@ public class AccountCreation {
         GridPane gridPane = new GridPane();
 
         // Label and text field for name
-        Label name = new Label("Employee Name: ");
-        TextField nameField = new TextField();
-        nameField.setMinWidth(150);
-        name.setMinWidth(100);
+        CustomLabel name = new CustomLabel("Employee Name");
+        CustomTextField nameField = new CustomTextField();
         gridPane.add(name,0,0);
         gridPane.add(nameField,1,0);
 
         // Label and text field for email
-        Label email = new Label("Email: ");
-        TextField emailText = new TextField();
-        emailText.setMinWidth(150);
-        email.setMinWidth(100);
+        CustomLabel email = new CustomLabel("Email");
+        CustomTextField emailText = new CustomTextField();
         gridPane.add(email,0,1);
         gridPane.add(emailText,1,1);
 
         // Label and text field for employee designation
-        Label designation = new Label("Designation: ");
-        TextField designationText = new TextField();
-        designationText.setMinWidth(150);
-        designation.setMinWidth(100);
+        CustomLabel designation = new CustomLabel("Designation");
+        CustomTextField designationText = new CustomTextField();
         gridPane.add(designation,0,2);
         gridPane.add(designationText,1,2);
 
         // Label and text field for username
-        Label username = new Label("Username: ");
-        TextField usernameText = new TextField();
-        usernameText.setMinWidth(150);
-        username.setMinWidth(100);
+        CustomLabel username = new CustomLabel("Username");
+        CustomTextField usernameText = new CustomTextField();
         gridPane.add(username,0,3);
         gridPane.add(usernameText,1,3);
 
         // Label and text field for password
-        Label password = new Label("Password: ");
+        CustomLabel password = new CustomLabel("Password");
         PasswordField passwordText = new PasswordField();
-        passwordText.setMinWidth(150);
-        password.setMinWidth(100);
         gridPane.add(password,0,4);
         gridPane.add(passwordText,1,4);
+        passwordText.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000;  -fx-font-size: 14px;");
 
         // Label and text field for confirming password
-        Label confirmPassword = new Label("Confirm Password: ");
+        CustomLabel confirmPassword = new CustomLabel("Confirm Password");
         PasswordField confirmPasswordText = new PasswordField();
-        confirmPasswordText.setMinWidth(150);
-        confirmPassword.setMinWidth(100);
         gridPane.add(confirmPassword,0,5);
         gridPane.add(confirmPasswordText,1,5);
+        confirmPasswordText.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000;  -fx-font-size: 14px;");
 
         // Label and text field for company key
-        Label companyKeyLabel = new Label("Company Key: ");
+        CustomLabel companyKeyLabel = new CustomLabel("Company Key");
         PasswordField companyKeyTF = new PasswordField();
-        companyKeyTF.setMinWidth(150);
-        companyKeyLabel.setMinWidth(100);
         gridPane.add(companyKeyLabel,0,6);
         gridPane.add(companyKeyTF,1,6);
+        companyKeyTF.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000;  -fx-font-size: 14px;");
 
         // Button to create account
         CustomButton createAccount = new CustomButton("Create Account");
@@ -110,6 +99,7 @@ public class AccountCreation {
             usernameText.getText().equals("")||passwordText.getText().equals("")||confirmPassword.getText().equals("")||
             companyKeyTF.getText().equals("")){
                 resultLabel.setText("Please fill out all the fields");
+                resultLabel.setStyle("-fx-background-color: red;");
                 vbox.getChildren().add(resultLabel);
             }else {
                 if (companyKeyTF.getText().equals(db.getCompanyKey())){
@@ -118,23 +108,25 @@ public class AccountCreation {
                         EmployeeLoginTable employeeLoginTable =EmployeeLoginTable.getInstance();
                         if (employeeLoginTable.checkUserExists(usernameText.getText()) == true){
                             resultLabel.setText("User Name already exists, try another one.");
+                            resultLabel.setStyle("-fx-background-color: red;");
                             vbox.getChildren().add(resultLabel);
                         }else {
                             employeeLoginTable.createAccount(newEmployee);
                             resultLabel.setText("Account Created");
+                            resultLabel.setStyle("-fx-background-color: green;");
                             vbox.getChildren().add(resultLabel);
                         }
-
                     }else {
                         resultLabel.setText("Password and Confirm Password fields did not match.");
+                        resultLabel.setStyle("-fx-background-color: red;");
                         vbox.getChildren().add(resultLabel);
                     }
                 }else {
                     resultLabel.setText("Wrong Company Key");
+                    resultLabel.setStyle("-fx-background-color: red;");
                     vbox.getChildren().add(resultLabel);
                 }
             }
-
         });
 
         gridPane.setAlignment(Pos.CENTER);
@@ -152,7 +144,7 @@ public class AccountCreation {
         HBox buttonBox = new HBox();
         buttonBox.getChildren().addAll(createAccount,signIn);
         buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.setSpacing(5);
+        buttonBox.setSpacing(10);
 
         // BorderPane for layout
         BorderPane root = new BorderPane();

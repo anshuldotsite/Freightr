@@ -5,6 +5,6 @@ import javafx.scene.control.Button;
 public class CustomButton  extends Button {
     public CustomButton(String buttonText) {
         super(buttonText);
-        this.setStyle("-fx-background-color: #C5705D; -fx-padding: 10px; -fx-text-fill: #F8EDE3; -fx-background-radius: 5px; -fx-cursor: hand;");
+        this.setStyle("-fx-background-color: #C5705D; -fx-padding: 8px 15px; -fx-text-fill: #F8EDE3; -fx-background-radius: 20px; -fx-cursor: hand; -fx-text-alignment: center; -fx-font-size: 18px;");
     }
 }

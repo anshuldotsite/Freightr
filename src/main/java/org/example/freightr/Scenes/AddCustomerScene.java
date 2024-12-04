@@ -185,5 +185,4 @@ public class AddCustomerScene {
 
         return new Scene(root, 900,640);
     }
-
 }
