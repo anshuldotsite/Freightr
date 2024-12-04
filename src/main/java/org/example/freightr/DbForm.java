@@ -104,8 +104,8 @@ public class DbForm {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
-        Label resultLabel = new Label("Please fill out all the fields before proceeding");
-        resultLabel.setStyle("-fx-text-fill: red");
+        Label resultLabel = new Label();
+
 
         //writing to the file through the form and establishing connection
         testButton.setOnAction(actionEvent -> {
@@ -113,6 +113,9 @@ public class DbForm {
                     ||hostInput.getText().equals("")|| passwordInput.getText().equals("")||
                     companyNameInput.getText().equals("") ||companyKeyInput.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
+                resultLabel.setStyle("-fx-text-fill: red");
+                resultLabel.setText("Please fill out all the fields before proceeding.");
+                resultLabel.setAlignment(Pos.BASELINE_CENTER);
                 vBox.getChildren().add(resultLabel);
 
             }else {
@@ -137,16 +140,25 @@ public class DbForm {
 
                     Database db = Database.getInstance();
                     if (db.getStatus()==true){
-                        Label successLabel = new Label("Connection Successful");
-                        successLabel.setStyle("-fx-text-fill: green");
-                        vBox.getChildren().add(successLabel);
-                        successLabel.setAlignment(Pos.BASELINE_CENTER);
+                        //setting text field to uneditable as so user cant edit textfield values after connection is successful
+                        usernameInput.setEditable(false);
+                        dbNameInput.setEditable(false);
+                        hostInput.setEditable(false);
+                        passwordInput.setEditable(false);
+                        companyNameInput.setEditable(false);
+                        companyKeyInput.setEditable(false);
+                        vBox.getChildren().remove(resultLabel);
+                        resultLabel.setText("Connection Successful");
+                        resultLabel.setStyle("-fx-text-fill: green");
+                        resultLabel.setAlignment(Pos.BASELINE_CENTER);
+                        vBox.getChildren().add(resultLabel);
                         nextButton.setDisable(false);
                     }else {
-                        Label failLabel = new Label("Connection Failed");
-                        failLabel.setStyle("-fx-text-fill: red");
-                        vBox.getChildren().add(failLabel);
-                        failLabel.setAlignment(Pos.BASELINE_CENTER);
+                        vBox.getChildren().remove(resultLabel);
+                        resultLabel.setText("Connection Failed");
+                        resultLabel.setStyle("-fx-text-fill: red");
+                        resultLabel.setAlignment(Pos.BASELINE_CENTER);
+                        vBox.getChildren().add(resultLabel);
                     }
                 }catch (Exception e){
                     e.printStackTrace();
