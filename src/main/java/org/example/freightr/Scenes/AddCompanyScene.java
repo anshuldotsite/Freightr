@@ -45,7 +45,7 @@ public class AddCompanyScene {
         gridPane.add(emailLabel, 0, 2);
         gridPane.add(emailTF, 1, 2);
 
-        // Label for displaying errors if any
+        // Result Label
         CustomLabel resultLabel = new CustomLabel("");
 
         // An add button to add the company to the database
@@ -57,7 +57,9 @@ public class AddCompanyScene {
         addBtn.setOnAction(event -> {
             if (companyNameTF.getText().equals("")||contactTF.getText().equals("")||emailTF.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
+                resultLabel.setStyle("-fx-text-fill: red;");
                 resultLabel.setText("Please fill out all the fields");
+                vBox.getChildren().add(resultLabel);
             }else {
                 vBox.getChildren().remove(resultLabel);
                 CompanyTableCreation company =  CompanyTableCreation.getInstance();
@@ -68,6 +70,20 @@ public class AddCompanyScene {
             }
         });
 
+        //Back button
+        CustomButton backButton = new CustomButton("Back");
+        backButton.setOnAction(event -> {
+            Scene addCustomer = AddCustomerScene.createAddCustomer(stage);
+            stage.setScene(addCustomer);
+        });
+
+
+        //Hbox for buttons
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().addAll(addBtn,backButton);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setSpacing(10);
+
         // Border Pane for layout
         BorderPane root = new BorderPane();
 
@@ -76,7 +92,7 @@ public class AddCompanyScene {
         gridPane.setAlignment(Pos.CENTER);
 
         // Adding all elements to the vbox
-        vBox.getChildren().addAll(headingBox,gridPane,addBtn);
+        vBox.getChildren().addAll(headingBox,gridPane,buttonBox);
         vBox.setSpacing(15);
         vBox.setAlignment(Pos.CENTER);
 
