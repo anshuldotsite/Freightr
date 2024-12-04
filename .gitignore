@@ -118,6 +118,9 @@ fabric.properties
 # https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij
 .idea/**/azureSettings.xml
 
+# Idea Misc file
+.idea/misc.xml
+
 ### Java ###
 # Compiled class file
 *.class
@@ -228,5 +231,6 @@ gradle-app.setting
 ### Gradle Patch ###
 # Java heap dump
 *.hprof
-
+credentials.txt
+EmployeeSignIn.txt
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,gradle,macos,windows

@@ -38,6 +38,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation 'com.mysql:mysql-connector-j:9.0.0'
 }
 
 test {
