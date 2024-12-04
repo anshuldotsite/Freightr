@@ -7,6 +7,7 @@ public class CustomNavButton extends Button {
     public CustomNavButton(String text) {
         super(text);
         this.setStyle(
+                "-fx-font-family:'Roboto';"+
                 "-fx-background-color: #F8EDE3; " +
                         "-fx-text-fill: #C5705D; " +
                         "-fx-padding: 5px 7.5px; " +
@@ -20,6 +21,7 @@ public class CustomNavButton extends Button {
 
 
         this.setOnMouseEntered(e -> this.setStyle(
+                "-fx-font-family:'Roboto';"+
                 "-fx-background-color: #FAF3E3; " +
                         "-fx-text-fill: #C5705D; " +
                         "-fx-padding: 5px 7.5px; " +
@@ -33,6 +35,7 @@ public class CustomNavButton extends Button {
 
 
         this.setOnMouseExited(e -> this.setStyle(
+                "-fx-font-family:'Roboto';"+
                 "-fx-background-color: #F8EDE3; " +
                         "-fx-text-fill: #C5705D; " +
                         "-fx-padding: 5px 7.5px; " +
