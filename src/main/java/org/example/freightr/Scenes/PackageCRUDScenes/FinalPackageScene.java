@@ -126,6 +126,12 @@ public class FinalPackageScene {
         receiverPane.add(receiverEmailLabel,0,2);
         receiverPane.add(receiverEmail,1,2);
 
+        // Label for sender's contact
+        CustomLabel receiverContactLabel = new CustomLabel("Receiver's Contact: ");
+        CustomLabel receiverContact = new CustomLabel(sender.getContactNumber());
+        customerPane.add(receiverContactLabel,0,3);
+        customerPane.add(receiverContact,1,3);
+
 
         CustomLabel location = new CustomLabel(sender.getCity());
 
