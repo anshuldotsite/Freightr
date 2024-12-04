@@ -60,9 +60,14 @@ public class TrackForCustomersScene {
             //error handling for null input
             if (input.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
+                vBox.getChildren().remove(gridPane);
+                vBox.getChildren().remove(backButton);
+                gridPane.getChildren().clear();
                 resultLabel.setText("Please fill out the field");
                 vBox.getChildren().add(resultLabel);
+                vBox.getChildren().add(backButton);
             }else{
+                vBox.getChildren().remove(resultLabel);
                 vBox.getChildren().remove(gridPane);
                 vBox.getChildren().remove(backButton);
                 gridPane.getChildren().clear();

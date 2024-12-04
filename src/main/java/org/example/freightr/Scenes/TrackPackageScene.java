@@ -55,9 +55,12 @@ public class TrackPackageScene {
             //error handling for null input
             if (input.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
+                vBox.getChildren().remove(gridPane);
+                gridPane.getChildren().clear();
                 resultLabel.setText("Please fill out the field");
                 vBox.getChildren().add(resultLabel);
             }else{
+                vBox.getChildren().remove(resultLabel);
                 vBox.getChildren().remove(gridPane);
                 gridPane.getChildren().clear();
                 PackageTracking trackedPackage = new PackageTracking();
@@ -92,7 +95,7 @@ public class TrackPackageScene {
         inputBox.getChildren().addAll(trackLabel, input, trackButton);
         inputBox.setSpacing(10);
         inputBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(pageHeading, inputBox,gridPane);
+        vBox.getChildren().addAll(pageHeading, inputBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(50);
 
