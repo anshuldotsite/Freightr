@@ -83,22 +83,28 @@ public class LoginPageScene {
 
         // This event handler creates a file which stores the details, and if any errors gives an error
         signInB.setOnAction(event -> {
-            EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
-            boolean signIn = employeeLoginTable.signIn(usernameInput.getText(), passwordInput.getText());
-            if (signIn == true) {
-                try {
-                    BufferedWriter bw = new BufferedWriter(new FileWriter("EmployeeSignIn.txt"));
-                    bw.write(usernameInput.getText());
-                    bw.flush();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                Scene packageForm = AddPackageScene.createAddPackage(stage);
-                stage.setScene(packageForm);
-            } else {
+            if (usernameInput.getText().equals("")||passwordInput.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
-                resultLabel.setText("Wrong User Name or Password");
+                resultLabel.setText("Please fill out all the fields");
                 vBox.getChildren().add(resultLabel);
+            }else {
+                EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
+                boolean signIn = employeeLoginTable.signIn(usernameInput.getText(), passwordInput.getText());
+                if (signIn == true) {
+                    try {
+                        BufferedWriter bw = new BufferedWriter(new FileWriter("EmployeeSignIn.txt"));
+                        bw.write(usernameInput.getText());
+                        bw.flush();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Scene packageForm = AddPackageScene.createAddPackage(stage);
+                    stage.setScene(packageForm);
+                } else {
+                    vBox.getChildren().remove(resultLabel);
+                    resultLabel.setText("Wrong User Name or Password");
+                    vBox.getChildren().add(resultLabel);
+                }
             }
         });
 
