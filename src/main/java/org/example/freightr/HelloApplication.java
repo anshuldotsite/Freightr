@@ -18,6 +18,9 @@ public class HelloApplication extends Application {
         String stylesheet = getClass().getResource("styles.css").toExternalForm();
 //        dbScene.getStylesheets().add(stylesheet);
 
+        //setting stage name
+        stage.setTitle("Freightr");
+
         File file = new File("credentials.txt");
         if (!file.exists()){
             stage.setScene(dbScene);

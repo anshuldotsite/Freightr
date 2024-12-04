@@ -115,12 +115,12 @@ public class LoginPageScene {
             stage.setScene(accountCreationScene);
         });
 
-        buttonBox.getChildren().addAll(forgotPasswordB, createAccountB);
+        buttonBox.getChildren().addAll(signInB, createAccountB);
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(5);
 
         // Adding all elements to vbox
-        vBox.getChildren().addAll(imageView, welcomeLabel, signInHeading, userBox, passwordBox, signInB, buttonBox);
+        vBox.getChildren().addAll(imageView, welcomeLabel, signInHeading, userBox, passwordBox, buttonBox, forgotPasswordB);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(10);
 
