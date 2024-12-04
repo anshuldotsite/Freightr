@@ -117,12 +117,6 @@ public class UpdateCustomer {
         gridPane.add(countryLabel, 0, 9);
         gridPane.add(countryTF, 1, 9);
 
-        // Label for Customer Type
-        CustomLabel typeLabel = new CustomLabel("Customer Type");
-        CustomTextField typeTF = new CustomTextField();
-        typeTF.setText(customer.getCustomerType());
-        gridPane.add(typeLabel, 0, 10);
-        gridPane.add(typeTF, 1, 10);
 
         // Button for update
         CustomButton updateBtn = new CustomButton("Update Customer");
@@ -138,7 +132,7 @@ public class UpdateCustomer {
         updateBtn.setOnAction(event -> {
             if (firstNameTF.getText().equals("")||lastNameTF.getText().equals("")||contactTF.getText().equals("")||emailTF.getText().equals("")||
                     addressTF.getText().equals("")||zipTF.getText().equals("")||cityTF.getText().equals("") ||provinceTF.getText().equals("") ||
-                    contactTF.getText().equals("")||typeTF.getText().equals("")){
+                    contactTF.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Fill out all the fields");
                 vBox.getChildren().add(resultLabel);
@@ -151,7 +145,7 @@ public class UpdateCustomer {
                             lastNameTF.getText(), contactTF.getText(),
                             emailTF.getText(), addressTF.getText(),
                             zipTF.getText(), cityTF.getText(), provinceTF.getText(),
-                            countryTF.getText(), typeTF.getText());
+                            countryTF.getText(), "Self");
                     customerTableCreation.updateCustomer(updatedCustomer);
                     resultLabel.setText("Customer Updated");
                     vBox.getChildren().add(resultLabel);
@@ -163,7 +157,7 @@ public class UpdateCustomer {
                     Customer updatedCustomer = new Customer(companyComboBox.getSelectionModel().getSelectedItem().getCompanyId(),firstNameTF.getText(), lastNameTF.getText(), contactTF.getText(),
                             emailTF.getText(), addressTF.getText(),
                             zipTF.getText(), cityTF.getText(), provinceTF.getText(),
-                            countryTF.getText(), typeTF.getText());
+                            countryTF.getText(), "Corporate");
                     updatedCustomer.setCustomerId(customer.getCustomerId());
                     customerTableCreation.updateCustomer(updatedCustomer);
                     resultLabel.setText("Customer Updated");
@@ -172,6 +166,20 @@ public class UpdateCustomer {
                 }
             }
         });
+
+
+        //Back button for navigation
+        CustomButton backButton = new CustomButton("Back");
+        backButton.setOnAction(event -> {
+            Scene allCustomerScene = DisplayCustomerScene.createDisplayCustomer(stage);
+            stage.setScene(allCustomerScene);
+        });
+
+        //Hbox for button
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().addAll(updateBtn,backButton);
+        buttonBox.setAlignment(Pos.CENTER);
+        buttonBox.setSpacing(10);
 
 
         // GridPane for layout
@@ -183,9 +191,9 @@ public class UpdateCustomer {
         NavigationVBox navigationVBox = new NavigationVBox(stage);
 
         // Add all components to the vbox
-        vBox.getChildren().addAll(headingBox,gridPane,updateBtn);
+        vBox.getChildren().addAll(headingBox,gridPane,buttonBox);
         vBox.setAlignment(Pos.CENTER);
-        vBox.setSpacing(10);
+        vBox.setSpacing(15);
 
         // BorderPane for layout
         BorderPane root = new BorderPane();
