@@ -103,8 +103,22 @@ public class UpdatePackageStatus {
             vBox.getChildren().add(resultLabel);
         });
 
+
+        //Back button for navigation
+        CustomButton backButton = new CustomButton("Back");
+        backButton.setOnAction(event -> {
+            Scene allTrack = AllPackageTrackingScene.createAllPackageTrackingScene(stage);
+            stage.setScene(allTrack);
+        });
+
+        //Hbox for button
+        HBox buttonBox = new HBox();
+        buttonBox.getChildren().addAll(updateBtn,backButton);
+        buttonBox.setSpacing(10);
+        buttonBox.setAlignment(Pos.CENTER);
+
         // Add all elements to the vbox
-        vBox.getChildren().addAll(headingBox,gridPane,updateBtn);
+        vBox.getChildren().addAll(headingBox,gridPane,buttonBox);
         vBox.setSpacing(10);
         vBox.setAlignment(Pos.CENTER);
 
