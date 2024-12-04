@@ -93,7 +93,7 @@ public class DbForm {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
-        Label resultLabel = new Label();
+        CustomLabel resultLabel = new CustomLabel("");
 
 
         //writing to the file through the form and establishing connection
@@ -103,7 +103,7 @@ public class DbForm {
                     companyNameInput.getText().equals("") || companyKeyInput.getText().equals("")) {
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Please fill out all the fields before proceeding.");
-                resultLabel.setStyle("-fx-text-fill: red");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                 resultLabel.setAlignment(Pos.BASELINE_CENTER);
                 vBox.getChildren().add(resultLabel);
             } else {
@@ -137,14 +137,14 @@ public class DbForm {
                         companyKeyInput.setEditable(false);
                         vBox.getChildren().remove(resultLabel);
                         resultLabel.setText("Connection Successful");
-                        resultLabel.setStyle("-fx-text-fill: green");
+                        resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
                         resultLabel.setAlignment(Pos.BASELINE_CENTER);
                         vBox.getChildren().add(resultLabel);
                         nextButton.setDisable(false);
                     } else {
                         vBox.getChildren().remove(resultLabel);
                         resultLabel.setText("Connection Failed");
-                        resultLabel.setStyle("-fx-text-fill: red");
+                        resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                         resultLabel.setAlignment(Pos.BASELINE_CENTER);
                         vBox.getChildren().add(resultLabel);
                     }

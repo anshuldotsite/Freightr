@@ -59,8 +59,8 @@ public class NewReceiverCompany {
         addBtn.setOnAction(event -> {
             if (companyNameTF.getText().equals("")||contactTF.getText().equals("")||emailTF.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
-                resultLabel.setStyle("-fx-text-fill: red;");
                 resultLabel.setText("Please fill out all the fields");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                 vBox.getChildren().add(resultLabel);
             }else {
                 vBox.getChildren().remove(resultLabel);
@@ -68,6 +68,7 @@ public class NewReceiverCompany {
                 Company newCompany = new Company(companyNameTF.getText(),Integer.parseInt(contactTF.getText()), emailTF.getText());
                 company.addCompany(newCompany);
                 resultLabel.setText("Company Added");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
                 vBox.getChildren().add(resultLabel);
             }
         });

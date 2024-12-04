@@ -50,7 +50,6 @@ public class TrackForCustomersScene {
 
         // Result Label
         CustomLabel resultLabel = new CustomLabel("");
-        resultLabel.setStyle("-fx-text-fill: red;");
 
         /**
          * This event handler retrieves the package details and populates the grid with the package details,
@@ -64,6 +63,7 @@ public class TrackForCustomersScene {
                 vBox.getChildren().remove(backButton);
                 gridPane.getChildren().clear();
                 resultLabel.setText("Please fill out the field");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                 vBox.getChildren().add(resultLabel);
                 vBox.getChildren().add(backButton);
             }else{
@@ -76,6 +76,7 @@ public class TrackForCustomersScene {
 
                 if (trackedPackage==null){
                     resultLabel.setText("Package not found");
+                    resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                     vBox.getChildren().add(resultLabel);
                     vBox.getChildren().add(backButton);
 

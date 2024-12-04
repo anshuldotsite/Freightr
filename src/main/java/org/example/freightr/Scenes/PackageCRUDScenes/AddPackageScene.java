@@ -85,7 +85,6 @@ public class AddPackageScene {
 
         // Result Label
         CustomLabel resultLabel = new CustomLabel("");
-        resultLabel.setStyle("-fx-text-fill: red;");
 
         // Pricing Logic
         calculateChargesBtn.setOnAction(e -> {
@@ -93,6 +92,7 @@ public class AddPackageScene {
             lengthTF.getText().equals("")||widthTF.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Please fill out all the fields");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                 vBox.getChildren().add(resultLabel);
             }else {
                 double height = Double.parseDouble(heightTF.getText());
@@ -148,6 +148,7 @@ public class AddPackageScene {
 
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Please fill out all the fields");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                 vBox.getChildren().add(resultLabel);
             }
                 else {  // Create package and pass to next scene

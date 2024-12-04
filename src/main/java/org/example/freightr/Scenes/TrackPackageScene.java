@@ -45,7 +45,6 @@ public class TrackPackageScene {
 
         // Result Label
         CustomLabel resultLabel = new CustomLabel("");
-        resultLabel.setStyle("-fx-text-fill: red;");
 
         /**
          * This event handler retrieves the package details and populates the grid with the package details,
@@ -58,6 +57,7 @@ public class TrackPackageScene {
                 vBox.getChildren().remove(gridPane);
                 gridPane.getChildren().clear();
                 resultLabel.setText("Please fill out the field");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                 vBox.getChildren().add(resultLabel);
             }else{
                 vBox.getChildren().remove(resultLabel);
@@ -70,6 +70,7 @@ public class TrackPackageScene {
                     vBox.getChildren().remove(gridPane);
                     gridPane.getChildren().clear();
                     resultLabel.setText("Package not found.");
+                    resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                     vBox.getChildren().add(resultLabel);
                 }else {
                     CustomLabel trackIDLabel = new CustomLabel("Tracking ID");
