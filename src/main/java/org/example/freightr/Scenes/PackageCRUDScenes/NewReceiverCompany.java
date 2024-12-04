@@ -13,6 +13,10 @@ import org.example.freightr.TableCreation.ObjectClasses.Company;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 import org.example.freightr.TableCreation.ObjectClasses.Package;
 
+/**
+ * @author Kautuk Prasad
+ * @description This is a customized company addition scene for new receiver.
+ */
 public class NewReceiverCompany {
     public static Scene createCompanyScene(Stage stage, Package packageData, Customer selectedCustomer){
         // HBox for heading
