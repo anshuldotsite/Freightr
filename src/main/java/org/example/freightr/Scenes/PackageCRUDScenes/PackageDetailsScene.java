@@ -22,7 +22,7 @@ import org.example.freightr.Scenes.NavigationVBox;
  */
 public class PackageDetailsScene {
 
-    public static Scene CreateSenderReciverDetailsPage(int PackageId, Stage stage) {
+    public static Scene CreateSenderReceiverDetailsPage(int PackageId, Stage stage) {
         BorderPane bp = new BorderPane();
         NavigationVBox navigationVBox = new NavigationVBox(stage);
         bp.setLeft(navigationVBox);
@@ -47,7 +47,7 @@ public class PackageDetailsScene {
         gridPane.setHgap(30);
         gridPane.setAlignment(Pos.CENTER);
 
-        Label headerSender = new CustomLabel("Sender Details");
+        CustomLabel headerSender = new CustomLabel("Sender Details");
         headerSender.setFont(new Font("Arial", 18));
         gridPane.add(headerSender, 0, 0);
         GridPane.setColumnSpan(headerSender, 2);
@@ -67,7 +67,7 @@ public class PackageDetailsScene {
             gridPane.add(new CustomLabel2(senderCompany.getCompanyName()), 1, 5);
         }
 
-        Label headerReceiver = new CustomLabel("Receiver Details");
+        CustomLabel headerReceiver = new CustomLabel("Receiver Details");
         headerReceiver.setFont(new Font("Arial", 18));
         gridPane.add(headerReceiver, 2, 0);
         GridPane.setColumnSpan(headerReceiver, 2);
@@ -89,8 +89,6 @@ public class PackageDetailsScene {
         // Adding the GridPane to the BorderPane
         bp.setCenter(gridPane);
         bp.setStyle("-fx-background-color: #F8EDE3");
-
-
 
         return  new Scene(bp, 900, 640);
     }

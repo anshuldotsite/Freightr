@@ -116,7 +116,7 @@ public class AllPackageTrackingScene {
             PackageCustomTracking trackingData1 = (PackageCustomTracking) tableView.getSelectionModel().getSelectedItem();
             if (trackingData1 != null) {
                 int packageId = trackingData1.getPackageId();
-                Scene detailsScene = PackageDetailsScene.CreateSenderReciverDetailsPage(packageId, stage);
+                Scene detailsScene = PackageDetailsScene.CreateSenderReceiverDetailsPage(packageId, stage);
                 stage.setScene(detailsScene);
             }
         });

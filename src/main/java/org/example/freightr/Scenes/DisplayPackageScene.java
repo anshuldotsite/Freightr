@@ -91,7 +91,7 @@ public class DisplayPackageScene {
             Package selectedPackage = (Package) tableView.getSelectionModel().getSelectedItem();
             if (selectedPackage != null) {
                 int packageId = selectedPackage.getPackageId();
-                Scene detailsScene = PackageDetailsScene.CreateSenderReciverDetailsPage(packageId, stage);
+                Scene detailsScene = PackageDetailsScene.CreateSenderReceiverDetailsPage(packageId, stage);
                 stage.setScene(detailsScene);
             }
         });
