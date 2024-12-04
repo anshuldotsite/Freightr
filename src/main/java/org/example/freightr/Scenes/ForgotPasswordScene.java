@@ -85,12 +85,19 @@ public class ForgotPasswordScene  {
             else{
                 if (companyKeyIn.getText().equals(db.getCompanyKey())) {
                     if (passwordInput.getText().equals(confirmPasswordIn.getText())) {
-                        vBox.getChildren().remove(resultLabel);
-                        resultLabel.setText("Password Updated!");
-                        employeeLoginTable.updatePassword(userNameInput.getText(), passwordInput.getText());
-                        resultLabel.setStyle("-fx-text-fill: green");
-                        resultLabel.setAlignment(Pos.CENTER);
-                        vBox.getChildren().add(resultLabel);
+                        if (employeeLoginTable.checkUserExists(userNameInput.getText())==true){
+                            vBox.getChildren().remove(resultLabel);
+                            resultLabel.setText("Password Updated!");
+                            employeeLoginTable.updatePassword(userNameInput.getText(), passwordInput.getText());
+                            resultLabel.setStyle("-fx-text-fill: green");
+                            resultLabel.setAlignment(Pos.CENTER);
+                            vBox.getChildren().add(resultLabel);
+                        }else {
+                            vBox.getChildren().remove(resultLabel);
+                            resultLabel.setStyle("-fx-text-fill: red;");
+                            resultLabel.setText("User Name does not exist");
+                            vBox.getChildren().add(resultLabel);
+                        }
                     } else {
                         vBox.getChildren().remove(resultLabel);
                         resultLabel.setText("Password and Confirm password fields did not match.");
