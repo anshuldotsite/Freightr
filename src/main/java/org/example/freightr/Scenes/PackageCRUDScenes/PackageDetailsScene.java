@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.example.freightr.Scenes.CustomLabel;
+import org.example.freightr.Scenes.CustomLabel2;
 import org.example.freightr.TableCreation.CompanyTableCreation;
 import org.example.freightr.TableCreation.CustomerPackageReceiverCRUD;
 import org.example.freightr.TableCreation.CustomerTableCreation;
@@ -49,38 +50,40 @@ public class PackageDetailsScene {
         Label headerSender = new CustomLabel("Sender Details");
         headerSender.setFont(new Font("Arial", 18));
         gridPane.add(headerSender, 0, 0);
+        GridPane.setColumnSpan(headerSender, 2);
 
         gridPane.add(new CustomLabel("Name: "), 0, 1);
-        gridPane.add(new Label(sender.getFirstName() + " " + sender.getLastName()), 0, 2);
+        gridPane.add(new CustomLabel2(sender.getFirstName() + " " + sender.getLastName()), 1, 1);
 
-        gridPane.add(new CustomLabel("Contact: "), 0, 3);
-        gridPane.add(new Label(sender.getContactNumber()), 0, 4);
-        gridPane.add(new CustomLabel("Email: "), 0, 5);
-        gridPane.add(new Label(sender.getEmail()), 0, 6);
+        gridPane.add(new CustomLabel("Contact: "), 0, 2);
+        gridPane.add(new CustomLabel2(sender.getContactNumber()), 1, 2);
+        gridPane.add(new CustomLabel("Email: "), 0, 3);
+        gridPane.add(new CustomLabel2(sender.getEmail()), 1, 3);
 
-        gridPane.add(new CustomLabel("Address: "), 0, 7);
-        gridPane.add(new Label(sender.getAddress()), 0, 8);
+        gridPane.add(new CustomLabel("Address: "), 0, 4);
+        gridPane.add(new CustomLabel2(sender.getAddress()), 1, 4);
         if (senderCompany != null) {
-            gridPane.add(new CustomLabel("Company: "), 0, 9);
-            gridPane.add(new Label(senderCompany.getCompanyName()), 0, 10);
+            gridPane.add(new CustomLabel("Company: "), 0, 5);
+            gridPane.add(new CustomLabel2(senderCompany.getCompanyName()), 1, 5);
         }
 
         Label headerReceiver = new CustomLabel("Receiver Details");
         headerReceiver.setFont(new Font("Arial", 18));
-        gridPane.add(headerReceiver, 1, 0);
-        gridPane.add(new CustomLabel("Name: "), 1, 1);
-        gridPane.add(new Label(receiver.getFirstName() + " " + receiver.getLastName()), 1, 2);
+        gridPane.add(headerReceiver, 2, 0);
+        GridPane.setColumnSpan(headerReceiver, 2);
+        gridPane.add(new CustomLabel("Name: "), 2, 1);
+        gridPane.add(new CustomLabel2(receiver.getFirstName() + " " + receiver.getLastName()), 3, 1);
 
-        gridPane.add(new CustomLabel("Contact: "), 1, 3);
-        gridPane.add(new Label(receiver.getContactNumber()), 1, 4);
-        gridPane.add(new CustomLabel("Email: "), 1, 5);
-        gridPane.add(new Label(receiver.getEmail()), 1, 6);
-        gridPane.add(new CustomLabel("Address: "), 1, 7);
-        gridPane.add(new Label(receiver.getAddress()), 1, 8);
+        gridPane.add(new CustomLabel("Contact: "), 2, 2);
+        gridPane.add(new CustomLabel2(receiver.getContactNumber()), 3, 2);
+        gridPane.add(new CustomLabel("Email: "), 2, 3);
+        gridPane.add(new CustomLabel2(receiver.getEmail()), 3, 3);
+        gridPane.add(new CustomLabel("Address: "), 2, 4);
+        gridPane.add(new CustomLabel2(receiver.getAddress()), 3, 4);
 
         if (receiverCompany != null) {
-            gridPane.add(new CustomLabel("Company: "), 1, 9);
-            gridPane.add(new Label(receiverCompany.getCompanyName()), 1, 10);
+            gridPane.add(new CustomLabel("Company: "), 2, 5);
+            gridPane.add(new Label(receiverCompany.getCompanyName()), 3, 5);
         }
 
         // Adding the GridPane to the BorderPane
