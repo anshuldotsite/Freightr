@@ -119,8 +119,23 @@ public class LoginPageScene {
         buttonBox.setAlignment(Pos.CENTER);
         buttonBox.setSpacing(5);
 
+        //2nd button box for guest user and sign in
+        HBox buttonBoxTwo = new HBox();
+
+        //button for customer tracking
+        CustomButton customerBtn = new CustomButton("Customer? Click Here");
+        customerBtn.setOnAction(event -> {
+            Scene trackForCustomer = TrackForCustomersScene.createTrackForCustomer(stage);
+            stage.setScene(trackForCustomer);
+        });
+
+        buttonBoxTwo.getChildren().addAll(forgotPasswordB,customerBtn);
+        buttonBoxTwo.setSpacing(5);
+        buttonBoxTwo.setAlignment(Pos.CENTER);
+
+
         // Adding all elements to vbox
-        vBox.getChildren().addAll(imageView, welcomeLabel, signInHeading, userBox, passwordBox, buttonBox, forgotPasswordB);
+        vBox.getChildren().addAll(imageView, welcomeLabel, signInHeading, userBox, passwordBox, buttonBox, buttonBoxTwo);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(10);
 
