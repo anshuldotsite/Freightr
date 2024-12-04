@@ -100,7 +100,7 @@ public class NewReceiverScene {
 
 
         // A button to the add customer to the database
-        CustomButton addButton = new CustomButton("Add Customer");
+        CustomButton addButton = new CustomButton("Create Receiver");
         addButton.setAlignment(Pos.CENTER);
 
         // Label for displaying errors if any
@@ -160,7 +160,7 @@ public class NewReceiverScene {
         // A button to add company to the database
         CustomButton addCompanyBtn = new CustomButton("Add Company");
         addCompanyBtn.setOnAction(event -> {
-            Scene companyFormScene = AddCompanyScene.createAddCompanyScene(stage);
+            Scene companyFormScene = NewReceiverCompany.createCompanyScene(stage,packageData,selectedCustomer);
             stage.setScene(companyFormScene);
         });
         addCompanyBtn.setAlignment(Pos.CENTER);
@@ -186,9 +186,13 @@ public class NewReceiverScene {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
+        //navigation vbox
+        NavigationVBox navigationVBox = new NavigationVBox(stage);
+
         // BorderPane for layout
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
+        root.setLeft(navigationVBox);
         root.setStyle("-fx-background-color: #F8EDE3");
 
         return new Scene(root, 900,640);

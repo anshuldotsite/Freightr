@@ -1,22 +1,23 @@
-package org.example.freightr.Scenes;
+package org.example.freightr.Scenes.PackageCRUDScenes;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.freightr.Scenes.*;
 import org.example.freightr.TableCreation.CompanyTableCreation;
 import org.example.freightr.TableCreation.ObjectClasses.Company;
+import org.example.freightr.TableCreation.ObjectClasses.Package;
 
 /**
  * @author Kautuk Prasad
- * @description This is a form to add companies in the database.
+ * @description This is a customized company addition scene for new sender.
  */
-public class AddCompanyScene {
-    public static Scene createAddCompanyScene(Stage stage){
+public class NewSenderCompanyScene {
+    public static Scene createCompanyScene(Stage stage, Package packageData){
         // HBox for heading
         CustomLabel heading = new CustomLabel("Add new Company");
         HBox headingBox = new HBox();
@@ -73,8 +74,8 @@ public class AddCompanyScene {
         //Back button
         CustomButton backButton = new CustomButton("Back");
         backButton.setOnAction(event -> {
-            Scene addCustomer = AddCustomerScene.createAddCustomer(stage);
-            stage.setScene(addCustomer);
+            Scene senderScene = NewSenderScene.createNewSender(stage,packageData);
+            stage.setScene(senderScene);
         });
 
 

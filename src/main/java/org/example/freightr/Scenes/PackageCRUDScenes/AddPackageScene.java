@@ -130,7 +130,7 @@ public class AddPackageScene {
                     WeightPrice=30;
                 }
                 totalPrice =heightSurcharge + widthSurcharge + lengthSurcharge + (WeightPrice * weight);
-                charge.setText(String.valueOf(totalPrice));
+                charge.setText("$"+String.valueOf(totalPrice));
 
             }
 

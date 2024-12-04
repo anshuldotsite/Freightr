@@ -1,35 +1,27 @@
-package org.example.freightr.Scenes.PackageCRUDScenes;
+package org.example.freightr.Scenes;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.example.freightr.Scenes.*;
-import org.example.freightr.TableCreation.CompanyTableCreation;
 import org.example.freightr.TableCreation.CustomerPackageReceiverCRUD;
 import org.example.freightr.TableCreation.CustomerTableCreation;
-import org.example.freightr.TableCreation.ObjectClasses.Company;
 import org.example.freightr.TableCreation.ObjectClasses.Customer;
 
-/**
- * This class shows the details of both the sender and the receiver of the package
- */
-public class PackageDetailsScene {
-
-    public static Scene CreateSenderReceiverDetailsPage(int PackageId, Stage stage) {
-        BorderPane bp = new BorderPane();
+public class TrackViewDetails {
+    public static Scene createTrackView(int packageID ,Stage stage){
+        BorderPane root = new BorderPane();
         NavigationVBox navigationVBox = new NavigationVBox(stage);
-        bp.setLeft(navigationVBox);
+        root.setLeft(navigationVBox);
 
         // Fetching sender and receiver details
         CustomerPackageReceiverCRUD customerPackageReceiverTableCred = CustomerPackageReceiverCRUD.getInstance();
-        int senderId = customerPackageReceiverTableCred.getCustomerIdByPackageId(PackageId);
-        int receiverId = customerPackageReceiverTableCred.getReciverIdByPackageId(PackageId);
+        int senderId = customerPackageReceiverTableCred.getCustomerIdByPackageId(packageID);
+        int receiverId = customerPackageReceiverTableCred.getReciverIdByPackageId(packageID);
 
         CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
         Customer sender = customerTableCreation.getCustomer(senderId);
@@ -87,8 +79,8 @@ public class PackageDetailsScene {
         //back button
         CustomButton backButton = new CustomButton("Back");
         backButton.setOnAction(event -> {
-            Scene allPackageScene = DisplayPackageScene.createDisplayPackage(stage);
-            stage.setScene(allPackageScene);
+            Scene trackAll = AllPackageTrackingScene.createAllPackageTrackingScene(stage);
+            stage.setScene(trackAll);
         });
 
         vBox.getChildren().addAll(gridPane,backButton);
@@ -97,9 +89,10 @@ public class PackageDetailsScene {
 
 
         // Adding the GridPane to the BorderPane
-        bp.setCenter(vBox);
-        bp.setStyle("-fx-background-color: #F8EDE3");
+        root.setCenter(vBox);
+        root.setStyle("-fx-background-color: #F8EDE3");
 
-        return  new Scene(bp, 900, 640);
+        return  new Scene(root, 900, 640);
+
     }
 }

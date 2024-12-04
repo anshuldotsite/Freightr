@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -25,85 +26,94 @@ public class ForgotPasswordScene  {
         VBox vBox = new VBox(20);
         vBox.setAlignment(Pos.CENTER);
 
+        //Grid pane for form
+        GridPane gridPane = new GridPane();
+
         // Forgot password for label
         CustomLabel headingForgot = new CustomLabel("Forgot your password? No Problem!");
         headingForgot.setAlignment(Pos.CENTER);
 
-        // HBox for username
-        HBox userNameBox = new HBox(20);
 
         // Username Label
         CustomLabel userNameLabel = new CustomLabel("Enter your username");
-        userNameLabel.setMinWidth(150);
         CustomTextField userNameInput = new CustomTextField();
-        userNameInput.setPrefWidth(300);
-        userNameBox.getChildren().addAll(userNameLabel, userNameInput);
-        userNameBox.setAlignment(Pos.CENTER);
+        gridPane.add(userNameLabel,0,0);
+        gridPane.add(userNameInput,1,0);
 
-        // HBox for new password
-        HBox passwordBox = new HBox(20);
 
         // Password Label
         CustomLabel passwordLabel = new CustomLabel("Enter new password");
-        userNameInput.setMinWidth(150);
         PasswordField passwordInput = new PasswordField();
-        userNameInput.setPrefWidth(300);
-        passwordBox.getChildren().addAll(passwordLabel, passwordInput);
-        passwordBox.setAlignment(Pos.CENTER);
         passwordInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000; -fx-font-size: 14px;");
+        gridPane.add(passwordLabel,0,1);
+        gridPane.add(passwordInput,1,1);
 
-        // Hbox for confirm password
-        HBox confirmPasswordBox = new HBox(20);
 
         // Confirm Password Label
         CustomLabel confirmPassLabel = new CustomLabel("Confirm Password");
-        confirmPassLabel.setMinWidth(150);
         PasswordField confirmPasswordIn = new PasswordField();
-        confirmPasswordIn.setPrefWidth(300);
-        confirmPasswordBox.getChildren().addAll(confirmPassLabel, confirmPasswordIn);
-        confirmPasswordBox.setAlignment(Pos.CENTER);
+        gridPane.add(confirmPassLabel,0,2);
+        gridPane.add(confirmPasswordIn,1,2);
         confirmPasswordIn.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000; -fx-font-size: 14px;");
 ;
 
-        // HBox for company key
-        HBox companyKeyBox = new HBox(20);
-
         // Label for company key
         CustomLabel companyKeyLabel = new CustomLabel("Enter Company Key");
-        confirmPassLabel.setMinWidth(150);
         PasswordField companyKeyIn = new PasswordField();
-        companyKeyIn.setPrefWidth(300);
-        companyKeyBox.getChildren().addAll(companyKeyLabel, companyKeyIn);
-        companyKeyBox.setAlignment(Pos.CENTER);
+        gridPane.add(companyKeyLabel,0,3);
+        gridPane.add(companyKeyIn,1,3);
         companyKeyIn.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000; -fx-font-size: 14px;");
 
         // Update password button
         CustomButton updatePassB = new CustomButton("Update Password");
+
+        // Result Label
+        CustomLabel resultLabel = new CustomLabel("");
 
         /**
          * This event handler checks for conditions to update the user's password with errors if they passwords not match and you enter the wrong company key
          */
         updatePassB.setOnAction(event -> {
             EmployeeLoginTable employeeLoginTable = EmployeeLoginTable.getInstance();
-            if (companyKeyIn.getText().equals(db.getCompanyKey())) {
-                if (passwordInput.getText().equals(confirmPasswordIn.getText())) {
-                    employeeLoginTable.updatePassword(userNameInput.getText(), passwordInput.getText());
-                    CustomLabel updatedPassLabel = new CustomLabel("Password Updated");
-                    updatedPassLabel.setStyle("-fx-text-fill: green");
-                    updatedPassLabel.setAlignment(Pos.CENTER);
-                    vBox.getChildren().add(updatedPassLabel);
-                } else {
-                    CustomLabel unidenticalPass = new CustomLabel("Password and Confirm password fields did not match.");
-                    unidenticalPass.setStyle("-fx-text-fill: red");
-                    unidenticalPass.setAlignment(Pos.CENTER);
-                    vBox.getChildren().add(unidenticalPass);
-                }
-            } else {
-                CustomLabel wrongCompanyKey = new CustomLabel("Wrong Company Key");
-                wrongCompanyKey.setStyle("-fx-text-fill: red");
-                wrongCompanyKey.setAlignment(Pos.CENTER);
-                vBox.getChildren().add(wrongCompanyKey);
+            if (userNameInput.getText().equals("")||passwordInput.getText().equals("")||
+                    confirmPasswordIn.getText().equals("")||companyKeyIn.getText().equals("")){
+                vBox.getChildren().remove(resultLabel);
+                resultLabel.setStyle("-fx-text-fill: red;");
+                resultLabel.setText("Please fill out all the fields");
+                vBox.getChildren().add(resultLabel);
             }
+            else{
+                if (companyKeyIn.getText().equals(db.getCompanyKey())) {
+                    if (passwordInput.getText().equals(confirmPasswordIn.getText())) {
+                        if (employeeLoginTable.checkUserExists(userNameInput.getText())==true){
+                            vBox.getChildren().remove(resultLabel);
+                            resultLabel.setText("Password Updated!");
+                            employeeLoginTable.updatePassword(userNameInput.getText(), passwordInput.getText());
+                            resultLabel.setStyle("-fx-text-fill: green");
+                            resultLabel.setAlignment(Pos.CENTER);
+                            vBox.getChildren().add(resultLabel);
+                        }else {
+                            vBox.getChildren().remove(resultLabel);
+                            resultLabel.setStyle("-fx-text-fill: red;");
+                            resultLabel.setText("User Name does not exist");
+                            vBox.getChildren().add(resultLabel);
+                        }
+                    } else {
+                        vBox.getChildren().remove(resultLabel);
+                        resultLabel.setText("Password and Confirm password fields did not match.");
+                        resultLabel.setStyle("-fx-text-fill: red");
+                        resultLabel.setAlignment(Pos.CENTER);
+                        vBox.getChildren().add(resultLabel);
+                    }
+                } else {
+                    vBox.getChildren().remove(resultLabel);
+                    resultLabel.setStyle("-fx-text-fill: red");
+                    resultLabel.setText("Wrong Company Key");
+                    resultLabel.setAlignment(Pos.CENTER);
+                    vBox.getChildren().add(resultLabel);
+                }
+            }
+
         });
 
         // Button to sign in
@@ -118,8 +128,13 @@ public class ForgotPasswordScene  {
         buttonBox.getChildren().addAll(updatePassB, signInB);
         buttonBox.setAlignment(Pos.CENTER);
 
+        //Setting grid pane
+        gridPane.setVgap(10);
+        gridPane.setHgap(10);
+        gridPane.setAlignment(Pos.CENTER);
+
         // Adding all elements to the vbox
-        vBox.getChildren().addAll(headingForgot, userNameBox, passwordBox, confirmPasswordBox, companyKeyBox, buttonBox);
+        vBox.getChildren().addAll(headingForgot, gridPane, buttonBox);
         vBox.setSpacing(20);
 
         // BorderPane for layout

@@ -17,9 +17,9 @@ import org.example.freightr.TableCreation.StatusTable;
 import java.util.ArrayList;
 
 /**
+ * @author Kautuk Prasad
  * @description This class allows users to track the statuses and location of a package using
  * a tracking ID
- * @author Kautuk Prasad
  */
 public class TrackPackageScene {
     public static Scene createTrackPackageScene(Stage stage) {
@@ -55,36 +55,47 @@ public class TrackPackageScene {
             //error handling for null input
             if (input.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
+                vBox.getChildren().remove(gridPane);
+                gridPane.getChildren().clear();
                 resultLabel.setText("Please fill out the field");
                 vBox.getChildren().add(resultLabel);
             }else{
+                vBox.getChildren().remove(resultLabel);
                 vBox.getChildren().remove(gridPane);
                 gridPane.getChildren().clear();
                 PackageTracking trackedPackage = new PackageTracking();
                 trackedPackage = packageTrackingTable.getPackageTracking(Integer.parseInt(input.getText()));
+                if (trackedPackage==null){
+                    vBox.getChildren().remove(resultLabel);
+                    vBox.getChildren().remove(gridPane);
+                    gridPane.getChildren().clear();
+                    resultLabel.setText("Package not found.");
+                    vBox.getChildren().add(resultLabel);
+                }else {
+                    CustomLabel trackIDLabel = new CustomLabel("Tracking ID");
+                    CustomLabel trackIDData = new CustomLabel(String.valueOf(trackedPackage.getTrackingId()));
+                    gridPane.add(trackIDLabel,0,0);
+                    gridPane.add(trackIDData,1,0);
 
-                CustomLabel trackIDLabel = new CustomLabel("Tracking ID");
-                CustomLabel trackIDData = new CustomLabel(String.valueOf(trackedPackage.getTrackingId()));
-                gridPane.add(trackIDLabel,0,0);
-                gridPane.add(trackIDData,1,0);
+                    CustomLabel locationLabel = new CustomLabel("Location");
+                    CustomLabel locationData = new CustomLabel(trackedPackage.getLocation());
+                    gridPane.add(locationLabel,0,1);
+                    gridPane.add(locationData,1,1);
 
-                CustomLabel locationLabel = new CustomLabel("Location");
-                CustomLabel locationData = new CustomLabel(trackedPackage.getLocation());
-                gridPane.add(locationLabel,0,1);
-                gridPane.add(locationData,1,1);
+                    ArrayList<StatusPOJO> status = new ArrayList<>();
+                    status=StatusTable.getInstance().getAllStatus();
 
-                ArrayList<StatusPOJO> status = new ArrayList<>();
-                status=StatusTable.getInstance().getAllStatus();
+                    CustomLabel statusLabel = new CustomLabel("Status");
+                    CustomLabel statusData = new CustomLabel(String.valueOf(find(status,trackedPackage.getStatusId())));
+                    gridPane.add(statusLabel,0,2);
+                    gridPane.add(statusData,1,2);
 
-                CustomLabel statusLabel = new CustomLabel("Status");
-                CustomLabel statusData = new CustomLabel(String.valueOf(find(status,trackedPackage.getStatusId())));
-                gridPane.add(statusLabel,0,2);
-                gridPane.add(statusData,1,2);
+                    gridPane.setHgap(10);
+                    gridPane.setVgap(10);
+                    gridPane.setAlignment(Pos.CENTER);
+                    vBox.getChildren().add(gridPane);
+                }
 
-                gridPane.setHgap(10);
-                gridPane.setVgap(10);
-                gridPane.setAlignment(Pos.CENTER);
-                vBox.getChildren().add(gridPane);
             }
         });
 
@@ -92,7 +103,7 @@ public class TrackPackageScene {
         inputBox.getChildren().addAll(trackLabel, input, trackButton);
         inputBox.setSpacing(10);
         inputBox.setAlignment(Pos.CENTER);
-        vBox.getChildren().addAll(pageHeading, inputBox,gridPane);
+        vBox.getChildren().addAll(pageHeading, inputBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(50);
 

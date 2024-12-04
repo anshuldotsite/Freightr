@@ -60,38 +60,50 @@ public class TrackForCustomersScene {
             //error handling for null input
             if (input.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
+                vBox.getChildren().remove(gridPane);
+                vBox.getChildren().remove(backButton);
+                gridPane.getChildren().clear();
                 resultLabel.setText("Please fill out the field");
                 vBox.getChildren().add(resultLabel);
+                vBox.getChildren().add(backButton);
             }else{
+                vBox.getChildren().remove(resultLabel);
                 vBox.getChildren().remove(gridPane);
                 vBox.getChildren().remove(backButton);
                 gridPane.getChildren().clear();
                 PackageTracking trackedPackage = new PackageTracking();
                 trackedPackage = packageTrackingTable.getPackageTracking(Integer.parseInt(input.getText()));
 
-                CustomLabel trackIDLabel = new CustomLabel("Tracking ID");
-                CustomLabel trackIDData = new CustomLabel(String.valueOf(trackedPackage.getTrackingId()));
-                gridPane.add(trackIDLabel,0,0);
-                gridPane.add(trackIDData,1,0);
+                if (trackedPackage==null){
+                    resultLabel.setText("Package not found");
+                    vBox.getChildren().add(resultLabel);
+                    vBox.getChildren().add(backButton);
 
-                CustomLabel locationLabel = new CustomLabel("Location");
-                CustomLabel locationData = new CustomLabel(trackedPackage.getLocation());
-                gridPane.add(locationLabel,0,1);
-                gridPane.add(locationData,1,1);
+                }else{
+                    CustomLabel trackIDLabel = new CustomLabel("Tracking ID");
+                    CustomLabel trackIDData = new CustomLabel(String.valueOf(trackedPackage.getTrackingId()));
+                    gridPane.add(trackIDLabel,0,0);
+                    gridPane.add(trackIDData,1,0);
 
-                ArrayList<StatusPOJO> status = new ArrayList<>();
-                status=StatusTable.getInstance().getAllStatus();
+                    CustomLabel locationLabel = new CustomLabel("Location");
+                    CustomLabel locationData = new CustomLabel(trackedPackage.getLocation());
+                    gridPane.add(locationLabel,0,1);
+                    gridPane.add(locationData,1,1);
 
-                CustomLabel statusLabel = new CustomLabel("Status");
-                CustomLabel statusData = new CustomLabel(String.valueOf(find(status,trackedPackage.getStatusId())));
-                gridPane.add(statusLabel,0,2);
-                gridPane.add(statusData,1,2);
+                    ArrayList<StatusPOJO> status = new ArrayList<>();
+                    status=StatusTable.getInstance().getAllStatus();
 
-                gridPane.setHgap(10);
-                gridPane.setVgap(10);
-                gridPane.setAlignment(Pos.CENTER);
-                vBox.getChildren().add(gridPane);
-                vBox.getChildren().add(backButton);
+                    CustomLabel statusLabel = new CustomLabel("Status");
+                    CustomLabel statusData = new CustomLabel(String.valueOf(find(status,trackedPackage.getStatusId())));
+                    gridPane.add(statusLabel,0,2);
+                    gridPane.add(statusData,1,2);
+
+                    gridPane.setHgap(10);
+                    gridPane.setVgap(10);
+                    gridPane.setAlignment(Pos.CENTER);
+                    vBox.getChildren().add(gridPane);
+                    vBox.getChildren().add(backButton);
+                }
             }
         });
 

@@ -37,7 +37,7 @@ public class AllPackageTrackingScene {
 
         // HBox for updating package
         HBox headingBox = new HBox();
-        CustomLabel heading = new CustomLabel("Update Package");
+        CustomLabel heading = new CustomLabel("Track All Packages");
         headingBox.getChildren().add(heading);
         headingBox.setAlignment(Pos.CENTER);
 
@@ -117,7 +117,7 @@ public class AllPackageTrackingScene {
             PackageCustomTracking trackingData1 = (PackageCustomTracking) tableView.getSelectionModel().getSelectedItem();
             if (trackingData1 != null) {
                 int packageId = trackingData1.getPackageId();
-                Scene detailsScene = PackageDetailsScene.CreateSenderReceiverDetailsPage(packageId, stage);
+                Scene detailsScene = TrackViewDetails.createTrackView(packageId, stage);
                 stage.setScene(detailsScene);
             }
         });
