@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.freightr.Scenes.CustomButton;
+import org.example.freightr.Scenes.CustomLabel;
+import org.example.freightr.Scenes.CustomTextField;
 import org.example.freightr.Scenes.LoginPageScene;
 
 import java.io.*;
@@ -21,63 +23,51 @@ import java.io.*;
  * @description This is a database configuration form which is used to connect to the database for the application.
  */
 public class DbForm {
-    public static Scene CreateDBFormScene (Stage stage){
+    public static Scene CreateDBFormScene(Stage stage) {
 
         //page heading
-        Label pageHeading = new Label("Database Configuration Form");
+        CustomLabel pageHeading = new CustomLabel("Database Configuration Form");
         pageHeading.setAlignment(Pos.CENTER);
-        pageHeading.setStyle("-fx-font-size: 18px; -fx-text-fill: #7f8c8d; -fx-min-width: 75px;");
 
         GridPane gridPane = new GridPane();
 
         //username
-        Label userLabel = new Label("DB User Name");
-        TextField usernameInput = new TextField();
-        gridPane.add(userLabel,0,0);
-        gridPane.add(usernameInput,1,0);
-        userLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: #7f8c8d; -fx-min-width: 75px;");
-        usernameInput.setStyle("-fx-text-fill: #3498db;");
+        CustomLabel userLabel = new CustomLabel("DB User Name");
+        CustomTextField usernameInput = new CustomTextField();
+        gridPane.add(userLabel, 0, 0);
+        gridPane.add(usernameInput, 1, 0);
 
         //db name
-        Label dbName = new Label("DB  Name");
-        TextField dbNameInput = new TextField();
-        gridPane.add(dbName,0,1);
-        gridPane.add(dbNameInput,1,1);
-        dbName.setStyle("-fx-font-size: 18px; -fx-text-fill: #7f8c8d; -fx-min-width: 75px;");
-        dbNameInput.setStyle("-fx-text-fill: #3498db;");
+        CustomLabel dbName = new CustomLabel("DB Name");
+        CustomTextField dbNameInput = new CustomTextField();
+        gridPane.add(dbName, 0, 1);
+        gridPane.add(dbNameInput, 1, 1);
 
         //host
-        Label hostLabel = new Label("Host");
-        TextField hostInput = new TextField();
-        gridPane.add(hostLabel,0,2);
-        gridPane.add(hostInput,1,2);
-        hostLabel.setStyle("-fx-font-size: 18px;-fx-font-weight: bold; -fx-text-fill: #7f8c8d; -fx-min-width: 75px;");
-        hostInput.setStyle("-fx-text-fill: #3498db;");
-
+        CustomLabel hostLabel = new CustomLabel("Host");
+        CustomTextField hostInput = new CustomTextField();
+        gridPane.add(hostLabel, 0, 2);
+        gridPane.add(hostInput, 1, 2);
 
         //password
-        Label passwordLabel = new Label("DB Password");
+        CustomLabel passwordLabel = new CustomLabel("DB Password");
         PasswordField passwordInput = new PasswordField();
-        gridPane.add(passwordLabel,0,3);
-        gridPane.add(passwordInput,1,3);
-        passwordLabel.setStyle("-fx-font-size: 18px;-fx-font-weight: bold; -fx-text-fill: #7f8c8d; -fx-min-width: 75px;");
-
+        gridPane.add(passwordLabel, 0, 3);
+        gridPane.add(passwordInput, 1, 3);
+        passwordInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000;  -fx-font-size: 14px;");
 
         //company name
-        Label companyNameLabel = new Label("Company Name");
-        TextField companyNameInput = new TextField();
-        gridPane.add(companyNameLabel,0,4);
-        gridPane.add(companyNameInput,1,4);
-        companyNameLabel.setStyle("-fx-font-size: 18px;-fx-font-weight: bold; -fx-text-fill: #7f8c8d; -fx-min-width: 75px;");
-        companyNameInput.setStyle("-fx-text-fill: #3498db;");
+        CustomLabel companyNameLabel = new CustomLabel("Company Name");
+        CustomTextField companyNameInput = new CustomTextField();
+        gridPane.add(companyNameLabel, 0, 4);
+        gridPane.add(companyNameInput, 1, 4);
 
         //company key
-        Label companyKeyLabel = new Label("Company Key");
-        TextField companyKeyInput = new TextField();
-        gridPane.add(companyKeyLabel,0,5);
-        gridPane.add(companyKeyInput,1,5);
-        companyKeyLabel.setStyle("-fx-font-size: 18px;-fx-font-weight: bold; -fx-text-fill: #7f8c8d; -fx-min-width: 75px;");
-        companyKeyInput.setStyle("-fx-text-fill: #3498db;");
+        CustomLabel companyKeyLabel = new CustomLabel("Company Key");
+        PasswordField companyKeyInput = new PasswordField();
+        gridPane.add(companyKeyLabel, 0, 5);
+        gridPane.add(companyKeyInput, 1, 5);
+        companyKeyInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000;  -fx-font-size: 14px;");
 
         //test connection button
         CustomButton testButton = new CustomButton("Test Connection");
@@ -90,7 +80,7 @@ public class DbForm {
 
         //button box
         HBox buttonBox = new HBox();
-        buttonBox.getChildren().addAll(testButton,nextButton);
+        buttonBox.getChildren().addAll(testButton, nextButton);
         buttonBox.setSpacing(5);
         buttonBox.setAlignment(Pos.CENTER);
 
@@ -100,7 +90,7 @@ public class DbForm {
 
         //Vbox
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(pageHeading,gridPane,buttonBox);
+        vBox.getChildren().addAll(pageHeading, gridPane, buttonBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(15);
 
@@ -109,26 +99,25 @@ public class DbForm {
 
         //writing to the file through the form and establishing connection
         testButton.setOnAction(actionEvent -> {
-            if (usernameInput.getText().equals("")||dbNameInput.getText().equals("")
-                    ||hostInput.getText().equals("")|| passwordInput.getText().equals("")||
-                    companyNameInput.getText().equals("") ||companyKeyInput.getText().equals("")){
+            if (usernameInput.getText().equals("") || dbNameInput.getText().equals("")
+                    || hostInput.getText().equals("") || passwordInput.getText().equals("") ||
+                    companyNameInput.getText().equals("") || companyKeyInput.getText().equals("")) {
                 vBox.getChildren().remove(resultLabel);
-                resultLabel.setStyle("-fx-text-fill: red");
                 resultLabel.setText("Please fill out all the fields before proceeding.");
+                resultLabel.setStyle("-fx-text-fill: red");
                 resultLabel.setAlignment(Pos.BASELINE_CENTER);
                 vBox.getChildren().add(resultLabel);
-
-            }else {
+            } else {
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("credentials.txt"));
 
                     String empty = " ";
-                    String userIn = usernameInput.getText()+empty;
-                    String dbNameIn = dbNameInput.getText()+empty;
-                    String hostIN = hostInput.getText()+empty;
-                    String passwordIn = passwordInput.getText()+empty;
-                    String companyNameIn = companyNameInput.getText()+empty;
-                    String companyKeyIn = companyKeyInput.getText()+empty;
+                    String userIn = usernameInput.getText() + empty;
+                    String dbNameIn = dbNameInput.getText() + empty;
+                    String hostIN = hostInput.getText() + empty;
+                    String passwordIn = passwordInput.getText() + empty;
+                    String companyNameIn = companyNameInput.getText() + empty;
+                    String companyKeyIn = companyKeyInput.getText() + empty;
 
                     writer.write(userIn);
                     writer.write(dbNameIn);
@@ -139,7 +128,7 @@ public class DbForm {
                     writer.flush();
 
                     Database db = Database.getInstance();
-                    if (db.getStatus()==true){
+                    if (db.getStatus() == true) {
                         //setting text field to uneditable as so user cant edit textfield values after connection is successful
                         usernameInput.setEditable(false);
                         dbNameInput.setEditable(false);
@@ -153,19 +142,17 @@ public class DbForm {
                         resultLabel.setAlignment(Pos.BASELINE_CENTER);
                         vBox.getChildren().add(resultLabel);
                         nextButton.setDisable(false);
-                    }else {
+                    } else {
                         vBox.getChildren().remove(resultLabel);
                         resultLabel.setText("Connection Failed");
                         resultLabel.setStyle("-fx-text-fill: red");
                         resultLabel.setAlignment(Pos.BASELINE_CENTER);
                         vBox.getChildren().add(resultLabel);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
-
         });
 
         //changing the scene if the connection is successful
@@ -176,6 +163,8 @@ public class DbForm {
 
         BorderPane root = new BorderPane();
         root.setCenter(vBox);
-        return new Scene(root,900,640);
+        root.setStyle("-fx-background-color: #F8EDE3");
+
+        return new Scene(root, 900, 640);
     }
 }

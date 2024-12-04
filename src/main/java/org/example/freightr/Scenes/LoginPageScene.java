@@ -67,7 +67,7 @@ public class LoginPageScene {
         PasswordField passwordInput = new PasswordField();
         passwordBox.getChildren().addAll(passwordLabel, passwordInput);
         passwordBox.setAlignment(Pos.CENTER);
-        passwordBox.setSpacing(13);
+        passwordBox.setSpacing(14);
         passwordInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000;  -fx-font-size: 14px;");
 
         // Sign-in button
@@ -117,22 +117,21 @@ public class LoginPageScene {
 
         buttonBox.getChildren().addAll(signInB, createAccountB);
         buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.setSpacing(5);
+        buttonBox.setSpacing(10);
 
         //2nd button box for guest user and sign in
         HBox buttonBoxTwo = new HBox();
 
         //button for customer tracking
-        CustomButton customerBtn = new CustomButton("Customer? Click Here");
+        CustomButton customerBtn = new CustomButton("Already a customer?");
         customerBtn.setOnAction(event -> {
             Scene trackForCustomer = TrackForCustomersScene.createTrackForCustomer(stage);
             stage.setScene(trackForCustomer);
         });
 
         buttonBoxTwo.getChildren().addAll(forgotPasswordB,customerBtn);
-        buttonBoxTwo.setSpacing(5);
         buttonBoxTwo.setAlignment(Pos.CENTER);
-
+        buttonBoxTwo.setSpacing(10);
 
         // Adding all elements to vbox
         vBox.getChildren().addAll(imageView, welcomeLabel, signInHeading, userBox, passwordBox, buttonBox, buttonBoxTwo);
