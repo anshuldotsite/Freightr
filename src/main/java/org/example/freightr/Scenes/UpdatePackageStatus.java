@@ -100,6 +100,7 @@ public class UpdatePackageStatus {
                     packageCustomTracking.getTrackingId(),locationTF.getText(),packageStatusComboBox.getSelectionModel().getSelectedItem().getId());
             packageCustomTrackingAll.updatePackage(packageCustomTracked);
             resultLabel.setText("Updated Package");
+            resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
             vBox.getChildren().add(resultLabel);
         });
 

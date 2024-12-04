@@ -155,6 +155,7 @@ PackageTracking packageTracking = new PackageTracking(0,packageGeneratedkey,loca
             PackageTrackingTable.getInstance().addPackageTracking(packageTracking);
             //start get tracking id here
             resultLabel.setText("Package Created Successfully");
+            resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
             mainBox.getChildren().add(resultLabel);
 
         });

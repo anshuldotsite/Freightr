@@ -118,6 +118,7 @@ public class AddCustomerScene {
                     contactTF.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Fill out all the fields");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                 vBox.getChildren().add(resultLabel);
             }else {
                 if (companyComboBox.getSelectionModel().getSelectedItem()==null){
@@ -128,6 +129,7 @@ public class AddCustomerScene {
                             countryTF.getText(), "Self");
                     customerTableCreation.addCustomerWithoutCompany(newCustomer);
                     resultLabel.setText("Customer Added");
+                    resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
                     vBox.getChildren().add(resultLabel);
 
                     // adding condition to refresh the table when adding customer in package
@@ -144,6 +146,7 @@ public class AddCustomerScene {
                             countryTF.getText(), "Corporate");
                     customerTableCreation.addCustomerWithCompany(newCustomer);
                     resultLabel.setText("Customer Added and associated with the company");
+                    resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
                     vBox.getChildren().add(resultLabel);
                     Package packages = new Package();
                     Scene senderScene = SenderSelectionScene.CreateSenderSelectionScene(stage,packages);

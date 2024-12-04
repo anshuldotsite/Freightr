@@ -69,7 +69,6 @@ public class ForgotPasswordScene  {
 
         // Result Label
         CustomLabel resultLabel = new CustomLabel("");
-        resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px");
 
         /**
          * This event handler checks for conditions to update the user's password with errors if they passwords not match and you enter the wrong company key
@@ -80,7 +79,7 @@ public class ForgotPasswordScene  {
                     confirmPasswordIn.getText().equals("")||companyKeyIn.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Please fill out all the fields");
-                resultLabel.setStyle("-fx-text-fill: red;");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                 vBox.getChildren().add(resultLabel);
             }
             else{
@@ -90,26 +89,26 @@ public class ForgotPasswordScene  {
                             vBox.getChildren().remove(resultLabel);
                             resultLabel.setText("Password Updated!");
                             employeeLoginTable.updatePassword(userNameInput.getText(), passwordInput.getText());
-                            resultLabel.setStyle("-fx-text-fill: green");
+                            resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
                             resultLabel.setAlignment(Pos.CENTER);
                             vBox.getChildren().add(resultLabel);
                         }else {
                             vBox.getChildren().remove(resultLabel);
-                            resultLabel.setStyle("-fx-text-fill: red;");
                             resultLabel.setText("User Name does not exist");
+                            resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                             vBox.getChildren().add(resultLabel);
                         }
                     } else {
                         vBox.getChildren().remove(resultLabel);
                         resultLabel.setText("Password and Confirm password fields did not match.");
-                        resultLabel.setStyle("-fx-text-fill: red");
+                        resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                         resultLabel.setAlignment(Pos.CENTER);
                         vBox.getChildren().add(resultLabel);
                     }
                 } else {
                     vBox.getChildren().remove(resultLabel);
-                    resultLabel.setStyle("-fx-text-fill: red");
                     resultLabel.setText("Wrong Company Key");
+                    resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                     resultLabel.setAlignment(Pos.CENTER);
                     vBox.getChildren().add(resultLabel);
                 }

@@ -116,6 +116,7 @@ public class NewReceiverScene {
                     contactTF.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Fill out all the fields");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                 vBox.getChildren().add(resultLabel);
             }else {
                 if (companyComboBox.getSelectionModel().getSelectedItem()==null){
@@ -126,6 +127,7 @@ public class NewReceiverScene {
                             countryTF.getText(), "Self");
                     Customer receiverCustomer= customerTableCreation.addCustomerWOCompany(newCustomer);
                     resultLabel.setText("Customer Added");
+                    resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
                     vBox.getChildren().add(resultLabel);
 
                     //selecting the customer directly from here
@@ -143,6 +145,7 @@ public class NewReceiverScene {
                             countryTF.getText(), "Corporate");
                     Customer receiverCustomer = customerTableCreation.addCustomerWCompany(newCustomer);
                     resultLabel.setText("Customer Added and associated with the company");
+                    resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
                     vBox.getChildren().add(resultLabel);
 
                     //selecting the customer directly from here

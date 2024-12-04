@@ -135,6 +135,7 @@ public class UpdateCustomer {
                     contactTF.getText().equals("")){
                 vBox.getChildren().remove(resultLabel);
                 resultLabel.setText("Fill out all the fields");
+                resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: red");
                 vBox.getChildren().add(resultLabel);
             }else {
                 // If the company is not selected
@@ -148,6 +149,7 @@ public class UpdateCustomer {
                             countryTF.getText(), "Self");
                     customerTableCreation.updateCustomer(updatedCustomer);
                     resultLabel.setText("Customer Updated");
+                    resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
                     vBox.getChildren().add(resultLabel);
                     DisplayCustomerScene.getInstance().refreshTable();
                 }else {
@@ -161,6 +163,7 @@ public class UpdateCustomer {
                     updatedCustomer.setCustomerId(customer.getCustomerId());
                     customerTableCreation.updateCustomer(updatedCustomer);
                     resultLabel.setText("Customer Updated");
+                    resultLabel.setStyle("-fx-font-family: 'Roboto'; -fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: green");
                     vBox.getChildren().add(resultLabel);
                     DisplayCustomerScene.getInstance().refreshTable();
                 }
