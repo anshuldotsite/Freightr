@@ -24,7 +24,6 @@ import java.io.*;
  */
 public class DbForm {
     public static Scene CreateDBFormScene(Stage stage) {
-
         //page heading
         CustomLabel pageHeading = new CustomLabel("Database Configuration Form");
         pageHeading.setAlignment(Pos.CENTER);
