@@ -99,10 +99,8 @@ public class ReceiverSelectionScene {
         // Button to create a new receiver
         CustomButton createReceiver = new CustomButton("Create a new receiver");
         createReceiver.setOnAction(e->{
-            Stage newStage = new Stage();
-            Scene addCustomerScene = AddCustomerScene.createAddCustomer(newStage);
-            newStage.setScene(addCustomerScene);
-            newStage.show();
+            Scene newReceiverScene = NewReceiverScene.createReceiverScene(stage,packageData,selectedCustomer);
+            stage.setScene(newReceiverScene);
         });
 
         // HBox for the customers
@@ -132,11 +130,6 @@ public class ReceiverSelectionScene {
         return new Scene(root, 900, 640);
     }
 
-    public void refreshTable(){
-        CustomerTableCreation customerTableCreation = CustomerTableCreation.getInstance();
-        tableView.getItems().clear();
-        tableView.getItems().addAll(customerTableCreation.getAllCustomers());
-    }
 
 
     // Singleton instance

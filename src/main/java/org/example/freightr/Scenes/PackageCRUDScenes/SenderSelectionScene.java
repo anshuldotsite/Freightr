@@ -102,10 +102,8 @@ public class SenderSelectionScene {
         // Button to create a new sender
         CustomButton SenderButton = new CustomButton("Create a new sender");
         SenderButton.setOnAction(e->{
-            Stage newStage = new Stage();
-            Scene addCustomerScene = AddCustomerScene.createAddCustomer(newStage);
-            newStage.setScene(addCustomerScene);
-            newStage.show();
+            Scene newSenderScene = NewSenderScene.createNewSender(stage,packageData);
+            stage.setScene(newSenderScene);
         });
 
         // NavigationVBox for navigation to different scenes
