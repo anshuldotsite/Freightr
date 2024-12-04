@@ -22,54 +22,60 @@ public class ForgotPasswordScene  {
         Database db = Database.getInstance();
 
         // Vbox for layout
-        VBox vBox = new VBox();
-        vBox.setStyle("-fx-spacing: 10px;");
+        VBox vBox = new VBox(20);
+        vBox.setAlignment(Pos.CENTER);
 
         // Forgot password for label
-        Label headingForgot = new Label("Forgot your password? No Problem!");
+        CustomLabel headingForgot = new CustomLabel("Forgot your password? No Problem!");
         headingForgot.setAlignment(Pos.CENTER);
-        headingForgot.setStyle("-fx-font-size: 18px;-fx-font-weight: bold; -fx-text-fill: #7f8c8d; -fx-min-width: 75px;");
 
         // HBox for username
-        HBox userNameBox = new HBox();
+        HBox userNameBox = new HBox(20);
 
         // Username Label
         CustomLabel userNameLabel = new CustomLabel("Enter your username");
+        userNameLabel.setMinWidth(150);
         CustomTextField userNameInput = new CustomTextField();
+        userNameInput.setPrefWidth(300);
         userNameBox.getChildren().addAll(userNameLabel, userNameInput);
         userNameBox.setAlignment(Pos.CENTER);
-        userNameBox.setSpacing(10);
 
         // HBox for new password
-        HBox passwordBox = new HBox();
+        HBox passwordBox = new HBox(20);
 
         // Password Label
         CustomLabel passwordLabel = new CustomLabel("Enter new password");
+        userNameInput.setMinWidth(150);
         PasswordField passwordInput = new PasswordField();
+        userNameInput.setPrefWidth(300);
         passwordBox.getChildren().addAll(passwordLabel, passwordInput);
         passwordBox.setAlignment(Pos.CENTER);
-        passwordBox.setSpacing(10);
-
+        passwordInput.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000; -fx-font-size: 14px;");
 
         // Hbox for confirm password
-        HBox confirmPasswordBox = new HBox();
+        HBox confirmPasswordBox = new HBox(20);
 
         // Confirm Password Label
         CustomLabel confirmPassLabel = new CustomLabel("Confirm Password");
+        confirmPassLabel.setMinWidth(150);
         PasswordField confirmPasswordIn = new PasswordField();
+        confirmPasswordIn.setPrefWidth(300);
         confirmPasswordBox.getChildren().addAll(confirmPassLabel, confirmPasswordIn);
         confirmPasswordBox.setAlignment(Pos.CENTER);
-        confirmPasswordBox.setSpacing(10);
+        confirmPasswordIn.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000; -fx-font-size: 14px;");
+;
 
         // HBox for company key
-        HBox companyKeyBox = new HBox();
+        HBox companyKeyBox = new HBox(20);
 
         // Label for company key
         CustomLabel companyKeyLabel = new CustomLabel("Enter Company Key");
-        CustomTextField companyKeyIn = new CustomTextField();
+        confirmPassLabel.setMinWidth(150);
+        PasswordField companyKeyIn = new PasswordField();
+        companyKeyIn.setPrefWidth(300);
         companyKeyBox.getChildren().addAll(companyKeyLabel, companyKeyIn);
         companyKeyBox.setAlignment(Pos.CENTER);
-        companyKeyBox.setSpacing(10);
+        companyKeyIn.setStyle("-fx-background-color: #D0B8A8; -fx-text-fill: #000; -fx-font-size: 14px;");
 
         // Update password button
         CustomButton updatePassB = new CustomButton("Update Password");
@@ -108,15 +114,13 @@ public class ForgotPasswordScene  {
         });
 
         // HBox for buttons
-        HBox buttonBox = new HBox();
+        HBox buttonBox = new HBox(20);
         buttonBox.getChildren().addAll(updatePassB, signInB);
         buttonBox.setAlignment(Pos.CENTER);
-        buttonBox.setSpacing(5);
 
         // Adding all elements to the vbox
         vBox.getChildren().addAll(headingForgot, userNameBox, passwordBox, confirmPasswordBox, companyKeyBox, buttonBox);
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setSpacing(15);
+        vBox.setSpacing(20);
 
         // BorderPane for layout
         BorderPane root = new BorderPane();

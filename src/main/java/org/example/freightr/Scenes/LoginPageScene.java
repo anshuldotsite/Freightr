@@ -1,6 +1,7 @@
 package org.example.freightr.Scenes;
 
 
+import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.example.freightr.Database;
 import org.example.freightr.TableCreation.EmployeeLoginTable;
 import org.example.freightr.Scenes.PackageCRUDScenes.AddPackageScene;
@@ -49,6 +51,19 @@ public class LoginPageScene {
         imageView.setFitWidth(200);
         imageView.setFitHeight(200);
         imageView.setPreserveRatio(true);
+
+        // Fade in Transition
+        FadeTransition fadeIn = new FadeTransition(Duration.seconds(3), imageView);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+
+        // Fade out Transition
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), imageView);
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+
+        // Play animation
+        fadeIn.play();
 
         // Sign in label
         CustomLabel signInHeading = new CustomLabel("Employee Sign In");
@@ -114,15 +129,22 @@ public class LoginPageScene {
         // Button for forgot password
         CustomButton forgotPasswordB = new CustomButton("Forgot Password?");
         forgotPasswordB.setOnAction(event -> {
-            Scene forgotPassScene = ForgotPasswordScene.createForgotPasswordScene(stage);
-            stage.setScene(forgotPassScene);
+            fadeOut.play();
+            fadeOut.setOnFinished(e ->{
+                Scene forgotPassScene = ForgotPasswordScene.createForgotPasswordScene(stage);
+                stage.setScene(forgotPassScene);
+            });
         });
+
 
         // Button for creating a new user account
         CustomButton createAccountB = new CustomButton("Create Account");
-        createAccountB.setOnAction(event -> {
-            Scene accountCreationScene = AccountCreation.AccountCreationScene(stage);
-            stage.setScene(accountCreationScene);
+             createAccountB.setOnAction(event -> {
+                 fadeOut.play();
+                 fadeOut.setOnFinished(e ->{
+                     Scene accountCreationScene = AccountCreation.AccountCreationScene(stage);
+                     stage.setScene(accountCreationScene);
+                 });
         });
 
         buttonBox.getChildren().addAll(signInB, createAccountB);
@@ -135,8 +157,11 @@ public class LoginPageScene {
         //button for customer tracking
         CustomButton customerBtn = new CustomButton("Already a customer?");
         customerBtn.setOnAction(event -> {
-            Scene trackForCustomer = TrackForCustomersScene.createTrackForCustomer(stage);
-            stage.setScene(trackForCustomer);
+            fadeOut.play();
+            fadeOut.setOnFinished(e ->{
+                Scene trackForCustomer = TrackForCustomersScene.createTrackForCustomer(stage);
+                stage.setScene(trackForCustomer);
+            });
         });
 
         buttonBoxTwo.getChildren().addAll(forgotPasswordB,customerBtn);
@@ -149,8 +174,11 @@ public class LoginPageScene {
         // Button for Credits
         CustomButton creditsBtn = new CustomButton("Project Credits");
         creditsBtn.setOnAction(event -> {
-            Scene projectCredits = ProjectCredits.ProjectCreditsScene(stage);
-            stage.setScene(projectCredits);
+            fadeOut.play();
+            fadeOut.setOnFinished(e ->{
+                Scene projectCredits = ProjectCredits.ProjectCreditsScene(stage);
+                stage.setScene(projectCredits);
+            });
         });
 
         buttonBoxThree.getChildren().add(creditsBtn);
