@@ -92,7 +92,6 @@ public class PackageDetailsScene {
 
 
 
-
         return  new Scene(bp, 900, 640);
     }
 }
