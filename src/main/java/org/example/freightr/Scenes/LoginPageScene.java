@@ -143,8 +143,22 @@ public class LoginPageScene {
         buttonBoxTwo.setAlignment(Pos.CENTER);
         buttonBoxTwo.setSpacing(10);
 
+        // HBox for credits button
+        HBox buttonBoxThree = new HBox();
+
+        // Button for Credits
+        CustomButton creditsBtn = new CustomButton("Project Credits");
+        creditsBtn.setOnAction(event -> {
+            Scene projectCredits = ProjectCredits.ProjectCreditsScene(stage);
+            stage.setScene(projectCredits);
+        });
+
+        buttonBoxThree.getChildren().add(creditsBtn);
+        buttonBoxThree.setAlignment(Pos.CENTER);
+        buttonBoxThree.setSpacing(10);
+
         // Adding all elements to vbox
-        vBox.getChildren().addAll(imageView, welcomeLabel, signInHeading, userBox, passwordBox, buttonBox, buttonBoxTwo);
+        vBox.getChildren().addAll(imageView, welcomeLabel, signInHeading, userBox, passwordBox, buttonBox, buttonBoxTwo, buttonBoxThree);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(10);
 
