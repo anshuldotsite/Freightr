@@ -82,46 +82,58 @@ public class AddPackageScene {
 
         // Add Package Button
         CustomButton addPackageBtn = new CustomButton("Add sender details");
-        Label resultLabel = new Label("");
+
+        // Result Label
+        CustomLabel resultLabel = new CustomLabel("");
+        resultLabel.setStyle("-fx-text-fill: red;");
 
         // Pricing Logic
         calculateChargesBtn.setOnAction(e -> {
-            double height = Double.parseDouble(heightTF.getText());
-            double width = Double.parseDouble(widthTF.getText());
-            double length = Double.parseDouble(lengthTF.getText());
-            double weight = Double.parseDouble(weightTF.getText());
-
-            // Surcharge Variables
-            int heightSurcharge=0;
-            int lengthSurcharge=0;
-            int widthSurcharge=0;
-
-            // Price per kg based on weight
-            int WeightPrice =0;
-
-            // Determine weight-based pricing
-            if(height>100){
-                heightSurcharge=15;
-            }
-            if(width>100){
-                widthSurcharge=15;
-            }
-            if(length>100){
-                lengthSurcharge=15;
-            }
-            if(15<weight&&weight<25){
-                WeightPrice=20;
-            }
-            else if(weight>25&&weight<50){
-                WeightPrice=17;
-            }
-            else if (weight>50){
-                WeightPrice=13;
+            if(descriptionTF.getText().equals("")||heightTF.getText().equals("")||widthTF.getText().equals("")||
+            lengthTF.getText().equals("")||widthTF.getText().equals("")){
+                vBox.getChildren().remove(resultLabel);
+                resultLabel.setText("Please fill out all the fields");
+                vBox.getChildren().add(resultLabel);
             }else {
-                WeightPrice=30;
+                double height = Double.parseDouble(heightTF.getText());
+                double width = Double.parseDouble(widthTF.getText());
+                double length = Double.parseDouble(lengthTF.getText());
+                double weight = Double.parseDouble(weightTF.getText());
+
+                // Surcharge Variables
+                int heightSurcharge=0;
+                int lengthSurcharge=0;
+                int widthSurcharge=0;
+
+                // Price per kg based on weight
+                int WeightPrice =0;
+
+                // Determine weight-based pricing
+                if(height>100){
+                    heightSurcharge=15;
+                }
+                if(width>100){
+                    widthSurcharge=15;
+                }
+                if(length>100){
+                    lengthSurcharge=15;
+                }
+                if(15<weight&&weight<25){
+                    WeightPrice=20;
+                }
+                else if(weight>25&&weight<50){
+                    WeightPrice=17;
+                }
+                else if (weight>50){
+                    WeightPrice=13;
+                }else {
+                    WeightPrice=30;
+                }
+                totalPrice =heightSurcharge + widthSurcharge + lengthSurcharge + (WeightPrice * weight);
+                charge.setText(String.valueOf(totalPrice));
+
             }
-            totalPrice =heightSurcharge + widthSurcharge + lengthSurcharge + (WeightPrice * weight);
-            charge.setText(String.valueOf(totalPrice));
+
         });
 
         /**
@@ -135,7 +147,7 @@ public class AddPackageScene {
                     weightTF.getText().isEmpty()) {
 
                 vBox.getChildren().remove(resultLabel);
-                resultLabel.setText("Fill out all the fields");
+                resultLabel.setText("Please fill out all the fields");
                 vBox.getChildren().add(resultLabel);
             }
                 else {  // Create package and pass to next scene
