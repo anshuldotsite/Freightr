@@ -11,7 +11,7 @@ This is Package Tracking Software for businesses to maintain their shipments.
 
 ### Running the application
 - Open git and use this command to clone the project- git clone https://github.com/anshuldotsite/Freightr.git
-- Go to git bash and establish connection with MySQL server.
+- Go to git bash and establish connection with MySQL server(./dbconnect.sh script).
 - Open the cloned folder in Intellij Idea.
 - Go to the HelloApplication.java file in Intellij and hit run.
 - Setup the application by filling in the required details asked in the application set up.
@@ -54,5 +54,6 @@ OS- Windows, MacOS, Linux
 MIT
 
 ## Acknowledgements
-- Oracle
+- Oracle Docs
 - Lecture notes
+- Flaticons for image
