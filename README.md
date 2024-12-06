@@ -6,7 +6,7 @@ This is Package Tracking Software for businesses to maintain their shipments.
 ## Getting Started Guide
 ### Software Requirements
 - IDE (Intellij IDEA)
-- JDK Version 20
+- JDK Version - Amazon Coretto 20
 - MySQL Server
 
 ### Running the application
