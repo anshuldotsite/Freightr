@@ -22,7 +22,7 @@ This is Package Tracking Software for businesses to maintain their shipments.
 ![image](https://github.com/user-attachments/assets/e9c4e51f-98ae-4869-b22d-2fe44145fb3d)
 
 ### Creating a Package
-![image](https://github.com/user-attachments/assets/abb6ebdb-c58c-403e-bf67-c7ad7eb3fc8d)
+![image](https://github.com/user-attachments/assets/aeb37aa1-d875-4e99-a7cd-444c75195030)
 
 ### All packages data
 ![image](https://github.com/user-attachments/assets/4670a50e-4677-4237-a31c-a177821af305)
